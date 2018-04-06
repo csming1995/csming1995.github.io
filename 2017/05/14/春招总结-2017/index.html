@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          2017年Android岗春招总结 - Csming | 少棉
+        
+    </title>
+
+    <link rel="canonical" href="https://csming1995.github.io/2017/05/14/春招总结-2017/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('undefined')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#定期总结" title="定期总结">定期总结</a>
+                            
+                        </div>
+                        <h1>2017年Android岗春招总结</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Csming on
+                            2017-05-14
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Csming</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>现在是五月份了；今年的春招基本上算是结束了；<br>
+基本没什么好面的了；<br>
+我的实习生的生活也确定是去美图了；<br>
+于是趁饭后的闲暇时光；做一做总结；</p>
+<hr>
+<h1><span id="春招的流程">春招的流程</span></h1>
+<ul>
+<li>
+<p><strong>投简历；</strong><br>
+首先是尽量寻求内推机会；内推是越早越好，因为有的公司是由内推名额限制的，所以去完了可能就GG了；<br>
+我有个朋友，在企鹅厂内推阶段跟我一起寻求的内推；但是我们俩都属于畏首畏尾的怂泡；所以等准备的比较充分了，到截止日的时候，才上传的简历；<br>
+所以内推阶段是没我们什么事了；</p>
+<p>当然没有内推机会的，尽量海投吧；多一个机会是一个；</p>
+</li>
+<li>
+<p><strong>准备笔试</strong><br>
+笔试的话，注重基础；具体的基础，指的是数据结构，计算机网络，操作系统还有数据库；当然，客户端开发可以不用深入的去复习数据库原理；<br>
+但是很注重数据结构和网络这两门课；<br>
+数据结构还需要考察到算法；一些基本的像数组、链表、树、图等都是要了解的；此外还有一些基本的排序算法；其中就可能会考察到某某个排序算法是不是稳定的这样的问题；<br>
+而计算机网络大多会考TCP/IP协议，以及其以上的内容；物理层和数据链路层比较少；当然，要了解三层交换机和路由器的区别；还有IP层寻址和TCP层寻址的区别；TCP和UDP的区别；TCP的报文结构；HTTP协议的状态码等等；<br>
+操作系统常见的就是进程死锁相关内容，还有进程调度等；</p>
+<p>此外，算法题指的就是OJ上面的类型；建议看剑指offer；我在这个寒假之前，基本不刷算法；然后寒假的时候把剑指offer看完了，并且刷了一部分的leetcode的题目；发现leetcode上easy完全可以做，Medium的题目也不会有太多问题；这样基本可以应付一般的笔试了；除非出到一些奇怪的知识点，或者脑壳短路了。</p>
+<p>此外，安卓岗的同学需要熟悉一些Java的基础知识；这些后面讲=。=；</p>
+</li>
+<li>
+<p><strong>面试阶段</strong><br>
+面试的话，不要紧张就行了；<br>
+一般面试官先让我们自我介绍；<br>
+**关于与自我介绍的内容：**一般面试官都看过我们的简历了对吧（看都没看的我们就怼他啊喂！），那么自我介绍的时候一般就说一些简历上没有的或者体现不到的；多说说自己最近的读什么书，在学习什么，在做什么有意思的项目这样的；</p>
+<p><strong>简历上的东西我们一定要准备充分，来应对面试官的提问</strong></p>
+<p>比较有意思的就是，我之前做过unity3d嘛；所以面过的厂的面试官都会问我为啥玩这个，后来为啥不玩了这样；<br>
+像鹅厂一面的前辈就问我，怎么实现碰撞检测（把图形学知识忘得一干二净的我无言以对……）</p>
+<p>然后就是<strong>Java和安卓的一些基础知识</strong>；有的还会问一些上面笔试里写的基础课，算法题这样的；</p>
+<p>当然，算法题不会很刁钻，面试官主要是想看我们临场解决问题的能力；<br>
+所以太快解题了说明我们之前可能曾经见过，于是还会问别的；<br>
+太慢的话，也不会有太大的影响，可以跟面试官说说自己思考的一些方向；</p>
+<p>最后一个环节，面试官会让我们问一些问题；这时候聪明机智的我们就要表现的自己勤奋好学一点了；</p>
+</li>
+<li>
+<p><strong>然后就是安心的等HR姐姐打电话通知HR面或者直接聊一些事项了</strong></p>
+</li>
+<li>
+<p><strong>最后，就是顺利拿到offer啦</strong></p>
+</li>
+</ul>
+<h1><span id="自己的一些经历">自己的一些经历</span></h1>
+<p>我是属于比较咸鱼的；当时投了八九家厂；</p>
+<p>然后最早开始面的是美图，后来顺利拿到offer后就懒得在准备其他厂了；</p>
+<p>清明节在家里做了一下企鹅厂的笔试；<br>
+回来学校后，跟基友去吃清汤面（传说中的清汤面）；<br>
+刚到店里坐下，就收到企鹅厂的面试短信了；<br>
+于是匆匆忙忙第二天赶去广州；<br>
+当然，我本身水平不是很高，加上没准备，一面妥妥挂了；</p>
+<p>然后辣鸡美团，过了笔试迟迟没有面试通知；<br>
+最后发了个道歉短信；呵呵WTF；<br>
+剩下的几家的笔试不是翘了就是水过去了……（咸鱼咸鱼，又跑又跳……）</p>
+<p>当时面完腾讯出来后，高德打了个电话了解情况，之后就没有消息了；</p>
+<hr>
+<ul>
+<li><strong>分享一下面试的一些东西吧</strong><br>
+感觉套路都差不多；<br>
+主要问的一些问题其他面经基本都有；</li>
+</ul>
+<p><strong>第一个就是问简历；</strong><br>
+比如说，我们的项目有哪些哪些特色，然后里面运用到了哪些知识这样；<br>
+比如，鹅厂的面试官就问了很多unity3d相关的；可能是想看看我的知识面怎么样吧……</p>
+<p>项目里有遇到什么困难吗；（宝宝遇到的困难基本都能在网络上找到解决方案，也都没怎么在意，所以没记录，妥妥的答不上来啊）<br>
+一般去哪些地方看技术文；一般都是CSDN，博客园，简书，stackoverflow这些吧；</p>
+<p>然后鹅厂的面试官问了一些网络方面的；比如，TCP协议怎么保证传输的可靠性的，一般都是差错检测，拥塞控制等等，书上都找得到；当然他也可能继续问一些具体的情况来检验我们是不是真的理解了；</p>
+<p><strong>此外就是Java的基础和android的基础了；</strong><br>
+这两个比较杂；</p>
+<hr>
+<ul>
+<li><strong>准备阶段我准备了一下以下这些点；感觉也八九不离十</strong></li>
+</ul>
+<p>Java比较重要的有：<br>
+1.集合相关：重点掌握List：ArrayList，LinkedList；Set；Map；Hashtable等的区别<br>
+哪些集合框架是线程安全的等；</p>
+<p>2.还有interface和abstract class的区别；</p>
+<p>3.String，StringBuilder，StringBuffer的区别；</p>
+<p>4.线程怎么开；<br>
+5.线程同步的几种方法；<br>
+同步代码块，同步方法，重入锁，特殊域变量等；一定要弄清楚适用的情况；</p>
+<p>6.Java的线程池</p>
+<p>7.JVM相关；加分项；ClassLoader，垃圾回收机制等；<br>
+自定义classloader<br>
+还有怎么判定辣鸡；</p>
+<p>8.强引用，弱引用，软引用，虚引用等的区别和作用；</p>
+<p>9.如何发现内存泄漏；解决方法；</p>
+<p>9.重载和覆盖的区别</p>
+<p>10.继承相关</p>
+<p>11.内存泄漏；OOM……</p>
+<p>12.各种基础类型占用多少内存</p>
+<p>（再多我也忘记了）</p>
+<p><strong>JVM的了解是一个很好的加分点；垃圾回收机制，还有classloader这些；</strong><br>
+（废话几句）要了解ClassLoader是双亲委托机制的；</p>
+<ul>
+<li><strong>Android方面的话比较杂</strong></li>
+</ul>
+<p>一般有生命周期；Fragment的和Activity的；以及两者交叉的；<br>
+还有，像是在一个app运行的时候，按了Home键，这时候生命周期是怎么样的；</p>
+<p>还有一个比较重要也比较没办法速成的就是，事件分发机制；<br>
+还有自定义View；</p>
+<hr>
+<p>打字打累了……</p>
+<p>还是上几篇还不错的面筋的链接吧；</p>
+<p><a href="https://www.nowcoder.com/discuss/19340?type=2&amp;order=4&amp;pos=15&amp;page=1?from=wb" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/19340?type=2&amp;order=4&amp;pos=15&amp;page=1?from=wb</a></p>
+<p><a href="https://m.nowcoder.com/discuss/21120?type=1&amp;order=0&amp;pos=14&amp;page=1?from=wb" target="_blank" rel="noopener">https://m.nowcoder.com/discuss/21120?type=1&amp;order=0&amp;pos=14&amp;page=1?from=wb</a></p>
+<p><a href="http://www.imooc.com/article/9375" target="_blank" rel="noopener">http://www.imooc.com/article/9375</a></p>
+<p><a href="https://www.zhihu.com/question/57815420" target="_blank" rel="noopener">https://www.zhihu.com/question/57815420</a></p>
+<p><a href="http://blog.csdn.net/jackfrued/article/details/44921941" target="_blank" rel="noopener">http://blog.csdn.net/jackfrued/article/details/44921941</a></p>
+<hr>
+<p>我要睡觉了再见</p>
+<p>你们看得很乱对吧；<br>
+咸鱼的我怎么可能刻意分段得很清晰呢hiahiahia</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/05/20/AndroidStudio3.0Canary/" data-toggle="tooltip" data-placement="top" title="Android Studio 3.0 Canary版本上手体验">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/04/25/python的多线程/" data-toggle="tooltip" data-placement="top" title="Python多线程">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#定期总结" title="定期总结">定期总结</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">It Helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "https://csming1995.github.io/2017/05/14/春招总结-2017/";
+    var disqus_url = "https://csming1995.github.io/2017/05/14/春招总结-2017/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/csming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Csming 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://csming1995.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://csming1995.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

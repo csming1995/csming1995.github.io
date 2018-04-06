@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Android自定义View——Canvas图形/图片/文字绘制学习笔记 - Csming | 少棉
+        
+    </title>
+
+    <link rel="canonical" href="https://csming1995.github.io/2017/02/10/Android自定义View-6/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('undefined')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#android" title="android">android</a>
+                            
+                              <a class="tag" href="/tags/#java" title="java">java</a>
+                            
+                        </div>
+                        <h1>Android自定义View——Canvas图形/图片/文字绘制学习笔记</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Csming on
+                            2017-02-10
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Csming</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="canvas简介">Canvas简介</span></h1>
+<p>Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形绘制的基础</p>
+<p>有两大特点：1.可操作性强；2.比较难用（组合操作）</p>
+<h1><span id="常用操作">常用操作</span></h1>
+<ul>
+<li>**绘制颜色：**drawColor, drawRGB, drawARGB；使用单一颜色填充整个画布</li>
+<li>**绘制基本形状：**drawPoint, drawPoints, drawLine, drawLines, drawRect, drawRoundRect, drawOval, drawCircle, drawArc；依次为 点、线、矩形、圆角矩形、椭圆、圆、圆弧</li>
+<li>**绘制图片：**drawBitmap, drawPicture；绘制位图和图片</li>
+<li>**绘制文本：**drawText, drawPosText, drawTextOnPath；依次为 绘制文字、绘制文字时指定每个文字位置、根据路径绘制文字</li>
+<li>**绘制路径：**drawPath；绘制路径，绘制贝塞尔曲线等</li>
+<li>**顶点操作：**drawVertices, drawBitmapMesh；通过对顶点操作可以使图像形变，drawVertices直接对画布作用、 drawBitmapMesh只对绘制的Bitmap作用</li>
+<li>**画布裁剪：**clipPath, clipRect；设置画布的显示区域</li>
+<li>**画布快照：**save, restore, saveLayerXxx, restoreToCount, getSaveCount；依次为 保存当前状态、 回滚到上一次保存的状态、 保存图层状态、 回滚到指定状态、 获取保存次数</li>
+<li>**画布变换：**translate, scale, rotate, skew；依次为 位移、缩放、 旋转、错切</li>
+<li>**Matrix(矩阵)：**getMatrix, setMatrix, concat；实际上画布的位移，缩放等操作的都是图像矩阵Matrix， 只不过Matrix比较难以理解和使用，故封装了一些常用的方法。</li>
+</ul>
+<h1><span id="canvas详解">Canvas详解</span></h1>
+<p>使用Canvas绘制基本图形</p>
+<ul>
+<li><strong>绘制颜色</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">canvas.drawColor(Color.BLUE); <span class="comment">//绘制蓝色</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>创建画笔</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Paint mPaint = <span class="keyword">new</span> Paint();</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initPaint</span><span class="params">()</span></span>&#123;</span><br><span class="line">	mPaint.setColor(Color.BLACK);</span><br><span class="line">	mPaint.setStyle(Paint.Style.FILL);</span><br><span class="line">	mPaint.setStrokeWidth(<span class="number">10f</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>**绘制点</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">canvas.drawPoint(<span class="number">200</span>, <span class="number">200</span>, mPaint);     <span class="comment">//在坐标(200,200)位置绘制一个点</span></span><br><span class="line">canvas.drawPoints(<span class="keyword">new</span> <span class="keyword">float</span>[]&#123;          <span class="comment">//绘制一组点，坐标位置由float数组指定</span></span><br><span class="line">      <span class="number">500</span>,<span class="number">500</span>,</span><br><span class="line">      <span class="number">500</span>,<span class="number">600</span>,</span><br><span class="line">      <span class="number">500</span>,<span class="number">700</span></span><br><span class="line">&#125;,mPaint);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>绘制直线</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">canvas.drawLine(<span class="number">300</span>,<span class="number">300</span>,<span class="number">500</span>,<span class="number">600</span>,mPaint);    <span class="comment">// 在坐标(300,300)(500,600)之间绘制一条直线</span></span><br><span class="line">canvas.drawLines(<span class="keyword">new</span> <span class="keyword">float</span>[]&#123;               <span class="comment">// 绘制一组线 每四数字(两个点的坐标)确定一条线</span></span><br><span class="line">    <span class="number">100</span>,<span class="number">200</span>,<span class="number">200</span>,<span class="number">200</span>,</span><br><span class="line">    <span class="number">100</span>,<span class="number">300</span>,<span class="number">200</span>,<span class="number">300</span></span><br><span class="line">&#125;,mPaint);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>绘制矩形</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种</span></span><br><span class="line">canvas.drawRect(<span class="number">100</span>,<span class="number">100</span>,<span class="number">800</span>,<span class="number">400</span>,mPaint);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二种</span></span><br><span class="line">Rect rect = <span class="keyword">new</span> Rect(<span class="number">100</span>,<span class="number">100</span>,<span class="number">800</span>,<span class="number">400</span>);</span><br><span class="line">canvas.drawRect(rect,mPaint);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第三种</span></span><br><span class="line">RectF rectF = <span class="keyword">new</span> RectF(<span class="number">100</span>,<span class="number">100</span>,<span class="number">800</span>,<span class="number">400</span>);</span><br><span class="line">canvas.drawRect(rectF,mPaint);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>**Rect与RectF的区别：**两者最大的区别就是精度不同，Rect是int(整形)的，而RectF是float(单精度浮点型)的</p>
+</li>
+<li>
+<p><strong>绘制圆角矩形</strong></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种</span></span><br><span class="line">RectF rectF = <span class="keyword">new</span> RectF(<span class="number">100</span>,<span class="number">100</span>,<span class="number">800</span>,<span class="number">400</span>);</span><br><span class="line">canvas.drawRoundRect(rectF,<span class="number">30</span>,<span class="number">30</span>,mPaint);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二种</span></span><br><span class="line">canvas.drawRoundRect(<span class="number">100</span>,<span class="number">100</span>,<span class="number">800</span>,<span class="number">400</span>,<span class="number">30</span>,<span class="number">30</span>,mPaint);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>绘制椭圆</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RectF rectF = <span class="keyword">new</span> RectF(<span class="number">100</span>,<span class="number">100</span>,<span class="number">800</span>,<span class="number">400</span>);</span><br><span class="line">canvas.drawOval(rectF,mPaint);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二种</span></span><br><span class="line">canvas.drawOval(<span class="number">100</span>,<span class="number">100</span>,<span class="number">800</span>,<span class="number">400</span>,mPaint);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>绘制圆</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">canvas.drawCircle(<span class="number">500</span>,<span class="number">500</span>,<span class="number">400</span>,mPaint);  <span class="comment">// 绘制一个圆心坐标在(500,500)，半径为400 的圆。</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>绘制圆弧</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawArc</span><span class="params">(@NonNull RectF oval, <span class="keyword">float</span> startAngle, <span class="keyword">float</span> sweepAngle, <span class="keyword">boolean</span> useCenter, @NonNull Paint paint)</span></span>&#123;&#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 第二种</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawArc</span><span class="params">(<span class="keyword">float</span> left, <span class="keyword">float</span> top, <span class="keyword">float</span> right, <span class="keyword">float</span> bottom, <span class="keyword">float</span> startAngle,</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="keyword">float</span> sweepAngle, <span class="keyword">boolean</span> useCenter, @NonNull Paint paint)</span> </span>&#123;&#125;</span><br><span class="line"><span class="comment">//startAngle  // 开始角度</span></span><br><span class="line"><span class="comment">//sweepAngle  // 扫过角度</span></span><br><span class="line"><span class="comment">//useCenter   // 是否使用中心</span></span><br></pre></td></tr></table></figure>
+<h1><span id="paint">Paint</span></h1>
+<p>基本形状由Canvas确定，但绘制出来的颜色,具体效果则由Paint确定</p>
+<ul>
+<li><strong>设置画笔样式</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mPaint.setStyle(Paint.Style.FILL);  <span class="comment">//设置画笔模式为填充</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//STROKE                //描边</span></span><br><span class="line"><span class="comment">//FILL                  //填充</span></span><br><span class="line"><span class="comment">//FILL_AND_STROKE       //描边加填充</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Paint paint = <span class="keyword">new</span> Paint();</span><br><span class="line">paint.setColor(Color.BLUE);</span><br><span class="line">paint.setStrokeWidth(<span class="number">40</span>);     <span class="comment">//为了实验效果明显，特地设置描边宽度非常大</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 描边</span></span><br><span class="line">paint.setStyle(Paint.Style.STROKE);</span><br><span class="line">canvas.drawCircle(<span class="number">200</span>,<span class="number">200</span>,<span class="number">100</span>,paint);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 填充</span></span><br><span class="line">paint.setStyle(Paint.Style.FILL);</span><br><span class="line">canvas.drawCircle(<span class="number">200</span>,<span class="number">500</span>,<span class="number">100</span>,paint);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 描边加填充</span></span><br><span class="line">paint.setStyle(Paint.Style.FILL_AND_STROKE);</span><br><span class="line">canvas.drawCircle(<span class="number">200</span>, <span class="number">800</span>, <span class="number">100</span>, paint);</span><br></pre></td></tr></table></figure>
+<h1><span id="绘制图片">绘制图片</span></h1>
+<h2><span id="drawpicture">drawPicture</span></h2>
+<blockquote>
+<p>A Picture records drawing calls (via the canvas returned by beginRecording) and can then play them back into Canvas (via draw(Canvas) or drawPicture(Picture)).For most content (e.g. text, lines, rectangles), drawing a sequence from a picture can be faster than the equivalent API calls, since the picture performs its playback without incurring any method-call overhead.</p>
+</blockquote>
+<ul>
+<li><strong>Picture录制Canvas中绘制的内容</strong><br>
+把Canvas绘制点，线，矩形等诸多操作用Picture录制下来，下次需要的时候拿来就能用，使用Picture相比于再次调用绘图API，开销是比较小的</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>相关方法</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>public int getWidth ()</td>
+<td>获取宽度</td>
+</tr>
+<tr>
+<td>public int getHeight ()</td>
+<td>获取高度</td>
+</tr>
+<tr>
+<td>public Canvas beginRecording (int width, int height)</td>
+<td>开始录制 (返回一个Canvas，在Canvas中所有的绘制都会存储在Picture中)</td>
+</tr>
+<tr>
+<td>public void endRecording ()</td>
+<td>结束录制</td>
+</tr>
+<tr>
+<td>public void draw (Canvas canvas)</td>
+<td>将Picture中内容绘制到Canvas中</td>
+</tr>
+<tr>
+<td>public static Picture createFromStream (InputStream stream)</td>
+<td>(已废弃)通过输入流创建一个Picture</td>
+</tr>
+<tr>
+<td>public void writeToStream (OutputStream stream)</td>
+<td>(已废弃)将Picture中内容写出到输出流中</td>
+</tr>
+</tbody>
+</table>
+<p>eg：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.创建Picture</span></span><br><span class="line"><span class="keyword">private</span> Picture mPicture = <span class="keyword">new</span> Picture();</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.录制内容方法</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">recording</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 开始录制 (接收返回值Canvas)</span></span><br><span class="line">    Canvas canvas = mPicture.beginRecording(<span class="number">500</span>, <span class="number">500</span>);</span><br><span class="line">    <span class="comment">// 创建一个画笔</span></span><br><span class="line">    Paint paint = <span class="keyword">new</span> Paint();</span><br><span class="line">    paint.setColor(Color.BLUE);</span><br><span class="line">    paint.setStyle(Paint.Style.FILL);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在Canvas中具体操作</span></span><br><span class="line">    <span class="comment">// 位移</span></span><br><span class="line">    canvas.translate(<span class="number">250</span>,<span class="number">250</span>);</span><br><span class="line">    <span class="comment">// 绘制一个圆</span></span><br><span class="line">    canvas.drawCircle(<span class="number">0</span>,<span class="number">0</span>,<span class="number">100</span>,paint);</span><br><span class="line"></span><br><span class="line">    mPicture.endRecording();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.在使用前调用(我在构造函数中调用了)</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Canvas3</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(context, attrs);</span><br><span class="line">    </span><br><span class="line">    recording();    <span class="comment">// 调用录制</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>将Picture中的内容绘制出来可以有以下几种方法</strong></li>
+</ul>
+<p>1.使用Picture提供的draw方法绘制</p>
+<p>2.使用Canvas提供的drawPicture方法绘制</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawPicture</span> <span class="params">(Picture picture)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawPicture</span> <span class="params">(Picture picture, Rect dst)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawPicture</span> <span class="params">(Picture picture, RectF dst)</span></span></span><br></pre></td></tr></table></figure>
+<p>3.将Picture包装成PictureDrawable，使用PictureDrawable的draw方法绘制</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 包装成为Drawable</span></span><br><span class="line">PictureDrawable drawable = <span class="keyword">new</span> PictureDrawable(mPicture);</span><br><span class="line"><span class="comment">// 设置绘制区域 -- 注意此处所绘制的实际内容不会缩放</span></span><br><span class="line">drawable.setBounds(<span class="number">0</span>,<span class="number">0</span>,<span class="number">250</span>,mPicture.getHeight());</span><br><span class="line"><span class="comment">// 绘制</span></span><br><span class="line">drawable.draw(canvas);</span><br></pre></td></tr></table></figure>
+<h2><span id="drawbitmap">drawBitmap</span></h2>
+<ul>
+<li><strong>获取Bitmap方式</strong><br>
+**1.通过Bitmap创建：**复制一个已有的Bitmap(新Bitmap状态和原有的一致) 或者 创建一个空白的Bitmap(内容可改变)<br>
+**2.通过BitmapDrawable获取：**从资源文件 内存卡 网络等地方获取一张图片并转换为内容不可变的Bitmap<br>
+**3.通过BitmapFactory获取：**从资源文件 内存卡 网络等地方获取一张图片并转换为内容不可变的Bitmap</li>
+</ul>
+<p>我们绘制Bitmap都是读取已有的图片转换为Bitmap绘制到Canvas上</p>
+<ul>
+<li><strong>BitmapFactory从不同位置获取Bitmap</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(),R.raw.bitmap);</span><br></pre></td></tr></table></figure>
+<p><strong>资源文件（assets）</strong><br>
+Bitmap bitmap=null;<br>
+try {<br>
+InputStream is = mContext.getAssets().open(“bitmap.png”);<br>
+bitmap = BitmapFactory.decodeStream(is);<br>
+is.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}</p>
+<p><strong>内存卡文件</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bitmap bitmap = BitmapFactory.decodeFile(<span class="string">"/sdcard/bitmap.png"</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>网络文件</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取网络输入流</span></span><br><span class="line">...</span><br><span class="line">Bitmap bitmap = BitmapFactory.decodeStream(is);</span><br><span class="line">is.close();</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>绘制Bitmap</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawBitmap</span> <span class="params">(Bitmap bitmap, Matrix matrix, Paint paint)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">// 第二种</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawBitmap</span> <span class="params">(Bitmap bitmap, <span class="keyword">float</span> left, <span class="keyword">float</span> top, Paint paint)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">// 第三种</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawBitmap</span> <span class="params">(Bitmap bitmap, Rect src, Rect dst, Paint paint)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawBitmap</span> <span class="params">(Bitmap bitmap, Rect src, RectF dst, Paint paint)</span></span></span><br></pre></td></tr></table></figure>
+<p>eg:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">canvas.drawBitmap(bitmap,<span class="keyword">new</span> Matrix(),<span class="keyword">new</span> Paint());</span><br></pre></td></tr></table></figure>
+<h2><span id="绘制文字">绘制文字</span></h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一类</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawText</span> <span class="params">(String text, <span class="keyword">float</span> x, <span class="keyword">float</span> y, Paint paint)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawText</span> <span class="params">(String text, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">float</span> x, <span class="keyword">float</span> y, Paint paint)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawText</span> <span class="params">(CharSequence text, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">float</span> x, <span class="keyword">float</span> y, Paint paint)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawText</span> <span class="params">(<span class="keyword">char</span>[] text, <span class="keyword">int</span> index, <span class="keyword">int</span> count, <span class="keyword">float</span> x, <span class="keyword">float</span> y, Paint paint)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">// 第二类</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawPosText</span> <span class="params">(String text, <span class="keyword">float</span>[] pos, Paint paint)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawPosText</span> <span class="params">(<span class="keyword">char</span>[] text, <span class="keyword">int</span> index, <span class="keyword">int</span> count, <span class="keyword">float</span>[] pos, Paint paint)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">// 第三类</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawTextOnPath</span> <span class="params">(String text, Path path, <span class="keyword">float</span> hOffset, <span class="keyword">float</span> vOffset, Paint paint)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawTextOnPath</span> <span class="params">(<span class="keyword">char</span>[] text, <span class="keyword">int</span> index, <span class="keyword">int</span> count, Path path, <span class="keyword">float</span> hOffset, <span class="keyword">float</span> vOffset, Paint paint)</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>分为三类：</strong><br>
+1.只能指定文本基线位置(基线x默认在字符串左侧，基线y默认在字符串下方)。<br>
+2.可以分别指定每个文字的位置。<br>
+3.是指定一个路径，根据路径绘制文字。</li>
+</ul>
+<hr>
+<p>出处：<a href="http://www.gcssloop.com/customview/Canvas_BasicGraphics" target="_blank" rel="noopener">http://www.gcssloop.com/customview/Canvas_BasicGraphics</a><br>
+<a href="http://www.gcssloop.com/customview/Canvas_PictureText" target="_blank" rel="noopener">http://www.gcssloop.com/customview/Canvas_PictureText</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/02/28/ClassLoader学习记录/" data-toggle="tooltip" data-placement="top" title="ClassLoader深入学习记录">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/01/22/Android自定义View-5/" data-toggle="tooltip" data-placement="top" title="Android自定义View——绘制流程学习笔记">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#android" title="android">android</a>
+                        
+                          <a class="tag" href="/tags/#java" title="java">java</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">It Helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "https://csming1995.github.io/2017/02/10/Android自定义View-6/";
+    var disqus_url = "https://csming1995.github.io/2017/02/10/Android自定义View-6/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/csming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Csming 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://csming1995.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://csming1995.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Java基础复习 - Csming | 少棉
+        
+    </title>
+
+    <link rel="canonical" href="https://csming1995.github.io/2017/05/27/JavaSe-00/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('undefined')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#java" title="java">java</a>
+                            
+                        </div>
+                        <h1>Java基础复习</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Csming on
+                            2017-05-27
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Csming</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="java基本语言特性">Java基本语言特性</span></h1>
+<h2><span id="常量-变量-枚举-数组">常量、变量、枚举、数组</span></h2>
+<ul>
+<li><strong>常量</strong>常量表示程序运行过程中不能改变的值</li>
+</ul>
+<p><strong>1.用于代表常数，便于程序的修改</strong><br>
+比如，在程序最开始的地方定义一个</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> PI = <span class="number">3.14159</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">	<span class="keyword">float</span> r = <span class="number">10.0</span>;</span><br><span class="line">	<span class="keyword">float</span> s = PI*r*r/<span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后，后期需要更改这个值的时候，就可以直接修改PI的值了；而不用一个一个的去修改</p>
+<p><strong>2.增强程序可读性</strong></p>
+<p><strong>3.常量可以先声明，后赋值；但是只能赋值一次</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> PI;</span><br><span class="line">PI = <span class="number">3.14159</span>;</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li><strong>变量</strong>变量表示程序的状态；程序通过改变变量的值来改变整个程序的状态；</li>
+</ul>
+<p>（书上看的）<br>
+其实感觉没这么邪乎吧，就是在程序运行中可以被改变的值；用来实现一些逻辑；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+<p>声明方式： 数据类型 变量名称;</p>
+<p>通过“=”号赋值，“==”好代表是否相等；</p>
+<hr>
+<ul>
+<li><strong>枚举</strong><br>
+枚举是一种类型；只能够赋enum中规定的值；</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Color&#123;</span><br><span class="line">    RED,GREEN,BLUE ; </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">		Color c = Color.BLUE;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上是基本用法；</p>
+<p>然后枚举有几种用法如下：</p>
+<p><strong>1.在switch中使用</strong></p>
+<p><strong>2.直接充当常量使用</strong></p>
+<p><strong>3.向枚举中添加新方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Color&#123;</span><br><span class="line">	RED(<span class="string">"red"</span>, <span class="number">1</span>), GREEN(<span class="string">"green"</span>,<span class="number">2</span>);</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> index;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Color</span><span class="params">(String name, <span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">		<span class="keyword">this</span>.index = index;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getName</span><span class="params">(<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(Color c : Color.values())&#123;</span><br><span class="line">			<span class="keyword">if</span>(c.getIndex()==index)&#123;</span><br><span class="line">				<span class="keyword">return</span> c.name;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// get set 方法  </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> name;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.name = name;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getIndex</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> index;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIndex</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.index = index;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>4.覆盖枚举的方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Color&#123;</span><br><span class="line">	...</span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>5.实现接口</strong><br>
+枚举继承java.lang.Enum类；<br>
+所以只能继承接口了；</p>
+<p><strong>6.使用接口组织枚举</strong></p>
+<hr>
+<ul>
+<li><strong>数组</strong>Array 相同类型数据的集合</li>
+</ul>
+<p><strong>定义数组</strong></p>
+<p>1.方式1：type[] xxx = new type[sum];</p>
+<p>2.方式2：type xxx[] = new type[sum];</p>
+<p>3.方式3：定义的时候直接初始化 type[] xxx = new type[]{x,x,x,x};</p>
+<p>或者：type[] 变量名 = {x,x,x,x};</p>
+<p><strong>运用</strong></p>
+<p><a href="http://1.xxx" target="_blank" rel="noopener">1.xxx</a>[index]；通过索引访问元素</p>
+<p>2.xxx.length：获取数组长度</p>
+<p>3.数组元素不为基本原生数据类型时，存放的是引用类型，而不是对象本身<br>
+当生成对象之后，引用才指向对象，否则引用为null。</p>
+<p><strong>二维数组</strong></p>
+<p>type[][] xxx = new type[sum][sum];<br>
+type xxx[][] = new type[sum][sum];</p>
+<p>其中，声明的二维数组，可以让第二维的数组不等长；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[][] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>][];</span><br><span class="line">a[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">a[<span class="number">1</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br></pre></td></tr></table></figure>
+<h2><span id="object与数据类型">Object与数据类型</span></h2>
+<ul>
+<li><strong>Object对象时所有对象的顶级父类</strong></li>
+</ul>
+<p><strong>以下记录一些常用方法</strong></p>
+<ol>
+<li>
+<pre><code>  equals(Object obj)
+</code></pre>
+</li>
+<li>
+<pre><code>  finalize()
+</code></pre>
+</li>
+<li>
+<pre><code>  getClass
+</code></pre>
+</li>
+<li>
+<pre><code>  hashCode()
+</code></pre>
+</li>
+<li>
+<pre><code>  notify
+</code></pre>
+</li>
+<li>
+<pre><code>  notifyAll();
+</code></pre>
+</li>
+<li>
+<pre><code>  wait()
+</code></pre>
+</li>
+<li>
+<pre><code>  Clone()
+</code></pre>
+</li>
+<li>
+<pre><code>  toString()
+</code></pre>
+</li>
+</ol>
+<ul>
+<li><strong>数据类型</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>基本数据类型</th>
+<th>封装器类</th>
+<th>位数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boolean</td>
+<td>Boolean</td>
+<td>1</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>Byte</td>
+<td>8</td>
+</tr>
+<tr>
+<td>short</td>
+<td>Short</td>
+<td>16</td>
+</tr>
+<tr>
+<td>int</td>
+<td>Integer</td>
+<td>32</td>
+</tr>
+<tr>
+<td>long</td>
+<td>Long</td>
+<td>64</td>
+</tr>
+<tr>
+<td>float</td>
+<td>Float</td>
+<td>32</td>
+</tr>
+<tr>
+<td>double</td>
+<td>Double</td>
+<td>64</td>
+</tr>
+<tr>
+<td>void</td>
+<td>Void</td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<h2><span id="字符串">字符串</span></h2>
+<p>字符串主要有三种表现形式吧；<br>
+String，StringBuilder，StringBuffer；</p>
+<p><strong>String是不可变对象；StringBuilder和StringBuffer是可变对象</strong></p>
+<p>String的字符串操作，如value+“abd”;时，会返回一个String对象，但不会是原来的value发生改变；</p>
+<p>通过，观察其运行时的情况，会发现，String对象执行字符串变换操作如+时，是将String对象转为StringBuilder再合并成新的String返回的；</p>
+<p><strong>String对象是不可变的，故是线程安全的；而StringBuffer在方法中加了同步锁或者对调用的方法加了同步锁，故事线程安全的；</strong><br>
+而StringBuilder是线程不安全的；</p>
+<h2><span id="基本运算">基本运算</span></h2>
+<p><strong>算术运算符</strong></p>
+<blockquote>
+<p>“+” 加<br>
+“-” 减<br>
+“*” 乘<br>
+“/” 除<br>
+“%” 模运算（取余）<br>
+“++” 自加1<br>
+“–” 自减1</p>
+</blockquote>
+<p><strong>关系运算符</strong></p>
+<blockquote>
+<p>“==” 相等<br>
+“!=” 不相等<br>
+“&gt;” 大于<br>
+“&lt;” 小于<br>
+“&gt;=” 大于等于<br>
+“&lt;=” 小于等于</p>
+</blockquote>
+<p><strong>位运算符</strong></p>
+<blockquote>
+<p>“&amp;” 按位与<br>
+“|” 按位或<br>
+“^” 异或运算<br>
+“~” 求非<br>
+“&gt;&gt;” 右移；其中最高位取1或0看二进制表示的最高位<br>
+“&lt;&lt;” 左移<br>
+“&gt;&gt;&gt;” 无符号右移，忽略符号位，空位都以0补齐</p>
+</blockquote>
+<p><strong>逻辑运算符</strong></p>
+<blockquote>
+<p>“&amp;&amp;” 并且<br>
+“||” 或者<br>
+“!” 非</p>
+</blockquote>
+<p><strong>赋值运算符</strong></p>
+<blockquote>
+<p>“=”<br>
+“+=”<br>
+“-=”<br>
+“*=”<br>
+“%=”<br>
+“&lt;&lt;=”<br>
+“&gt;&gt;=”<br>
+“&amp;=”<br>
+“^=”<br>
+“!=”</p>
+</blockquote>
+<p><strong>其它运算符</strong></p>
+<p>1.(?:)条件运算符</p>
+<p>2.instanceof运算符（这个操作符只用于对象引用变量。操作检查对象是否为特定类型（类类型或接口类型））</p>
+<h2><span id="常用逻辑控制">常用逻辑控制</span></h2>
+<p><strong>if语句</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>()&#123;</span><br><span class="line">	</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>()&#123;</span><br><span class="line">	</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>循环语句</strong></p>
+<p>1.for(,)语句；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; sum ; i++)&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.while语句；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="keyword">boolean</span>)&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">	</span><br><span class="line">&#125;<span class="keyword">while</span>()</span><br></pre></td></tr></table></figure>
+<p><strong>switch语句</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>()&#123;</span><br><span class="line">	<span class="keyword">case</span> xxx :</span><br><span class="line">		...</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> xxx :</span><br><span class="line">		...</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">default</span> :</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1><span id="面向对象程序">面向对象程序</span></h1>
+<h2><span id="面向对象程序设计概述">面向对象程序设计概述</span></h2>
+<blockquote>
+<p>Object-oriented programming (OOP) 是一种基于对象的编程思维；<br>
+我们将问题空间中的元素和在方案空间的表示物称作“对象”（Object）</p>
+</blockquote>
+<p>这里我理解为，像现实生活一样，我们把我们利用计算机解决问题时的所有东西都作为对象；万物皆对象；</p>
+<p>而对象和对象也有共通的地方，所有属性和动作一样的对象就属于同个类；<br>
+例如，汽车有四个轮子，有颜色，名字，其行为有前进后退、加速等；</p>
+<blockquote>
+<p>软件世界中的对象和现实世界中的对象类似，对象存储状态在字段（field）里，而通过方法（methods）暴露其行为。方法对对象的内部状态进行操作，并作为对象与对象之间通信主要机制。隐藏对象内部状态，通过方法进行所有的交互，这个面向对象编程的一个基本原则——数据封装（data encapsulation）。</p>
+</blockquote>
+<p><strong>程序是一大堆对象的组合；对象和对象间通过消息传递告知自己需要做什么；</strong></p>
+<p><strong>面向对象程序设计有四个特性：封装、抽象、继承、多态</strong></p>
+<h2><span id="类class基本概念">类(class)基本概念</span></h2>
+<p>类是一个模板，它描述一类对象的行为和状态。</p>
+<p><strong>类利用class定义</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dog</span></span>&#123;</span><br><span class="line">	String bread;</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">	String color;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">barking</span><span class="params">()</span></span>&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">hungry</span><span class="params">()</span></span>&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">sleeping</span><span class="params">()</span></span>&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上是菜鸟教程中的一个例子；不过我觉得方法名命名得不太好，像是某种状态，而不是某个动作；</p>
+<hr>
+<p>一个类可以包括：局部变量，成员变量，类变量；</p>
+<p><strong>局部变量</strong>就是方法和构造方法的或者语句块中定义的变量；只在局部有效；</p>
+<p>语句块指的应该是static{}，或者{}代码块</p>
+<p><strong>成员变量</strong>定义在类中，在创建对象时被实例化，成员变量可以被类中的方法、构造方法和特定类的语句块访问；</p>
+<p><strong>类变量</strong>被声明为static类型的变量，声明在类中、方法体外，可以直接通过类名调用；</p>
+<hr>
+<p>**构造方法：**每个类都有构造方法，如果没有显式的定义构造方法，Java编译器会提供一个默认的；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Puppy</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Puppy</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="对象">对象</span></h2>
+<p>对象是类的一个实例，有状态和行为</p>
+<p><strong>创建对象需要三步：</strong></p>
+<p>**声明：**声明一个对象，包括对象名称和对象类型</p>
+<p>**实例化：**使用new来创建一个对象</p>
+<p>**初始化：**使用new创建一个对象时，会调用构造方法初始化对象</p>
+<h2><span id="方法参数">方法参数</span></h2>
+<p><strong>基本类型作为参数传递时，是传递值的拷贝</strong></p>
+<p><strong>而对象作为参数传递时，是把对象的引用传递了；所以在方法内，如果对对象的引用进行操作，就会直接对对象进行改变</strong><br>
+（脑补小知识：引用指向的是存储对象的一段内存）</p>
+<h2><span id="静态域和静态方法">静态域和静态方法</span></h2>
+<h3><span id="静态域">静态域</span></h3>
+<ul>
+<li>
+<p><strong>静态变量</strong><br>
+若将某个变量声明为static，则这个类和其所有对象共享一个值；<br>
+而内存中值存在一份；</p>
+</li>
+<li>
+<p><strong>静态常量</strong></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> PI = <span class="number">3.1415</span>;</span><br></pre></td></tr></table></figure>
+<h3><span id="静态方法">静态方法</span></h3>
+<p>不需要实例化对象就可以调用的方法；可以直接用类名进行调用；</p>
+<p><strong>应用场景：</strong> 工具类、一个访问只需要访问类的静态域</p>
+<h2><span id="类成员初始化">类成员初始化</span></h2>
+<ul>
+<li>**类的初始化：**值初始化一次，类的初始化主要是初始化静态变量；<br>
+先按照静态成员变量的定义顺序在类内部声明成员变量；<br>
+再按照原Java类中对成员变量的初始化顺序进行初始化</li>
+</ul>
+<h2><span id="包package">包(package)</span></h2>
+<p>更好的组织类</p>
+<ul>
+<li><strong>包的作用</strong><br>
+1.将功能相似或相关的类或接口组织在同个包中，便于查找和使用</li>
+</ul>
+<p>2.像文件夹一样，采用树形目录的存储方式；同一个包的类名称是不同的，不同包的类名是可以相同的；可有效避免名称的冲突</p>
+<p>3.包也限定了访问权限；拥有包访问权限的类才能访问某个包中的类；</p>
+<h2><span id="注释">注释</span></h2>
+<p><em><em>1.&quot;//&quot;、&quot;/</em> … <em>/&quot;</em></em></p>
+<p><strong>2.javadoc标签</strong></p>
+<table>
+<thead>
+<tr>
+<th>标签</th>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@author</td>
+<td>标识一个类的作者</td>
+<td>@author description</td>
+</tr>
+<tr>
+<td>@deprecated</td>
+<td>指明一个过期的类或成员</td>
+<td>@deprecated description</td>
+</tr>
+<tr>
+<td>{@docRoot}</td>
+<td>指明当前文档根目录的路径</td>
+<td>Directory Path</td>
+</tr>
+<tr>
+<td>@exception</td>
+<td>标识一个类抛出的异常</td>
+<td>@exception exception-name explanation</td>
+</tr>
+<tr>
+<td>{@inheritDoc}</td>
+<td>从直接父类继承的注释</td>
+<td>Inherits a comment from the immediate surperclass.</td>
+</tr>
+<tr>
+<td>{@link}</td>
+<td>插入一个到另一个主题的链接</td>
+<td>{@link name text}</td>
+</tr>
+<tr>
+<td>{@linkplain}</td>
+<td>插入一个到另一个主题的链接，但是该链接显示纯文本字体</td>
+<td>Inserts an in-line link to another topic.</td>
+</tr>
+<tr>
+<td>@param</td>
+<td>说明一个方法的参数</td>
+<td>@param parameter-name explanation</td>
+</tr>
+<tr>
+<td>@return</td>
+<td>说明返回值类型</td>
+<td>@return explanation</td>
+</tr>
+<tr>
+<td>@see</td>
+<td>指定一个到另一个主题的链接</td>
+<td>@see anchor</td>
+</tr>
+<tr>
+<td>@serial</td>
+<td>说明一个序列化属性</td>
+<td>@serial description</td>
+</tr>
+<tr>
+<td>@serialData</td>
+<td>说明通过writeObject( ) 和 writeExternal( )方法写的数据</td>
+<td>@serialData description</td>
+</tr>
+<tr>
+<td>@serialField</td>
+<td>说明一个ObjectStreamField组件</td>
+<td>@serialField name type description</td>
+</tr>
+<tr>
+<td>@since</td>
+<td>标记当引入一个特定的变化时</td>
+<td>@since release</td>
+</tr>
+<tr>
+<td>@throws</td>
+<td>和 @exception标签一样.</td>
+<td>The @throws tag has the same meaning as the @exception tag.</td>
+</tr>
+<tr>
+<td>{@value}</td>
+<td>显示常量的值，该常量必须是static属性。</td>
+<td>Displays the value of a constant, which must be a static field.</td>
+</tr>
+<tr>
+<td>@version</td>
+<td>指定类的版本</td>
+<td>@version info</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3.文档注释</strong></p>
+<p>在开始的/**后，第一行或几行是关于类、变量和方法的主要描述</p>
+<p><strong>javadoc或输出一些包含程序注释的HTML文件</strong></p>
+<hr>
+<h2><span id="接口">接口</span></h2>
+<p>接口：interface，是一种抽象类型，是抽象方法的集合；用interface来声明；<br>
+类通过集成接口的方式，来集成接口的抽象方法；</p>
+<p>接口不是类，但是编写接口和类相似；</p>
+<blockquote>
+<p>类描述对象的属性和方法，接口则包含类要实现的方法；</p>
+</blockquote>
+<p><strong>类要实现所继承的接口的所有方法；</strong></p>
+<p><strong>接口无法被实例化，但可以被实现（用类实现）；</strong></p>
+<blockquote>
+<p>在 Java 中，接口类型可用来声明一个变量，他们可以成为一个空指针，或是被绑定在一个以此接口实现的对象</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[可见度] interface 接口名称 [extends 其他的类名] &#123;</span><br><span class="line">        <span class="comment">// 声明变量</span></span><br><span class="line">        <span class="comment">// 抽象方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="抽象类">抽象类</span></h2>
+<p>用abstract class声明</p>
+<blockquote>
+<p>抽象类除了不能实例化对象之外，类的其它功能依然存在，成员变量、成员方法和构造方法的访问方式和普通类一样。<br>
+由于抽象类不能实例化对象，所以抽象类必须被继承，才能被使用。</p>
+</blockquote>
+<p>通常在设计阶段决定是否要设计抽象类</p>
+<hr>
+<p><strong>抽象类和接口的区别</strong></p>
+<ol>
+<li>抽象类中的方法可以有方法体，就是能实现方法的具体功能，但是接口中的方法不行。</li>
+<li>抽象类中的成员变量可以是各种类型的，而接口中的成员变量只能是 public static final 类型的。</li>
+<li>接口中不能含有静态代码块以及静态方法(用 static 修饰的方法)，而抽象类是可以有静态代码块和静态方法。</li>
+<li>一个类只能继承一个抽象类，而一个类却可以实现多个接口。</li>
+</ol>
+<h2><span id="内部类">内部类</span></h2>
+<p>顾名思义，就是声明在类内部的类；</p>
+<ul>
+<li><strong>成员内部类</strong></li>
+</ul>
+<p>最普通的内部类；一个位于类的内部的类；</p>
+<p>编译器在进行编译的时候，会将成员内部类单独编译成一个字节码文件；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Outer</span></span>&#123;</span><br><span class="line">	...</span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>成员内部类可以访问外部类的所有成员属性和成员方法</p>
+<p><strong>而外部类想要访问成员内部类的成员，要先创建一个成员内部类的对象，然后通过只想这个对象的引用来访问</strong></p>
+<p><strong>成员内部类是依附外部类而存在的，也就是说，如果要创建成员内部类的对象，前提是必须存在一个外部类的对象</strong></p>
+<p><strong>内部类可以拥有private访问权限、protected访问权限、public访问权限及包访问权限</strong></p>
+<ul>
+<li>
+<p><strong>局部内部类</strong><br>
+定义在一个方法或一个作用域内的类；<br>
+仅作用于方法或作用域内；</p>
+</li>
+<li>
+<p><strong>匿名内部类</strong><br>
+编写事件监听的代码时使用匿名内部类不但方便，而且使代码更加容易维护</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">button.setOnClickListener(<span class="keyword">new</span> OnClickListener()&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>静态内部类</strong><br>
+类内部的，用static修饰；</li>
+</ul>
+<p>静态内部类是不需要依赖于外部类的；</p>
+<p>没有一个指向外部类的指针；</p>
+<h2><span id="继承">继承</span></h2>
+<p>子类拥有父类非private的属性，方法。<br>
+子类可以拥有自己的属性和方法，即子类可以对父类进行扩展。<br>
+子类可以用自己的方式实现父类的方法。<br>
+Java的继承是单继承，但是可以多重继承，单继承就是一个子类只能继承一个父类，多重继承就是，例如A类继承B类，B类继承C类，所以按照关系就是C类是B类的父类，B类是A类的父类，这是java继承区别于C++继承的一个特性。<br>
+提高了类之间的耦合性（继承的缺点，耦合度高就会造成代码之间的联系）。</p>
+<h2><span id="类设计技巧">类设计技巧</span></h2>
+<ul>
+<li>
+<p><strong>将数据设计为私有</strong><br>
+不要破坏封装性<br>
+需要编写一个访问器方法或更改器方法，但是最好还是保持实例域的私有性</p>
+</li>
+<li>
+<p><strong>一定要对数据初始化</strong><br>
+Java不对局部变量进行初始化，但是会对对象的实例域进行初始化。<br>
+不要依赖于系统的默认值，而是应该显式地初始化所有的数据</p>
+</li>
+<li>
+<p><strong>不要在类中使用过多的基本数据类型</strong><br>
+用其他的类代替多个相关的基本数据类型的使用。这样会使类更加易于理解且易于修改。</p>
+</li>
+<li>
+<p><strong>不是所有的域都需要独立的域访问器和域更改器</strong></p>
+</li>
+<li>
+<p><strong>使用标准格式进行类的定义</strong><br>
+一定采用下面的顺序书写类的内容：<br>
+公有访问特性部分<br>
+包作用域访问特性部分<br>
+私有访问特性部分<br>
+在每一部分中，应该按照下列顺序列出：<br>
+实例方法<br>
+静态方法<br>
+实例域<br>
+静态域</p>
+</li>
+<li>
+<p><strong>将职责过多的类进行分解</strong></p>
+</li>
+<li>
+<p><strong>类名和方法名要能够体现它们的职责</strong></p>
+</li>
+</ul>
+<hr>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/05/28/JavaSe-01/" data-toggle="tooltip" data-placement="top" title="Java基础复习——设计模式">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/05/24/Daily07/" data-toggle="tooltip" data-placement="top" title="日记-2017-05-24">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#java" title="java">java</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">It Helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "https://csming1995.github.io/2017/05/27/JavaSe-00/";
+    var disqus_url = "https://csming1995.github.io/2017/05/27/JavaSe-00/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/csming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Csming 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://csming1995.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://csming1995.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

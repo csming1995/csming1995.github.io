@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Java内部类 - Csming | 少棉
+        
+    </title>
+
+    <link rel="canonical" href="https://csming1995.github.io/2017/03/15/Java内部类/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('undefined')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#java" title="java">java</a>
+                            
+                        </div>
+                        <h1>Java内部类</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Csming on
+                            2017-03-15
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Csming</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="什么是内部类">什么是内部类</span></h1>
+<p>将一个类的定义放在另一个类的内部，就称之为内部类</p>
+<h1><span id="创建内部类">创建内部类</span></h1>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Parcel1</span> </span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Contents</span></span>&#123;</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">11</span>;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">value</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> i;&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Destination</span></span>&#123;</span><br><span class="line">		<span class="keyword">private</span> String label;</span><br><span class="line">		Destination(String whereTo)&#123;</span><br><span class="line">			label = whereTo;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function">String <span class="title">readLabel</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> label;&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Destination <span class="title">to</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Destination(s);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Contents <span class="title">contents</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Contents();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ship</span><span class="params">(String dest)</span></span>&#123;</span><br><span class="line">		Contents c = <span class="keyword">new</span> Contents();</span><br><span class="line">		Destination d = <span class="keyword">new</span> Destination(dest);</span><br><span class="line">		System.out.println(d.readLabel());</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">		Parcel1 p = <span class="keyword">new</span> Parcel1();</span><br><span class="line">		p.ship(<span class="string">"Tasmania"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以使外部类有一个方法，该方法返回一个指向内部类的引用，就像在to()和contents()方法</p>
+<h1><span id="连接到外部类">连接到外部类</span></h1>
+<p>内部类拥有其外围类的所有元素的访问权；<br>
+内部类的对象可以访问其外为对象的所有成员</p>
+<h1><span id="this与new">.this与.new</span></h1>
+<ul>
+<li><strong>1. .this可以生成对外部类的对象的引用</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DotThis</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span>&#123;System.out.println(<span class="string">"DoThis.f()"</span>);&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> DotThis <span class="title">outer</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="keyword">return</span> DotThis.<span class="keyword">this</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Inner <span class="title">inner</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> <span class="keyword">new</span> Inner();&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">		DotThis dt = <span class="keyword">new</span> DotThis();</span><br><span class="line">		DotThis.Inner dti = dt.inner();</span><br><span class="line">		dti.outer().f();<span class="comment">//利用outer函数调用外部类对象</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>2. .new告知某些其他对象，去创建其某个内部类的对象；</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DotNew</span></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">		DotNew dn = <span class="keyword">new</span> DotNew();</span><br><span class="line">		DotNew.Inner dni = dn.new Inner();<span class="comment">//使用.new创建内部类对象</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1><span id="内部类的向上转型">内部类的向上转型</span></h1>
+<p>将内部类向上转型为其基类，尤其是转型为一个接口时；内部类就有了用武之地；从实现了某个接口的对象，得到对此接口的引用，与向上转型为这个对象的基类，实质上是一样的；</p>
+<ul>
+<li><strong>创建以下接口</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Destination</span></span>&#123;</span><br><span class="line">	<span class="function">String <span class="title">readLabel</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Contents</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parcel</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">PContents</span> <span class="keyword">implements</span> <span class="title">Contents</span></span>&#123;</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">11</span>;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">value</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> i;&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">protected</span> <span class="class"><span class="keyword">class</span> <span class="title">PDestination</span> <span class="keyword">implements</span> <span class="title">Destination</span></span>&#123;</span><br><span class="line">		<span class="keyword">private</span> String label;</span><br><span class="line">		<span class="function"><span class="keyword">private</span> <span class="title">PDestination</span><span class="params">(String whereTo)</span></span>&#123;</span><br><span class="line">			label = whereTo;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> String <span class="title">readLabel</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> label;&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Destination <span class="title">destination</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> PDestination(s);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Contents <span class="title">contents</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> PContents();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestParcel</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">		Parcel p = <span class="keyword">new</span> Parcel();</span><br><span class="line">		Contents c = p.contents();</span><br><span class="line">		Destination d = p.destination(<span class="string">"Tasmania"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1><span id="在方法和作用域内的内部类">在方法和作用域内的内部类</span></h1>
+<p>可以在一个方法或者一个作用域内部定义内部类；<br>
+有两个理由这么做：<br>
+1.实现了某个类型的接口，于是可以创建并返回对其引用<br>
+2.要解决一个问题，于是创建一个类来辅助解决方案，但又不希望这个类是公用的</p>
+<ul>
+<li>
+<p><strong>可以这么做：</strong><br>
+1.一个定义在方法中的类<br>
+2.一个定义在作用域内的类，此作用域在方法的内部<br>
+3.一个实现了接口的匿名类<br>
+4.一个匿名类，扩展了有非默认构造器的类<br>
+5.一个匿名类，执行了字段的初始化<br>
+6.一个匿名类，通过实例初始化实现构造（匿名类不可能有构造器）</p>
+</li>
+<li>
+<p><strong>1.方法中的类</strong></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Parcel</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Destination <span class="title">destination</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">		<span class="class"><span class="keyword">class</span> <span class="title">PDestination</span> <span class="keyword">implements</span> <span class="title">Destination</span></span>&#123;</span><br><span class="line">			<span class="keyword">private</span> String label;</span><br><span class="line">			<span class="function"><span class="keyword">private</span> <span class="title">PEestination</span><span class="params">(String whereTo)</span></span>&#123;</span><br><span class="line">				label = whereTo;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="function"><span class="keyword">public</span> String <span class="title">readLabel</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> label;&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> PDestination(s);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">		Parcel p = <span class="keyword">new</span> Parcel();</span><br><span class="line">		Destination d = p.destination(<span class="string">"Tasmania"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>2.嵌入作用域中的内部类</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Parcel</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">internalTracking</span><span class="params">(<span class="keyword">boolean</span> b)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(b)&#123;</span><br><span class="line">			<span class="class"><span class="keyword">class</span> <span class="title">TrackingSlip</span></span>&#123;</span><br><span class="line">				<span class="keyword">private</span> String id;</span><br><span class="line">				TrackingSlip(String s)&#123;</span><br><span class="line">					id = s;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="function">String <span class="title">getSlip</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> id;&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			TrackingSlip ts = <span class="keyword">new</span> TrackingSlip(<span class="string">"slip"</span>);</span><br><span class="line">			String s = ts.getSlip();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">track</span><span class="params">()</span></span>&#123;internalTracking(<span class="keyword">true</span>);&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">		Parcel p = <span class="keyword">new</span> Parcel();</span><br><span class="line">		p.track();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1><span id="匿名内部类">匿名内部类</span></h1>
+<p>没有名字的类；作为实现了某个接口或基类的对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Parcel</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Contents <span class="title">contents</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Contents()&#123;<span class="comment">//匿名类</span></span><br><span class="line">			<span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">11</span>;</span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">value</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> i;&#125;</span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">		Parcel p = <span class="keyword">new</span> Parcel();</span><br><span class="line">		Contents c = p.contents();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>注意点：</strong><br>
+<strong>1.若基类需要一个带有参数的构造器；则给匿名类一个参数：</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Parcel</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Wrapping <span class="title">wrapping</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Wrapping(x)&#123;</span><br><span class="line">		<span class="comment">//这个参数是提供给基类构造器的，匿名类中不能使用</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">value</span><span class="params">()</span></span>&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">super</span>.value()*<span class="number">47</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">		Parcel p = <span class="keyword">new</span> Parcel();</span><br><span class="line">		Wrapping w = p.wrapping(<span class="number">10</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Wrapping基类如下：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Wrapping</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> i;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Wrapping</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;i = x;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">value</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> i;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2.若希望匿名类可以使用一个定义在外部的对象，则需要将该参数声明为final；//代码太多懒得写了……</strong></p>
+<h2><span id="工厂方法">工厂方法</span></h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Service</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">metiod2</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">ServiceFactory</span></span>&#123;</span><br><span class="line">	<span class="function">Service <span class="title">getService</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Implementation1</span> <span class="keyword">implements</span> <span class="title">Servie</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Implementation1</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span></span>&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> ServiceFactory factory = <span class="keyword">new</span> ServiceFactory()&#123;</span><br><span class="line">		<span class="function">publc Service <span class="title">getService</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> Implementation1();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Implementation2</span> <span class="keyword">implements</span> <span class="title">Servie</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Implementation1</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span></span>&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> ServiceFactory factory = <span class="keyword">new</span> ServiceFactory()&#123;</span><br><span class="line">		<span class="function">publc Service <span class="title">getService</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> Implementation2();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Factories</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">serviceConsumer</span><span class="params">(ServiceFactory fact)</span></span>&#123;</span><br><span class="line">		Service s = fact.getService();</span><br><span class="line">		s.method1();</span><br><span class="line">		s.method2();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">		serviceConsumer(Implemention1.factory);</span><br><span class="line">		serviceConsumer(Implemention2.factory);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1><span id="嵌套类">嵌套类</span></h1>
+<p>将内部类声明为static;由此，内部类对象与外部类对象之间没有了联系</p>
+<p><strong>It means：</strong><br>
+1.要创建嵌套类的对象，不需要其外部类的对象<br>
+2.不能从嵌套类的对象中访问非静态的外部类对象</p>
+<p><strong>普通的内部类的字段和方法只能放在类的外部层次上，所以普通的内部类不能有static数据和static字段；也不能包含嵌套类</strong></p>
+<p><strong>但是嵌套类就可以包含这些</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Parcel</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ParcelContents</span> <span class="keyword">implements</span> <span class="title">Contents</span></span>&#123;</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">11</span>;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">value</span><span class="params">(return i;)</span></span></span><br><span class="line"><span class="function">	&#125;</span></span><br><span class="line"><span class="function">	<span class="keyword">protected</span> <span class="keyword">static</span> class ParcelDestination implements Destination</span>&#123;</span><br><span class="line">		<span class="keyword">private</span> String label;</span><br><span class="line">		<span class="function"><span class="keyword">private</span> <span class="title">ParceDestination</span><span class="params">(String whereTo)</span></span>&#123;</span><br><span class="line">			label = whereTo;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> String <span class="title">readLabel</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> label;&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="keyword">static</span> <span class="keyword">int</span> x = <span class="number">10</span>;</span><br><span class="line">			<span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">AnotherLevel</span></span>&#123;</span><br><span class="line">				<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">				<span class="keyword">static</span> <span class="keyword">int</span> x = <span class="number">10</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Destination <span class="title">destination</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> ParcelContents();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Contents <span class="title">contents</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> ParcelContents();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">			Contents c = contents();</span><br><span class="line">			Destination d = destination(<span class="string">"Tasmania"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="接口内部的类">接口内部的类</span></h2>
+<p>用于进行测试</p>
+<h2><span id="从多层嵌套类中访问外部类的成员">从多层嵌套类中访问外部类的成员</span></h2>
+<p>一个内部类无论被嵌套多少层，其依旧可以透明的访问所有它嵌入的外围类的所有成员</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MNA</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">g</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">		<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;</span><br><span class="line">			<span class="function"><span class="keyword">void</span> <span class="title">h</span><span class="params">()</span></span>&#123;</span><br><span class="line">				g();</span><br><span class="line">				f();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MultiNestingAccess</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">		MNA mna = <span class="keyword">new</span> MNA();</span><br><span class="line">		MNA.A mnaa = mna.new A();</span><br><span class="line">		MNA.A.B mnaab = mnaa.new B();</span><br><span class="line">		mnaab.h();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1><span id="闭包和回调">闭包和回调</span></h1>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> closure;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Incrementable</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">increment</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyIncrement</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increment</span><span class="params">()</span></span>&#123;System.out.println(<span class="string">"Other operation"</span>);&#125;</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(MyIncrement mi)</span></span>&#123;mi.increment();&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Callee1</span> <span class="keyword">implements</span> <span class="title">Incrementable</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increment</span><span class="params">()</span></span>&#123;</span><br><span class="line">		i++;</span><br><span class="line">		System.out.println(i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Callee2</span> <span class="keyword">extends</span> <span class="title">MyIncrement</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increment</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">super</span>.increment();</span><br><span class="line">		i++;</span><br><span class="line">		System.out.println(i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Closure</span> <span class="keyword">implements</span> <span class="title">Incrementable</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increment</span><span class="params">()</span></span>&#123;</span><br><span class="line">			Callee2.<span class="keyword">this</span>.increment();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">Incrementable <span class="title">getCallbackReference</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Closure();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Caller</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Incrementable callbackReference;</span><br><span class="line">	Caller(Incrementable cbh)&#123;callbackReference = cbh;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">go</span><span class="params">()</span></span>&#123;callbackReference.increment();&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Callbacks</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		Callee1 c1 = <span class="keyword">new</span> Callee1();</span><br><span class="line">		Callee2 c2 = <span class="keyword">new</span> Callee2();</span><br><span class="line">		MyIncrement.f(c2);</span><br><span class="line">		Caller caller1 = <span class="keyword">new</span> Caller(c1);</span><br><span class="line">		Caller caller2 = <span class="keyword">new</span> Caller(c2.getCallbackReference());</span><br><span class="line">		caller1.go();</span><br><span class="line">		caller1.go();</span><br><span class="line">		caller2.go();</span><br><span class="line">		caller2.go();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：<br>
+Other operation<br>
+1<br>
+1<br>
+2<br>
+Other operation<br>
+2<br>
+Other operation<br>
+3</p>
+<h1><span id="内部类与控制框架">内部类与控制框架</span></h1>
+<p>略</p>
+<h1><span id="内部类的继承">内部类的继承</span></h1>
+<p>eg：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WithInner</span></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InheritInner</span> <span class="keyword">extends</span> <span class="title">WithInner</span>.<span class="title">Inner</span></span>&#123;</span><br><span class="line">	InheritInner(WithInner wi)&#123;</span><br><span class="line">		wi.<span class="keyword">super</span>();<span class="comment">//必须使用此句</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">		WithInner wi = <span class="keyword">new</span> WithInner();</span><br><span class="line">		InheritInner ii  = <span class="keyword">new</span> InheritInner(wi);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1><span id="内部类可以被覆盖吗">内部类可以被覆盖吗</span></h1>
+<h2><span id="不能被覆盖的情况">不能被覆盖的情况</span></h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Egg</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Yolk y;</span><br><span class="line">	<span class="keyword">protected</span> <span class="class"><span class="keyword">class</span> <span class="title">Yolk</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Yolk</span><span class="params">()</span></span>&#123;</span><br><span class="line">			...</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Egg</span><span class="params">()</span></span>&#123;</span><br><span class="line">		...</span><br><span class="line">		y = <span class="keyword">new</span> Yolk();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BigEgg</span> <span class="keyword">extends</span> <span class="title">Egg</span></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Yolk</span></span>&#123;</span><br><span class="line">		<span class="function">pubic <span class="title">Yolk</span><span class="params">()</span></span>&#123;...&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">		<span class="keyword">new</span> BigEgg();</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="能被覆盖的情况">能被覆盖的情况</span></h2>
+<p>必须使用extends</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Egg</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Yolk y;</span><br><span class="line">	<span class="keyword">protected</span> <span class="class"><span class="keyword">class</span> <span class="title">Yolk</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Yolk</span><span class="params">()</span></span>&#123;</span><br><span class="line">			...</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Egg</span><span class="params">()</span></span>&#123;</span><br><span class="line">		...</span><br><span class="line">		y = <span class="keyword">new</span> Yolk();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BigEgg</span> <span class="keyword">extends</span> <span class="title">Egg</span></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Yolk</span> <span class="keyword">extends</span> <span class="title">Egg</span>.<span class="title">Yolk</span></span>&#123;</span><br><span class="line">		<span class="function">pubic <span class="title">Yolk</span><span class="params">()</span></span>&#123;...&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">		<span class="keyword">new</span> BigEgg();</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1><span id="局部内部类与匿名类的区别">局部内部类与匿名类的区别</span></h1>
+<p>一个有名字一个没有名字</p>
+<h1><span id="内部类标识符">内部类标识符</span></h1>
+<p>Xxx&amp;Xxx.java</p>
+<hr>
+<p>资料：《Thking in java》</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/03/18/Android自定义View-13/" data-toggle="tooltip" data-placement="top" title="Android自定义View——MotionEvent学习笔记">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/03/15/Android自定义View-12/" data-toggle="tooltip" data-placement="top" title="Android自定义View——事件分发机制学习笔记">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#java" title="java">java</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">It Helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "https://csming1995.github.io/2017/03/15/Java内部类/";
+    var disqus_url = "https://csming1995.github.io/2017/03/15/Java内部类/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/csming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Csming 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://csming1995.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://csming1995.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

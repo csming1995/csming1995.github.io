@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          ClassLoader深入学习记录 - Csming | 少棉
+        
+    </title>
+
+    <link rel="canonical" href="https://csming1995.github.io/2017/02/28/ClassLoader学习记录/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('undefined')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#java" title="java">java</a>
+                            
+                        </div>
+                        <h1>ClassLoader深入学习记录</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Csming on
+                            2017-02-28
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Csming</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <hr>
+<p>最近为了学习Java底层，因而学习了ClassLoader；准备下一阶段学习JVM原理</p>
+<hr>
+<h1><span id="classloader是什么">ClassLoader是什么</span></h1>
+<ul>
+<li><strong>ClassLoader是Java的类加载机制</strong><br>
+ClassLoader用于动态加载class文件到内存中</li>
+</ul>
+<p>Java程序写好后，是由若干个class文件组织而成的一个完整的Java应用程序；程序运行时，会调用改程序的一个入口函数来调用系统的相关功能；这些功能被封装在不同的class文件中；程序启动时，不会一次性加载程序所需要的所有class文件，而是根据需要，通过ClassLoader来动态加载某个class文件到内存中；当class文件被载入到内存后，才能被其他class所引用；</p>
+<h1><span id="java提供的classloader">Java提供的ClassLoader</span></h1>
+<ul>
+<li><strong>Java提供的ClassLoader有三个</strong><br>
+**BootStrap ClassLoader（启动类加载器）：**是Java类加载层最顶层的类加载器，由C++编写而成, 已经内嵌到JVM中了；主要用来加载JDK的核心类库，如：rt.jar、resources.jar、charsets.jar等；<br>
+eg：利用以下代码获得BootStrap ClassLoader加载的jar或class文件</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">URL[] urls = sun.misc.Launcher.getBootstrapClassPath().getURLs();  </span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; urls.length; i++) &#123;  </span><br><span class="line">    System.out.println(urls[i].toExternalForm());  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(System.getProperty(<span class="string">"sun.boot.class.path"</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">file:/C:/Program%<span class="number">20F</span>iles/Java/jre1.8.0_121/lib/resources.jar</span><br><span class="line">file:/C:/Program%<span class="number">20F</span>iles/Java/jre1.8.0_121/lib/rt.jar</span><br><span class="line">file:/C:/Program%<span class="number">20F</span>iles/Java/jre1.8.0_121/lib/sunrsasign.jar</span><br><span class="line">file:/C:/Program%<span class="number">20F</span>iles/Java/jre1.8.0_121/lib/jsse.jar</span><br><span class="line">file:/C:/Program%<span class="number">20F</span>iles/Java/jre1.8.0_121/lib/jce.jar</span><br><span class="line">file:/C:/Program%<span class="number">20F</span>iles/Java/jre1.8.0_121/lib/charsets.jar</span><br><span class="line">file:/C:/Program%<span class="number">20F</span>iles/Java/jre1.8.0_121/lib/jfr.jar</span><br><span class="line">file:/C:/Program%<span class="number">20F</span>iles/Java/jre1.8.0_121/classes</span><br></pre></td></tr></table></figure>
+<p>**Extension ClassLoader(扩展类加载器)：**负责加载Java的扩展类库，默认加载JAVA_HOME/jre/lib/ext目录下的所有jar；</p>
+<p>**App ClassLoader（扩展系统类加载器）：**负责加载应用程序classpath目录下的所有jar和class文件</p>
+<hr>
+<p>**CustomClassLoader：**自定义ClassLoader（继承java.lang.ClassLoader类/Extension ClassLoader/App ClassLoader）；然而，不能继承Bootstrap ClassLoader，因为Bootstrap ClassLoader由底层C++编写，已迁入JVM内核，当JVM启动后，Bootstrap ClassLoader也随之启动，负责加载核心类库，并后遭Extension ClassLoader和App ClassLoader类加载器；</p>
+<p><img src="https://csming1995.github.io/attach/ClassLoader/11.gif" alt=""></p>
+<h2><span id="查看父类加载器">查看父类加载器</span></h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 查看父类加载器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ClassLoader appClassLoader = ClassLoader.getSystemClassLoader();</span><br><span class="line">    System.out.println(<span class="string">"系统类装载器:"</span> + appClassLoader);</span><br><span class="line">    ClassLoader extensionClassLoader = appClassLoader.getParent();</span><br><span class="line">    System.out.println(<span class="string">"系统类装载器的父类加载器——扩展类加载器:"</span> + extensionClassLoader);</span><br><span class="line">    ClassLoader bootstrapClassLoader = extensionClassLoader.getParent();</span><br><span class="line">    System.out.println(<span class="string">"扩展类加载器的父类加载器——引导类加载器:"</span> + bootstrapClassLoader);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>ExtensionClassLoader的parent为null</strong>因为bootstrapClassLoader不是一个普通的Java类</p>
+<h1><span id="classloader加载类的原理">ClassLoader加载类的原理</span></h1>
+<h2><span id="原理">原理</span></h2>
+<p>使用双亲委托模型来搜索类；每个ClassLoader实例都有一个父类加载器的引用（是一种包含关系）；而虚拟机内置的类加载器（Bootstrap ClassLoader）本身没有福类加载器，但可以用作其他的任务委托给它的福类加载器，这个过程是自上而下一次检查的；</p>
+<p>首先有最顶层的类加载器Bootstrap ClassLoader视图加载，若没有加载到；则将任务转交给Extension ClassLoader试图加载，若没有加载到；则转交给App ClassLoader进行加载，若没有加载成功，则返回给委托的发起者，由它到指定的文件系统或网络等URL中加载该类；若都没有加载到这个类，则跳出ClassNotFoundException异常；否则将这个找到的类生成一个类的定义，并将它加载到内存中，最后返回这个类在内存中的实例对象；</p>
+<h2><span id="为什么使用双亲委托模型">为什么使用双亲委托模型</span></h2>
+<p>因为这样可以避免重复加载，当父亲已经加载了该类的时候，就没有必要子ClassLoader再加载一次；考虑到安全因素，若不使用这种委托模式，那我们就可以随时使用自定义的String来动态替代java核心api中定义的类型，这样会存在非常大的安全隐患，而双亲委托的方式，就可以避免这种情况，因为String已经在启动时就被引导类加载器（Bootstrcp ClassLoader）加载，所以用户自定义的ClassLoader永远也无法加载一个自己写的String，除非改变JDK中ClassLoader搜索类的默认算法。</p>
+<h2><span id="jvm搜索类的时候如何判定两个class是相同的">JVM搜索类的时候，如何判定两个class是相同的</span></h2>
+<p>JVM在判定两个class是否相同时，不仅要判断两个类名是否相同，而且要判断是否由同一个类加载器实例加载的。只有两者同时满足的情况下，JVM才认为这两个class是相同的</p>
+<h1><span id="自定义classloader">自定义ClassLoader</span></h1>
+<h2><span id="三个重要方法">三个重要方法</span></h2>
+<ul>
+<li>
+<p><strong>loadClass</strong>classloader加载类的入口，此方法负责加载指定名字的类，ClassLoader的实现方法为先从已经加载的类中寻找，如没有则继续从父ClassLoader中寻找，如仍然没找到，则从BootstrapClassLoader中寻找，最后再调用findClass方法来寻找，如要改变类的加载顺序，则可覆盖此方法，如加载顺序相同，则可通过覆盖findClass来做特殊的处理，例如解密、固定路径寻找等，当通过整个寻找类的过程仍然未获取到Class对象时，则抛出ClassNotFoundException。如类需要resolve，则调用resolveClass进行链接。</p>
+</li>
+<li>
+<p><strong>findClass</strong>此方法直接抛出ClassNotFoundException，因此需要通过覆盖loadClass或此方法来以自定义的方式加载相应的类。</p>
+</li>
+<li>
+<p><strong>defineClass</strong>此方法负责将二进制的字节码转换为Class对象，这个方法对于自定义加载类而言非常重要，如二进制的字节码的格式不符合JVM Class文件的格式，抛出ClassFormatError；如需要生成的类名和二进制字节码中的不同，则抛出NoClassDefFoundError；如需要加载的class是受保护的、采用不同签名的或类名是以java.开头的，则抛出SecurityException；如需加载的class在此ClassLoader中已加载，则抛出LinkageError。</p>
+</li>
+</ul>
+<p><strong>在自定义ClassLoader时，一般只重写findClass而不是loadClass</strong></p>
+<p><strong>loadClass源码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="keyword">boolean</span> resolve)</span><br><span class="line">        <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;</span><br><span class="line">            <span class="comment">// First, check if the class has already been loaded</span></span><br><span class="line">            Class c = findLoadedClass(name);</span><br><span class="line">            <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">long</span> t0 = System.nanoTime();</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (parent != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        c = parent.loadClass(name, <span class="keyword">false</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        c = findBootstrapClassOrNull(name);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                    <span class="comment">// ClassNotFoundException thrown if class not found</span></span><br><span class="line">                    <span class="comment">// from the non-null parent class loader</span></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">// If still not found, then invoke findClass in order</span></span><br><span class="line">                    <span class="comment">// to find the class.</span></span><br><span class="line">                    <span class="keyword">long</span> t1 = System.nanoTime();</span><br><span class="line">                    c = findClass(name);</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// this is the defining class loader; record the stats</span></span><br><span class="line">                    sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                    sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                    sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (resolve) &#123;</span><br><span class="line">                resolveClass(c);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> c;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>JDK已经在loadClass方法中帮我们实现了ClassLoader搜索类的判断方法，当在loadClass方法中搜索不到类时，loadClass方法就会调用findClass方法来搜索类，所以我们只需重写该方法即可</strong></p>
+<h2><span id="自定义classloader">自定义ClassLoader</span></h2>
+<p>来自：<a href="http://blog.csdn.net/tonytfjing/article/details/47212291" target="_blank" rel="noopener">http://blog.csdn.net/tonytfjing/article/details/47212291</a></p>
+<p>1.定义一个Person接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.再定一个类实现这个接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HighRichHandsome</span> <span class="keyword">implements</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I don't care whether you are rich or not"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.编写ClassLoader</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.ByteArrayOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClassLoader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span></span>&#123;</span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">     * 覆盖了父类的findClass，实现自定义的classloader</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Class&lt;?&gt; findClass(String name) &#123;</span><br><span class="line">        <span class="keyword">byte</span>[] bt = loadClassData(name);</span><br><span class="line">        <span class="keyword">return</span> defineClass(name, bt, <span class="number">0</span>, bt.length);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">byte</span>[] loadClassData(String className) &#123;</span><br><span class="line">        InputStream is = getClass().getClassLoader().getResourceAsStream(</span><br><span class="line">                className.replace(<span class="string">"."</span>, <span class="string">"/"</span>) + <span class="string">".class"</span>);</span><br><span class="line">        ByteArrayOutputStream byteSt = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> ((len = is.read()) != -<span class="number">1</span>) &#123;</span><br><span class="line">                byteSt.write(len);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> byteSt.toByteArray();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4.测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> classloader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoaderTest</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		test2();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">	    MyClassLoader loader = <span class="keyword">new</span> MyClassLoader();</span><br><span class="line">	    Class&lt;?&gt; c = loader.loadClass(<span class="string">"classloader.HighRichHandsome"</span>);</span><br><span class="line">	    System.out.println(<span class="string">"Loaded by :"</span> + c.getClassLoader());</span><br><span class="line"></span><br><span class="line">	    Person p = (Person) c.newInstance();</span><br><span class="line">	    p.say();</span><br><span class="line"></span><br><span class="line">	    HighRichHandsome man = (HighRichHandsome) c.newInstance();</span><br><span class="line">	    man.say();    </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">    MyClassLoader loader = <span class="keyword">new</span> MyClassLoader();</span><br><span class="line">    Class&lt;?&gt; c = loader.findClass(<span class="string">"com.alibaba.classload.HighRichHandsome"</span>);</span><br><span class="line">    System.out.println(<span class="string">"Loaded by :"</span> + c.getClassLoader());</span><br><span class="line"></span><br><span class="line">    Person p = (Person) c.newInstance();</span><br><span class="line">    p.say();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//注释下面两行则不报错</span></span><br><span class="line">    HighRichHandsome man = (HighRichHandsome) c.newInstance();</span><br><span class="line">    man.say();    </span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试结果：</p>
+<blockquote>
+<p>Loaded by :sun.misc.Launcher$AppClassLoader@73d16e93<br>
+I don’t care whether you are rich or not<br>
+I don’t care whether you are rich or not</p>
+</blockquote>
+<h1><span id="遇到的一些问题">遇到的一些问题</span></h1>
+<p>学习ClassLoader的教程是在网上看的；于是在使用sun.misc.Launcher的时候发现编译器找不到这个类；但是sun.misc这个包是存在于rt.jar的，只是apidoc中没有,那是因为sun开头的包不属于J2SE规范,是Sun公司的内部实现；<br>
+故，使用一下方法解决：</p>
+<blockquote>
+<p>右键项目-》属性-》java bulid path-》jre System Library-》access rules-》resolution选择accessible，下面填上** 点击确定</p>
+</blockquote>
+<hr>
+<p>参考资料：<a href="http://blog.csdn.net/xyang81/article/details/7292380" target="_blank" rel="noopener">http://blog.csdn.net/xyang81/article/details/7292380</a><br>
+<a href="http://blog.csdn.net/tonytfjing/article/details/47212291" target="_blank" rel="noopener">http://blog.csdn.net/tonytfjing/article/details/47212291</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/03/05/Android自定义View-7/" data-toggle="tooltip" data-placement="top" title="Android自定义View——Canvas操作学习笔记">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/02/10/Android自定义View-6/" data-toggle="tooltip" data-placement="top" title="Android自定义View——Canvas图形/图片/文字绘制学习笔记">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#java" title="java">java</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">It Helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "https://csming1995.github.io/2017/02/28/ClassLoader学习记录/";
+    var disqus_url = "https://csming1995.github.io/2017/02/28/ClassLoader学习记录/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/csming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Csming 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://csming1995.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://csming1995.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

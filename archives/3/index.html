@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Csming | 少棉
+        
+    </title>
+
+    <link rel="canonical" href="https://csming1995.github.io/archives/3/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/home-bg-2-dark.png') 
+            /*config*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="site-heading">
+                        <h1>Csming</h1>
+                        <!--<hr class="small">-->
+                        <span class="subheading">一生想做浪漫极客</span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Csming</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+            
+                <!-- Main Content -->
+
+
+<div class="post-preview">
+
+    <a href="/2017/04/15/python学习日记07/">
+        <h2 class="post-title">
+            Python函数式编程
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            函数式编程（请注意多了一个“式”字）——Functional Programming，虽然也可以归结到面向过程的程序设计，但其思想更接近数学计算
+
+高阶函数
+
+变量可指向函数
+
+123a = abs(-10)print(a)# 10
+
+123f = absprint(f(-10))# 10
+
+
+函数名也是变量
+函数名其实就是指向函数的变量！对于abs()这个函数，完全可以把函数名abs看成变......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-04-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#python" title="python">python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/04/15/python学习日记06/">
+        <h2 class="post-title">
+            我与Py的那些事——高级特性
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            切片
+取一个list或tuple的部分元素
+1234567891011121314L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack']# ---------------------------------------L[0:3] L[1:3] # 方法1L[:3] # 方法2L[-2:] # 方法3L[:10:2] # 前10个数中每2个取1个L[......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-04-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#python" title="python">python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/04/15/python学习日记04/">
+        <h2 class="post-title">
+            我与Py的那些事——条件判断
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            条件判断
+12345678if &lt;条件判断1&gt;:    &lt;执行1&gt;elif &lt;条件判断2&gt;:    &lt;执行2&gt;elif &lt;条件判断3&gt;:    &lt;执行3&gt;else:    &lt;执行4&gt;
+eg:
+1234567age = 20if age &gt;= 6:    print('teenager')elif age......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-04-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#python" title="python">python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/04/15/python学习日记05/">
+        <h2 class="post-title">
+            我与Py的那些事——函数
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            调用函数
+Python内置了很多函数，可直接调用
+调用一个函数，要知道函数的名称和参数；
+eg：
+123abs(100)abs(-20)abs(12.34)
+如果传入的参数不正确，则会报错TypeError
+
+一些常用函数
+
+max()可以传入任意多参数，计算最大值
+数据类型转换：
+int() float() str() bool()
+
+
+函数名，其实就是一个指向函数对象的引用，可以将函数名......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-04-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#python" title="python">python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/04/15/python学习日记03/">
+        <h2 class="post-title">
+            我与Py的那些事——list与tuple
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            list
+list是Python内置的数据类型；是一种有序的集合，可以随时添加和删除其中的元素
+123&gt;&gt;&gt; classmates = ['Michael', 'Bob', 'Tracy']&gt;&gt;&gt; classmates# ['Michael', 'Bob', 'Tracy']
+那么classmates就是一个list；
+可以使用len()函数获得list元......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-04-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#python" title="python">python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/04/15/python学习日记02/">
+        <h2 class="post-title">
+            我与Py的那些事——Python基础
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Python是一个没有格式化{}符号的语言；他要求我们始终写出格式化的代码；
+使用四个空格缩进；于是没办法用用复制粘贴的方法重用代码；
+而且py是一个大小写敏感的语言；
+
+数据类型和变量
+
+整型：
+
+Python可以处理任意大小的整数，包括负整数（略）
+
+浮点数：
+
+浮点数就是小数；
+比如：1.23、3.14、-9.01；
+很大或很小的浮点数可以表示为：1.23e9、12.3e8；即：1.2......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-04-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#python" title="python">python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/04/09/python学习日记01/">
+        <h2 class="post-title">
+            我与Py的那些事——输入输出
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            最近受了老板（一折）的“蛊惑”入了py坑；虽然刚学，但觉得py跟以前学的C语言族的语言很不一样，很hacker……学习过程中主要看了廖雪峰的教程
+
+第一个程序
+
+安装完python后，在命令提示符中输入“python”；进入Python编辑器；
+
+两种编写方式
+
+第一种是在命令提示符下的；
+第一次写的代码如下；
+
+12&gt;&gt;&gt;100+200300
+12&gt;&gt;&gt;......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-04-09
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#python" title="python">python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/18/Android自定义View-13/">
+        <h2 class="post-title">
+            Android自定义View——MotionEvent学习笔记
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Android将所有输入事件都放在MotionEvent
+包括单点触控、多点触控、鼠标事件、getAction()、getActionMasked()
+单点触控
+（MotionEvent中）
+
+**ACTION_DOWN：**手指 初次接触到屏幕 时触发。
+ACTION_MOVE：	手指 在屏幕上滑动 时触发，会多次触发。
+**ACTION_UP：**手指 离开屏幕 时触发。
+**ACTIO......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-18
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#android" title="android">android</a>
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/15/Java内部类/">
+        <h2 class="post-title">
+            Java内部类
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            什么是内部类
+将一个类的定义放在另一个类的内部，就称之为内部类
+创建内部类
+1234567891011121314151617181920212223242526272829public class Parcel1 &#123;	class Contents&#123;		private int i = 11;		public int value()&#123;return i;&#125;......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/15/Android自定义View-12/">
+        <h2 class="post-title">
+            Android自定义View——事件分发机制学习笔记
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            为什么有事件分发机制
+
+
+因为Android的View是树状结构的；View可能会重叠在一起；
+
+
+当我们点击的地方有很多歌View都可以响应时，就很尴尬了；
+
+
+于是事件分发机制就用来解决这种问题
+
+
+如图，View是一层一层嵌套的；当点击View1时，下面的ViewGroupA、RootView等也能够响应；为了确定到底要由哪个View处理盖点击事件，就需要事件分发机制来处理了；**
+（......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#android" title="android">android</a>
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+        <li class="previous">
+            <a href="/archives/2/">&larr; Newer Posts</a>
+        </li>
+    
+    
+        <li class="next">
+            <a href="/archives/4/">Older Posts &rarr;</a>
+        </li>
+    
+</ul>
+
+
+
+                <!-- 如果开启评论功能 -->
+                
+            </div>
+
+          <!-- Sidebar Container -->
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+        <!-- Featured Tags -->
+
+<section>
+    <!-- no hr -->
+    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#android" title="android" rel="21">android</a>
+            
+        
+            
+            <a href="/tags/#java" title="java" rel="29">java</a>
+            
+        
+            
+            <a href="/tags/#想当一个有趣的人" title="想当一个有趣的人" rel="9">想当一个有趣的人</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Java" title="Java" rel="14">Java</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#unity3d" title="unity3d" rel="2">unity3d</a>
+            
+        
+            
+            <a href="/tags/#python" title="python" rel="15">python</a>
+            
+        
+            
+            <a href="/tags/#leetcode" title="leetcode" rel="2">leetcode</a>
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+</section>
+
+        <hr>
+    
+        <!-- Short About -->
+<section class="visible-md visible-lg">
+    <h5><a href="/about/">ABOUT ME</a></h5>
+    <div class="short-about">
+
+        
+            <img id = "avatar_pic" src="/img/ironman-draw.png" />
+        
+
+        
+            <p>Hi, i&#39;m John Doe</p>
+        
+
+        <!-- SNS Link -->
+        <ul class="list-inline">
+            
+            
+            
+
+            
+
+            
+                <li>
+                    <a target="_blank" href="https://www.facebook.com/csming1995">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+
+            
+                <li>
+                    <a target="_blank"  href="https://github.com/csming1995">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+            
+            
+            
+                <li>
+                    <a target="_blank"  href="https://www.linkedin.com/in/csming">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</section>
+        <hr>
+    
+        
+  <h5>RECENT POSTS</h3>
+  <div class="widget">
+    <ul>
+      
+        <li>
+          <a href="/2017/07/29/实习日记1/">第一次正式成为代码工实习</a>
+        </li>
+      
+        <li>
+          <a href="/2017/06/09/Blog集合/">mark[一些博文的集合]</a>
+        </li>
+      
+        <li>
+          <a href="/2017/06/06/Android进程间通信/">Android进程间通信</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/31/JavaSe-02/">Java基础复习——I/O系统</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/28/JavaSe-01/">Java基础复习——设计模式</a>
+        </li>
+      
+    </ul>
+  </div>
+
+        <hr>
+    
+        <!-- Friends Blog -->
+
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+
+    
+        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+    
+        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+    
+        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+    
+        <li><a href="#" target="_blank">It Helps SEO</a></li>
+    
+</ul>
+
+        <hr>
+    
+</div>
+
+        
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/csming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Csming 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://csming1995.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://csming1995.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

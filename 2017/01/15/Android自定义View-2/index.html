@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Android自定义View——颜色学习笔记 - Csming | 少棉
+        
+    </title>
+
+    <link rel="canonical" href="https://csming1995.github.io/2017/01/15/Android自定义View-2/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('undefined')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#android" title="android">android</a>
+                            
+                              <a class="tag" href="/tags/#java" title="java">java</a>
+                            
+                        </div>
+                        <h1>Android自定义View——颜色学习笔记</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Csming on
+                            2017-01-15
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Csming</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="颜色">颜色</span></h1>
+<h2><span id="安卓支持的颜色模式">安卓支持的颜色模式</span></h2>
+<blockquote>
+<p>ARGB8888: 四通道高精度(32位)<br>
+ARGB4444: 四通道低精度(16位)<br>
+RGB565:   屏幕默认模式(16位)<br>
+Alpha8:   仅有透明通道(8位)<br>
+PS：其中字母表示通道类型，数值表示该类型用多少位二进制来描述。如ARGB8888则表示有四个通道(ARGB),每个对应的通道均用8位来描述。</p>
+</blockquote>
+<p><strong>我们常用的是ARGB8888和ARGB4444，而在所有的安卓设备屏幕上默认的模式都是RGB565</strong></p>
+<h1><span id="创建或使用颜色的方式">创建或使用颜色的方式</span></h1>
+<h2><span id="java中定义颜色">Java中定义颜色</span></h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> color = Color.GRAY;     <span class="comment">//灰色</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> color = Color.argb(<span class="number">127</span>, <span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);   <span class="comment">//半透明红色</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> color = <span class="number">0xaaff0000</span>;                   <span class="comment">//带有透明度的红色</span></span><br></pre></td></tr></table></figure>
+<h2><span id="xml文件中定义颜色">xml文件中定义颜色</span></h2>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">color</span> <span class="attr">name</span>=<span class="string">"red"</span>&gt;</span>#ff0000<span class="tag">&lt;/<span class="name">color</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">color</span> <span class="attr">name</span>=<span class="string">"green"</span>&gt;</span>#00ff00<span class="tag">&lt;/<span class="name">color</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>**定义颜色以“#”开头，后面跟十六进制值</p>
+<blockquote>
+<p>#f00            //低精度 - 不带透明通道红色<br>
+#af00           //低精度 - 带透明通道红色</p>
+</blockquote>
+<blockquote>
+<p>#ff0000         //高精度 - 不带透明通道红色<br>
+#aaff0000       //高精度 - 带透明通道红色</p>
+</blockquote>
+<h2><span id="java中引用xml中定义的颜色">Java中引用xml中定义的颜色：</span></h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> color = getResources().getColor(R.color.mycolor);</span><br></pre></td></tr></table></figure>
+<h2><span id="xml中引用或创建颜色">xml中引用或创建颜色</span></h2>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"AppTheme"</span> <span class="attr">parent</span>=<span class="string">"Theme.AppCompat.Light.DarkActionBar"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimary"</span>&gt;</span>@color/red<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">android:background="@color/red"     //引用在/res/values/color.xml 中定义的颜色</span><br><span class="line"></span><br><span class="line">android:background="#ff0000"        //创建并使用颜色</span><br></pre></td></tr></table></figure>
+<h1><span id="取色工具">取色工具</span></h1>
+<p><a href="http://www.gcssloop.com/customview/Color" target="_blank" rel="noopener">http://www.gcssloop.com/customview/Color</a><br>
+原博文有出处</p>
+<h1><span id="颜色混合模式alpha通道相关">颜色混合模式（Alpha通道相关）</span></h1>
+<p><strong>Alpha通道主要在两个图像混合的时候生效</strong></p>
+<p>默认情况下，当一个颜色绘制到Canvas上时的混合模式是这样计算的：</p>
+<p>(RGB通道) 最终颜色 = 绘制的颜色 + (1 - 绘制颜色的透明度) × Canvas上的原有颜色。</p>
+<h2><span id="注意点">注意点</span></h2>
+<p>1.这里我们一般把每个通道的取值从0(ox00)到255(0xff)映射到0到1的浮点数表示。<br>
+2.这里等式右边的“绘制的颜色”、“Canvas上的原有颜色” 都是经过预乘了自己的Alpha通道的值。如绘制颜色：0x88ffffff，那么参与运算时的每个颜色通道的值不是1.0，而是(1.0 * 0.5333 = 0.5333)。 (其中0.5333 = 0x88/0xff)</p>
+<p>使用这种方式的混合，就会造成后绘制的内容以半透明的方式叠在上面的视觉效果。</p>
+<h2><span id="porterduff模式">PorterDuff模式</span></h2>
+<p><strong>还可以有不同的混合模式供我们选择，用Paint.setXfermode，指定不同的PorterDuff.Mode。</strong></p>
+<p>下表是各个PorterDuff模式的混合计算公式：（D指原本在Canvas上的内容dst，S指绘制输入的内容src，a指alpha通道，c指RGB各个通道）</p>
+<table>
+<thead>
+<tr>
+<th>混合模式</th>
+<th>计算公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADD</td>
+<td>Saturate(S + D)</td>
+</tr>
+<tr>
+<td>CLEAR</td>
+<td>[0, 0]</td>
+</tr>
+<tr>
+<td>DARKEN</td>
+<td>[Sa + Da - SaDa, Sc(1 - Da) + Dc*(1 - Sa) + min(Sc, Dc)]</td>
+</tr>
+<tr>
+<td>DST</td>
+<td>[Da, Dc]</td>
+</tr>
+<tr>
+<td>DST_ATOP</td>
+<td>[Sa, Sa * Dc + Sc * (1 - Da)]</td>
+</tr>
+<tr>
+<td>DST_IN</td>
+<td>[Sa * Da, Sa * Dc]</td>
+</tr>
+<tr>
+<td>DST_OUT</td>
+<td>[Da * (1 - Sa), Dc * (1 - Sa)]</td>
+</tr>
+<tr>
+<td>DST_OVER</td>
+<td>[Sa + (1 - Sa)Da, Rc = Dc + (1 - Da)Sc]</td>
+</tr>
+<tr>
+<td>LIGHTEN</td>
+<td>[Sa + Da - SaDa, Sc(1 - Da) + Dc*(1 - Sa) + max(Sc, Dc)]</td>
+</tr>
+<tr>
+<td>MULTIPLY</td>
+<td>[Sa * Da, Sc * Dc]</td>
+</tr>
+<tr>
+<td>SCREEN</td>
+<td>[Sa + Da - Sa * Da, Sc + Dc - Sc * Dc]</td>
+</tr>
+<tr>
+<td>SRC</td>
+<td>[Sa, Sc]</td>
+</tr>
+<tr>
+<td>SRC_ATOP</td>
+<td>[Da, Sc * Da + (1 - Sa) * Dc]</td>
+</tr>
+<tr>
+<td>SRC_IN</td>
+<td>[Sa * Da, Sc * Da]</td>
+</tr>
+<tr>
+<td>SRC_OUT</td>
+<td>[Sa * (1 - Da), Sc * (1 - Da)]</td>
+</tr>
+<tr>
+<td>SRC_OVER</td>
+<td>[Sa + (1 - Sa)Da, Rc = Sc + (1 - Sa)Dc]</td>
+</tr>
+<tr>
+<td>XOR</td>
+<td>[Sa+ Da - 2 * Sa * Da, Sc * (1 - Da) + (1 - Sa) * Dc]</td>
+</tr>
+</tbody>
+</table>
+<p>src表示输入的图，dst表示原Canvas上的内容</p>
+<p>默认混合模式其实就是SRC_OVER。</p>
+<p>通过选择其他的PorterDuff模式，我们可以达到一些特殊的效果：</p>
+<p>使用DST_OVER的话，相当于后绘制的内容作为背景在底下。</p>
+<p>使用DST_IN/DST_OUT的话，可以裁剪Canvas里的内容，或用一张带alpha的图片mask指定哪些区域显示/不显示。</p>
+<p>通过选择SRC_ATOP可以只在Canvas上有内容（不透明）的地方绘制。</p>
+<p><img src="https://csming1995.github.io/attach/AndroidView/21.jpg" alt="参照图"></p>
+<hr>
+<p>出处：<a href="http://www.gcssloop.com/customview/Color" target="_blank" rel="noopener">http://www.gcssloop.com/customview/Color</a><br>
+学习资料：<a href="http://www.cnblogs.com/zhucai/p/android-graphics-animation.html" target="_blank" rel="noopener">http://www.cnblogs.com/zhucai/p/android-graphics-animation.html</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/01/16/Android自定义View-3/" data-toggle="tooltip" data-placement="top" title="Android自定义View——绘图API学习笔记">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/12/21/Android自定义View-1/" data-toggle="tooltip" data-placement="top" title="Android自定义View——角度与弧度学习笔记">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#android" title="android">android</a>
+                        
+                          <a class="tag" href="/tags/#java" title="java">java</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">It Helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "https://csming1995.github.io/2017/01/15/Android自定义View-2/";
+    var disqus_url = "https://csming1995.github.io/2017/01/15/Android自定义View-2/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/csming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Csming 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://csming1995.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://csming1995.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

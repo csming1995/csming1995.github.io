@@ -2,18 +2,23 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <sitemap>
-        <loc>http://yoursite-url/post-sitemap.xml</loc>
-        <lastmod>2018-04-06T12:58:41.733Z</lastmod>
+        <loc>https://csming1995.github.io/post-sitemap.xml</loc>
+        <lastmod>2017-07-29T13:25:00.000Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>http://yoursite-url/page-sitemap.xml</loc>
-        <lastmod>2018-04-06T12:58:41.836Z</lastmod>
+        <loc>https://csming1995.github.io/page-sitemap.xml</loc>
+        <lastmod>2018-04-06T13:10:52.371Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>http://yoursite-url/tag-sitemap.xml</loc>
-        <lastmod>2018-04-06T12:58:41.733Z</lastmod>
+        <loc>https://csming1995.github.io/category-sitemap.xml</loc>
+        <lastmod>2016-10-19T16:03:02.000Z</lastmod>
+    </sitemap>
+
+    <sitemap>
+        <loc>https://csming1995.github.io/tag-sitemap.xml</loc>
+        <lastmod>2016-10-27T00:38:06.000Z</lastmod>
     </sitemap>
 
 </sitemapindex>

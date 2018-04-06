@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Python函数式编程 - Csming | 少棉
+        
+    </title>
+
+    <link rel="canonical" href="https://csming1995.github.io/2017/04/15/python学习日记07/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('undefined')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#python" title="python">python</a>
+                            
+                        </div>
+                        <h1>Python函数式编程</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Csming on
+                            2017-04-15
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Csming</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>函数式编程（请注意多了一个“式”字）——Functional Programming，虽然也可以归结到面向过程的程序设计，但其思想更接近数学计算</p>
+<hr>
+<h1><span id="高阶函数">高阶函数</span></h1>
+<ul>
+<li><strong>变量可指向函数</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = abs(<span class="number">-10</span>)</span><br><span class="line">print(a)</span><br><span class="line"><span class="comment"># 10</span></span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f = abs</span><br><span class="line">print(f(<span class="number">-10</span>))</span><br><span class="line"><span class="comment"># 10</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><strong>函数名也是变量</strong><br>
+函数名其实就是指向函数的变量！对于abs()这个函数，完全可以把函数名abs看成变量，它指向一个可以计算绝对值的函数</p>
+</li>
+<li>
+<p><strong>传入函数</strong><br>
+变量可以指向函数，函数的参数能接收变量，那么一个函数就可以接收另一个函数作为参数，这种函数就称之为<strong>高阶函数</strong></p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(x, y, f)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> f(x) + f(y)</span><br></pre></td></tr></table></figure>
+<h1><span id="mapreduce">map/reduce</span></h1>
+<ul>
+<li><strong>map()函数接受两个参数，一个是函数，一个是Iterable；map将传入的函数一次作用到序列的每个元素；并将结果作为新的Iterator返回；</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x * x</span><br><span class="line"></span><br><span class="line">r = map(f, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>])</span><br><span class="line">print(list(r))</span><br><span class="line"><span class="comment"># [1, 4, 9, 16, 25, 36, 49, 64, 81]</span></span><br></pre></td></tr></table></figure>
+<p><strong>map()传入的第一个参数是f，即函数对象本身；由于结果r是一个Iterator，Iterator是惰性序列，需要通过list()函数让它把整个序列都计算出来并返回一个list</strong></p>
+<p><strong>map()作为高阶函数，事实上它把运算规则抽象了，因此，我们不但可以计算简单的f(x)=x2，还可以计算任意复杂的函数，比如，把这个list所有数字转为字符串</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list(map(str, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]))</span><br><span class="line">[<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span>, <span class="string">'6'</span>, <span class="string">'7'</span>, <span class="string">'8'</span>, <span class="string">'9'</span>]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>reduce</strong><br>
+reduce把一个函数作用在一个序列上，这个函数接受两个参数，reduce把结果继续和序列的下一个元素做累积计算；</li>
+</ul>
+<blockquote>
+<p>reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line"></span><br><span class="line">print(reduce(add, [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 25</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fn</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x * <span class="number">10</span> + y</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">char2num</span><span class="params">(s)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">'0'</span>: <span class="number">0</span>, <span class="string">'1'</span>: <span class="number">1</span>, <span class="string">'2'</span>: <span class="number">2</span>, <span class="string">'3'</span>: <span class="number">3</span>, <span class="string">'4'</span>: <span class="number">4</span>, <span class="string">'5'</span>: <span class="number">5</span>, <span class="string">'6'</span>: <span class="number">6</span>, <span class="string">'7'</span>: <span class="number">7</span>, <span class="string">'8'</span>: <span class="number">8</span>, <span class="string">'9'</span>: <span class="number">9</span>&#125;[s]</span><br><span class="line"></span><br><span class="line">print(reduce(fn, map(char2num, <span class="string">'13579'</span>)))</span><br><span class="line"><span class="number">13579</span></span><br></pre></td></tr></table></figure>
+<p>可改写为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">str2int</span><span class="params">(s)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fn</span><span class="params">(x, y)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> x * <span class="number">10</span> + y</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">char2num</span><span class="params">(s)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="string">'0'</span>: <span class="number">0</span>, <span class="string">'1'</span>: <span class="number">1</span>, <span class="string">'2'</span>: <span class="number">2</span>, <span class="string">'3'</span>: <span class="number">3</span>, <span class="string">'4'</span>: <span class="number">4</span>, <span class="string">'5'</span>: <span class="number">5</span>, <span class="string">'6'</span>: <span class="number">6</span>, <span class="string">'7'</span>: <span class="number">7</span>, <span class="string">'8'</span>: <span class="number">8</span>, <span class="string">'9'</span>: <span class="number">9</span>&#125;[s]</span><br><span class="line">    <span class="keyword">return</span> reduce(fn, map(char2num, s))</span><br></pre></td></tr></table></figure>
+<p>用lambda函数进一步简化成:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">char2num</span><span class="params">(s)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">'0'</span>: <span class="number">0</span>, <span class="string">'1'</span>: <span class="number">1</span>, <span class="string">'2'</span>: <span class="number">2</span>, <span class="string">'3'</span>: <span class="number">3</span>, <span class="string">'4'</span>: <span class="number">4</span>, <span class="string">'5'</span>: <span class="number">5</span>, <span class="string">'6'</span>: <span class="number">6</span>, <span class="string">'7'</span>: <span class="number">7</span>, <span class="string">'8'</span>: <span class="number">8</span>, <span class="string">'9'</span>: <span class="number">9</span>&#125;[s]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">str2int</span><span class="params">(s)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> reduce(<span class="keyword">lambda</span> x, y: x * <span class="number">10</span> + y, map(char2num, s))</span><br></pre></td></tr></table></figure>
+<h1><span id="filter">filter</span></h1>
+<p>filter()函数用于过滤序列<br>
+接受一个函数和一个序列；</p>
+<p>filter()把传入的函数一次作用于每个元素，然后根据返回值是True还是False决定保留还是求其该元素；</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_odd</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> n % <span class="number">2</span> == <span class="number">1</span></span><br><span class="line"></span><br><span class="line">list(filter(is_odd, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">15</span>]))</span><br><span class="line"><span class="comment"># 结果: [1, 5, 9, 15]</span></span><br></pre></td></tr></table></figure>
+<p>删掉偶数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">not_empty</span><span class="params">(s)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> s <span class="keyword">and</span> s.strip()</span><br><span class="line"></span><br><span class="line">list(filter(not_empty, [<span class="string">'A'</span>, <span class="string">''</span>, <span class="string">'B'</span>, <span class="keyword">None</span>, <span class="string">'C'</span>, <span class="string">'  '</span>]))</span><br><span class="line"><span class="comment"># 结果: ['A', 'B', 'C']</span></span><br></pre></td></tr></table></figure>
+<p>把一个序列中的空字符串删掉</p>
+<h1><span id="sorted">sorted</span></h1>
+<p>排序算法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sorted([<span class="number">36</span>, <span class="number">5</span>, <span class="number">-12</span>, <span class="number">9</span>, <span class="number">-21</span>])</span><br><span class="line"><span class="comment"># [-21, -12, 5, 9, 36]</span></span><br></pre></td></tr></table></figure>
+<p>sorted()函数也是一个高阶函数，它还可以接收一个key函数来实现自定义的排序，例如按绝对值大小排序:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sorted([<span class="number">36</span>, <span class="number">5</span>, <span class="number">-12</span>, <span class="number">9</span>, <span class="number">-21</span>], key=abs)</span><br><span class="line"><span class="comment"># [5, 9, -12, -21, 36]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sorted([<span class="string">'bob'</span>, <span class="string">'about'</span>, <span class="string">'Zoo'</span>, <span class="string">'Credit'</span>])</span><br><span class="line"><span class="comment"># ['Credit', 'Zoo', 'about', 'bob']</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ------------------------------------</span></span><br><span class="line"></span><br><span class="line">sorted([<span class="string">'bob'</span>, <span class="string">'about'</span>, <span class="string">'Zoo'</span>, <span class="string">'Credit'</span>], key=str.lower)</span><br><span class="line"><span class="comment"># ['about', 'bob', 'Credit', 'Zoo']</span></span><br></pre></td></tr></table></figure>
+<p>要进行反向排序，不必改动key函数，可以传入第三个参数reverse=True:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted([<span class="string">'bob'</span>, <span class="string">'about'</span>, <span class="string">'Zoo'</span>, <span class="string">'Credit'</span>], key=str.lower, reverse=<span class="keyword">True</span>)</span><br><span class="line"><span class="comment"># ['Zoo', 'Credit', 'bob', 'about']</span></span><br></pre></td></tr></table></figure>
+<h1><span id="返回函数">返回函数</span></h1>
+<ul>
+<li><strong>函数作为返回值</strong><br>
+高阶函数除了可以接受函数作为参数外，还可以把函数作为结果值返回</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lazy_sum</span><span class="params">(*args)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sum</span><span class="params">()</span>:</span></span><br><span class="line">        ax = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> n <span class="keyword">in</span> args:</span><br><span class="line">            ax = ax + n</span><br><span class="line">        <span class="keyword">return</span> ax</span><br><span class="line">    <span class="keyword">return</span> sum</span><br></pre></td></tr></table></figure>
+<p><strong>当我们调用lazy_sum()时，返回的并不是求和结果，而是求和函数</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f = lazy_sum(<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>)</span><br><span class="line">f</span><br><span class="line"><span class="comment"># &lt;function lazy_sum.&lt;locals&gt;.sum at 0x101c6ed90&gt;</span></span><br></pre></td></tr></table></figure>
+<p>正确姿势：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f()</span><br><span class="line"><span class="comment"># 25</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>闭包</strong><br>
+返回的函数在其定义内部引用了局部变量args，所以，当一个函数返回了一个函数后，其内部的局部变量还被新函数引用</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">count</span><span class="params">()</span>:</span></span><br><span class="line">    fs = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">4</span>):</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">()</span>:</span></span><br><span class="line">             <span class="keyword">return</span> i*i</span><br><span class="line">        fs.append(f)</span><br><span class="line">    <span class="keyword">return</span> fs</span><br><span class="line"></span><br><span class="line">f1, f2, f3 = count()</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f1()</span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f2()</span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f3()</span><br><span class="line"><span class="number">9</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">count</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(j)</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">g</span><span class="params">()</span>:</span></span><br><span class="line">            <span class="keyword">return</span> j*j</span><br><span class="line">        <span class="keyword">return</span> g</span><br><span class="line">    fs = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">4</span>):</span><br><span class="line">        fs.append(f(i)) <span class="comment"># f(i)立刻被执行，因此i的当前值被传入f()</span></span><br><span class="line">    <span class="keyword">return</span> fs</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f1, f2, f3 = count()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f1()</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f2()</span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f3()</span><br><span class="line"><span class="number">9</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>参考资料：<a href="http://www.liaoxuefeng.com/" target="_blank" rel="noopener">http://www.liaoxuefeng.com/</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/04/16/python学习日记08/" data-toggle="tooltip" data-placement="top" title="Python匿名函数">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/04/15/python学习日记06/" data-toggle="tooltip" data-placement="top" title="我与Py的那些事——高级特性">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#python" title="python">python</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">It Helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "https://csming1995.github.io/2017/04/15/python学习日记07/";
+    var disqus_url = "https://csming1995.github.io/2017/04/15/python学习日记07/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/csming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Csming 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://csming1995.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://csming1995.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

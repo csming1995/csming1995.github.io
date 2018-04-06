@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Csming | 少棉
+        
+    </title>
+
+    <link rel="canonical" href="https://csming1995.github.io/archives/6/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/home-bg-2-dark.png') 
+            /*config*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="site-heading">
+                        <h1>Csming</h1>
+                        <!--<hr class="small">-->
+                        <span class="subheading">一生想做浪漫极客</span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Csming</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+            
+                <!-- Main Content -->
+
+
+<div class="post-preview">
+
+    <a href="/2016/12/04/Daily05/">
+        <h2 class="post-title">
+            日记-2016-12-04
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            考完接口啦
+反正能想到的点我都写上了
+哼
+我这么帅一定会有个好结果的对不对
+
+下午写蓝桥杯的校选，写完前三题脖子痛的受不了
+于是去打球运动了=。=
+算是个烂尾吧略略略
+
+于是去打球了
+感觉还不错=。=
+嘻嘻嘻，难得的准星
+
+晚上要去看《你的名字》了
+“不忘初心，一定能等到你的名字~”
+
+嘛，考完试要回归正常生活了
+手头的三个项目希望可以尽快结束
+
+说到这个
+好像又有个项目要去谈了
+
+好吧，重......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2016-12-04
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#想当一个有趣的人" title="想当一个有趣的人">想当一个有趣的人</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/12/02/Daily04/">
+        <h2 class="post-title">
+            日记-2016-12-02
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            考完图形学，觉得突然想涂涂画画
+想养一只猫
+
+
+
+
+
+
+如果你也爱我~
+...
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2016-12-02
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#想当一个有趣的人" title="想当一个有趣的人">想当一个有趣的人</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/11/26/JunitTest/">
+        <h2 class="post-title">
+            Junit与单元测试
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            概述
+前段时间，在看JavaWeb视频的时候，看到了老师用Junit 4框架进行单元测试
+今天在软工课上，助教哥哥也刚好在教我们使用Junit4框架对Java程序进行单元测试，所以打算记录一下这个东西~
+
+什么是Junit
+JUnit是由 Erich Gamma 和 Kent Beck 编写的一个回归测试框架（regression testing framework）。Junit测试是程序员......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2016-11-26
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Java" title="Java">Java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/11/23/Daily03/">
+        <h2 class="post-title">
+            日记-2016-11-23
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            那天复习了一晚上有些烦躁
+
+
+
+...
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2016-11-23
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#想当一个有趣的人" title="想当一个有趣的人">想当一个有趣的人</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/11/19/Daily02/">
+        <h2 class="post-title">
+            日记-2016-11-19
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+普通的分割线
+昨晚改bug，改了个通宵
+觉得自己在这次开发中，没有做好监管的作用
+让队友太放飞自我了=。=
+导致bug连改都改不动了
+（记笔记记笔记，吸取教训~）
+我也想放飞自己呀
+
+睡了半天了，出来更新一下日常
+
+所谓刀光剑影的江湖
+真是无法割舍呢
+
+码代码时，该用怎样的速度，才能到你的身边
+攒够一百万行
+...
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2016-11-19
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#想当一个有趣的人" title="想当一个有趣的人">想当一个有趣的人</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/11/18/Daily01/">
+        <h2 class="post-title">
+            日记-2016-11-18
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+爱与和平的分割线
+这礼拜为了各种事情而忙碌着
+软工实践的项目，在这十天来写完了架构，陪着大家熬夜，顺便改了改各种bug
+然后顺便说了嘲讽一下小超超，他好像不大开心~
+呀，软工实践真有趣真几把累。
+码代码的速度变得越来越快了
+所谓，动作要快，姿势要帅哦
+
+正义的伙伴分割线
+呀，最近把小黑清洗了一下，灰多的吓人~
+今天把它的主键的键帽换成七彩的了，真帅呢好给呀
+想想用了半年多了，虽然丑，但是好......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2016-11-18
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#想当一个有趣的人" title="想当一个有趣的人">想当一个有趣的人</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/11/16/XXX00/">
+        <h2 class="post-title">
+            随便写两句
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+有时候，改对了几个bug的时间里。
+青春就已经悄悄消逝了。
+
+
+
+我叫陈少棉
+可以和你交个朋友吗？
+我会一直燃烧的
+
+
+...
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2016-11-16
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#想当一个有趣的人" title="想当一个有趣的人">想当一个有趣的人</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/11/16/让EditText不捕获焦点的小技巧/">
+        <h2 class="post-title">
+            让EditText不捕获焦点的小技巧
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            让EditText默认不捕捉焦点的小技巧
+
+你是否会为每次打开登录界面时，username的EditText总是处于输入状态而烦恼
+
+只要在布局界面加入这行代码，即可解决您的烦恼~
+
+12345678&lt;LinearLayout       android:id="@+id/default_focused_view"       android:layout_width="0dp"   ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2016-11-16
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#android" title="android">android</a>
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/11/04/写在1-1/">
+        <h2 class="post-title">
+            写在2016.1.1的一点
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            那一年的小事
+
+写在2016.1.1的一点半
+五月天说，时间是贼，偷走一切。
+一年前一年后，看到的好像还是同一片烟花。说不清对焰火有什么迷恋，只是在燃烧一瞬间才有的美感，才最让人爱惜。
+年岁痴长，岁月里所发生的确是历历在目。失去的得到的，年前的年后的，怎么能是一样的光景。好在，得到的不必失去的少，失去的也并不比得到的多。
+一年前的光景，跟现在早已事事非。因为一些原因所失去的真的非常多。因为另......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2016-11-04
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#想当一个有趣的人" title="想当一个有趣的人">想当一个有趣的人</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/11/03/android开发小记01/">
+        <h2 class="post-title">
+            Android开发小记(一)——侧滑菜单实现
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            简介drawerlayout
+
+drawerlayout大概就是抽屉的意思
+Support Library包中实现了侧滑菜单效果的控件
+drawerLayout分为侧边菜单和主内容区两部分
+drawerLayout其实是一个布局控件，跟LinearLayout等控件是一种东西，但是drawerLayout带有滑动的功能。只要按照drawerLayout的规定布局方式写完布局，就能有侧滑的效果......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2016-11-03
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#android" title="android">android</a>
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+        <li class="previous">
+            <a href="/archives/5/">&larr; Newer Posts</a>
+        </li>
+    
+    
+        <li class="next">
+            <a href="/archives/7/">Older Posts &rarr;</a>
+        </li>
+    
+</ul>
+
+
+
+                <!-- 如果开启评论功能 -->
+                
+            </div>
+
+          <!-- Sidebar Container -->
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+        <!-- Featured Tags -->
+
+<section>
+    <!-- no hr -->
+    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#android" title="android" rel="21">android</a>
+            
+        
+            
+            <a href="/tags/#java" title="java" rel="29">java</a>
+            
+        
+            
+            <a href="/tags/#想当一个有趣的人" title="想当一个有趣的人" rel="9">想当一个有趣的人</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Java" title="Java" rel="14">Java</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#unity3d" title="unity3d" rel="2">unity3d</a>
+            
+        
+            
+            <a href="/tags/#python" title="python" rel="15">python</a>
+            
+        
+            
+            <a href="/tags/#leetcode" title="leetcode" rel="2">leetcode</a>
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+</section>
+
+        <hr>
+    
+        <!-- Short About -->
+<section class="visible-md visible-lg">
+    <h5><a href="/about/">ABOUT ME</a></h5>
+    <div class="short-about">
+
+        
+            <img id = "avatar_pic" src="/img/ironman-draw.png" />
+        
+
+        
+            <p>Hi, i&#39;m John Doe</p>
+        
+
+        <!-- SNS Link -->
+        <ul class="list-inline">
+            
+            
+            
+
+            
+
+            
+                <li>
+                    <a target="_blank" href="https://www.facebook.com/csming1995">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+
+            
+                <li>
+                    <a target="_blank"  href="https://github.com/csming1995">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+            
+            
+            
+                <li>
+                    <a target="_blank"  href="https://www.linkedin.com/in/csming">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</section>
+        <hr>
+    
+        
+  <h5>RECENT POSTS</h3>
+  <div class="widget">
+    <ul>
+      
+        <li>
+          <a href="/2017/07/29/实习日记1/">第一次正式成为代码工实习</a>
+        </li>
+      
+        <li>
+          <a href="/2017/06/09/Blog集合/">mark[一些博文的集合]</a>
+        </li>
+      
+        <li>
+          <a href="/2017/06/06/Android进程间通信/">Android进程间通信</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/31/JavaSe-02/">Java基础复习——I/O系统</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/28/JavaSe-01/">Java基础复习——设计模式</a>
+        </li>
+      
+    </ul>
+  </div>
+
+        <hr>
+    
+        <!-- Friends Blog -->
+
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+
+    
+        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+    
+        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+    
+        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+    
+        <li><a href="#" target="_blank">It Helps SEO</a></li>
+    
+</ul>
+
+        <hr>
+    
+</div>
+
+        
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/csming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Csming 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://csming1995.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://csming1995.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

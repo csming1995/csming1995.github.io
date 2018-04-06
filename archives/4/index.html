@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Csming | 少棉
+        
+    </title>
+
+    <link rel="canonical" href="https://csming1995.github.io/archives/4/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/home-bg-2-dark.png') 
+            /*config*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="site-heading">
+                        <h1>Csming</h1>
+                        <!--<hr class="small">-->
+                        <span class="subheading">一生想做浪漫极客</span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Csming</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+            
+                <!-- Main Content -->
+
+
+<div class="post-preview">
+
+    <a href="/2017/03/14/Android自定义View-11/">
+        <h2 class="post-title">
+            Android自定义View——Matrix学习笔记
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Matrix是什么
+Matrix是一个矩阵，用于坐标映射，数制转换
+
+可以运用于View、图片、动画效果等各个方面
+画布操作是对Matrix的封装；Matrix更接近底层
+
+基本原理
+最根本的作用就是坐标转换
+(这涉及到了图形学的知识)
+
+我们所用到的变换均属于仿射变换，仿射变换是 线性变换(缩放，旋转，错切) 和 平移变换(平移) 的复合；
+
+
+**基本变换有4种: **平移(transl......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-14
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#android" title="android">android</a>
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/14/Android自定义View-10/">
+        <h2 class="post-title">
+            Android自定义View——PathMeasure学(A)习(P)笔(I)记(jilu)
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            PathMeasure是什么
+PathMeasure是用来测量Path类的
+API:
+
+
+
+方法名
+用处
+
+
+
+
+PathMeasure()
+创建一个空的PathMeasure
+
+
+PathMeasure(Path path,boolean forceClosed)
+创建 PathMeasure 并关联一个指定的Path(Path需要已经创建完成)。
+
+
+void setPath(Path ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-14
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#android" title="android">android</a>
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/13/Linux常用命令记录/">
+        <h2 class="post-title">
+            Linux的常用命令记录
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+**复制：**cp -v 源文件路径 目标文件路径
+**移动：**mv -v 源文件路径 目标文件路径
+**删除：**rm -v 文件路径
+		rmdir -v 文件夹路径–文件夹要为空
+		rm -rv 文件夹路径–递归删除文件夹及其子文件
+**创建文件夹：**mkdir -v 文件夹名字（在当前目录创建文件夹）
+**创建文件：**touch 文件路径（创建一个空文件）
+
+
+
+**显示当......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-13
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Linux" title="Linux">Linux</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/12/JVM学习笔记-3/">
+        <h2 class="post-title">
+            JVM学习——gc回收机制
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+最近复习Java基础细节的时候看Thking in Java；书上有提到两种垃圾回收机制，“停止-复制”、“标记-清扫”；
+
+
+
+**停止-复制：**将暂停程序的运行，然后将所有存活的对象从当前堆复制到另一个堆，而没有被复制的对象都是垃圾；当对象被复制到新堆时，它们是一个挨着一个的，所以新堆保持紧凑排列；然后就可以直接分配新空间了
+
+
+**标记-清扫：**从堆栈和静态存储区出发，遍历所有的......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/12/JVM学习笔记-2/">
+        <h2 class="post-title">
+            JVM学习——堆和栈的区别
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+在学习JVM运行机制的时候，运行时数据内存分为堆内存和栈内存；记得看Thking in Java时，曾看到过，栈内存存放的是基本类型的变量和对象的引用；而堆内存存放的则是对象；
+
+堆内存
+作用是用于存储Java中的对象和数组，当我们new一个对象或者创建一个数组的时候，就会在堆内存中开辟一段空间给它，用于存放
+堆内存的特点
+1.堆可以看做队列，先进先出，后进后出
+2.堆可以动态分配内存大小......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/12/JVM学习笔记-1/">
+        <h2 class="post-title">
+            JVM学习——Native方法
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+在学习JVM运行机制的时候，发现本地方法区是用于执行Native方法的；故有此疑问，什么是Native方法呢？
+
+什么是Native方法
+一个Native Method就是一个java调用非java代码的接口（NDK也跟这有关吗？（疑问）
+一个Native Method由非java语言实现
+
+在定义一个native method时，并不提供实现体（有些像定义一个java interface......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/11/JVM学习笔记-0/">
+        <h2 class="post-title">
+            JVM学习——运行机制原理
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+最近学习了ClassLoader；进而开始学习Java虚拟机的相关知识，进而深入理解Java的原理
+
+什么是JVM
+
+JVM——Java虚拟机
+JVM是可运行Java代码的虚拟计算机；JVM包括一套字节码指令集、一组寄存器、一个栈、一个垃圾回收堆和一个存储方法域；
+
+JVM
+Java源文件通过编译器能够生产相应的.class文件（字节码文件）；而字节码文件又通过Java虚拟机中的解释器（字......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-11
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/09/Android自定义View-9/">
+        <h2 class="post-title">
+            Android自定义View——贝塞尔曲线学习笔记
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            贝塞尔曲线
+贝塞尔曲线奠定了计算机绘图的基础(它可以将任何复杂的图形用精确的数学语言进行描述)
+有开放和封闭路径的区别；
+理解贝塞尔曲线的原理
+贝塞尔曲线是由一系列点来控制曲线状态的
+
+**数据点：**确定曲线的起始和结束位置
+**控制点：**确定曲线的弯曲程度
+
+一阶曲线
+一阶曲线是没有控制点的，仅有两个数据点(A 和 B)，最终效果一个线段；类似于lineTo；
+生成过程：
+
+二阶曲线
+......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-09
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#android" title="android">android</a>
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/05/Android自定义View-8/">
+        <h2 class="post-title">
+            Android自定义View——Path操作学习笔记
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Path简介
+Path封装了直线曲线构成的几何路径；
+可以利用Canvas的drawPath绘制；也可以用于剪裁画布，根据路径绘制文字；也可以用于描述一个图像的轮廓；
+有开放和封闭路径的区别；
+Paht常用方法
+
+**移动起点moveTo:**移动下一次操作的起点位置
+**设置终点setLastPoint:**重置当前path中最后一个点位置，如果在绘制之前调用，效果和moveTo相同
+**......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-05
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#android" title="android">android</a>
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/05/Android自定义View-7/">
+        <h2 class="post-title">
+            Android自定义View——Canvas操作学习笔记
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Canvas的基本操作
+位移（translate）
+translate是坐标系的移动，可以为图形绘制选择一个合适的坐标系
+1234567891011// 省略了创建画笔的代码// 在坐标原点绘制一个黑色圆形mPaint.setColor(Color.BLACK);canvas.translate(200,200);canvas.drawCircle(0,0,100,mPaint);// 在坐......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-05
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#android" title="android">android</a>
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+        <li class="previous">
+            <a href="/archives/3/">&larr; Newer Posts</a>
+        </li>
+    
+    
+        <li class="next">
+            <a href="/archives/5/">Older Posts &rarr;</a>
+        </li>
+    
+</ul>
+
+
+
+                <!-- 如果开启评论功能 -->
+                
+            </div>
+
+          <!-- Sidebar Container -->
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+        <!-- Featured Tags -->
+
+<section>
+    <!-- no hr -->
+    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#android" title="android" rel="21">android</a>
+            
+        
+            
+            <a href="/tags/#java" title="java" rel="29">java</a>
+            
+        
+            
+            <a href="/tags/#想当一个有趣的人" title="想当一个有趣的人" rel="9">想当一个有趣的人</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Java" title="Java" rel="14">Java</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#unity3d" title="unity3d" rel="2">unity3d</a>
+            
+        
+            
+            <a href="/tags/#python" title="python" rel="15">python</a>
+            
+        
+            
+            <a href="/tags/#leetcode" title="leetcode" rel="2">leetcode</a>
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+</section>
+
+        <hr>
+    
+        <!-- Short About -->
+<section class="visible-md visible-lg">
+    <h5><a href="/about/">ABOUT ME</a></h5>
+    <div class="short-about">
+
+        
+            <img id = "avatar_pic" src="/img/ironman-draw.png" />
+        
+
+        
+            <p>Hi, i&#39;m John Doe</p>
+        
+
+        <!-- SNS Link -->
+        <ul class="list-inline">
+            
+            
+            
+
+            
+
+            
+                <li>
+                    <a target="_blank" href="https://www.facebook.com/csming1995">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+
+            
+                <li>
+                    <a target="_blank"  href="https://github.com/csming1995">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+            
+            
+            
+                <li>
+                    <a target="_blank"  href="https://www.linkedin.com/in/csming">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</section>
+        <hr>
+    
+        
+  <h5>RECENT POSTS</h3>
+  <div class="widget">
+    <ul>
+      
+        <li>
+          <a href="/2017/07/29/实习日记1/">第一次正式成为代码工实习</a>
+        </li>
+      
+        <li>
+          <a href="/2017/06/09/Blog集合/">mark[一些博文的集合]</a>
+        </li>
+      
+        <li>
+          <a href="/2017/06/06/Android进程间通信/">Android进程间通信</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/31/JavaSe-02/">Java基础复习——I/O系统</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/28/JavaSe-01/">Java基础复习——设计模式</a>
+        </li>
+      
+    </ul>
+  </div>
+
+        <hr>
+    
+        <!-- Friends Blog -->
+
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+
+    
+        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+    
+        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+    
+        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+    
+        <li><a href="#" target="_blank">It Helps SEO</a></li>
+    
+</ul>
+
+        <hr>
+    
+</div>
+
+        
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/csming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Csming 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://csming1995.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://csming1995.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

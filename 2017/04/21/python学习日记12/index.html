@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Python的IO编程 - Csming | 少棉
+        
+    </title>
+
+    <link rel="canonical" href="https://csming1995.github.io/2017/04/21/python学习日记12/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('undefined')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#python" title="python">python</a>
+                            
+                        </div>
+                        <h1>Python的IO编程</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Csming on
+                            2017-04-21
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Csming</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>今天本来想要看动漫的，结果辣鸡锐捷又断网；<br>
+呵，辣鸡锐捷<br>
+一个网站要让我们可以看视频，就要涉及到网络编程啦~<br>
+那么，我们怎么样通过Python来实现文件的读写，还有网络操作呢~</p>
+<hr>
+<h1><span id="同步和异步的区别">同步和异步的区别</span></h1>
+<p>同步就是一步一步进行的操作；<br>
+就是说，我们在进行网络操作或者文件读写（如：从网上下载东西），在这段时间里，我们就只做这个操作，等这个操作完成之后，才进行下一个步骤</p>
+<p>那么异步呢，就是可以在进行网络操作的时候，进行其他步骤；</p>
+<hr>
+<p>还记得大一的时候，学习unity开发，有人跟我说，加载场景用异步的话，可以优化很多</p>
+<p>我的内心os：异步是啥……好高端的名词呀……</p>
+<p>现在才发现，好像也没有很可怕……</p>
+<h1><span id="io编程">IO编程</span></h1>
+<p>那么什么是IO编程；<br>
+IO编程指的一般就是通过流的形式，在我们的硬盘或者网络上读写东西；<br>
+嗯，就是酱紫</p>
+<h1><span id="文件读写">文件读写</span></h1>
+<p>Python内置了读写文件的函数，用法和C语言兼容</p>
+<p>不愧是高级语言啊！！！</p>
+<p><strong>读写文件就是请求操作系统打开一个文件对象，然后通过操作系统提供的接口从这个文件对象中读取数据，或者把数据写入这个文件对象</strong></p>
+<h2><span id="读文件">读文件</span></h2>
+<ul>
+<li>打开一个文件对象，使用<strong>open()函数</strong>，传入文件名和标示符</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f = open(<span class="string">'/User/michael/test.txt'</span>, <span class="string">'r'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>案例来自廖雪峰前辈的博客http://www.liaoxuefeng.com/</strong></p>
+<p><strong>'r’表示读，这样就可以打开一个文件了；</strong><br>
+若文件不存在，函数open()会抛出一个IOError错误；</p>
+<ul>
+<li>若文件打开成功；则可以调用read()方法，将文件中的内容一次性读取到内存中；并用一个str对象表示</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f.read()</span><br><span class="line"><span class="comment"># f.read()是一个str对象</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>读完后，关闭文件：close()方法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+<p><strong>因为，文件读写可能出现IOError错误，那么这时候f.close()就不能调用了；</strong><br>
+所以一般使用try…finally：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	f = open(<span class="string">'/path/to/file'</span>, <span class="string">'r'</span>)</span><br><span class="line">	print(f.read())</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">	<span class="keyword">if</span> f:</span><br><span class="line">		f.close()</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>如果担心文件内容太多；那么可以使用read(size)方法；**<br>
+这个方法一次读取size字节的内容<br>
+<strong>也可以调用readline()，每次读取一行内容</strong></li>
+</ul>
+<p><strong>readlines()方法，一次性读取所有内容，并按行返回list</strong></p>
+<h1><span id="file-like-object">file-like Object</span></h1>
+<p>open()函数返回的这种有个read()方法的对象，在Python中统称为file-like Object</p>
+<p>除了file外，还可以是内存的字节流，网络流，自定义流等；</p>
+<p>file-like Object不要求从特定的类继承，只需要写一个read()方法;</p>
+<hr>
+<p><strong>StringIO 就是在内存中创建的file-like Object</strong></p>
+<hr>
+<ul>
+<li><strong>二进制文件</strong><br>
+要读取二进制文件，比如图片，视频等；<br>
+就用**‘rb’**模式：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f = open(<span class="string">'xxxxxx.jpg'</span>, <span class="string">'rb'</span>)</span><br><span class="line">print(f.read())</span><br><span class="line"><span class="comment"># b'\xff\xd8\xff\xe1\x00\x18Exif\x00\x00...' # 十六进制表示的字节</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>字符编码</strong><br>
+非UTF-8的文本文件；<br>
+需要给open()函数传入encoding参数；</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f = open(<span class="string">'xxxxxx.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'gbk'</span>)</span><br><span class="line">f.read()</span><br></pre></td></tr></table></figure>
+<p>遇到有些编码不规范的文件，你可能会遇到UnicodeDecodeError，因为在文本文件中可能夹杂了一些非法编码的字符</p>
+<hr>
+<h1><span id="写文件">写文件</span></h1>
+<p>和写文件一样；<br>
+但是调用open()函数的时候，传入标识符为**‘w’<strong>，</strong>‘wb’**表示写文本文件或写二进制文件；</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f = open(<span class="string">'./User/michael/test.txt'</span>, <span class="string">'r'</span>)</span><br><span class="line">f.write(<span class="string">'Hello, world!!'</span>)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+<hr>
+<h1><span id="stringio和bytesio">StringIO和BytesIO</span></h1>
+<p>很多时候，数据在内存中读写；<br>
+StringIO就是在内存中读写的str；</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> io <span class="keyword">import</span> StringIO</span><br><span class="line">f = StringIO()</span><br><span class="line">f.wirte(<span class="string">'hello'</span>)</span><br><span class="line">f.wirte(<span class="string">' '</span>) <span class="comment"># 返回1</span></span><br><span class="line">f.write(<span class="string">'world!'</span>) <span class="comment"># 返回6</span></span><br><span class="line">print(f.getvalue())</span><br><span class="line"><span class="comment"># hello world!</span></span><br></pre></td></tr></table></figure>
+<p>getvalue()函数，用来获取写入后的str</p>
+<hr>
+<p>由于StringIO只能读写str对象；<br>
+那么，要操作二进制数据，就需要使用BytesIO<br>
+BytesIO在内存中读写bytes<br>
+<strong>可以用一个bytes初始化BytesIO</strong></p>
+<hr>
+<h1><span id="操作文件和目录">操作文件和目录</span></h1>
+<p>操作文件和目录的函数一部分放在os模块中<br>
+还有一部分放在os.path模块中</p>
+<p><strong>os.path.abspath(’.’)查看当前目录的绝对路径</strong></p>
+<p><strong>os.path.join(’/Users/michael’, ‘testdir’)在某个目录下创建一个新目录，首先把新目录的完整路径表示出来</strong></p>
+<p><strong>os.mkdir(’/Users/michael/testdir’)然后创建一个目录</strong></p>
+<p><strong>os.rmdir(’/Users/michael/testdir’)删掉一个目录</strong></p>
+<p>把两个路径合成一个时，不要直接拼字符串，而要通过os.path.join()函数，这样可以正确处理不同操作系统的路径分隔符</p>
+<p>要拆分路径时，也不要直接去拆字符串，而要通过os.path.split()函数</p>
+<p><strong>os.path.splitext()可以直接让你得到文件扩展名</strong></p>
+<p><strong>os.rename()用于重命名文件</strong><br>
+<strong>os.remove()删除文件</strong></p>
+<hr>
+<p><strong>案例来自廖雪峰前辈的博客：<a href="http://www.liaoxuefeng.com/" target="_blank" rel="noopener">http://www.liaoxuefeng.com/</a></strong><br>
+参考资料：<a href="http://www.liaoxuefeng.com/" target="_blank" rel="noopener">http://www.liaoxuefeng.com/</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/04/24/python学习日记13/" data-toggle="tooltip" data-placement="top" title="Python序列化">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/04/17/python学习日记11/" data-toggle="tooltip" data-placement="top" title="Python的继承与多态">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#python" title="python">python</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">It Helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "https://csming1995.github.io/2017/04/21/python学习日记12/";
+    var disqus_url = "https://csming1995.github.io/2017/04/21/python学习日记12/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/csming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Csming 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://csming1995.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://csming1995.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
