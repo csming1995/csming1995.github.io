@@ -132,14 +132,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -209,6 +209,36 @@
 
 <div class="post-preview">
 
+    <a href="/2017/04/15/python学习日记06/">
+        <h2 class="post-title">
+            我与Py的那些事——高级特性
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            切片
+取一个list或tuple的部分元素
+1234567891011121314L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack']# ---------------------------------------L[0:3] L[1:3] # 方法1L[:3] # 方法2L[-2:] # 方法3L[:10:2] # 前10个数中每2个取1个L[......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-04-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#python" title="python">python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2017/04/15/python学习日记07/">
         <h2 class="post-title">
             Python函数式编程
@@ -249,48 +279,19 @@
 
 <div class="post-preview">
 
-    <a href="/2017/04/15/python学习日记06/">
+    <a href="/2017/04/15/python学习日记03/">
         <h2 class="post-title">
-            我与Py的那些事——高级特性
+            我与Py的那些事——list与tuple
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            切片
-取一个list或tuple的部分元素
-1234567891011121314L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack']# ---------------------------------------L[0:3] L[1:3] # 方法1L[:3] # 方法2L[-2:] # 方法3L[:10:2] # 前10个数中每2个取1个L[......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-04-15
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#python" title="python">python</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2017/04/15/python学习日记04/">
-        <h2 class="post-title">
-            我与Py的那些事——条件判断
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            条件判断
-12345678if &lt;条件判断1&gt;:    &lt;执行1&gt;elif &lt;条件判断2&gt;:    &lt;执行2&gt;elif &lt;条件判断3&gt;:    &lt;执行3&gt;else:    &lt;执行4&gt;
-eg:
-1234567age = 20if age &gt;= 6:    print('teenager')elif age......
+            list
+list是Python内置的数据类型；是一种有序的集合，可以随时添加和删除其中的元素
+123&gt;&gt;&gt; classmates = ['Michael', 'Bob', 'Tracy']&gt;&gt;&gt; classmates# ['Michael', 'Bob', 'Tracy']
+那么classmates就是一个list；
+可以使用len()函数获得list元......
         </div>
     </a>
     
@@ -352,38 +353,6 @@ int() float() str() bool()
 
 <div class="post-preview">
 
-    <a href="/2017/04/15/python学习日记03/">
-        <h2 class="post-title">
-            我与Py的那些事——list与tuple
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            list
-list是Python内置的数据类型；是一种有序的集合，可以随时添加和删除其中的元素
-123&gt;&gt;&gt; classmates = ['Michael', 'Bob', 'Tracy']&gt;&gt;&gt; classmates# ['Michael', 'Bob', 'Tracy']
-那么classmates就是一个list；
-可以使用len()函数获得list元......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-04-15
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#python" title="python">python</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
     <a href="/2017/04/15/python学习日记02/">
         <h2 class="post-title">
             我与Py的那些事——Python基础
@@ -407,6 +376,37 @@ Python可以处理任意大小的整数，包括负整数（略）
 浮点数就是小数；
 比如：1.23、3.14、-9.01；
 很大或很小的浮点数可以表示为：1.23e9、12.3e8；即：1.2......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-04-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#python" title="python">python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/04/15/python学习日记04/">
+        <h2 class="post-title">
+            我与Py的那些事——条件判断
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            条件判断
+12345678if &lt;条件判断1&gt;:    &lt;执行1&gt;elif &lt;条件判断2&gt;:    &lt;执行2&gt;elif &lt;条件判断3&gt;:    &lt;执行3&gt;else:    &lt;执行4&gt;
+eg:
+1234567age = 20if age &gt;= 6:    print('teenager')elif age......
         </div>
     </a>
     
@@ -616,10 +616,6 @@ ACTION_MOVE：	手指 在屏幕上滑动 时触发，会多次触发。
     <div class="tags">
         
             
-        
-            
-        
-            
             <a href="/tags/#android" title="android" rel="21">android</a>
             
         
@@ -628,15 +624,15 @@ ACTION_MOVE：	手指 在屏幕上滑动 时触发，会多次触发。
             
         
             
+        
+            
             <a href="/tags/#想当一个有趣的人" title="想当一个有趣的人" rel="9">想当一个有趣的人</a>
             
         
             
-        
-            
-        
-            
             <a href="/tags/#Java" title="Java" rel="14">Java</a>
+            
+        
             
         
             
