@@ -209,6 +209,41 @@
 
 <div class="post-preview">
 
+    <a href="/2017/04/16/python学习日记08/">
+        <h2 class="post-title">
+            Python匿名函数
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+匿名函数
+不显式定义的函数
+eg：
+123456lambda x: x * x# 相当于：def f(x):    return x * x
+实例：
+12list(map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9]))# [1, 4, 9, 16, 25, 36, 49, 64, 81]
+匿名函数只能有一个表达式，不用写return；表达式的结......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-04-16
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#python" title="python">python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2017/04/15/python学习日记06/">
         <h2 class="post-title">
             我与Py的那些事——高级特性
@@ -279,48 +314,6 @@
 
 <div class="post-preview">
 
-    <a href="/2017/04/15/python学习日记02/">
-        <h2 class="post-title">
-            我与Py的那些事——Python基础
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Python是一个没有格式化{}符号的语言；他要求我们始终写出格式化的代码；
-使用四个空格缩进；于是没办法用用复制粘贴的方法重用代码；
-而且py是一个大小写敏感的语言；
-
-数据类型和变量
-
-整型：
-
-Python可以处理任意大小的整数，包括负整数（略）
-
-浮点数：
-
-浮点数就是小数；
-比如：1.23、3.14、-9.01；
-很大或很小的浮点数可以表示为：1.23e9、12.3e8；即：1.2......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-04-15
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#python" title="python">python</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
     <a href="/2017/04/15/python学习日记04/">
         <h2 class="post-title">
             我与Py的那些事——条件判断
@@ -333,38 +326,6 @@ Python可以处理任意大小的整数，包括负整数（略）
 12345678if &lt;条件判断1&gt;:    &lt;执行1&gt;elif &lt;条件判断2&gt;:    &lt;执行2&gt;elif &lt;条件判断3&gt;:    &lt;执行3&gt;else:    &lt;执行4&gt;
 eg:
 1234567age = 20if age &gt;= 6:    print('teenager')elif age......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-04-15
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#python" title="python">python</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2017/04/15/python学习日记03/">
-        <h2 class="post-title">
-            我与Py的那些事——list与tuple
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            list
-list是Python内置的数据类型；是一种有序的集合，可以随时添加和删除其中的元素
-123&gt;&gt;&gt; classmates = ['Michael', 'Bob', 'Tracy']&gt;&gt;&gt; classmates# ['Michael', 'Bob', 'Tracy']
-那么classmates就是一个list；
-可以使用len()函数获得list元......
         </div>
     </a>
     
@@ -407,6 +368,80 @@ int() float() str() bool()
 
 
 函数名，其实就是一个指向函数对象的引用，可以将函数名......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-04-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#python" title="python">python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/04/15/python学习日记02/">
+        <h2 class="post-title">
+            我与Py的那些事——Python基础
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Python是一个没有格式化{}符号的语言；他要求我们始终写出格式化的代码；
+使用四个空格缩进；于是没办法用用复制粘贴的方法重用代码；
+而且py是一个大小写敏感的语言；
+
+数据类型和变量
+
+整型：
+
+Python可以处理任意大小的整数，包括负整数（略）
+
+浮点数：
+
+浮点数就是小数；
+比如：1.23、3.14、-9.01；
+很大或很小的浮点数可以表示为：1.23e9、12.3e8；即：1.2......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-04-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#python" title="python">python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/04/15/python学习日记03/">
+        <h2 class="post-title">
+            我与Py的那些事——list与tuple
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            list
+list是Python内置的数据类型；是一种有序的集合，可以随时添加和删除其中的元素
+123&gt;&gt;&gt; classmates = ['Michael', 'Bob', 'Tracy']&gt;&gt;&gt; classmates# ['Michael', 'Bob', 'Tracy']
+那么classmates就是一个list；
+可以使用len()函数获得list元......
         </div>
     </a>
     
@@ -533,49 +568,6 @@ ACTION_MOVE：	手指 在屏幕上滑动 时触发，会多次触发。
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2017/03/15/Android自定义View-12/">
-        <h2 class="post-title">
-            Android自定义View——事件分发机制学习笔记
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            为什么有事件分发机制
-
-
-因为Android的View是树状结构的；View可能会重叠在一起；
-
-
-当我们点击的地方有很多歌View都可以响应时，就很尴尬了；
-
-
-于是事件分发机制就用来解决这种问题
-
-
-如图，View是一层一层嵌套的；当点击View1时，下面的ViewGroupA、RootView等也能够响应；为了确定到底要由哪个View处理盖点击事件，就需要事件分发机制来处理了；**
-（......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-03-15
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -616,7 +608,7 @@ ACTION_MOVE：	手指 在屏幕上滑动 时触发，会多次触发。
     <div class="tags">
         
             
-            <a href="/tags/#android" title="android" rel="21">android</a>
+            <a href="/tags/#android" title="android" rel="22">android</a>
             
         
             
@@ -727,6 +719,10 @@ ACTION_MOVE：	手指 在屏幕上滑动 时触发，会多次触发。
     <ul>
       
         <li>
+          <a href="/2017/11/26/StatusLayout/">StatusLayout</a>
+        </li>
+      
+        <li>
           <a href="/2017/07/29/实习日记1/">第一次正式成为代码工实习</a>
         </li>
       
@@ -740,10 +736,6 @@ ACTION_MOVE：	手指 在屏幕上滑动 时触发，会多次触发。
       
         <li>
           <a href="/2017/05/31/JavaSe-02/">Java基础复习——I/O系统</a>
-        </li>
-      
-        <li>
-          <a href="/2017/05/28/JavaSe-01/">Java基础复习——设计模式</a>
         </li>
       
     </ul>
@@ -796,7 +788,7 @@ ACTION_MOVE：	手指 在屏幕上滑动 时触发，会多次触发。
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
