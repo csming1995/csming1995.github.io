@@ -30,13 +30,6 @@
     </url>
 
     <url>
-        <loc>https://csming1995.github.io/tags/technology/</loc>
-        <lastmod>2018-04-06T14:16:07.841Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://csming1995.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</loc>
         <lastmod>2018-04-06T14:16:44.794Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -95,6 +88,13 @@
     <url>
         <loc>https://csming1995.github.io/tags/android/</loc>
         <lastmod>2018-04-07T03:26:40.295Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://csming1995.github.io/tags/technology/</loc>
+        <lastmod>2018-04-13T11:24:22.899Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

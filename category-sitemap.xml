@@ -28,13 +28,6 @@
     </url>
 
     <url>
-        <loc>https://csming1995.github.io/categories/%E9%9B%86%E5%90%88/</loc>
-        <lastmod>2018-04-06T14:16:07.841Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://csming1995.github.io/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</loc>
         <lastmod>2018-04-06T14:16:44.794Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -86,6 +79,13 @@
     <url>
         <loc>https://csming1995.github.io/categories/%E5%86%99%E7%9D%80%E4%BB%A3%E7%A0%81%E5%B0%B1%E5%BC%80%E5%A7%8B%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%AD/</loc>
         <lastmod>2018-04-06T14:19:31.026Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://csming1995.github.io/categories/%E9%9B%86%E5%90%88/</loc>
+        <lastmod>2018-04-13T11:24:22.899Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

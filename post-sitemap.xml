@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>https://csming1995.github.io/2018/04/13/Blog%E9%9B%86%E5%90%88/</loc>
+        <lastmod>2018-04-13T11:24:22.899Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://csming1995.github.io/2017/11/26/StatusLayout/</loc>
         <lastmod>2018-04-07T03:26:40.295Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -409,14 +417,6 @@
     <url>
         <loc>https://csming1995.github.io/2017/02/28/ClassLoader%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</loc>
         <lastmod>2018-04-06T14:16:11.646Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://csming1995.github.io/2017/06/09/Blog%E9%9B%86%E5%90%88/</loc>
-        <lastmod>2018-04-06T14:16:07.841Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
