@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Android自定义View——Path操作学习笔记 - 十一月 | 深入迷雾寻找火光
+          Android性能优化（一） - 十一月 | 深入迷雾寻找火光
         
     </title>
 
-    <link rel="canonical" href="https://csming1995.github.io/2017/03/05/Android自定义View-8/">
+    <link rel="canonical" href="https://csming1995.github.io/2018/04/15/Android性能优化/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -88,14 +88,12 @@
                             
                               <a class="tag" href="/tags/#android" title="android">android</a>
                             
-                              <a class="tag" href="/tags/#java" title="java">java</a>
-                            
                         </div>
-                        <h1>Android自定义View——Path操作学习笔记</h1>
+                        <h1>Android性能优化（一）</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Csming on
-                            2017-03-05
+                            2018-04-15
                         </span>
                     </div>
                 
@@ -212,93 +210,111 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="path简介">Path简介</span></h1>
-<p>Path封装了直线曲线构成的几何路径；<br>
-可以利用Canvas的drawPath绘制；也可以用于剪裁画布，根据路径绘制文字；也可以用于描述一个图像的轮廓；</p>
-<p>有开放和封闭路径的区别；</p>
-<h1><span id="paht常用方法">Paht常用方法</span></h1>
+                <p>原文地址：<a href="https://www.csdn.net/article/2015-01-20/2823621-android-performance-patterns/1" target="_blank" rel="noopener">https://www.csdn.net/article/2015-01-20/2823621-android-performance-patterns/1</a></p>
+<p>最近阅读了<a href="http://hukai.me/" target="_blank" rel="noopener">胡凯</a>的Android性能优化典范，做了一些记录；还有一部分时机应用的时候遇到的问题。</p>
+<h1><span id="绘制问题">绘制问题</span></h1>
+<h2><span id="画面渲染">画面渲染</span></h2>
 <ul>
-<li>**移动起点moveTo:**移动下一次操作的起点位置</li>
-<li>**设置终点setLastPoint:**重置当前path中最后一个点位置，如果在绘制之前调用，效果和moveTo相同</li>
-<li>**连接直线lineTo:**添加上一个点到当前点之间的直线到Path</li>
-<li>**闭合路径close:**连接第一个点连接到最后一个点，形成一个闭合区域</li>
-<li>**添加内容addRect, addRoundRect, addOval, addCircle, addPath, addArc, arcTo:**添加(矩形， 圆角矩形， 椭圆， 圆， 路径， 圆弧) 到当前Path (注意addArc和arcTo的区别)</li>
-<li>**是否为空isEmpty:**判断Path是否为空</li>
-<li>**是否为矩形isRect:**判断path是否是一个矩形</li>
-<li>**替换路径set:**用新的路径替换到当前路径所有内容</li>
-<li>**偏移路径offset:**对当前路径之前的操作进行偏移(不会影响之后的操作)</li>
-<li>**贝塞尔曲线quadTo, cubicTo:**分别为二次和三次贝塞尔曲线的方法</li>
-<li>**rXxx方法rMoveTo, rLineTo, rQuadTo, rCubicTo:**不带r的方法是基于原点的坐标系(偏移量)， rXxx方法是基于当前点坐标系(偏移量)</li>
-<li>**填充模式setFillType, getFillType, isInverseFillType, toggleInverseFillType:**设置,获取,判断和切换填充模式</li>
-<li>**提示方法incReserve:**提示Path还有多少个点等待加入(这个方法貌似会让Path优化存储结构)</li>
-<li>**布尔操作(API19)op:**对两个Path进行布尔运算(即取交集、并集等操作)</li>
-<li>**计算边界computeBounds:**计算Path的边界</li>
-<li>**重置路径reset, rewind:**清除Path中的内容</li>
-<li>**reset:**不保留内部数据结构，但会保留FillType.</li>
-<li>**rewind:**会保留内部的数据结构，但不保留FillType</li>
-<li>**矩阵操作transform:**矩阵变换</li>
-</ul>
-<h1><span id="使用方法">使用方法</span></h1>
-<h2><span id="moveto-setlastpoint-lineto-和-close">moveTo、 setLastPoint、 lineTo 和 close</span></h2>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// moveTo只改变下次操作的起点</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">moveTo</span> <span class="params">(<span class="keyword">float</span> x, <span class="keyword">float</span> y)</span></span></span><br><span class="line"><span class="function"><span class="comment">// setLastPoint设置之前操作的最后一个点位置</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLastPoint</span> <span class="params">(<span class="keyword">float</span> dx, <span class="keyword">float</span> dy)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lineTo</span> <span class="params">(<span class="keyword">float</span> x, <span class="keyword">float</span> y)</span></span></span><br><span class="line"><span class="function"><span class="comment">//用于连接当前最后一个点和最初的一个点</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span> <span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<h2><span id="addxxx与arcto">addXxx与arcTo</span></h2>
-<ul>
-<li><strong>addXxx</strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一类(基本形状)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 圆形</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCircle</span> <span class="params">(<span class="keyword">float</span> x, <span class="keyword">float</span> y, <span class="keyword">float</span> radius, Path.Direction dir)</span></span></span><br><span class="line"><span class="function"><span class="comment">// 椭圆</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addOval</span> <span class="params">(RectF oval, Path.Direction dir)</span></span></span><br><span class="line"><span class="function"><span class="comment">// 矩形</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addRect</span> <span class="params">(<span class="keyword">float</span> left, <span class="keyword">float</span> top, <span class="keyword">float</span> right, <span class="keyword">float</span> bottom, Path.Direction dir)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addRect</span> <span class="params">(RectF rect, Path.Direction dir)</span></span></span><br><span class="line"><span class="function"><span class="comment">// 圆角矩形</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addRoundRect</span> <span class="params">(RectF rect, <span class="keyword">float</span>[] radii, Path.Direction dir)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addRoundRect</span> <span class="params">(RectF rect, <span class="keyword">float</span> rx, <span class="keyword">float</span> ry, Path.Direction dir)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">// path 组合path</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addPath</span> <span class="params">(Path src)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addPath</span> <span class="params">(Path src, <span class="keyword">float</span> dx, <span class="keyword">float</span> dy)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addPath</span> <span class="params">(Path src, Matrix matrix)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">// addArc直接添加一个圆弧到path中</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addArc</span> <span class="params">(RectF oval, <span class="keyword">float</span> startAngle, <span class="keyword">float</span> sweepAngle)</span></span></span><br><span class="line"><span class="function"><span class="comment">// arcTo添加一个圆弧到path，如果圆弧的起点和上次最后一个坐标点不相同，就连接两个点</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">arcTo</span> <span class="params">(RectF oval, <span class="keyword">float</span> startAngle, <span class="keyword">float</span> sweepAngle)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">arcTo</span> <span class="params">(RectF oval, <span class="keyword">float</span> startAngle, <span class="keyword">float</span> sweepAngle, <span class="keyword">boolean</span> forceMoveTo)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">## isEmpty、 isRect、isConvex、 set 和 offset</span></span><br><span class="line"><span class="function">```java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isRect</span> <span class="params">(RectF rect)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//将新的path赋值到现有path。</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span> <span class="params">(Path src)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//对path进行一段平移，它和Canvas中的translate作用很像，但Canvas作用于整个画布，而path的offset只作用于当前path</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">offset</span> <span class="params">(<span class="keyword">float</span> dx, <span class="keyword">float</span> dy)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">offset</span> <span class="params">(<span class="keyword">float</span> dx, <span class="keyword">float</span> dy, Path dst)</span></span></span><br></pre></td></tr></table></figure>
-<h1><span id="rxxx方法">rXxx方法</span></h1>
-<p>rXxx方法的坐标使用的是相对位置(基于当前点的位移)，而之前方法的坐标是绝对位置(基于当前坐标系的坐标)</p>
-<h1><span id="填充模式">填充模式</span></h1>
-<p>Paint有三种样式，“描边” “填充” 以及 “描边加填充”<br>
-给一个图形内部填充颜色，首先需要分清哪一部分是外部，哪一部分是内部</p>
-<p>Android的填充模式封装在Path中</p>
-<blockquote>
-<p>EVEN_ODD			奇偶规则<br>
-INVERSE_EVEN_ODD	反奇偶规则<br>
-WINDING			非零环绕数规则<br>
-INVERSE_WINDING	反非零环绕数规则</p>
-</blockquote>
-<ul>
-<li>**Path关于填充模式的方法</li>
+<li>
+<p><strong>Android系统每隔16ms发出 <code>VSYNC</code> 信号，触发对UI进行渲染。如果每次都能够渲染成功，则能够达到60fps，即达到人肉眼能够接受的流畅画面。为了达到60fps，需要程序的大多数操作要在16ms内完成。</strong></p>
+</li>
+<li>
+<p><strong>如果你的某个操作时间超过16ms，那么在系统发出<code>VSYNC</code>信号的时候无法进行正常渲染，这样就会发生丢帧现象。用户会在后面看到同一帧画面</strong></p>
+</li>
 </ul>
 <blockquote>
-<p>setFillType			设置填充规则<br>
-getFillType			获取当前填充规则<br>
-isInverseFillType		判断是否是反向(INVERSE)规则<br>
-toggleInverseFillType	切换填充规则(即原有规则与反向规则之间相互切换)</p>
+<p>60fps:16ms刷新一次，能够达到60fps。60fps能够达到流畅的原因，是因为人眼与大脑之间的协作无法感知超过60fps的画面更新</p>
 </blockquote>
-<h1><span id="bool操作">Bool操作</span></h1>
-<blockquote>
-<p>DIFFERENCE			差集<br>
-REVERSE_DIFFERENCE	差集 与DIFFERENCE相反<br>
-INTERSECT			交集<br>
-UNION				并集	<br>
-XOR				异或</p>
-</blockquote>
+<p>这点，在我最近的毕设项目里，利用Hander向自己不停发送<code>sendEmptyMessageDelayed</code>请求的时候，就深有体会。当我的delay时长越接近16ms时，seekbar的处理就越流畅；而delay时长越长，画面就越不流畅。<br>
+Android系统的触发渲染也一样。<br>
+代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">VideoProgressHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</span><br><span class="line">    <span class="comment">// WeakReference to the outer class's instance.</span></span><br><span class="line">    <span class="keyword">private</span> WeakReference&lt;NeroVideoView&gt; mVideoView;</span><br><span class="line">    <span class="keyword">private</span> WeakReference&lt;SeekBar&gt; mSbProgress;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">VideoProgressHandler</span><span class="params">(NeroVideoView videoView, SeekBar seekbar)</span> </span>&#123;</span><br><span class="line">        mVideoView = <span class="keyword">new</span> WeakReference&lt;&gt;(videoView);</span><br><span class="line">        mSbProgress = <span class="keyword">new</span> WeakReference&lt;&gt;(seekbar);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">        NeroVideoView videoView = mVideoView.get();</span><br><span class="line">        SeekBar sbProgress = mSbProgress.get();</span><br><span class="line">        <span class="keyword">switch</span> (msg.what) &#123;</span><br><span class="line">            <span class="keyword">case</span> UPDATE_PROGRESS: &#123;</span><br><span class="line">                <span class="comment">//当前时间</span></span><br><span class="line">                <span class="keyword">if</span> (mVideoView != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">int</span> currentPosition = videoView.getCurrentPosition();</span><br><span class="line">                    sbProgress.setProgress(currentPosition);</span><br><span class="line">                    sendEmptyMessageDelayed(UPDATE_PROGRESS, <span class="number">40</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">default</span>: &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>话说回来：</strong> 用户容易在UI执行动画或者滑动ListView的时候感到卡顿；这是因为这里的操作相对复杂。有可能是由于<code>布局</code>太过复杂，无法再16ms内完成渲染。有可能是因为你的UI上有层叠太多的绘制单元，还有可能是因为动画执行的次数过多。</p>
+<p>**工具：**可以使用HierarchyViewer来查看布局是否太过复杂；也可以通过开发者选项里的Show GPU Overdraw来观察。</p>
+<h2><span id="过度绘制">过度绘制</span></h2>
 <ul>
-<li><strong>Path中的布尔运算方法</strong></li>
+<li><strong>过度绘制指的是：屏幕上某个像素在同一帧内被绘制了多次。（一层一层又一层）而覆盖在下面的层绘制了，但却被新绘制的层覆盖了。这样浪费了大量的CPU以及GPU资源。（看不到还绘制，当然浪费资源了对不对）</strong></li>
 </ul>
 <blockquote>
-<p>boolean op (Path path, Path.Op op)</p>
+<p>Overdraw有时候是因为你的UI布局存在大量重叠的部分，还有的时候是因为非必须的重叠背景。例如某个Activity有一个背景，然后里面的Layout又有自己的背景，同时子View又分别有自己的背景。仅仅是通过移除非必须的背景图片，这就能够减少大量的红色Overdraw区域，增加蓝色区域的占比。这一措施能够显著提升程序性能。</p>
 </blockquote>
+<ul>
+<li><strong>为了提升性能，我们需要尽可能减少过度绘制的发生。</strong></li>
+</ul>
+<p>在出现复杂布局的情况下，就会很容易发生过度绘制的现象。<br>
+个人认为：ConstraintLayout是一个处理复杂布局非常棒的layout；但是仅在复杂布局下才能发挥其最大的性能，因为ConstraintLayout的绘制效率比LinearLayout、FrameLayout、RelativeLayout低好多，原因可以自行体会。<br>
+<strong>结论：</strong> 复杂布局使用ConstraintLayout，简单布局不使用。</p>
+<ul>
+<li>**开发者选项的Show GPU Overdraw 能够帮助我们观察UI上的过度绘制情况。**开启这个功能，会把我们的手机屏幕上的元素标记为蓝色、绿色、淡红、深红；我们的目标就是尽量减少红色的发生。</li>
+</ul>
+<h2><span id="android的渲染原理">Android的渲染原理</span></h2>
+<p>1.<code>Resterization</code>(栅格化)：将绘制内容拆分为不同像素上显示。GPU就使用来加快栅格化操作的。</p>
+<p>2.CPU负责把UI组件（绘制内容）计算成<code>Polygons</code>(多边形)，<code>Texture</code>(纹理)，<strong>然后交给GPU进行栅格化渲染</strong>。</p>
+<p>每次将数据从CPU转移到GPU是很费事的。<br>
+OpenGL ES能够把那些需要渲染的纹理放在GPU Memory中，比较省事；</p>
+<p><strong>所以，在处理比较麻烦的动画和交互的时候，也有人用OpenGL ES来处理绘制</strong></p>
 <blockquote>
-<p>boolean op (Path path1, Path path2, Path.Op op)</p>
+<p>在Android里面那些由主题所提供的资源，例如Bitmaps，Drawables都是一起打包到统一的Texture纹理当中，然后再传递到GPU里面，这意味着每次你需要使用这些资源的时候，都是直接从纹理里面进行获取渲染的。当然随着UI组件的越来越丰富，有了更多演变的形态。例如显示图片的时候，需要先经过CPU的计算加载到内存中，然后传递给GPU进行渲染。文字的显示更加复杂，需要先经过CPU换算成纹理，然后再交给GPU进行渲染，回到CPU绘制单个字符的时候，再重新引用经过GPU渲染的内容。动画则是一个更加复杂的操作流程。</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对 path1 和 path2 执行布尔运算，运算方式由第二个参数指定，运算结果存入到path1中。</span></span><br><span class="line">path1.op(path2, Path.Op.DIFFERENCE);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对 path1 和 path2 执行布尔运算，运算方式由第三个参数指定，运算结果存入到path3中。</span></span><br><span class="line">path3.op(path1, path2, Path.Op.DIFFERENCE)</span><br></pre></td></tr></table></figure>
-<h1><span id="计算边界">计算边界</span></h1>
-<p>Path中的方法</p>
+<h2><span id="android处理ui组件更新">Android处理UI组件更新</span></h2>
+<p>Android需要将XML布局文件转为GPU能够识别并绘制的对象。<br>
+Displaylist用来处理这个事项。Displaylist持有所有将要递交给GPU绘制到屏幕上的数据信息。</p>
+<p><strong>过程：</strong><br>
+当某个View第一次需要被渲染的时候，它的DisplayList被创建，当这个View将要显示到屏幕上时，会执行GPU的绘制指令来进行渲染。<br>
+后续，如果执行移动这个View的位置等操作而需要再次绘制这个View时，我们就仅需要再执行一次绘制指令就够了。<br>
+而，如果修改了View中的某个可见组件（绘制内容发生改变），那么之前的DisplayList就不能使用了，需要重新创建一个DisplayList兵重新执行渲染指令更新到屏幕上。</p>
+<p>创建DisplayList，渲染DisplayList，更新到屏幕上等一系列操作挺耗时的，如果布局太过复杂，会导致严重的性能问题。</p>
+<p>可以使用Monitor GPU Rendering来查看渲染的表现性能，也可以通过Show GPU view updates来查看视图更新操作。还可以使用HierarchyViewer来查看视图。</p>
+<p>使布局尽量扁平化，移除非必须的UI组件能够减少Measure，Layout的计算时间。</p>
+<h2><span id="cliprectquickreject">ClipRect，QuickReject</span></h2>
+<p>针对自定义View：</p>
 <blockquote>
-<p>void computeBounds(RectF bounds,boolean exact)<br>
-bounds 测量结果会放入这个矩形<br>
-exact 是否精确测量；一般为true</p>
+<p>我们可以通过canvas.clipRect()来帮助系统识别那些可见的区域。这个方法可以指定一块矩形区域，只有在这个区域内才会被绘制，其他的区域会被忽视。<br>
+可以使用canvas.quickreject()来判断是否没和某个矩形相交，从而跳过那些非矩形区域内的绘制操作。</p>
 </blockquote>
-<h1><span id="重置路径">重置路径</span></h1>
+<h2><span id="性能调试工具">性能调试工具</span></h2>
+<ul>
+<li>**1.<code>Profile GPU Rendering</code>（GPU呈现模式分析）**打开<code>On Screen As Bars</code>（在屏幕上显示为条形图）进行调试。</li>
+</ul>
 <blockquote>
-<p>reset</p>
+<p>选择之后就能够在手机画面上看到GPU绘制图形信息。分别关于StatusBar，NavBar，激活的程序Activity区域的GPU Rending信息。<br>
+随着界面的刷新，界面上会滚动显示垂直的柱状图来表示每帧画面所需要渲染的时间，柱状图越高表示花费的渲染时间越长。</p>
 </blockquote>
+<p>中间横着的横线，代表16ms。如果我们确保每一帧花费的时间都小于16ms，就能避免出现卡顿现象。</p>
+<blockquote>
+<p>每一条柱状线都包含三部分，蓝色代表测量绘制Display List的时间，红色代表OpenGL渲染Display List所需要的时间，黄色代表CPU等待GPU处理的时间。</p>
+</blockquote>
+<h1><span id="内存问题">内存问题</span></h1>
+<h2><span id="简单说说gc">简单说说GC</span></h2>
+<p>Android系统有自动管理内存的机制。系统会根据内存中不同的内存数据类型分别执行不同的GC操作。内存块分为<code>Young Generation</code>(新生代)、<code>Old Generation</code>(老生代)、<code>Permanent Generation</code>(持久代)。</p>
+<p>了解过JVM的话，一定知道这三者的区别；最近分配的对象会存放在Young Generation区域，当这个对象在这个区域停留的时间达到一定程度，它会被移动到Old Generation，最后到Permanent Generation区域。每隔内存区域都有固定大小，此后不断有新的对象被分配到此区域，当这些对象总的大小达到这些区域的阈值的时候，会出发GC。</p>
+<p>**Android是没有标记整理的：**这意味着在GC的时候，Android不会讲内存中的资源整理为连续的内存单元。所以说，大量创建对象后，部分对象如果被回收了，今后创建的对象只能存储在较小块的零碎空白区域，导致下一次触发GC的时间就会缩短。</p>
+<p>新生代的对象通常会被快速创建并且很快被销毁回收，新生代的GC操作速度也比老生代快。</p>
+<p>在执行GC操作的时候，线程的所有操作都将被暂停，等待GC结束后，才能继续。通常GC操作不会占用太长时间，但是大量的GC就会占用帧间隔的时间了，那么在用户就可能感到明显的卡顿。</p>
+<p>频繁执行GC可能是由于：1.内存抖动，大量对象呗创建后有马上被释放。2.瞬间产生大量对象占用新生代区域，达到阈值后出发GC。</p>
+<h2><span id="内存泄露">内存泄露</span></h2>
+<p>不再使用的对象无法被GC识别，这样就导致这个对象一直留在内存当中，占用了宝贵的内存空间。使得每级Generation的内存区域可用空间变小，GC就会更容易被触发，从而引起性能问题</p>
+<p>关于内存泄漏：<a href="https://blog.csdn.net/anxpp/article/details/51325838" target="_blank" rel="noopener">https://blog.csdn.net/anxpp/article/details/51325838</a></p>
+<h2><span id="工具">工具</span></h2>
+<ul>
+<li><strong>Memory Monitor：</strong> 查看整个app所占用的内存，以及发生GC的时刻，短时间内发生大量的GC操作是一个危险的信号。</li>
+<li><strong>Allocation Tracker：</strong> 使用此工具来追踪内存的分配，前面有提到过。</li>
+<li><strong>Heap Tool：</strong> 查看当前内存快照，便于对比分析哪些对象有可能是泄漏了的，请参考前面的Case。</li>
+</ul>
+<h1><span id="电池问题">电池问题</span></h1>
+<p>电池问题不太想展开写……因为电池问题通常都是通过一些定时操作来进行处理的。比较不那么重要。</p>
+<blockquote>
+<p>Purdue University研究了最受欢迎的一些应用的电量消耗，平均只有30%左右的电量是被程序最核心的方法例如绘制图片，摆放布局等等所使用掉的，剩下的70%左右的电量是被上报数据，检查位置信息，定时检索后台广告信息所使用掉的。如何平衡这两者的电量消耗，就显得非常重要了。</p>
+</blockquote>
+<ul>
+<li><strong>应该减少唤醒屏幕的次数和持续时间；</strong></li>
+<li><strong>某些非必须马上执行的操作，例如上传歌曲，图片处理等，可以等到设备处于充电状态或者电量充足的时候才进行</strong></li>
+<li><strong>触发网络请求的操作，每次都会保持无线信号持续一段时间，我们可以把零散的网络请求打包进行一次操作，避免过多的无线信号引起的电量消耗。</strong></li>
+</ul>
 <hr>
-<p>出处：<a href="http://www.gcssloop.com/customview/Path_Basic" target="_blank" rel="noopener">http://www.gcssloop.com/customview/Path_Basic</a><br>
-<a href="http://www.gcssloop.com/customview/Path_Over" target="_blank" rel="noopener">http://www.gcssloop.com/customview/Path_Over</a></p>
+<p><strong>建议一些非必须执行的操作，可以配合Android的JobScheduler进行处理</strong></p>
+<hr>
+<p>好困了……要去睡了</p>
 
                 
 
@@ -306,13 +322,9 @@ exact 是否精确测量；一般为true</p>
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2017/03/05/Android自定义View-7/" data-toggle="tooltip" data-placement="top" title="Android自定义View——Canvas操作学习笔记">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2017/02/28/ClassLoader学习记录/" data-toggle="tooltip" data-placement="top" title="ClassLoader深入学习记录">Next Post &rarr;</a>
+                            <a href="/2018/04/13/Blog集合/" data-toggle="tooltip" data-placement="top" title="收藏的一些博文[new]">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -352,8 +364,6 @@ exact 是否精确测量；一般为true</p>
                     <div class="tags">
                        
                           <a class="tag" href="/tags/#android" title="android">android</a>
-                        
-                          <a class="tag" href="/tags/#java" title="java">java</a>
                         
                     </div>
                 </section>
@@ -408,8 +418,8 @@ exact 是否精确测量；一般为true</p>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "csming1995";
-    var disqus_identifier = "https://csming1995.github.io/2017/03/05/Android自定义View-8/";
-    var disqus_url = "https://csming1995.github.io/2017/03/05/Android自定义View-8/";
+    var disqus_identifier = "https://csming1995.github.io/2018/04/15/Android性能优化/";
+    var disqus_url = "https://csming1995.github.io/2018/04/15/Android性能优化/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
