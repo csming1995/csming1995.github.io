@@ -212,15 +212,20 @@
 
                 <h1><span id="配置环境">配置环境</span></h1>
 <p>Flutter的环境配置在此处不多说明。<br>
-本文学习Dart的过程，是在WebStorm上编码的。<br>
-Dart目前能够使用的IDE是Dart Editor（已被弃用），WebStorm，Atom。我选择了WebStorm。</p>
-<p>其配置Dart环境的方法：<a href="https://webdev-dartlang-org-dev.firebaseapp.com/guides/get-started" target="_blank" rel="noopener">https://webdev-dartlang-org-dev.firebaseapp.com/guides/get-started</a></p>
-<p>配置完成后就可以创建一个新项目开始你的编码了。</p>
+笔者在学习Dart时，是在WebStorm上编码的。Dart目前能够使用的IDE是Dart Editor（已被弃用），WebStorm，Atom。我选择了WebStorm。</p>
+<p>在WebStorm上配置Dart环境的方法：<a href="https://webdev-dartlang-org-dev.firebaseapp.com/guides/get-started" target="_blank" rel="noopener">https://webdev-dartlang-org-dev.firebaseapp.com/guides/get-started</a></p>
+<p>配置完成后就可以创建一个新的控制台项目开始学习了。</p>
 <h1><span id="hello-world">Hello World</span></h1>
 <p>一个很简单的Hello World。和Java、C++等都一样，Dart从main()函数开始执行。<br>
 此处打印了一个hello world。</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">main(<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; arguments) &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">'Hello world'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://csming1995.github.io/attach/Dart/Androider_Shaomian.pdf" alt="Hello World"></p>
+<p><img src="https://csming1995.github.io/attach/Dart/hello-world.png" alt="Hello World"></p>
+<h1><span id="数据类型">数据类型</span></h1>
+<p>根据万物皆为对象的自然法则，Dart中所有的东西都是对象，都继承于<code>Object</code>，且默认值为<code>null</code>。</p>
+<p>Dart支持：Numbers、Strings、Booleans、List、Maps这些数据类型。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">main(<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; arguments) &#123;</span><br><span class="line">  <span class="keyword">var</span> str1 = <span class="string">"Hello world"</span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">String</span> str2 = <span class="string">'Hello world'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> str3 = <span class="string">"""hello</span></span><br><span class="line"><span class="string">  world</span></span><br><span class="line"><span class="string">  """</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> str4 = <span class="string">'hello'</span> <span class="string">'world'</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">print</span>(<span class="string">"Name: $str4"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">r"\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Dart是动态类型语言<br>
+可以使用var或者类型来声明变量，而一个变量也可以被指向不同类型的对象。</p>
 
                 
 
