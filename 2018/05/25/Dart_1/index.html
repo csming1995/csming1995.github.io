@@ -18,7 +18,7 @@
         
     </title>
 
-    <link rel="canonical" href="https://csming1995.github.io/2018/05/25/untitled/">
+    <link rel="canonical" href="https://csming1995.github.io/2018/05/25/Dart_1/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -223,9 +223,28 @@
 <h1><span id="数据类型">数据类型</span></h1>
 <p>根据万物皆为对象的自然法则，Dart中所有的东西都是对象，都继承于<code>Object</code>，且默认值为<code>null</code>。</p>
 <p>Dart支持：Numbers、Strings、Booleans、List、Maps这些数据类型。</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">main(<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; arguments) &#123;</span><br><span class="line">  <span class="keyword">var</span> str1 = <span class="string">"Hello world"</span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">String</span> str2 = <span class="string">'Hello world'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> str3 = <span class="string">"""hello</span></span><br><span class="line"><span class="string">  world</span></span><br><span class="line"><span class="string">  """</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> str4 = <span class="string">'hello'</span> <span class="string">'world'</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">print</span>(<span class="string">"Name: $str4"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">r"\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Dart是动态类型语言<br>
-可以使用var或者类型来声明变量，而一个变量也可以被指向不同类型的对象。</p>
+<h2><span id="strings">Strings</span></h2>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">main(<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; arguments) &#123;</span><br><span class="line">  <span class="keyword">var</span> str1 = <span class="string">"Hello world"</span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">String</span> str2 = <span class="string">'Hello world'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> str3 = <span class="string">"""hello</span></span><br><span class="line"><span class="string">  world</span></span><br><span class="line"><span class="string">  """</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> str31 = <span class="string">'''hello</span></span><br><span class="line"><span class="string">  world</span></span><br><span class="line"><span class="string">  '''</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> str4 = <span class="string">'hello'</span> <span class="string">'world'</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">print</span>(<span class="string">"$str4"</span>);<span class="comment">//5.</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">r"\n"</span>);<span class="comment">//6.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Dart是动态类型语言。<br>
+1.可以使用var或者类型来声明变量，而一个变量也可以被指向不同类型的对象。如：str1、str2。<br>
+2.对于String类型，其值可用单引号或者双引号。若是使用双引号，则可以内嵌单引号相反亦是。（和js一样）否则需要使用<code>\</code>转移符。<br>
+3.可以使用三个单引号或三个双引号包裹多行文字。如：str3、str31。<br>
+4.相邻的字符串在编译时或被自动连接。如：str4。<br>
+5.如果要连接字符串则可以用相邻连接的方法、Java中的<code>+</code>连接。还可以用模板的方式。如代码中5.所示。利用<code>$</code>或者<code>${}</code>插入。<br>
+6.在字符串初始化时，在前面加上字符<code>r</code>可以抵消<code>\</code>的转义作用。如代码中6.所示。</p>
+<h2><span id="numbers">Numbers</span></h2>
+<p>num有两个子类型：int和double。分别表示任意长度的证书和双精度浮点数。</p>
+<h2><span id="const和final">const和final</span></h2>
+<p>声明变量时，可以使用<code>var</code>还有<code>const</code>和<code>final</code>。<code>const</code>和<code>final</code>都为常量。</p>
+<p><code>const</code>：编译时常量，只能用常量初始化<br>
+<code>final</code>：可以用变量来初始化</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">10000</span>;</span><br><span class="line"><span class="keyword">final</span> b = <span class="number">100000</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="built_in">int</span> c  = <span class="number">1000</span>;</span><br><span class="line"><span class="keyword">final</span> <span class="built_in">double</span> d = <span class="number">1000.1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> <span class="built_in">int</span> x = <span class="number">111</span>;</span><br><span class="line"><span class="keyword">final</span> <span class="built_in">int</span> y = x;</span><br></pre></td></tr></table></figure>
+<h1><span id="函数">函数</span></h1>
+<p>函数是一个Function对象。当没有指定的返回值的时候，返回<code>null</code>。<br>
+函数定义的方式如下：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span> sayHello(<span class="built_in">String</span> name) &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">"hello <span class="subst">$&#123;name&#125;</span>"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"hello"</span> + name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHello(name) &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">"hello <span class="subst">$&#123;name&#125;</span>"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"hello"</span> + name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHello(name) =&gt; <span class="string">'Hello $name'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> sayHello = (name)=&gt;<span class="string">'Hello $name!'</span>;</span><br></pre></td></tr></table></figure>
+<p>Dart的类型是可选的，所以能够用第二种方式定义。</p>
+<p>如果函数知识简单的返回一个表达式的值，则可以用第三种和第四种方式定义方式（匿名函数）。</p>
 
                 
 
@@ -329,8 +348,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "csming1995";
-    var disqus_identifier = "https://csming1995.github.io/2018/05/25/untitled/";
-    var disqus_url = "https://csming1995.github.io/2018/05/25/untitled/";
+    var disqus_identifier = "https://csming1995.github.io/2018/05/25/Dart_1/";
+    var disqus_url = "https://csming1995.github.io/2018/05/25/Dart_1/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
