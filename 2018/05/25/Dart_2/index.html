@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Android自定义View——Path操作学习笔记 - 十一月 | 深入迷雾寻找火光
+          Dart（二） - 十一月 | 深入迷雾寻找火光
         
     </title>
 
-    <link rel="canonical" href="https://csming1995.github.io/2017/03/05/Android自定义View-8/">
+    <link rel="canonical" href="https://csming1995.github.io/2018/05/25/Dart_2/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -86,16 +86,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#android" title="android">android</a>
-                            
-                              <a class="tag" href="/tags/#java" title="java">java</a>
+                              <a class="tag" href="/tags/#Dart" title="Dart">Dart</a>
                             
                         </div>
-                        <h1>Android自定义View——Path操作学习笔记</h1>
+                        <h1>Dart（二）</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Csming on
-                            2017-03-05
+                            2018-05-25
                         </span>
                     </div>
                 
@@ -212,93 +210,18 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="path简介">Path简介</span></h1>
-<p>Path封装了直线曲线构成的几何路径；<br>
-可以利用Canvas的drawPath绘制；也可以用于剪裁画布，根据路径绘制文字；也可以用于描述一个图像的轮廓；</p>
-<p>有开放和封闭路径的区别；</p>
-<h1><span id="paht常用方法">Paht常用方法</span></h1>
-<ul>
-<li>**移动起点moveTo:**移动下一次操作的起点位置</li>
-<li>**设置终点setLastPoint:**重置当前path中最后一个点位置，如果在绘制之前调用，效果和moveTo相同</li>
-<li>**连接直线lineTo:**添加上一个点到当前点之间的直线到Path</li>
-<li>**闭合路径close:**连接第一个点连接到最后一个点，形成一个闭合区域</li>
-<li>**添加内容addRect, addRoundRect, addOval, addCircle, addPath, addArc, arcTo:**添加(矩形， 圆角矩形， 椭圆， 圆， 路径， 圆弧) 到当前Path (注意addArc和arcTo的区别)</li>
-<li>**是否为空isEmpty:**判断Path是否为空</li>
-<li>**是否为矩形isRect:**判断path是否是一个矩形</li>
-<li>**替换路径set:**用新的路径替换到当前路径所有内容</li>
-<li>**偏移路径offset:**对当前路径之前的操作进行偏移(不会影响之后的操作)</li>
-<li>**贝塞尔曲线quadTo, cubicTo:**分别为二次和三次贝塞尔曲线的方法</li>
-<li>**rXxx方法rMoveTo, rLineTo, rQuadTo, rCubicTo:**不带r的方法是基于原点的坐标系(偏移量)， rXxx方法是基于当前点坐标系(偏移量)</li>
-<li>**填充模式setFillType, getFillType, isInverseFillType, toggleInverseFillType:**设置,获取,判断和切换填充模式</li>
-<li>**提示方法incReserve:**提示Path还有多少个点等待加入(这个方法貌似会让Path优化存储结构)</li>
-<li>**布尔操作(API19)op:**对两个Path进行布尔运算(即取交集、并集等操作)</li>
-<li>**计算边界computeBounds:**计算Path的边界</li>
-<li>**重置路径reset, rewind:**清除Path中的内容</li>
-<li>**reset:**不保留内部数据结构，但会保留FillType.</li>
-<li>**rewind:**会保留内部的数据结构，但不保留FillType</li>
-<li>**矩阵操作transform:**矩阵变换</li>
-</ul>
-<h1><span id="使用方法">使用方法</span></h1>
-<h2><span id="moveto-setlastpoint-lineto-和-close">moveTo、 setLastPoint、 lineTo 和 close</span></h2>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// moveTo只改变下次操作的起点</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">moveTo</span> <span class="params">(<span class="keyword">float</span> x, <span class="keyword">float</span> y)</span></span></span><br><span class="line"><span class="function"><span class="comment">// setLastPoint设置之前操作的最后一个点位置</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLastPoint</span> <span class="params">(<span class="keyword">float</span> dx, <span class="keyword">float</span> dy)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lineTo</span> <span class="params">(<span class="keyword">float</span> x, <span class="keyword">float</span> y)</span></span></span><br><span class="line"><span class="function"><span class="comment">//用于连接当前最后一个点和最初的一个点</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span> <span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<h2><span id="addxxx与arcto">addXxx与arcTo</span></h2>
-<ul>
-<li><strong>addXxx</strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一类(基本形状)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 圆形</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCircle</span> <span class="params">(<span class="keyword">float</span> x, <span class="keyword">float</span> y, <span class="keyword">float</span> radius, Path.Direction dir)</span></span></span><br><span class="line"><span class="function"><span class="comment">// 椭圆</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addOval</span> <span class="params">(RectF oval, Path.Direction dir)</span></span></span><br><span class="line"><span class="function"><span class="comment">// 矩形</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addRect</span> <span class="params">(<span class="keyword">float</span> left, <span class="keyword">float</span> top, <span class="keyword">float</span> right, <span class="keyword">float</span> bottom, Path.Direction dir)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addRect</span> <span class="params">(RectF rect, Path.Direction dir)</span></span></span><br><span class="line"><span class="function"><span class="comment">// 圆角矩形</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addRoundRect</span> <span class="params">(RectF rect, <span class="keyword">float</span>[] radii, Path.Direction dir)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addRoundRect</span> <span class="params">(RectF rect, <span class="keyword">float</span> rx, <span class="keyword">float</span> ry, Path.Direction dir)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">// path 组合path</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addPath</span> <span class="params">(Path src)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addPath</span> <span class="params">(Path src, <span class="keyword">float</span> dx, <span class="keyword">float</span> dy)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addPath</span> <span class="params">(Path src, Matrix matrix)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">// addArc直接添加一个圆弧到path中</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addArc</span> <span class="params">(RectF oval, <span class="keyword">float</span> startAngle, <span class="keyword">float</span> sweepAngle)</span></span></span><br><span class="line"><span class="function"><span class="comment">// arcTo添加一个圆弧到path，如果圆弧的起点和上次最后一个坐标点不相同，就连接两个点</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">arcTo</span> <span class="params">(RectF oval, <span class="keyword">float</span> startAngle, <span class="keyword">float</span> sweepAngle)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">arcTo</span> <span class="params">(RectF oval, <span class="keyword">float</span> startAngle, <span class="keyword">float</span> sweepAngle, <span class="keyword">boolean</span> forceMoveTo)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">## isEmpty、 isRect、isConvex、 set 和 offset</span></span><br><span class="line"><span class="function">```java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isRect</span> <span class="params">(RectF rect)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//将新的path赋值到现有path。</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span> <span class="params">(Path src)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//对path进行一段平移，它和Canvas中的translate作用很像，但Canvas作用于整个画布，而path的offset只作用于当前path</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">offset</span> <span class="params">(<span class="keyword">float</span> dx, <span class="keyword">float</span> dy)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">offset</span> <span class="params">(<span class="keyword">float</span> dx, <span class="keyword">float</span> dy, Path dst)</span></span></span><br></pre></td></tr></table></figure>
-<h1><span id="rxxx方法">rXxx方法</span></h1>
-<p>rXxx方法的坐标使用的是相对位置(基于当前点的位移)，而之前方法的坐标是绝对位置(基于当前坐标系的坐标)</p>
-<h1><span id="填充模式">填充模式</span></h1>
-<p>Paint有三种样式，“描边” “填充” 以及 “描边加填充”<br>
-给一个图形内部填充颜色，首先需要分清哪一部分是外部，哪一部分是内部</p>
-<p>Android的填充模式封装在Path中</p>
-<blockquote>
-<p>EVEN_ODD			奇偶规则<br>
-INVERSE_EVEN_ODD	反奇偶规则<br>
-WINDING			非零环绕数规则<br>
-INVERSE_WINDING	反非零环绕数规则</p>
-</blockquote>
-<ul>
-<li>**Path关于填充模式的方法</li>
-</ul>
-<blockquote>
-<p>setFillType			设置填充规则<br>
-getFillType			获取当前填充规则<br>
-isInverseFillType		判断是否是反向(INVERSE)规则<br>
-toggleInverseFillType	切换填充规则(即原有规则与反向规则之间相互切换)</p>
-</blockquote>
-<h1><span id="bool操作">Bool操作</span></h1>
-<blockquote>
-<p>DIFFERENCE			差集<br>
-REVERSE_DIFFERENCE	差集 与DIFFERENCE相反<br>
-INTERSECT			交集<br>
-UNION				并集	<br>
-XOR				异或</p>
-</blockquote>
-<ul>
-<li><strong>Path中的布尔运算方法</strong></li>
-</ul>
-<blockquote>
-<p>boolean op (Path path, Path.Op op)</p>
-</blockquote>
-<blockquote>
-<p>boolean op (Path path1, Path path2, Path.Op op)</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对 path1 和 path2 执行布尔运算，运算方式由第二个参数指定，运算结果存入到path1中。</span></span><br><span class="line">path1.op(path2, Path.Op.DIFFERENCE);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对 path1 和 path2 执行布尔运算，运算方式由第三个参数指定，运算结果存入到path3中。</span></span><br><span class="line">path3.op(path1, path2, Path.Op.DIFFERENCE)</span><br></pre></td></tr></table></figure>
-<h1><span id="计算边界">计算边界</span></h1>
-<p>Path中的方法</p>
-<blockquote>
-<p>void computeBounds(RectF bounds,boolean exact)<br>
-bounds 测量结果会放入这个矩形<br>
-exact 是否精确测量；一般为true</p>
-</blockquote>
-<h1><span id="重置路径">重置路径</span></h1>
-<blockquote>
-<p>reset</p>
-</blockquote>
-<hr>
-<p>出处：<a href="http://www.gcssloop.com/customview/Path_Basic" target="_blank" rel="noopener">http://www.gcssloop.com/customview/Path_Basic</a><br>
-<a href="http://www.gcssloop.com/customview/Path_Over" target="_blank" rel="noopener">http://www.gcssloop.com/customview/Path_Over</a></p>
+                <h1><span id="容器">容器</span></h1>
+<h2><span id="stringbuffer">StringBuffer</span></h2>
+<p>StringBuffer能够高效的构建多个字符串。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">StringBuffer</span> sb = <span class="keyword">new</span> <span class="built_in">StringBuffer</span>();</span><br><span class="line"></span><br><span class="line">sb.write(<span class="string">"11111"</span>);</span><br><span class="line">sb.writeAll([<span class="string">'222'</span>, <span class="string">'333 '</span>, <span class="string">'string '</span>, <span class="string">'444 '</span>]);</span><br><span class="line">sb..write(<span class="string">'123112'</span>)</span><br><span class="line">  ..write(<span class="string">'333'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(sb.toString());</span><br><span class="line"></span><br><span class="line">sb.clear();</span><br></pre></td></tr></table></figure>
+<h2><span id="list">List</span></h2>
+<p>List提供添加、索引、删除等方法</p>
+<p>可以用以下两种方式初始化：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> aList = <span class="keyword">new</span> <span class="built_in">List</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者简单的用List来赋值</span></span><br><span class="line"><span class="keyword">var</span> bList = [<span class="string">'xx'</span>, <span class="string">'yy'</span>];</span><br></pre></td></tr></table></figure>
+<p>List支持add、addAll、indexOf、removeAt等方法。</p>
+<p>还可以使用sort对List进行排序。但是必须定义两个对象的对比函数。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fruits.sort((a, b) =&gt; a.compareTo(b));</span><br></pre></td></tr></table></figure>
+<h2><span id="set">Set</span></h2>
 
                 
 
@@ -306,13 +229,9 @@ exact 是否精确测量；一般为true</p>
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2017/03/09/Android自定义View-9/" data-toggle="tooltip" data-placement="top" title="Android自定义View——贝塞尔曲线学习笔记">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2017/03/05/Android自定义View-7/" data-toggle="tooltip" data-placement="top" title="Android自定义View——Canvas操作学习笔记">Next Post &rarr;</a>
+                            <a href="/2018/05/25/Dart_1/" data-toggle="tooltip" data-placement="top" title="Dart——初次见面请多指教">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -351,9 +270,7 @@ exact 是否精确测量；一般为true</p>
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#android" title="android">android</a>
-                        
-                          <a class="tag" href="/tags/#java" title="java">java</a>
+                          <a class="tag" href="/tags/#Dart" title="Dart">Dart</a>
                         
                     </div>
                 </section>
@@ -408,8 +325,8 @@ exact 是否精确测量；一般为true</p>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "csming1995";
-    var disqus_identifier = "https://csming1995.github.io/2017/03/05/Android自定义View-8/";
-    var disqus_url = "https://csming1995.github.io/2017/03/05/Android自定义View-8/";
+    var disqus_identifier = "https://csming1995.github.io/2018/05/25/Dart_2/";
+    var disqus_url = "https://csming1995.github.io/2018/05/25/Dart_2/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

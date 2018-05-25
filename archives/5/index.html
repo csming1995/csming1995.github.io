@@ -209,24 +209,35 @@
 
 <div class="post-preview">
 
-    <a href="/2017/03/05/Android自定义View-7/">
+    <a href="/2017/03/09/Android自定义View-9/">
         <h2 class="post-title">
-            Android自定义View——Canvas操作学习笔记
+            Android自定义View——贝塞尔曲线学习笔记
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            Canvas的基本操作
-位移（translate）
-translate是坐标系的移动，可以为图形绘制选择一个合适的坐标系
-1234567891011// 省略了创建画笔的代码// 在坐标原点绘制一个黑色圆形mPaint.setColor(Color.BLACK);canvas.translate(200,200);canvas.drawCircle(0,0,100,mPaint);// 在坐......
+            贝塞尔曲线
+贝塞尔曲线奠定了计算机绘图的基础(它可以将任何复杂的图形用精确的数学语言进行描述)
+有开放和封闭路径的区别；
+理解贝塞尔曲线的原理
+贝塞尔曲线是由一系列点来控制曲线状态的
+
+**数据点：**确定曲线的起始和结束位置
+**控制点：**确定曲线的弯曲程度
+
+一阶曲线
+一阶曲线是没有控制点的，仅有两个数据点(A 和 B)，最终效果一个线段；类似于lineTo；
+生成过程：
+
+二阶曲线
+......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
-            2017-03-05
+            2017-03-09
         </p>
         <div class="tags">
             
@@ -259,6 +270,39 @@ Paht常用方法
 **移动起点moveTo:**移动下一次操作的起点位置
 **设置终点setLastPoint:**重置当前path中最后一个点位置，如果在绘制之前调用，效果和moveTo相同
 **......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-05
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#android" title="android">android</a>
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/05/Android自定义View-7/">
+        <h2 class="post-title">
+            Android自定义View——Canvas操作学习笔记
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Canvas的基本操作
+位移（translate）
+translate是坐标系的移动，可以为图形绘制选择一个合适的坐标系
+1234567891011// 省略了创建画笔的代码// 在坐标原点绘制一个黑色圆形mPaint.setColor(Color.BLACK);canvas.translate(200,200);canvas.drawCircle(0,0,100,mPaint);// 在坐......
         </div>
     </a>
     
@@ -535,40 +579,6 @@ PS：其中字母表示通道类型，数值表示该类型用多少位二进制
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2016/12/17/Android自定义View-0/">
-        <h2 class="post-title">
-            Android自定义View——坐标系学习笔记
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            屏幕坐标系与数学坐标系
-移动设备一般定义屏幕左上角为坐标原点；向右为x轴增大方向，向下为y轴增大方向
-View的坐标系
-View的坐标系统是相对于父空间而言的
-1234getTop();       //获取子View左上角距父View顶部的距离getLeft();      //获取子View左上角距父View左侧的距离getBottom();    //获取子View右下角距父View顶......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2016-12-17
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -651,6 +661,8 @@ View的坐标系统是相对于父空间而言的
             
         
             
+            <a href="/tags/#Dart" title="Dart" rel="2">Dart</a>
+            
         
     </div>
 </section>
@@ -722,6 +734,10 @@ View的坐标系统是相对于父空间而言的
     <ul>
       
         <li>
+          <a href="/2018/05/25/Dart_2/">Dart（二）</a>
+        </li>
+      
+        <li>
           <a href="/2018/05/25/Dart_1/">Dart——初次见面请多指教</a>
         </li>
       
@@ -735,10 +751,6 @@ View的坐标系统是相对于父空间而言的
       
         <li>
           <a href="/2017/11/26/StatusLayout/">StatusLayout</a>
-        </li>
-      
-        <li>
-          <a href="/2017/07/29/实习日记1/">第一次正式成为代码工实习</a>
         </li>
       
     </ul>
@@ -787,7 +799,7 @@ View的坐标系统是相对于父空间而言的
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
