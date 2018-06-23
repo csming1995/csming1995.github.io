@@ -350,36 +350,6 @@ eg：
 
 <div class="post-preview">
 
-    <a href="/2017/04/15/python学习日记06/">
-        <h2 class="post-title">
-            我与Py的那些事——高级特性
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            切片
-取一个list或tuple的部分元素
-1234567891011121314L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack']# ---------------------------------------L[0:3] L[1:3] # 方法1L[:3] # 方法2L[-2:] # 方法3L[:10:2] # 前10个数中每2个取1个L[......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-04-15
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#python" title="python">python</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
     <a href="/2017/04/15/python学习日记07/">
         <h2 class="post-title">
             Python函数式编程
@@ -420,18 +390,17 @@ eg：
 
 <div class="post-preview">
 
-    <a href="/2017/04/15/python学习日记04/">
+    <a href="/2017/04/15/python学习日记06/">
         <h2 class="post-title">
-            我与Py的那些事——条件判断
+            我与Py的那些事——高级特性
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            条件判断
-12345678if &lt;条件判断1&gt;:    &lt;执行1&gt;elif &lt;条件判断2&gt;:    &lt;执行2&gt;elif &lt;条件判断3&gt;:    &lt;执行3&gt;else:    &lt;执行4&gt;
-eg:
-1234567age = 20if age &gt;= 6:    print('teenager')elif age......
+            切片
+取一个list或tuple的部分元素
+1234567891011121314L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack']# ---------------------------------------L[0:3] L[1:3] # 方法1L[:3] # 方法2L[-2:] # 方法3L[:10:2] # 前10个数中每2个取1个L[......
         </div>
     </a>
     
@@ -493,6 +462,48 @@ Python可以处理任意大小的整数，包括负整数（略）
 
 <div class="post-preview">
 
+    <a href="/2017/04/15/python学习日记05/">
+        <h2 class="post-title">
+            我与Py的那些事——函数
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            调用函数
+Python内置了很多函数，可直接调用
+调用一个函数，要知道函数的名称和参数；
+eg：
+123abs(100)abs(-20)abs(12.34)
+如果传入的参数不正确，则会报错TypeError
+
+一些常用函数
+
+max()可以传入任意多参数，计算最大值
+数据类型转换：
+int() float() str() bool()
+
+
+函数名，其实就是一个指向函数对象的引用，可以将函数名......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-04-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#python" title="python">python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2017/04/15/python学习日记03/">
         <h2 class="post-title">
             我与Py的那些事——list与tuple
@@ -525,29 +536,18 @@ list是Python内置的数据类型；是一种有序的集合，可以随时添�
 
 <div class="post-preview">
 
-    <a href="/2017/04/15/python学习日记05/">
+    <a href="/2017/04/15/python学习日记04/">
         <h2 class="post-title">
-            我与Py的那些事——函数
+            我与Py的那些事——条件判断
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            调用函数
-Python内置了很多函数，可直接调用
-调用一个函数，要知道函数的名称和参数；
-eg：
-123abs(100)abs(-20)abs(12.34)
-如果传入的参数不正确，则会报错TypeError
-
-一些常用函数
-
-max()可以传入任意多参数，计算最大值
-数据类型转换：
-int() float() str() bool()
-
-
-函数名，其实就是一个指向函数对象的引用，可以将函数名......
+            条件判断
+12345678if &lt;条件判断1&gt;:    &lt;执行1&gt;elif &lt;条件判断2&gt;:    &lt;执行2&gt;elif &lt;条件判断3&gt;:    &lt;执行3&gt;else:    &lt;执行4&gt;
+eg:
+1234567age = 20if age &gt;= 6:    print('teenager')elif age......
         </div>
     </a>
     
