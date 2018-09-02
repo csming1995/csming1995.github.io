@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          我与Py的那些事——条件判断 - 十一月 | 深入迷雾寻找火光
+          JavaScript——BOM - 十一月 | 深入迷雾寻找火光
         
     </title>
 
-    <link rel="canonical" href="https://csming1995.github.io/2017/04/15/python学习日记04/">
+    <link rel="canonical" href="https://csming1995.github.io/2018/08/27/JS_BOM/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -86,14 +86,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#python" title="python">python</a>
+                              <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
                             
                         </div>
-                        <h1>我与Py的那些事——条件判断</h1>
+                        <h1>JavaScript——BOM</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Csming on
-                            2017-04-15
+                            2018-08-27
                         </span>
                     </div>
                 
@@ -210,39 +210,95 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="条件判断">条件判断</span></h1>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> &lt;条件判断<span class="number">1</span>&gt;:</span><br><span class="line">    &lt;执行<span class="number">1</span>&gt;</span><br><span class="line"><span class="keyword">elif</span> &lt;条件判断<span class="number">2</span>&gt;:</span><br><span class="line">    &lt;执行<span class="number">2</span>&gt;</span><br><span class="line"><span class="keyword">elif</span> &lt;条件判断<span class="number">3</span>&gt;:</span><br><span class="line">    &lt;执行<span class="number">3</span>&gt;</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    &lt;执行<span class="number">4</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>eg:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">age = <span class="number">20</span></span><br><span class="line"><span class="keyword">if</span> age &gt;= <span class="number">6</span>:</span><br><span class="line">    print(<span class="string">'teenager'</span>)</span><br><span class="line"><span class="keyword">elif</span> age &gt;= <span class="number">18</span>:</span><br><span class="line">    print(<span class="string">'adult'</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">'kid'</span>)</span><br></pre></td></tr></table></figure>
-<hr>
-<ul>
-<li><strong>然后有一点，就是利用input()输入时，输入默认为str类型</strong><br>
-<strong>所以输入后需要转型</strong></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = input()</span><br><span class="line">birth = int(s)</span><br></pre></td></tr></table></figure>
-<p>int()函数会判断参数是否是合法数字</p>
-<h1><span id="循环">循环</span></h1>
-<p>循环有两种方式，for和while</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> ...</span><br><span class="line"></span><br><span class="line">sum = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]:</span><br><span class="line">	sum = sum + x</span><br><span class="line">print(sum)</span><br><span class="line"></span><br><span class="line">list(range(<span class="number">5</span>))</span><br><span class="line">sum = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">101</span>)</span><br><span class="line">	sum = sum + x</span><br><span class="line">print(sum)</span><br><span class="line"><span class="comment"># --------------------------------------</span></span><br><span class="line">sum = <span class="number">0</span></span><br><span class="line">n = <span class="number">99</span></span><br><span class="line"><span class="keyword">while</span> n &gt; <span class="number">0</span>:</span><br><span class="line">	sum = sum + n</span><br><span class="line">	n = n <span class="number">-2</span></span><br><span class="line">print(sum)</span><br></pre></td></tr></table></figure>
-<h1><span id="break与continue">break与continue</span></h1>
-<p>break语句可以提前退出循环<br>
-通过continue语句，跳过当前的这次循环，直接开始下一次循环</p>
-<hr>
-<p>参考资料：<a href="http://www.liaoxuefeng.com/" target="_blank" rel="noopener">http://www.liaoxuefeng.com/</a></p>
+                <h1><span id="window">Window</span></h1>
+<p>BOM的核心对象是window，其表示浏览器的一个实例。在浏览器中，window既作为JavaScript访问浏览器窗口的一个接口，又是ECMAScript规定的Global对象。</p>
+<h2><span id="全局作用域">全局作用域</span></h2>
+<p>作为Global对象角色。</p>
+<p><strong>1.在全局作用域中定义的变量，函数等，都自动归在window对象名下。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = <span class="number">29</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayAge</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.age);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(<span class="built_in">window</span>.age);</span><br><span class="line">sayAge();</span><br><span class="line"><span class="built_in">window</span>.sayAge();</span><br></pre></td></tr></table></figure>
+<p><strong>2.在window上定义的属性可以被delete，而全局变量不能被delete；</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = <span class="number">29</span>;</span><br><span class="line"><span class="built_in">window</span>.color = <span class="string">"red"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> <span class="built_in">window</span>.age;<span class="comment">//false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> <span class="built_in">window</span>.color;<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<h2><span id="窗口关系及框架">窗口关系及框架</span></h2>
+<p>框架：Frame</p>
+<p>**1.若页面中包含框架，则每个框架都拥有自己的window对象，且保存在frames集合中。**在frames集合中，可以通过数值索引（从0开始）或者框架名称来访问相应的window对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.frames[<span class="number">0</span>]</span><br><span class="line"><span class="built_in">window</span>.frames[<span class="string">"topFrame"</span>]</span><br><span class="line">frames[<span class="number">0</span>]</span><br><span class="line">frames[<span class="string">"topFrame"</span>]</span><br></pre></td></tr></table></figure>
+<p>另外，还有一个top对象，用来指向最高层的框架，也就是浏览器窗口。使用它可以确保一个框架中正确而访问另一个框架。</p>
+<p>而与top相对的另一个window对象是parent。就是当前框架的父框架。嗯。</p>
+<h2><span id="窗口位置">窗口位置</span></h2>
+<p><strong>screenLeft，screenTop；screenX，screenY</strong></p>
+<p>IE、Safari、Opera、Chrome提供screenLeft、screenTop<br>
+Firefox提供screenX、screenY。<br>
+故，需要用到窗口位置的值时，需要如此调用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> leftPos (<span class="keyword">typeof</span> <span class="built_in">window</span>.screenLeft == <span class="string">"number"</span>) ? <span class="built_in">window</span>.screenLeft: <span class="built_in">window</span>.screenX;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> topPos (<span class="keyword">typeof</span> <span class="built_in">window</span>.screenTop == <span class="string">"number"</span>) ? <span class="built_in">window</span>.screenTop: <span class="built_in">window</span>.screenY;</span><br></pre></td></tr></table></figure>
+<p>IE、Opera、Chrome存储的是从左边和上边到由window对象表示的页面可见区域的距离。<br>
+而Firefox、Safari中存储的是浏览器窗口相对于整个屏幕的坐标值。</p>
+<p><strong>移动窗口</strong></p>
+<p>moveTo()，moveBy()可以将窗口精确移动到一个新的位置。</p>
+<h2><span id="窗口大小">窗口大小</span></h2>
+<p>IE9+、Firefox、Safari、Opera、Chrome提供了innerWidth、innerHeight、outerWidth、outerHeight。</p>
+<p>**在IE9+、Firefox、Safari中，outerWidth、outerHeight返回浏览器窗口本身的尺寸，**无论是从最外层的对象还是从某个框架访问，都是窗口本身的大小。</p>
+<p><strong>而Opera的outerWidth、outerHeight表示页面视图区域的大小</strong><br>
+而innerWidth和innerHeight表示该容器中页面试图去的大小（减去边框）。</p>
+<p><strong>Chrome中的outerWidth、outerHeight返回相同的值，表示视图大小</strong></p>
+<p>IE、Firefox、Safari、Opera、Chrome都提供了document.documentElement.clientWidth和document.documentElement.clientHeight保存页面窗口的信息。而这些属性在IE6中，只有在标准模式下才生效。故需要通过document.body.clientWidth和document.body.clientHeight获取。</p>
+<p>故，需要取得页面视口的大小需要这样操作：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pageWidth = <span class="built_in">window</span>.innerWidth, pageHeight = <span class="built_in">window</span>.innerHeight;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> pageWidth != <span class="string">"number"</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="built_in">document</span>,compatMode == <span class="string">"CSS1Compat"</span>) &#123; <span class="comment">//判断是否处在标准模式</span></span><br><span class="line">    pageWidth = <span class="built_in">document</span>.documentElement.clientWidth;</span><br><span class="line">    pageHeight = <span class="built_in">document</span>.documentElement.clientHeight;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    pageWidth = <span class="built_in">document</span>.body.clientWidth;</span><br><span class="line">    pageHeight = <span class="built_in">document</span>.body.clientHeight;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>resizeTo()和resizeBy()可以调整浏览器窗口大小。</strong></p>
+<h2><span id="导航和打开窗口">导航和打开窗口</span></h2>
+<p><strong>使用window.open()方法可以导航到一个特定的url，也可以打开一个新的浏览器窗口。这个方法接收：要加载的url、窗口目标、一个特性字符串、一个表示新页面是否取代浏览器历史记录中当前加载页面的布尔值</strong></p>
+<p>**第二个参数一般是框架，或者：<code>_self</code>、<code>_parent</code>、<code>_top</code>、<code>_blank</code>：**若给window.open()传递的第二个参数不是已经存在的窗口或框架，则该方法会根据在第三个参数传入的字符串创建一个新窗口或者新标签页。若没有传入第三个参数，则打开一个带有全部默认设置的新窗口。</p>
+<p><strong>第三个参数是一个逗号分隔的设置字符串，表示在新窗口中都有哪些特性</strong></p>
+<blockquote>
+<p>fullscreen: yes/no 表示浏览器窗口是否最大化，仅限IE<br>
+height 数值 表示新窗口的高度，不小于100<br>
+left 数值 表示新窗口的左坐标，不能为负值<br>
+location yes/no 表示是否在浏览器显示地址栏<br>
+menubar yes/no 表示是否在浏览器中显示菜单<br>
+resizable yes/no 表示是否可以通过拖动浏览器的边框改变其大小<br>
+scrollbars yes/no 表示若内容在视口中显示不下，是否允许滚动<br>
+status yes/no 表示是否在浏览器中显示状态栏<br>
+toolbar yes/no 表示是否在浏览器中显示工具栏<br>
+top 数值 表示新窗口的上坐标，不能为复制<br>
+width 数值 表示新窗口的宽度，不小于100</p>
+</blockquote>
+<h2><span id="间歇调用和超时调用">间歇调用和超时调用</span></h2>
+<p>js是单线程语言，但允许设置超时值和间歇时间值来调度代码在特定的时刻执行。<code>设置超时值</code>，是在指定时间过后执行代码，而<code>设置间歇时间值</code>则是每隔一段时间执行一次代码。</p>
+<p>**超时，需要调用window的setTimeout()方法：**接收两个参数，要执行的代码和时间。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="string">"alert('Hello world!')"</span>, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">'hello world!'</span>)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+<p>setTimeout()方法会返回一个超时调用id，该id可以被用来取消尚未执行的超市调用方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clearTimeout(id)</span><br></pre></td></tr></table></figure>
+<p><strong>间歇调用，需要使用setInterval方法</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">setInterval(<span class="string">"alert('Hello world!')"</span>, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">'hello world!'</span>)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+<p>间歇调用也返回一个间歇调用id，使用方法同演示调用嗯。</p>
+<h2><span id="系统对话框">系统对话框</span></h2>
+<p>浏览器通过alert()、confirm()、prompt()方法可以调用系统对话框向用户显示消息。其外观由系统及浏览器设置决定。</p>
+<p>这个感觉比较简单，略过不写了。</p>
+<h1><span id="location对象">location对象</span></h1>
+<p><strong>location提供了与当前窗口中加载的文档相关的信息，且提供了一些导航功能。</strong></p>
+<p>location既是window对象的属性，又是document对象的属性。</p>
+<p>location的属性如下：</p>
+<blockquote>
+<p>hash “#contents” 返回URL中的hash，如果URL中不包含hash则返回空字符转<br>
+host <code>www.wrox.com:80</code> 返回服务器名称和端口号<br>
+hostname <code>www.wrox.com</code> 返回服务器名称<br>
+href <code>http://www.wrox.com</code> 返回加载页面的完整URL<br>
+pathname “/wileyCDA” 返回URL中的目录和文件名<br>
+port “8080” 返回端口号<br>
+protocal “http:” 返回协议<br>
+search “?p=javascript” 返回URL查询的字符串</p>
+</blockquote>
+<!-- ## 查询字符串参数
 
+ -->
                 
 
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2017/04/15/python学习日记02/" data-toggle="tooltip" data-placement="top" title="我与Py的那些事——Python基础">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2017/04/15/python学习日记05/" data-toggle="tooltip" data-placement="top" title="我与Py的那些事——函数">Next Post &rarr;</a>
+                            <a href="/2018/06/23/游记_杭州/" data-toggle="tooltip" data-placement="top" title="去杭州后的第五天">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -281,7 +337,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#python" title="python">python</a>
+                          <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
                         
                     </div>
                 </section>
@@ -336,8 +392,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "csming1995";
-    var disqus_identifier = "https://csming1995.github.io/2017/04/15/python学习日记04/";
-    var disqus_url = "https://csming1995.github.io/2017/04/15/python学习日记04/";
+    var disqus_identifier = "https://csming1995.github.io/2018/08/27/JS_BOM/";
+    var disqus_url = "https://csming1995.github.io/2018/08/27/JS_BOM/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
