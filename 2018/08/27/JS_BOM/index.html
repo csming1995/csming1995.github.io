@@ -287,9 +287,47 @@ port “8080” 返回端口号<br>
 protocal “http:” 返回协议<br>
 search “?p=javascript” 返回URL查询的字符串</p>
 </blockquote>
-<!-- ## 查询字符串参数
+<h2><span id="查询字符串参数">查询字符串参数</span></h2>
+<p>location.search返回url中从问好到url末尾的所有内容。</p>
+<h2><span id="位置操作">位置操作</span></h2>
+<p>location可以通过多种方式改变浏览器的位置。</p>
+<p>**1.assign()方法：**该方法可以立即打开新url，并且在浏览器的历史记录中生成一条记录。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location.assign(<span class="string">"http://www.wrox.com"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 同以下两种方式</span></span><br><span class="line"><span class="built_in">window</span>.location = <span class="string">"http://www.wrox.com"</span>;</span><br><span class="line">location.href = <span class="string">"http://www.wrox.com"</span>;</span><br></pre></td></tr></table></figure>
+<p>**2.replace()方法：**不会在历史记录中生成一条记录</p>
+<p>**3.reload()方法：**重新加载当前显示的页面。如果调用reload()时不传递任何参数，页面就会以最有效的方式重新加载。</p>
+<h1><span id="navigator对象">navigator对象</span></h1>
+<p>navigator对象用于识别客户端浏览器的事实标准。其属性如下：</p>
+<blockquote>
+<p>appCodeName 浏览器的名称，通常是Mozilla<br>
+appMinorVersion 此版本信息<br>
+appName 完整的浏览器名称<br>
+appVersion 浏览器的版本。<br>
+buildID 浏览器编译版本<br>
+cookieEnabled 是否启用cookie<br>
+cpuClass 客户端计算机中使用的CPU类型<br>
+javaEnabled() 浏览器中是否启用了java<br>
+lauguage 浏览器的主语言<br>
+mimeTypes 在浏览器中注册的MIME类型数组<br>
+onLine 是否连接到因特网<br>
+oscpu 客户端计算机的操作系统或使用的cpu<br>
+Platform 浏览器所在的系统平台<br>
+plugins 浏览器中安装的插件信息的数组<br>
+preference() 设置用户的首选项<br>
+product 产品名称<br>
+productSub 关于产品的次要信息<br>
+registerContentHandler() 针对特定的协议将第一个站点注册为处理程序<br>
+systemLanguage 操作系统的语言<br>
+useraAgent 浏览器的用户代理字符串<br>
+userLanguage 操作系统的默认语言<br>
+userProfile 借以访问用户个人信息的对象<br>
+wendor 浏览器的品牌<br>
+vendorSub 有关供应商的次要信息</p>
+</blockquote>
+<h2><span id="检测插件">检测插件</span></h2>
+<p>使用plugins数组检查插件。</p>
+<p>该数组每一项都包含：name、description、filename、length。<br>
+length指的是插件所处理的MIME类型数量。</p>
 
- -->
                 
 
                 <hr>
