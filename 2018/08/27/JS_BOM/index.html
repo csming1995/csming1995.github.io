@@ -220,7 +220,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = <span class="number">29</span>;</span><br><span class="line"><span class="built_in">window</span>.color = <span class="string">"red"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> <span class="built_in">window</span>.age;<span class="comment">//false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> <span class="built_in">window</span>.color;<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
 <h2><span id="窗口关系及框架">窗口关系及框架</span></h2>
 <p>框架：Frame</p>
-<p>**1.若页面中包含框架，则每个框架都拥有自己的window对象，且保存在frames集合中。**在frames集合中，可以通过数值索引（从0开始）或者框架名称来访问相应的window对象。</p>
+<p><strong>1.若页面中包含框架，则每个框架都拥有自己的window对象，且保存在frames集合中。</strong> 在frames集合中，可以通过数值索引（从0开始）或者框架名称来访问相应的window对象。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.frames[<span class="number">0</span>]</span><br><span class="line"><span class="built_in">window</span>.frames[<span class="string">"topFrame"</span>]</span><br><span class="line">frames[<span class="number">0</span>]</span><br><span class="line">frames[<span class="string">"topFrame"</span>]</span><br></pre></td></tr></table></figure>
 <p>另外，还有一个top对象，用来指向最高层的框架，也就是浏览器窗口。使用它可以确保一个框架中正确而访问另一个框架。</p>
 <p>而与top相对的另一个window对象是parent。就是当前框架的父框架。嗯。</p>
@@ -236,7 +236,7 @@ Firefox提供screenX、screenY。<br>
 <p>moveTo()，moveBy()可以将窗口精确移动到一个新的位置。</p>
 <h2><span id="窗口大小">窗口大小</span></h2>
 <p>IE9+、Firefox、Safari、Opera、Chrome提供了innerWidth、innerHeight、outerWidth、outerHeight。</p>
-<p>**在IE9+、Firefox、Safari中，outerWidth、outerHeight返回浏览器窗口本身的尺寸，**无论是从最外层的对象还是从某个框架访问，都是窗口本身的大小。</p>
+<p><strong>在IE9+、Firefox、Safari中，outerWidth、outerHeight返回浏览器窗口本身的尺寸，</strong> 无论是从最外层的对象还是从某个框架访问，都是窗口本身的大小。</p>
 <p><strong>而Opera的outerWidth、outerHeight表示页面视图区域的大小</strong><br>
 而innerWidth和innerHeight表示该容器中页面试图去的大小（减去边框）。</p>
 <p><strong>Chrome中的outerWidth、outerHeight返回相同的值，表示视图大小</strong></p>
@@ -246,7 +246,7 @@ Firefox提供screenX、screenY。<br>
 <p><strong>resizeTo()和resizeBy()可以调整浏览器窗口大小。</strong></p>
 <h2><span id="导航和打开窗口">导航和打开窗口</span></h2>
 <p><strong>使用window.open()方法可以导航到一个特定的url，也可以打开一个新的浏览器窗口。这个方法接收：要加载的url、窗口目标、一个特性字符串、一个表示新页面是否取代浏览器历史记录中当前加载页面的布尔值</strong></p>
-<p>**第二个参数一般是框架，或者：<code>_self</code>、<code>_parent</code>、<code>_top</code>、<code>_blank</code>：**若给window.open()传递的第二个参数不是已经存在的窗口或框架，则该方法会根据在第三个参数传入的字符串创建一个新窗口或者新标签页。若没有传入第三个参数，则打开一个带有全部默认设置的新窗口。</p>
+<p><strong>第二个参数一般是框架，或者：<code>_self</code>、<code>_parent</code>、<code>_top</code>、<code>_blank</code>：</strong> 若给window.open()传递的第二个参数不是已经存在的窗口或框架，则该方法会根据在第三个参数传入的字符串创建一个新窗口或者新标签页。若没有传入第三个参数，则打开一个带有全部默认设置的新窗口。</p>
 <p><strong>第三个参数是一个逗号分隔的设置字符串，表示在新窗口中都有哪些特性</strong></p>
 <blockquote>
 <p>fullscreen: yes/no 表示浏览器窗口是否最大化，仅限IE<br>
@@ -263,7 +263,7 @@ width 数值 表示新窗口的宽度，不小于100</p>
 </blockquote>
 <h2><span id="间歇调用和超时调用">间歇调用和超时调用</span></h2>
 <p>js是单线程语言，但允许设置超时值和间歇时间值来调度代码在特定的时刻执行。<code>设置超时值</code>，是在指定时间过后执行代码，而<code>设置间歇时间值</code>则是每隔一段时间执行一次代码。</p>
-<p>**超时，需要调用window的setTimeout()方法：**接收两个参数，要执行的代码和时间。</p>
+<p><strong>超时，需要调用window的setTimeout()方法：</strong> 接收两个参数，要执行的代码和时间。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="string">"alert('Hello world!')"</span>, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">'hello world!'</span>)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
 <p>setTimeout()方法会返回一个超时调用id，该id可以被用来取消尚未执行的超市调用方法。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clearTimeout(id)</span><br></pre></td></tr></table></figure>
@@ -288,13 +288,13 @@ protocal “http:” 返回协议<br>
 search “?p=javascript” 返回URL查询的字符串</p>
 </blockquote>
 <h2><span id="查询字符串参数">查询字符串参数</span></h2>
-<p>location.search返回url中从问好到url末尾的所有内容。</p>
+<p>location.search返回url中从问号到url末尾的所有内容。</p>
 <h2><span id="位置操作">位置操作</span></h2>
 <p>location可以通过多种方式改变浏览器的位置。</p>
-<p>**1.assign()方法：**该方法可以立即打开新url，并且在浏览器的历史记录中生成一条记录。</p>
+<p><strong>1.assign()方法：</strong> 该方法可以立即打开新url，并且在浏览器的历史记录中生成一条记录。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location.assign(<span class="string">"http://www.wrox.com"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 同以下两种方式</span></span><br><span class="line"><span class="built_in">window</span>.location = <span class="string">"http://www.wrox.com"</span>;</span><br><span class="line">location.href = <span class="string">"http://www.wrox.com"</span>;</span><br></pre></td></tr></table></figure>
-<p>**2.replace()方法：**不会在历史记录中生成一条记录</p>
-<p>**3.reload()方法：**重新加载当前显示的页面。如果调用reload()时不传递任何参数，页面就会以最有效的方式重新加载。</p>
+<p><strong>2.replace()方法：</strong> 不会在历史记录中生成一条记录</p>
+<p><strong>3.reload()方法：</strong> 重新加载当前显示的页面。如果调用reload()时不传递任何参数，页面就会以最有效的方式重新加载。</p>
 <h1><span id="navigator对象">navigator对象</span></h1>
 <p>navigator对象用于识别客户端浏览器的事实标准。其属性如下：</p>
 <blockquote>
@@ -327,6 +327,13 @@ vendorSub 有关供应商的次要信息</p>
 <p>使用plugins数组检查插件。</p>
 <p>该数组每一项都包含：name、description、filename、length。<br>
 length指的是插件所处理的MIME类型数量。</p>
+<h2><span id="注册处理程序">注册处理程序</span></h2>
+<p>Firefox2为navigator对象新增了registerContentHandler()和registerProtocolHandler()方法。用于让一个站点指明它可以处理特定类型的信息。</p>
+<h1><span id="screen对象">screen对象</span></h1>
+<p>一个对撸码没什么用的对象，多用于表示浏览器的能力（宽高、颜色位数等）。啊，就不提了。</p>
+<h1><span id="history对象">history对象</span></h1>
+<p>用于保存用户上网的历史记录。对于每个浏览器窗口、每个标签页、每个框架，都有其自己的history对象与特定的window相关联。</p>
+<p><strong>使用history的go()、back()、forward()方法可以使页面前进或后退</strong></p>
 
                 
 
