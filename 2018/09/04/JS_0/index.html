@@ -238,8 +238,31 @@
 <h1><span id="语法">语法</span></h1>
 <h2><span id="变量">变量</span></h2>
 <p>ECMAScript的变量是松散类型的，即：可以用来保存任何类型的数据。变量只是一个占位符嗯。</p>
-<p><strong>1.声明变量：</strong></p>
+<p>**1.声明变量：**使用var操作符声明变量。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message;</span><br></pre></td></tr></table></figure>
+<p>以上声明的<code>message</code>变量可以用来保存任何值。以上代码中，<code>message</code>没有初始化，故保存了一个特殊值：undefined</p>
+<p>**2.赋值：**由于变量知识一个占位符。故，可以赋予任何值，嗯。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message = <span class="string">"hi"</span>;</span><br><span class="line">message = <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>3.使用var定义的变量会使该变量成为定义该变量的作用域中的局部变量。</strong></p>
+<p><strong>4.而不使用var，直接定义的变量，将会成为全局变量：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  message = <span class="string">"hi"</span></span><br><span class="line">&#125;</span><br><span class="line">test()</span><br><span class="line">alert(message)</span><br></pre></td></tr></table></figure>
+<p><strong>5.可以使用一条语句定义多个变量。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message = <span class="string">"hi"</span>,</span><br><span class="line">    found = <span class="literal">false</span>,</span><br><span class="line">    age = <span class="number">29</span>;</span><br></pre></td></tr></table></figure>
+<h2><span id="数据类型">数据类型</span></h2>
+<p>ECMAScript中有五种简单数据类型：<code>Undefined</code>、<code>Null</code>、<code>Boolean</code>、<code>Number</code>、<code>String</code>,以及复杂数据类型：<code>Object</code>。</p>
+<p><strong>Obejct的本质是一组无序的key-value组成的。</strong></p>
+<h3><span id="typeof操作符">typeof操作符</span></h3>
+<p>typeof用于检测给定变量的数据类型。</p>
+<blockquote>
+<p>“undefined” 这个值未定义<br>
+&quot;boolean&quot; 这个值是布尔值<br>
+&quot;string&quot; 这个值是字符串<br>
+&quot;number&quot; 这个值是数值<br>
+&quot;object&quot; 这个值是对象或null<br>
+&quot;function&quot; 这个值是函数</p>
+</blockquote>
+<p>eg:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message = <span class="string">"some string"</span></span><br><span class="line">alert(<span class="keyword">typeof</span> message) <span class="comment">// "string"</span></span><br><span class="line">alert(<span class="keyword">typeof</span>(message))<span class="comment">// "string"</span></span><br><span class="line">alert(<span class="keyword">typeof</span> <span class="number">95</span>) <span class="comment">// "number"</span></span><br></pre></td></tr></table></figure>
 
                 
 
