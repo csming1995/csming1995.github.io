@@ -215,20 +215,16 @@
 <p>ECMAScript和Web浏览器没什么太大的关系，ECMA包含了：语法、类型、语句、关键字、保留字、操作符、对象。</p>
 <p>类比于Java的话，就是Java的基础语法，即：java se部分，不包含j2ee,java me的部分。</p>
 <h1><span id="在html中使用javascript">在HTML中使用javascript</span></h1>
-<h2><span id="元素h2-该标签在html-401中定义了6个属性async-可选用于告诉浏览器立即下载文件charset-可选表示通过src属性指定的代码的字符集defer-可选表示脚本可以延迟到文档完全被解析和显示之后再执行-只对外部脚本文件有用-language-已废弃表示使用的脚本语言src-可选表示包含执行代码的外部文件type-可选textjavascript等-使用script的方法1在页面中嵌入javascript代码figure-classhighlight-jstabletrtd-classgutterprespan-classline1spanbrspan-classline2spanbrspan-classline3spanbrspan-classline4spanbrspan-classline5spanbrpretdtd-classcodeprespan-classlineltscript-typespan-classstringtextjavascriptspangtspanbrspan-classlinespan-classfunctionspan-classkeywordfunctionspan-span-classtitlesayhispanspan-classparamsspan-span123spanbrspan-classline-alertspan-classstringhispanspanbrspan-classline125spanbrspan-classlineltspan-classregexpscriptgtspanspanbrpretdtrtablefigurep包含在codeltscriptgtcode标签中的代码将会被从上到下依次解释-pp当解释器对codeltscriptgtcode标签元素内部的所有代码求值完毕之前页面中的其余内容就不会被浏览器加载嗯-ppstrong2包含外部javascript文件strongpfigure-classhighlight-jstabletrtd-classgutterprespan-classline1spanbrspan-classline2spanbrpretdtd-classcodeprespan-classlineltscript-typespan-classstringtextjavascriptspan-srcspan-classstringexamplejsspangtspanbrspan-classlineltspan-classregexpscriptgtspanspanbrpretdtrtablefigureh2标签的位置h2p一般所有codeltscriptgtcode标签都应该被放在页面的codeltheadgtcode里-这样会使得页面在javascript代码加载完成后才会执行-这样就会非常卡啊嗯-pp为了避免这个问题现在一般将javascript的引用放在codeltbodygtcode标签中的页面内容的最后面-ph1嵌入代码vs外部文件h1p使用外部文件有可维护性-可缓存-适应未来等优点-嗯-ph1语法h1h2变量h2pecmascript的变量是松散类型的即可以用来保存任何类型的数据-变量只是一个占位符嗯-ppstrong1声明变量strongpfigure-classhighlight-javascripttabletrtd-classgutterprespan-classline1spanbrpretdtd-classcodeprespan-classlinespan-classkeywordvarspan-messagespanbrpretdtrtablefigurepgtp"><script>元素</h2>
-<!-- 该标签在HTML 4.01中，定义了6个属性：
-
-**`async` 可选，用于告诉浏览器，立即下载文件**
-**`charset` 可选，表示通过src属性指定的代码的字符集**
-**`defer` 可选，表示脚本可以延迟到文档完全被解析和显示之后再执行。只对外部脚本文件有用。**
-**`language` 已废弃，表示使用的脚本语言**
-**`src` 可选，表示包含执行代码的外部文件**
-**`type` 可选：text/javascript等**
-
-## 使用<script>的方法
-
-**1.在页面中嵌入JavaScript代码**
-
+<h2><span id="ltscriptgt元素"><code>&lt;script&gt;</code>元素</span></h2>
+<p>该标签在HTML 4.01中，定义了6个属性：</p>
+<p><strong><code>async</code> 可选，用于告诉浏览器，立即下载文件</strong><br>
+<strong><code>charset</code> 可选，表示通过src属性指定的代码的字符集</strong><br>
+<strong><code>defer</code> 可选，表示脚本可以延迟到文档完全被解析和显示之后再执行。只对外部脚本文件有用。</strong><br>
+<strong><code>language</code> 已废弃，表示使用的脚本语言</strong><br>
+<strong><code>src</code> 可选，表示包含执行代码的外部文件</strong><br>
+<strong><code>type</code> 可选：text/javascript等</strong></p>
+<h2><span id="使用的方法h2pstrong1在页面中嵌入javascript代码strongpfigure-classhighlight-jstabletrtd-classgutterprespan-classline1spanbrspan-classline2spanbrspan-classline3spanbrspan-classline4spanbrspan-classline5spanbrpretdtd-classcodeprespan-classlineltscript-typespan-classstringtextjavascriptspangtspanbrspan-classlinespan-classfunctionspan-classkeywordfunctionspan-span-classtitlesayhispanspan-classparamsspan-span123spanbrspan-classline-alertspan-classstringhispanspanbrspan-classline125spanbrspan-classlineltspan-classregexpscriptgtspanspanbrpretdtrtablefigurep包含在codeltscriptgtcode标签中的代码将会被从上到下依次解释-pp当解释器对codeltscriptgtcode标签元素内部的所有代码求值完毕之前页面中的其余内容就不会被浏览器加载嗯-ppstrong2包含外部javascript文件strongpfigure-classhighlight-jstabletrtd-classgutterprespan-classline1spanbrspan-classline2spanbrpretdtd-classcodeprespan-classlineltscript-typespan-classstringtextjavascriptspan-srcspan-classstringexamplejsspangtspanbrspan-classlineltspan-classregexpscriptgtspanspanbrpretdtrtablefigureh2标签的位置h2p一般所有codeltscriptgtcode标签都应该被放在页面的codeltheadgtcode里-这样会使得页面在javascript代码加载完成后才会执行-这样就会非常卡啊嗯-pp为了避免这个问题现在一般将javascript的引用放在codeltbodygtcode标签中的页面内容的最后面-ph1嵌入代码vs外部文件h1p使用外部文件有可维护性-可缓存-适应未来等优点-嗯-ph1语法h1h2变量h2pecmascript的变量是松散类型的即可以用来保存任何类型的数据-变量只是一个占位符嗯-ppstrong1声明变量strongpfigure-classhighlight-javascripttabletrtd-classgutterprespan-classline1spanbrpretdtd-classcodeprespan-classlinespan-classkeywordvarspan-messagespanbrpretdtrtablefigure">使用<script>的方法</h2>
+<p><strong>1.在页面中嵌入JavaScript代码</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="string">"Hi!"</span>);</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 <p>包含在<code>&lt;script&gt;</code>标签中的代码，将会被从上到下依次解释。</p>
 <p>当解释器对<code>&lt;script&gt;</code>标签元素内部的所有代码求值完毕之前，页面中的其余内容就不会被浏览器加载，嗯。</p>
@@ -244,7 +240,6 @@
 <p>ECMAScript的变量是松散类型的，即：可以用来保存任何类型的数据。变量只是一个占位符嗯。</p>
 <p><strong>1.声明变量：</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message;</span><br></pre></td></tr></table></figure>
-<p>–&gt;</p>
 </script></span></h2>
                 
 
