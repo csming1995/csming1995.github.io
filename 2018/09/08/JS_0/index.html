@@ -332,6 +332,23 @@ toLocaleString()： 返回对象的字符串表示，字符串与执行环境的
 toString()<br>
 valueOf()</p>
 </blockquote>
+<h2><span id="操作符">操作符</span></h2>
+<p>操作符重点记一下相等操作符。</p>
+<h3><span id="相等操作符">相等操作符</span></h3>
+<p><strong>1.相等和不相等：</strong><code>==</code>、<code>!=</code></p>
+<p>若两个操作数相等则返回true。</p>
+<p>相等和不相等操作符遵循以下规则：</p>
+<blockquote>
+<p>1.若一个操作数是布尔值，则在比较相等性之前，先将其转换成数值0/1<br>
+2.若一个操作数是字符串，另一个操作数是数值，在比较前，现将字符串转换成数值。<br>
+3.若一个操作数是对象，另一个不是，则调用对象的valueOf()方法，用得到的基本类型按照前面的规则进行比较。<br>
+4.null和undefined是相等的。<br>
+5.在比较相等性之前，不能将null和undefined转换成其他任何值。<br>
+6.若一个操作数是NaN，则不与任何数相等<br>
+7.若两个操作数都是对象，若指向同一个对象，则相等；否则不相等。</p>
+</blockquote>
+<p><strong>2.全等和不全等：</strong><code>===</code>、<code>!==</code><br>
+除了在比较之前，不转换操作数之外，全等不全等和相等不相等操作符并没有区别。</p>
 <h2><span id="语句">语句</span></h2>
 <p>语句里面，比较特别的是一个with语句</p>
 <h3><span id="with">with</span></h3>
