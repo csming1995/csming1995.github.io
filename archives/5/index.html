@@ -209,6 +209,45 @@
 
 <div class="post-preview">
 
+    <a href="/2017/03/13/Linux常用命令记录/">
+        <h2 class="post-title">
+            Linux的常用命令记录
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+**复制：**cp -v 源文件路径 目标文件路径
+**移动：**mv -v 源文件路径 目标文件路径
+**删除：**rm -v 文件路径
+		rmdir -v 文件夹路径–文件夹要为空
+		rm -rv 文件夹路径–递归删除文件夹及其子文件
+**创建文件夹：**mkdir -v 文件夹名字（在当前目录创建文件夹）
+**创建文件：**touch 文件路径（创建一个空文件）
+
+
+
+**显示当......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-13
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Linux" title="Linux">Linux</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2017/03/12/JVM学习笔记-3/">
         <h2 class="post-title">
             JVM学习——gc回收机制
@@ -396,18 +435,23 @@ Java源文件通过编译器能够生产相应的.class文件（字节码文件�
 
 <div class="post-preview">
 
-    <a href="/2017/03/05/Android自定义View-7/">
+    <a href="/2017/03/05/Android自定义View-8/">
         <h2 class="post-title">
-            Android自定义View——Canvas操作学习笔记
+            Android自定义View——Path操作学习笔记
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            Canvas的基本操作
-位移（translate）
-translate是坐标系的移动，可以为图形绘制选择一个合适的坐标系
-1234567891011// 省略了创建画笔的代码// 在坐标原点绘制一个黑色圆形mPaint.setColor(Color.BLACK);canvas.translate(200,200);canvas.drawCircle(0,0,100,mPaint);// 在坐......
+            Path简介
+Path封装了直线曲线构成的几何路径；
+可以利用Canvas的drawPath绘制；也可以用于剪裁画布，根据路径绘制文字；也可以用于描述一个图像的轮廓；
+有开放和封闭路径的区别；
+Paht常用方法
+
+**移动起点moveTo:**移动下一次操作的起点位置
+**设置终点setLastPoint:**重置当前path中最后一个点位置，如果在绘制之前调用，效果和moveTo相同
+**......
         </div>
     </a>
     
@@ -429,23 +473,18 @@ translate是坐标系的移动，可以为图形绘制选择一个合适的坐�
 
 <div class="post-preview">
 
-    <a href="/2017/03/05/Android自定义View-8/">
+    <a href="/2017/03/05/Android自定义View-7/">
         <h2 class="post-title">
-            Android自定义View——Path操作学习笔记
+            Android自定义View——Canvas操作学习笔记
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            Path简介
-Path封装了直线曲线构成的几何路径；
-可以利用Canvas的drawPath绘制；也可以用于剪裁画布，根据路径绘制文字；也可以用于描述一个图像的轮廓；
-有开放和封闭路径的区别；
-Paht常用方法
-
-**移动起点moveTo:**移动下一次操作的起点位置
-**设置终点setLastPoint:**重置当前path中最后一个点位置，如果在绘制之前调用，效果和moveTo相同
-**......
+            Canvas的基本操作
+位移（translate）
+translate是坐标系的移动，可以为图形绘制选择一个合适的坐标系
+1234567891011// 省略了创建画笔的代码// 在坐标原点绘制一个黑色圆形mPaint.setColor(Color.BLACK);canvas.translate(200,200);canvas.drawCircle(0,0,100,mPaint);// 在坐......
         </div>
     </a>
     
@@ -524,43 +563,6 @@ Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
             2017-02-10
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2017/01/22/Android自定义View-5/">
-        <h2 class="post-title">
-            Android自定义View——绘制流程学习笔记
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            自定义View绘制流程函数调用链
-
-自定义View分类
-自定义ViewGroup&amp;自定义View
-1.自定义ViewGroup
-自定义ViewGroup一般是利用现有的组件根据特定的布局方式来组成新的组件，大多继承自ViewGroup或各种Layout，包含有子View。
-
-例如：应用底部导航条中的条目，一般都是上面图标(ImageView)，下面文字(TextView)，那么这两个......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-01-22
         </p>
         <div class="tags">
             
@@ -662,7 +664,7 @@ Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形
             
         
             
-            <a href="/tags/#JavaScript" title="JavaScript" rel="3">JavaScript</a>
+            <a href="/tags/#JavaScript" title="JavaScript" rel="4">JavaScript</a>
             
         
     </div>
@@ -735,6 +737,10 @@ Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形
     <ul>
       
         <li>
+          <a href="/2018/09/09/JS_2/">ECMAScript学习笔记（三）</a>
+        </li>
+      
+        <li>
           <a href="/2018/09/08/JS_1/">ECMAScript学习笔记（二）</a>
         </li>
       
@@ -748,10 +754,6 @@ Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形
       
         <li>
           <a href="/2018/06/23/游记_杭州/">去杭州后的第五天</a>
-        </li>
-      
-        <li>
-          <a href="/2018/05/25/Dart_2/">Dart（二）</a>
         </li>
       
     </ul>
@@ -800,7 +802,7 @@ Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
