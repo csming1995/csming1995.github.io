@@ -14,7 +14,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          ECMAScript学习笔记（三） - 十一月 | 深入迷雾寻找火光
+          ECMAScript学习笔记（四） - 十一月 | 深入迷雾寻找火光
         
     </title>
 
@@ -89,7 +89,7 @@
                               <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
                             
                         </div>
-                        <h1>ECMAScript学习笔记（三）</h1>
+                        <h1>ECMAScript学习笔记（四）</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Csming on
@@ -212,66 +212,68 @@
 
                 <h1><span id="引用类型">引用类型</span></h1>
 <p>JavaScript高级程序设计的第五章。讲解了跟对象相关的东西。</p>
-<p><strong>引用类型的值，是引用类型的一个实例（对象）</strong></p>
-<h2><span id="object类型">Object类型</span></h2>
-<p>创建Object实例的方式有两种，第一种是使用<code>new操作符</code>：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">person.name = <span class="string">"Nicholas"</span>;</span><br><span class="line">person.age = <span class="number">29</span>;</span><br></pre></td></tr></table></figure>
-<p>另一种方式是<code>对象字面量表示法</code>：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  name: <span class="string">"Nicholas"</span>,</span><br><span class="line">  age: <span class="number">29</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = &#123;&#125;</span><br><span class="line">person.name = <span class="string">"Nicholas"</span>;</span><br><span class="line">person.age = <span class="number">29</span>;</span><br></pre></td></tr></table></figure>
-<h2><span id="array类型">Array类型</span></h2>
-<p>ECMAScript的数组，可以为每一项保存任何类型的数据。且数组大小是可以动态调整的。</p>
-<p><strong>创建数组的方式1：</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line"><span class="keyword">var</span> colors = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">20</span>);</span><br><span class="line"><span class="keyword">var</span> colors = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>);</span><br></pre></td></tr></table></figure>
-<p><strong>创建数组的方式2：</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = [<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>];</span><br><span class="line"><span class="keyword">var</span> colors = [, , , ];</span><br><span class="line"><span class="keyword">var</span> values = [<span class="number">1</span>, <span class="number">2</span>, ];</span><br></pre></td></tr></table></figure>
-<p><strong>Array的length不是只读的。通过设置该属性，可以从数组的末尾移除项或者添加新项。</strong></p>
-<p><strong>另外，如果将一个值放在超出当前数组大小的位置上时，数组就会中心计算length</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = [<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>];</span><br><span class="line">colors[<span class="number">99</span>] = <span class="string">"black"</span>;</span><br></pre></td></tr></table></figure>
-<h3><span id="检测数组">检测数组</span></h3>
-<p>确定一个对象是不是数组：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.isArray(value)</span><br></pre></td></tr></table></figure>
-<h3><span id="转换方法">转换方法</span></h3>
-<p>数组集成的toLocalString()、toString()、valueOf()方法，默认用逗号分隔。我们可以使用join()方法，使用不同的分隔符来构建字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = [<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>];</span><br><span class="line">colors.join(<span class="string">"|"</span>);</span><br></pre></td></tr></table></figure>
-<h3><span id="栈方法">栈方法</span></h3>
-<p>**1.push(), pop()：**入栈和出栈</p>
-<p>push()方法可以接收任意数量的参数，将他们逐一添加到数组末尾，然后返回最终的数组长度。</p>
-<p>而pop()方法，会从数组末尾移除最后一项，并返回移除的项。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line"><span class="keyword">var</span> count = colors.push(<span class="string">"red"</span>, <span class="string">"green"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> item = colors.pop();</span><br></pre></td></tr></table></figure>
-<h3><span id="队列方法">队列方法</span></h3>
-<p><strong>1.shift()方法能够移除数组的第一个项，并返回被移除的项</strong></p>
-<p>于是shift()和push()结合，就可以实现类似于队列一样的方法了。</p>
-<p><strong>2.unshift()方法能够在数组的前端添加任何项，并返回最终的数组长度。</strong></p>
-<p>于是unshift()和pop()结合，就可以实现类似于队列的方法了。</p>
-<h3><span id="重排序方法">重排序方法</span></h3>
-<p>数组中存在：reverse()和sort()方法，能够用来排序。</p>
-<p><strong>1.sort()排序方法，会调用每个数组项的toString()方法，然后再进行排序。</strong></p>
-<p><strong>2.sort()方法可以接收一个比较函数作为参数：</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compare</span>(<span class="params">value1, value2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (value1 &lt; value2) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value1 &gt; value2) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3><span id="操作方法">操作方法</span></h3>
-<p><strong>1.concat()方法可以基于当前数组的所有项，创建一个新数组，然后将接收到的参数添加到这个数组的末尾。</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = [<span class="string">"red"</span>, <span class="string">"green"</span>, <span class="string">"blue"</span>];</span><br><span class="line"><span class="keyword">var</span> colors2 = colors.concat(<span class="string">"yellow"</span>, [<span class="string">"black"</span>, <span class="string">"brown"</span>]);</span><br></pre></td></tr></table></figure>
-<p><strong>2.slice()方法能够基于当前数组中的一或多项创建一个新数组。</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = [<span class="string">"red"</span>, <span class="string">"green"</span>, <span class="string">"blue"</span>];</span><br><span class="line"><span class="keyword">var</span> colors2 = colors.slice(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">var</span> colors3 = colors.slice(<span class="number">1</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-<p><strong>3.splice()方法：</strong></p>
-<p>1）删除：能够删除任意数量的项，只需要指定要删除的第一项和要删除的项数。<br>
-2）插入：可以向指定位置插入任意数量的项，只需要提供：起始位置，0（要删除的项数），要插入的项。<br>
-3）替换：略</p>
-<h3><span id="位置方法">位置方法</span></h3>
-<p><strong>ECMAScript 5提供了indexOf()和lastIndexOf()方法。</strong></p>
-<p>这两个方法可以传入两个参数：要查找的项，查找起点。</p>
-<h3><span id="迭代方法">迭代方法</span></h3>
-<p>迭代方法接收：每一项上运行的函数，运行该函数的作用域对象</p>
-<p><strong>1.every()方法：</strong> 对数组的每一项运行给定函数，若该数组对每一项都返回true，则返回true</p>
-<p><strong>2.filter()方法：</strong> 对数组的每一项运行给定函数，返回该函数会返回true的项组成的数组。</p>
-<p><strong>3.forEach()方法：</strong> 对数组的每一项运行给定函数，这个方法没有返回值。</p>
-<p><strong>4.map()方法：</strong> 对数组的每一项运行给定函数，返回每次函数调用的结果组成的数组。</p>
-<p><strong>5.some()方法：</strong> 对数组的每一项运行给定函数，如果该函数对任意一项返回true，则返回ture。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</span><br><span class="line"><span class="keyword">var</span> everyResult = numbers.every(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, array</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (item &gt; <span class="number">2</span>);</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
-<h3><span id="缩小方法">缩小方法</span></h3>
-<p><strong>reduce()和refuceRight()方法，会迭代数组的所有项，然后构建一个最终返回的值。</strong></p>
-<p>这两个方法接收两个参数：一个在每一项上调用的函数，缩小基础的初始值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> values = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">var</span> sum = values.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">prev, cur, index, array</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> prev + cur;</span><br><span class="line">  &#125;);</span><br><span class="line">alert(sum); <span class="comment">// 15</span></span><br></pre></td></tr></table></figure>
+<h2><span id="date类型">Date类型</span></h2>
+<p>Date类型，是基于Java的java.util.Date构建的（怪不得觉得用起来很顺手）。</p>
+<p>Date类型使用自UTC 2017年1月1日零时开始经过的毫秒数来保存日期。Date类型保存的日期能够精确到1970年1月1日之前或折后的285616年。</p>
+<p>创建一个Date对象, 可以这么操作：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br></pre></td></tr></table></figure>
+<p><strong>该对象将获得当前的日期和时间。</strong></p>
+<p>若想指定时间和日期创建Date对象，则需要传入表示该日期的毫秒数。为了简化计算过程，ECMAScript提供了：Date.parse(), Date.UTC()方法。</p>
+<p><strong>Date.parse</strong><br>
+eg：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> someDate = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="built_in">Date</span>.parse(<span class="string">"May 25, 2018"</span>));</span><br></pre></td></tr></table></figure>
+<p>当然，如果直接把表示日期的字符串，传入Date构造函数，他在后台也会调用Date.parse()函数。</p>
+<p>**Date.UTC:**参数分别为年份、基于0的月份、月中的某一天、小时数、分钟、秒及毫秒。</p>
+<p>**必须参数：**年份、月份<br>
+eg:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> y2k = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="built_in">Date</span>.UTC(<span class="number">2000</span>, <span class="number">0</span>));</span><br><span class="line"><span class="keyword">var</span> allFives = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="built_in">Date</span>.UTC(<span class="number">2005</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">17</span>, <span class="number">55</span>, <span class="number">55</span>));</span><br></pre></td></tr></table></figure>
+<p>当然，如果直接把Date.UTC()需要的参数，传入Date构造函数，他在后台也会调用Date.UTC()函数。</p>
+<p><strong>ECMAScript 5 添加了Date.now()方法，返回表示调用这个方法时的日期和时间的毫秒数。这个方法简化了使用Date对象分析代码的工作。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> start = <span class="built_in">Date</span>.now();</span><br></pre></td></tr></table></figure>
+<h3><span id="日期格式化方法">日期格式化方法</span></h3>
+<p><strong>1.toDateString()：</strong> 以特定于实现的格式显示星期几, 月, 日和年<br>
+<strong>2.toTimeString()：</strong> 以特定于实现的格式显示时, 分, 秒和时区<br>
+<strong>3.toLocaleDateString()：</strong> 以特定于地区的格式显示星期几, 月, 日和年<br>
+<strong>4.toLocalTimeString()：</strong> 以特定于地区的格式显示星期几, 月, 日和年<br>
+<strong>5.toUTCString()：</strong> 以特定于实现的格式完整的UTC日期。</p>
+<h3><span id="日期时间组件方法">日期/时间组件方法</span></h3>
+<p><strong>1.getTime()：</strong> 返回表示日期的毫秒数<br>
+<strong>2.setTime(毫秒)</strong><br>
+<strong>3.getFullYear()：</strong> 取得4位数年份<br>
+<strong>4.setFullYear(年)</strong><br>
+<strong>5.getUTCFullYear()：</strong> 返回UTC日期的4位数年份<br>
+<strong>6.setUTCFullYear(年)：</strong><br>
+<strong>7.getMonth()：</strong> 返回日期中的月份，以0开始计数<br>
+<strong>8.setMonth(月)</strong><br>
+<strong>9.getUTCMonth()：</strong> 返回UTC日期中的月份，以0开始计数<br>
+<strong>10.setUTCMonth(月)</strong><br>
+<strong>11.getDate()：</strong> 返回日期月份中的天数<br>
+<strong>12.setDate(日)</strong><br>
+<strong>13.getUTCDate()：</strong> 返回UTC日期月份中的天数<br>
+<strong>14.setUTCDate(日)</strong><br>
+<strong>15.getDay()：</strong> 返回日期中星期的星期几，0表示星期日，6表示星期六<br>
+<strong>16.getUTCDay()：</strong> 返回UTC日期中星期的星期几，0表示星期日，6表示星期六<br>
+<strong>17.getHours()：</strong> 返回日期中的小时数，0-23<br>
+<strong>18.setHours()</strong><br>
+<strong>19.getUTCHours()：</strong> 返回UTC日期中的小时数，0-23<br>
+<strong>20.setUTCHours()</strong><br>
+<strong>21.getMinutes()：</strong> 返回日期中的分钟数<br>
+<strong>22.setMinutes()</strong><br>
+<strong>23.getUTCMinutes()：</strong> 返回UTC日期中的分钟数<br>
+<strong>24.setUTCMinutes()</strong><br>
+<strong>25.getSeconds()：</strong> 返回日期中的秒数<br>
+<strong>26.setSeconds()</strong><br>
+<strong>27.getUTCSeconds()：</strong> 返回UTC日期中的秒数<br>
+<strong>28.setUTCSeconds()</strong><br>
+<strong>29.getMilliseconds()：</strong> 返回日期中的毫秒数<br>
+<strong>30.setMilliseconds()</strong><br>
+<strong>31.getUTCMilliseconds():</strong> 返回UTC日期中的毫秒数<br>
+<strong>32.setUTCMilliseconds()</strong></p>
+<h2><span id="regexp类型">RegExp类型</span></h2>
+<p>RegExp用来支持正则表达式。</p>
+<p>以以下方式，可以创建一个正则表达式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> expression = <span class="regexp">/ pattern /</span> flags;</span><br></pre></td></tr></table></figure>
+
                 
 
                 <hr>
@@ -280,7 +282,7 @@
                     
                     
                         <li class="next">
-                            <a href="/2018/09/08/JS_1/" data-toggle="tooltip" data-placement="top" title="ECMAScript学习笔记（二）">Next Post &rarr;</a>
+                            <a href="/2018/09/09/JS_2的副本/" data-toggle="tooltip" data-placement="top" title="ECMAScript学习笔记（三）">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
