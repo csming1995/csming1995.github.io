@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>https://csming1995.github.io/2018/09/11/JS_3/</loc>
+        <lastmod>2018-09-11T15:46:22.315Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://csming1995.github.io/2018/09/11/JS_2/</loc>
         <lastmod>2018-09-11T14:35:07.782Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -17,14 +25,6 @@
     <url>
         <loc>https://csming1995.github.io/2017/09/09/Docker_0/</loc>
         <lastmod>2018-09-10T15:38:23.115Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://csming1995.github.io/2018/09/09/JS_3/</loc>
-        <lastmod>2018-09-09T08:11:45.937Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          ECMAScript学习笔记（三） - 十一月 | 深入迷雾寻找火光
+          关于正则表达式 - 十一月 | 深入迷雾寻找火光
         
     </title>
 
-    <link rel="canonical" href="https://csming1995.github.io/2018/09/09/JS_3/">
+    <link rel="canonical" href="https://csming1995.github.io/2018/09/11/JS_3/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -89,11 +89,11 @@
                               <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
                             
                         </div>
-                        <h1>ECMAScript学习笔记（三）</h1>
+                        <h1>关于正则表达式</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Csming on
-                            2018-09-09
+                            2018-09-11
                         </span>
                     </div>
                 
@@ -210,81 +210,152 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="引用类型">引用类型</span></h1>
-<p>JavaScript高级程序设计的第五章。讲解了跟对象相关的东西。</p>
-<p><strong>引用类型的值，是引用类型的一个实例（对象）</strong></p>
-<h2><span id="object类型">Object类型</span></h2>
-<p>创建Object实例的方式有两种，第一种是使用<code>new操作符</code>：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">person.name = <span class="string">"Nicholas"</span>;</span><br><span class="line">person.age = <span class="number">29</span>;</span><br></pre></td></tr></table></figure>
-<p>另一种方式是<code>对象字面量表示法</code>：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  name: <span class="string">"Nicholas"</span>,</span><br><span class="line">  age: <span class="number">29</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = &#123;&#125;</span><br><span class="line">person.name = <span class="string">"Nicholas"</span>;</span><br><span class="line">person.age = <span class="number">29</span>;</span><br></pre></td></tr></table></figure>
-<h2><span id="array类型">Array类型</span></h2>
-<p>ECMAScript的数组，可以为每一项保存任何类型的数据。且数组大小是可以动态调整的。</p>
-<p><strong>创建数组的方式1：</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line"><span class="keyword">var</span> colors = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">20</span>);</span><br><span class="line"><span class="keyword">var</span> colors = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>);</span><br></pre></td></tr></table></figure>
-<p><strong>创建数组的方式2：</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = [<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>];</span><br><span class="line"><span class="keyword">var</span> colors = [, , , ];</span><br><span class="line"><span class="keyword">var</span> values = [<span class="number">1</span>, <span class="number">2</span>, ];</span><br></pre></td></tr></table></figure>
-<p><strong>Array的length不是只读的。通过设置该属性，可以从数组的末尾移除项或者添加新项。</strong></p>
-<p><strong>另外，如果将一个值放在超出当前数组大小的位置上时，数组就会中心计算length</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = [<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>];</span><br><span class="line">colors[<span class="number">99</span>] = <span class="string">"black"</span>;</span><br></pre></td></tr></table></figure>
-<h3><span id="检测数组">检测数组</span></h3>
-<p>确定一个对象是不是数组：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.isArray(value)</span><br></pre></td></tr></table></figure>
-<h3><span id="转换方法">转换方法</span></h3>
-<p>数组集成的toLocalString()、toString()、valueOf()方法，默认用逗号分隔。我们可以使用join()方法，使用不同的分隔符来构建字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = [<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>];</span><br><span class="line">colors.join(<span class="string">"|"</span>);</span><br></pre></td></tr></table></figure>
-<h3><span id="栈方法">栈方法</span></h3>
-<p>**1.push(), pop()：**入栈和出栈</p>
-<p>push()方法可以接收任意数量的参数，将他们逐一添加到数组末尾，然后返回最终的数组长度。</p>
-<p>而pop()方法，会从数组末尾移除最后一项，并返回移除的项。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line"><span class="keyword">var</span> count = colors.push(<span class="string">"red"</span>, <span class="string">"green"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> item = colors.pop();</span><br></pre></td></tr></table></figure>
-<h3><span id="队列方法">队列方法</span></h3>
-<p><strong>1.shift()方法能够移除数组的第一个项，并返回被移除的项</strong></p>
-<p>于是shift()和push()结合，就可以实现类似于队列一样的方法了。</p>
-<p><strong>2.unshift()方法能够在数组的前端添加任何项，并返回最终的数组长度。</strong></p>
-<p>于是unshift()和pop()结合，就可以实现类似于队列的方法了。</p>
-<h3><span id="重排序方法">重排序方法</span></h3>
-<p>数组中存在：reverse()和sort()方法，能够用来排序。</p>
-<p><strong>1.sort()排序方法，会调用每个数组项的toString()方法，然后再进行排序。</strong></p>
-<p><strong>2.sort()方法可以接收一个比较函数作为参数：</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compare</span>(<span class="params">value1, value2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (value1 &lt; value2) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value1 &gt; value2) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3><span id="操作方法">操作方法</span></h3>
-<p><strong>1.concat()方法可以基于当前数组的所有项，创建一个新数组，然后将接收到的参数添加到这个数组的末尾。</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = [<span class="string">"red"</span>, <span class="string">"green"</span>, <span class="string">"blue"</span>];</span><br><span class="line"><span class="keyword">var</span> colors2 = colors.concat(<span class="string">"yellow"</span>, [<span class="string">"black"</span>, <span class="string">"brown"</span>]);</span><br></pre></td></tr></table></figure>
-<p><strong>2.slice()方法能够基于当前数组中的一或多项创建一个新数组。</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = [<span class="string">"red"</span>, <span class="string">"green"</span>, <span class="string">"blue"</span>];</span><br><span class="line"><span class="keyword">var</span> colors2 = colors.slice(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">var</span> colors3 = colors.slice(<span class="number">1</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-<p><strong>3.splice()方法：</strong></p>
-<p>1）删除：能够删除任意数量的项，只需要指定要删除的第一项和要删除的项数。<br>
-2）插入：可以向指定位置插入任意数量的项，只需要提供：起始位置，0（要删除的项数），要插入的项。<br>
-3）替换：略</p>
-<h3><span id="位置方法">位置方法</span></h3>
-<p><strong>ECMAScript 5提供了indexOf()和lastIndexOf()方法。</strong></p>
-<p>这两个方法可以传入两个参数：要查找的项，查找起点。</p>
-<h3><span id="迭代方法">迭代方法</span></h3>
-<p>迭代方法接收：每一项上运行的函数，运行该函数的作用域对象</p>
-<p><strong>1.every()方法：</strong> 对数组的每一项运行给定函数，若该数组对每一项都返回true，则返回true</p>
-<p><strong>2.filter()方法：</strong> 对数组的每一项运行给定函数，返回该函数会返回true的项组成的数组。</p>
-<p><strong>3.forEach()方法：</strong> 对数组的每一项运行给定函数，这个方法没有返回值。</p>
-<p><strong>4.map()方法：</strong> 对数组的每一项运行给定函数，返回每次函数调用的结果组成的数组。</p>
-<p><strong>5.some()方法：</strong> 对数组的每一项运行给定函数，如果该函数对任意一项返回true，则返回ture。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</span><br><span class="line"><span class="keyword">var</span> everyResult = numbers.every(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, array</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (item &gt; <span class="number">2</span>);</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
-<h3><span id="缩小方法">缩小方法</span></h3>
-<p><strong>reduce()和refuceRight()方法，会迭代数组的所有项，然后构建一个最终返回的值。</strong></p>
-<p>这两个方法接收两个参数：一个在每一项上调用的函数，缩小基础的初始值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> values = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">var</span> sum = values.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">prev, cur, index, array</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> prev + cur;</span><br><span class="line">  &#125;);</span><br><span class="line">alert(sum); <span class="comment">// 15</span></span><br></pre></td></tr></table></figure>
+                <p>学习资料来自：<a href="https://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="noopener">https://deerchao.net/tutorials/regex/regex.htm</a></p>
+<h1><span id="我们说的正则表达式到底是啥_">我们说的正则表达式到底是啥<code>?_?</code></span></h1>
+<p>正则表达式，是用于<strong>描述</strong> 需要查找的符合某些具有<strong>复杂规则</strong> 的字符串的工具</p>
+<h1><span id="元字符">元字符</span></h1>
+<table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.</td>
+<td>匹配除换行符以外的任意字符</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配零个或多个的字符</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配一个或多个字符</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配字母或数字或下划线或汉字</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配任意的空白符</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配数字</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>匹配单词的开始或结束</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配字符串的开始</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配字符串的结束</td>
+</tr>
+</tbody>
+</table>
+<p>eg：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">\ba\w*\b </span><br><span class="line">//匹配字幕a开头的单词（\ba），然后任意数量的字母数字下划线或者汉字(\w*), 最后以单词结束(\b)</span><br><span class="line"></span><br><span class="line">\d+</span><br><span class="line">// 匹配一个或多个连续的数字</span><br><span class="line"></span><br><span class="line">\b\w&#123;6&#125;\b</span><br><span class="line">// 匹配留个字符的单词&#123;6&#125;-&gt;表示限定6个字符</span><br><span class="line"></span><br><span class="line">^\d&#123;5,12&#125;$</span><br><span class="line">// 匹配5-12位的数字</span><br></pre></td></tr></table></figure>
+<h1><span id="字符重复">字符重复</span></h1>
+<table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>重复零次或更多次</td>
+</tr>
+<tr>
+<td>+</td>
+<td>重复一次或更多次</td>
+</tr>
+<tr>
+<td>?</td>
+<td>重复零次或一次</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>重复n次</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>重复n次或更多次</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>重复n到m次</td>
+</tr>
+</tbody>
+</table>
+<h1><span id="字符类">字符类</span></h1>
+<p>若想要查找数字、字母，则可以将需要查找的字符列在方括号里面：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[abcd]</span><br><span class="line"></span><br><span class="line">[a-z0-9A-Z_]</span><br></pre></td></tr></table></figure>
+<h1><span id="分歧条件">分歧条件</span></h1>
+<p><strong>分枝条件</strong> 指的是有几种规则，如果满足其中任意一种规则都应该当成匹配；</p>
+<p><strong>使用<code>|</code>符号隔开。</strong></p>
+<p>eg：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\d&#123;5&#125;-\d&#123;4&#125;|\d&#123;5&#125;</span><br></pre></td></tr></table></figure>
+<h1><span id="分组">分组</span></h1>
+<p>当想要重复多个字符的时候，可以使用小括号指定子表达式（即，分组）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(\d&#123;1,3&#125;\.)&#123;3&#125;\d&#123;1,3&#125;</span><br><span class="line">\\可以重复3个 \d&#123;1,3&#125;\.。</span><br></pre></td></tr></table></figure>
+<h1><span id="反义">反义</span></h1>
+<p>查找不属于定义的字符类的字符。</p>
+<table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\W</td>
+<td>匹配任意不是字母，数字，下划线，汉字的字符</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配任意不是空白符的字符</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>匹配任意非数字的字符</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>匹配不是单词开头或结束的位置</td>
+</tr>
+<tr>
+<td>[^x]</td>
+<td>匹配除了x以外的任意字符</td>
+</tr>
+<tr>
+<td>[^aeiou]</td>
+<td>匹配除了aeiou这几个字母以外的任意字符</td>
+</tr>
+</tbody>
+</table>
+<h1><span id="向后引用">向后引用</span></h1>
+<p>使用小括号指定一个子表达式后，<strong>匹配这个子表达式的文本</strong>，可以再表达式或其他程序中作进一步的处理。默认情况下，每个分组会自动拥有一个组号。</p>
+
                 
 
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/09/11/JS_2/" data-toggle="tooltip" data-placement="top" title="ECMAScript学习笔记（四）">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/09/08/JS_1/" data-toggle="tooltip" data-placement="top" title="ECMAScript学习笔记（二）">Next Post &rarr;</a>
+                            <a href="/2018/09/11/JS_2/" data-toggle="tooltip" data-placement="top" title="ECMAScript学习笔记（四）">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -378,8 +449,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "csming1995";
-    var disqus_identifier = "https://csming1995.github.io/2018/09/09/JS_3/";
-    var disqus_url = "https://csming1995.github.io/2018/09/09/JS_3/";
+    var disqus_identifier = "https://csming1995.github.io/2018/09/11/JS_3/";
+    var disqus_url = "https://csming1995.github.io/2018/09/11/JS_3/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
