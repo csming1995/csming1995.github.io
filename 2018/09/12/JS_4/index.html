@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          ECMAScript学习笔记（二） - 十一月 | 深入迷雾寻找火光
+          ECMAScript学习笔记（五） - 十一月 | 深入迷雾寻找火光
         
     </title>
 
-    <link rel="canonical" href="https://csming1995.github.io/2018/09/08/JS_1/">
+    <link rel="canonical" href="https://csming1995.github.io/2018/09/12/JS_4/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -89,11 +89,11 @@
                               <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
                             
                         </div>
-                        <h1>ECMAScript学习笔记（二）</h1>
+                        <h1>ECMAScript学习笔记（五）</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Csming on
-                            2018-09-08
+                            2018-09-12
                         </span>
                     </div>
                 
@@ -210,49 +210,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="变量-作用域和内存问题">变量, 作用域和内存问题</span></h1>
-<p>JavaScript高级程序设计的第四章。讲解了如何理解基本类型和引用类型的值，理解执行环境和垃圾回收。</p>
-<p>ECMAScript变量松散的性质，决定了变量知识在特定时间内用于保存特定值的一个名字而已。</p>
-<h2><span id="基本类型vs引用类型">基本类型VS引用类型</span></h2>
-<p><strong>基本类型：简单的数据段</strong></p>
-<p><strong>引用类型：多个值构成的对象</strong></p>
-<p>Undefined、Null、Boolean、Number、String类型是按值访问的。引用类型的值是保存在内存中的对象。ECMAScript不允许直接访问内存中的位置，在操作对象时，实际上操作的是对象的引用而不是实际的对象。</p>
-<h3><span id="动态的属性">动态的属性</span></h3>
-<p>定义基本类型和引用类型，都需要创建一个变量并为其赋值。</p>
-<p>对于引用类型，我们可以为其添加或删除属性和方法。而不能对基本类型的值这么做。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> object();</span><br><span class="line">person.name = <span class="string">"Micheal"</span>;</span><br></pre></td></tr></table></figure>
-<h3><span id="复制变量值">复制变量值</span></h3>
-<p>从一个变量向另一个变量复制基本类型的值，会在变量对象上创建一个新的值。然后将该值复制到新变量分配的位置上。</p>
-<p>而从一个变量向另一个变量复制引用类型的值时，也会创建一个新的值，分配到为新变量分配的空间中。但不同的是，这个值的副本是一个指针，指针指向的是存储在堆中的同一个对象。复制操作结束后，两个变量引用的是同一个值。跟Java差不多嗯。</p>
-<h3><span id="传递参数">传递参数</span></h3>
-<p>ECMAScript中的所有函数的参数都是按值传递的-&gt;即，把函数外部的值复制给函数内部的参数。</p>
-<p>在项函数传递引用类型的值时，会将这个值在内存中的地址复制给一个局部变量。故，这个局部变量的变化会反映在函数的外部。</p>
-<h3><span id="检测类型">检测类型</span></h3>
-<p>typeof用于检测一个变量是不是基本类型。</p>
-<p>而在检测引用类型时，这个操作符的用处不大。我们可以用instanceof操作符来检测一个值是否是某种类型的。</p>
-<p>result = variable instanceof constructor</p>
-<h2><span id="执行环境和作用域">执行环境和作用域</span></h2>
-<p>执行环境定义了变量、函数有权访问的其他数据，决定了它们各自的行为。</p>
-<p><strong>每个执行环境，都有一个与之相关的变量对象（variable object）：</strong> 这个对象保存了环境中定义的所有变量和函数。</p>
-<p><strong>全局变量：</strong> 是一个最外围的执行环境。根据ECMAScript实现的宿主环境不同，表示的执行环境的对象也不同。在Web浏览器中，全局执行环境被认为是window对象。</p>
-<p><strong>每个函数都有自己的执行环境：</strong> 一个<code>执行流</code>进入一个函数时，函数的环境就被推入一个环境栈，在函数执行之后，栈就将其环境弹出。把控制权返回给之前的执行环境。</p>
-<p><strong>当代码在一个环境执行时，会创建变量对象的一个<code>作用域链</code></strong> 作用域链保证对执行环境有权访问的所有变量和函数的有序访问。作用域链的前端是当前执行环境的代码所在环境的变量对象。作用域链的下一个变量对象来自外部环境。</p>
-<p>标识符解析是沿着作用域链一级一级搜索标识符的过程。</p>
-<h3><span id="延长作用域链">延长作用域链</span></h3>
-<p>有些语句能够在作用域的前端临时增加一个变量对象，这个变量对象会在代码执行后被移除。对于try-catch语句的catch和with语句，当执行流进入他们时，作用域就会得到加长。</p>
-<h3><span id="没有块级作用域">没有块级作用域</span></h3>
-<p>Js是没有块级作用域的。</p>
-<p>所以在块语句（用花括号封闭的代码块），中定义的变量会被添加到当前的执行环境中。</p>
-<p><strong>1.用var声明的变量会自动添加到最近的环境中。</strong></p>
-<p><strong>2.当在某个环境中为了读取或写入而引用一个标识符时，必须通过搜索来确定标识符实际代表什么。搜索过程从作用域链的前端开始，向上逐级查询与给定名字匹配的标识符。</strong></p>
-<h2><span id="垃圾回收">垃圾回收</span></h2>
-<h3><span id="标记清除">标记清除</span></h3>
-<p>当变量进入环境时，将该变量标记为“进入环境”，当变量离开环境时，将其标记为“离开环境”.以此来标记是否需要清除垃圾。</p>
-<h3><span id="引用计数">引用计数</span></h3>
-<p>引用计数，是跟踪记录每个值被引用的次数。当声明了一个变量并将一个引用类型赋值给该变量时，这个值的引用次数就是1. 此后每被引用一次就将其引用次数加1. 相反，如果包含对这个值的引用的变量不再引用他了，就减1. 当这个值的引用次数变成0时，就可以回收他了。</p>
-<p>当然引用计数会遇到循环引用的问题，啧。跟Java里面一样呢。</p>
-<hr>
-<p>感觉js里面的一些思想跟Java还蛮像的，嗯。</p>
+                <h1><span id="面向对象程序设计">面向对象程序设计</span></h1>
+<p>这是我觉得最…困难的一个章节。我需要好好梳理梳理嗯。</p>
 
                 
 
@@ -260,13 +219,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/09/11/JS_2/" data-toggle="tooltip" data-placement="top" title="ECMAScript学习笔记（三）">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/09/08/JS_0/" data-toggle="tooltip" data-placement="top" title="ECMAScript学习笔记（一）">Next Post &rarr;</a>
+                            <a href="/2018/09/12/JS_3/" data-toggle="tooltip" data-placement="top" title="ECMAScript学习笔记（四）">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -360,8 +315,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "csming1995";
-    var disqus_identifier = "https://csming1995.github.io/2018/09/08/JS_1/";
-    var disqus_url = "https://csming1995.github.io/2018/09/08/JS_1/";
+    var disqus_identifier = "https://csming1995.github.io/2018/09/12/JS_4/";
+    var disqus_url = "https://csming1995.github.io/2018/09/12/JS_4/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
