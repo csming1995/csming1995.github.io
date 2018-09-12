@@ -256,6 +256,18 @@
 <p>引用类型和基本包装类型的区别在于对象的生存期：使用new操作符创建的引用类型的实例，在执行流离开当前作用域前都会一直被存在内存中。而自动创建的基本包装类型的对象，只存在于一行代码的执行瞬间之后会立即被销毁。</p>
 <p><strong>那么，就不能在运行时为基本类型值添加属性和方法了。</strong></p>
 <p>各种基本类型的用法之类的跟Java里面差不多，我就不记录了。嗯。</p>
+<h2><span id="单体内置对象">单体内置对象</span></h2>
+<p>内置对象就是：ECMAScript实现提供的不依赖于宿主环境的对象。</p>
+<h3><span id="global对象">Global对象</span></h3>
+<p>Global不属于其他任何对象的属性或者方法，最终都是他的属性和方法。</p>
+<p><strong>1.URI编码方法：</strong></p>
+<p>encodeURI()和encodeURIComponent()方法可以对URI进行编码。</p>
+<p><strong>2.eval()方法</strong></p>
+<p>eval()方法相当于一个完整的ECMAScript解析器。能够接受一个要执行的ECMAScript代码的字符串。</p>
+<p>然后就执行了。</p>
+<p><strong>4.window对象</strong></p>
+<h3><span id="math对象">Math对象</span></h3>
+<p>跟Java里的差不多，就懒得记了。</p>
 
                 
 
