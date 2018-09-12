@@ -86,7 +86,7 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
+                              <a class="tag" href="/tags/#杂类" title="杂类">杂类</a>
                             
                         </div>
                         <h1>关于正则表达式</h1>
@@ -210,8 +210,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>学习资料来自：<a href="https://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="noopener">https://deerchao.net/tutorials/regex/regex.htm</a></p>
-<h1><span id="我们说的正则表达式到底是啥_">我们说的正则表达式到底是啥<code>?_?</code></span></h1>
+                <h1><span id="我们说的正则表达式到底是啥_">我们说的正则表达式到底是啥<code>?_?</code></span></h1>
 <p>正则表达式，是用于<strong>描述</strong> 需要查找的符合某些具有<strong>复杂规则</strong> 的字符串的工具</p>
 <h1><span id="元字符">元字符</span></h1>
 <table>
@@ -345,7 +344,107 @@
 </tbody>
 </table>
 <h1><span id="向后引用">向后引用</span></h1>
-<p>使用小括号指定一个子表达式后，<strong>匹配这个子表达式的文本</strong>，可以再表达式或其他程序中作进一步的处理。默认情况下，每个分组会自动拥有一个组号。</p>
+<p>使用小括号指定一个子表达式后，<strong>匹配这个子表达式的文本</strong>，可以在表达式或其他程序中作进一步的处理。默认情况下，每个分组会自动拥有一个组号。</p>
+<p>向后引用用于重复搜索前面某个分组匹配的文本。</p>
+<p>eg：</p>
+<p>\1代表分组1匹配的文本<br>
+\0代表整个正则表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\b(\w+)\b\s+\1\b</span><br><span class="line"></span><br><span class="line">// 可以匹配go go或者kitty kitty</span><br></pre></td></tr></table></figure>
+<p>常用的分组语法</p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(exp)</td>
+<td>匹配exp,并捕获文本到自动命名的组里</td>
+</tr>
+<tr>
+<td>(?<name>exp)</name></td>
+<td>匹配exp,并捕获文本到名称为name的组里，也可以写成(?'name’exp)</td>
+</tr>
+<tr>
+<td>(?:exp)</td>
+<td>匹配exp,不捕获匹配的文本，也不给此分组分配组号</td>
+</tr>
+<tr>
+<td>(?=exp)</td>
+<td>匹配exp前面的位置</td>
+</tr>
+<tr>
+<td>(?&lt;=exp)</td>
+<td>匹配exp后面的位置</td>
+</tr>
+<tr>
+<td>(?!exp)</td>
+<td>匹配后面跟的不是exp的位置</td>
+</tr>
+<tr>
+<td>(?&lt;!exp)</td>
+<td>匹配前面不是exp的位置</td>
+</tr>
+<tr>
+<td>(?#comment)</td>
+<td>这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读</td>
+</tr>
+</tbody>
+</table>
+<h1><span id="零宽断言">零宽断言</span></h1>
+<p><strong>(?=exp)</strong> 它断言自身出现的位置的后面能匹配表达式exp。比如\b\w+(?=ing\b)，匹配以ing结尾的单词的前面部分(除了ing以外的部分)</p>
+<p>查找I’m singing while you’re dancing.时，它会匹配sing和danc。</p>
+<p><strong>(?&lt;=exp)</strong> 它断言自身出现的位置的前面能匹配表达式exp。比如(?&lt;=\bre)\w+\b会匹配以re开头的单词的后半部分(除了re以外的部分)，例如在查找reading a book时，它匹配ading</p>
+<h1><span id="负向零宽断言">负向零宽断言</span></h1>
+<p>负向零宽断言只匹配一个位置，并不消费任何字符。</p>
+<p>eg:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">\b\w*q(?!u)\w*\b</span><br><span class="line">// 匹配存在q且q后面不为u的单词。</span><br><span class="line"></span><br><span class="line">\d&#123;3&#125;(?!\d)</span><br><span class="line">// 匹配三位数字，而且这三位数字的后面不能是数字；</span><br><span class="line"></span><br><span class="line">\b((?!abc)\w)+\b</span><br><span class="line">// 匹配不包含连续字符串abc的单词</span><br><span class="line"></span><br><span class="line">(?&lt;![a-z])\d&#123;7&#125;</span><br><span class="line">// 匹配前面不是小写字母的七位数字</span><br></pre></td></tr></table></figure>
+<h1><span id="贪婪与懒惰">贪婪与懒惰</span></h1>
+<p>当正则表达式中包含能够接受重复的限定符时，<strong>通常</strong>是要匹配尽可能多的字符。<br>
+这就叫<strong>贪婪匹配</strong></p>
+<p>eg:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a.*b</span><br><span class="line">// 匹配最长的a开头b结尾的字符串</span><br></pre></td></tr></table></figure>
+<p>而当正则表达式需要匹配尽可能少的字符时，就叫<strong>懒惰匹配</strong></p>
+<p>eg:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a.*?b</span><br><span class="line"></span><br><span class="line">// 匹配最短的以a开头b结尾的字符串</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>.*?</code>就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复</p>
+</blockquote>
+<p><strong>懒惰限定符：</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*?</td>
+<td>重复任意次，但尽可能少重复</td>
+</tr>
+<tr>
+<td>+?</td>
+<td>重复1次或更多次，但尽可能少重复</td>
+</tr>
+<tr>
+<td>??</td>
+<td>重复0次或1次，但尽可能少重复</td>
+</tr>
+<tr>
+<td>{n,m}?</td>
+<td>重复n到m次，但尽可能少重复</td>
+</tr>
+<tr>
+<td>{n,}?</td>
+<td>重复n次以上，但尽可能少重复</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>学习资料来自：<a href="https://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="noopener">https://deerchao.net/tutorials/regex/regex.htm</a></p>
 
                 
 
@@ -394,7 +493,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
+                          <a class="tag" href="/tags/#杂类" title="杂类">杂类</a>
                         
                     </div>
                 </section>
