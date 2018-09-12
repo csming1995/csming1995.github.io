@@ -209,33 +209,28 @@
 
 <div class="post-preview">
 
-    <a href="/2017/04/15/python学习日记07/">
+    <a href="/2017/04/16/python学习日记08/">
         <h2 class="post-title">
-            Python函数式编程
+            Python匿名函数
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            函数式编程（请注意多了一个“式”字）——Functional Programming，虽然也可以归结到面向过程的程序设计，但其思想更接近数学计算
-
-高阶函数
-
-变量可指向函数
-
-123a = abs(-10)print(a)# 10
-
-123f = absprint(f(-10))# 10
-
-
-函数名也是变量
-函数名其实就是指向函数的变量！对于abs()这个函数，完全可以把函数名abs看成变......
+            
+匿名函数
+不显式定义的函数
+eg：
+123456lambda x: x * x# 相当于：def f(x):    return x * x
+实例：
+12list(map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9]))# [1, 4, 9, 16, 25, 36, 49, 64, 81]
+匿名函数只能有一个表达式，不用写return；表达式的结......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
-            2017-04-15
+            2017-04-16
         </p>
         <div class="tags">
             
@@ -279,18 +274,27 @@
 
 <div class="post-preview">
 
-    <a href="/2017/04/15/python学习日记04/">
+    <a href="/2017/04/15/python学习日记07/">
         <h2 class="post-title">
-            我与Py的那些事——条件判断
+            Python函数式编程
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            条件判断
-12345678if &lt;条件判断1&gt;:    &lt;执行1&gt;elif &lt;条件判断2&gt;:    &lt;执行2&gt;elif &lt;条件判断3&gt;:    &lt;执行3&gt;else:    &lt;执行4&gt;
-eg:
-1234567age = 20if age &gt;= 6:    print('teenager')elif age......
+            函数式编程（请注意多了一个“式”字）——Functional Programming，虽然也可以归结到面向过程的程序设计，但其思想更接近数学计算
+
+高阶函数
+
+变量可指向函数
+
+123a = abs(-10)print(a)# 10
+
+123f = absprint(f(-10))# 10
+
+
+函数名也是变量
+函数名其实就是指向函数的变量！对于abs()这个函数，完全可以把函数名abs看成变......
         </div>
     </a>
     
@@ -426,6 +430,37 @@ int() float() str() bool()
 
 <div class="post-preview">
 
+    <a href="/2017/04/15/python学习日记04/">
+        <h2 class="post-title">
+            我与Py的那些事——条件判断
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            条件判断
+12345678if &lt;条件判断1&gt;:    &lt;执行1&gt;elif &lt;条件判断2&gt;:    &lt;执行2&gt;elif &lt;条件判断3&gt;:    &lt;执行3&gt;else:    &lt;执行4&gt;
+eg:
+1234567age = 20if age &gt;= 6:    print('teenager')elif age......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-04-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#python" title="python">python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2017/04/09/python学习日记01/">
         <h2 class="post-title">
             我与Py的那些事——输入输出
@@ -533,49 +568,6 @@ ACTION_MOVE：	手指 在屏幕上滑动 时触发，会多次触发。
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2017/03/15/Android自定义View-12/">
-        <h2 class="post-title">
-            Android自定义View——事件分发机制学习笔记
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            为什么有事件分发机制
-
-
-因为Android的View是树状结构的；View可能会重叠在一起；
-
-
-当我们点击的地方有很多歌View都可以响应时，就很尴尬了；
-
-
-于是事件分发机制就用来解决这种问题
-
-
-如图，View是一层一层嵌套的；当点击View1时，下面的ViewGroupA、RootView等也能够响应；为了确定到底要由哪个View处理盖点击事件，就需要事件分发机制来处理了；**
-（......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-03-15
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -664,7 +656,7 @@ ACTION_MOVE：	手指 在屏幕上滑动 时触发，会多次触发。
             
         
             
-            <a href="/tags/#JavaScript" title="JavaScript" rel="5">JavaScript</a>
+            <a href="/tags/#JavaScript" title="JavaScript" rel="6">JavaScript</a>
             
         
             
@@ -739,7 +731,11 @@ ACTION_MOVE：	手指 在屏幕上滑动 时触发，会多次触发。
     <ul>
       
         <li>
-          <a href="/2018/09/11/JS_3/">关于正则表达式</a>
+          <a href="/2018/09/12/JS_3/">ECMAScript学习笔记（五）</a>
+        </li>
+      
+        <li>
+          <a href="/2018/09/11/Pattern/">关于正则表达式</a>
         </li>
       
         <li>
@@ -752,10 +748,6 @@ ACTION_MOVE：	手指 在屏幕上滑动 时触发，会多次触发。
       
         <li>
           <a href="/2018/09/08/JS_0/">ECMAScript学习笔记（一）</a>
-        </li>
-      
-        <li>
-          <a href="/2018/08/27/JS_BOM/">JavaScript——BOM</a>
         </li>
       
     </ul>
@@ -804,7 +796,7 @@ ACTION_MOVE：	手指 在屏幕上滑动 时触发，会多次触发。
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>

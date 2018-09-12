@@ -209,6 +209,49 @@
 
 <div class="post-preview">
 
+    <a href="/2017/03/15/Android自定义View-12/">
+        <h2 class="post-title">
+            Android自定义View——事件分发机制学习笔记
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            为什么有事件分发机制
+
+
+因为Android的View是树状结构的；View可能会重叠在一起；
+
+
+当我们点击的地方有很多歌View都可以响应时，就很尴尬了；
+
+
+于是事件分发机制就用来解决这种问题
+
+
+如图，View是一层一层嵌套的；当点击View1时，下面的ViewGroupA、RootView等也能够响应；为了确定到底要由哪个View处理盖点击事件，就需要事件分发机制来处理了；**
+（......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#android" title="android">android</a>
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2017/03/14/Android自定义View-11/">
         <h2 class="post-title">
             Android自定义View——Matrix学习笔记
@@ -528,39 +571,6 @@ Java源文件通过编译器能够生产相应的.class文件（字节码文件�
 
 <div class="post-preview">
 
-    <a href="/2017/03/05/Android自定义View-7/">
-        <h2 class="post-title">
-            Android自定义View——Canvas操作学习笔记
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Canvas的基本操作
-位移（translate）
-translate是坐标系的移动，可以为图形绘制选择一个合适的坐标系
-1234567891011// 省略了创建画笔的代码// 在坐标原点绘制一个黑色圆形mPaint.setColor(Color.BLACK);canvas.translate(200,200);canvas.drawCircle(0,0,100,mPaint);// 在坐......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-03-05
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
     <a href="/2017/03/05/Android自定义View-8/">
         <h2 class="post-title">
             Android自定义View——Path操作学习笔记
@@ -685,7 +695,7 @@ Paht常用方法
             
         
             
-            <a href="/tags/#JavaScript" title="JavaScript" rel="5">JavaScript</a>
+            <a href="/tags/#JavaScript" title="JavaScript" rel="6">JavaScript</a>
             
         
             
@@ -760,7 +770,11 @@ Paht常用方法
     <ul>
       
         <li>
-          <a href="/2018/09/11/JS_3/">关于正则表达式</a>
+          <a href="/2018/09/12/JS_3/">ECMAScript学习笔记（五）</a>
+        </li>
+      
+        <li>
+          <a href="/2018/09/11/Pattern/">关于正则表达式</a>
         </li>
       
         <li>
@@ -773,10 +787,6 @@ Paht常用方法
       
         <li>
           <a href="/2018/09/08/JS_0/">ECMAScript学习笔记（一）</a>
-        </li>
-      
-        <li>
-          <a href="/2018/08/27/JS_BOM/">JavaScript——BOM</a>
         </li>
       
     </ul>
@@ -825,7 +835,7 @@ Paht常用方法
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>

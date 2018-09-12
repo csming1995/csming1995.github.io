@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          关于正则表达式 - 十一月 | 深入迷雾寻找火光
+          ECMAScript学习笔记（五） - 十一月 | 深入迷雾寻找火光
         
     </title>
 
-    <link rel="canonical" href="https://csming1995.github.io/2018/09/11/JS_3/">
+    <link rel="canonical" href="https://csming1995.github.io/2018/09/12/JS_3/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -86,14 +86,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#杂类" title="杂类">杂类</a>
+                              <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
                             
                         </div>
-                        <h1>关于正则表达式</h1>
+                        <h1>ECMAScript学习笔记（五）</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Csming on
-                            2018-09-11
+                            2018-09-12
                         </span>
                     </div>
                 
@@ -210,241 +210,51 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="我们说的正则表达式到底是啥_">我们说的正则表达式到底是啥<code>?_?</code></span></h1>
-<p>正则表达式，是用于<strong>描述</strong> 需要查找的符合某些具有<strong>复杂规则</strong> 的字符串的工具</p>
-<h1><span id="元字符">元字符</span></h1>
-<table>
-<thead>
-<tr>
-<th>元字符</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>.</td>
-<td>匹配除换行符以外的任意字符</td>
-</tr>
-<tr>
-<td>*</td>
-<td>匹配零个或多个的字符</td>
-</tr>
-<tr>
-<td>+</td>
-<td>匹配一个或多个字符</td>
-</tr>
-<tr>
-<td>\w</td>
-<td>匹配字母或数字或下划线或汉字</td>
-</tr>
-<tr>
-<td>\s</td>
-<td>匹配任意的空白符</td>
-</tr>
-<tr>
-<td>\d</td>
-<td>匹配数字</td>
-</tr>
-<tr>
-<td>\b</td>
-<td>匹配单词的开始或结束</td>
-</tr>
-<tr>
-<td>^</td>
-<td>匹配字符串的开始</td>
-</tr>
-<tr>
-<td>$</td>
-<td>匹配字符串的结束</td>
-</tr>
-</tbody>
-</table>
-<p>eg：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">\ba\w*\b </span><br><span class="line">//匹配字幕a开头的单词（\ba），然后任意数量的字母数字下划线或者汉字(\w*), 最后以单词结束(\b)</span><br><span class="line"></span><br><span class="line">\d+</span><br><span class="line">// 匹配一个或多个连续的数字</span><br><span class="line"></span><br><span class="line">\b\w&#123;6&#125;\b</span><br><span class="line">// 匹配留个字符的单词&#123;6&#125;-&gt;表示限定6个字符</span><br><span class="line"></span><br><span class="line">^\d&#123;5,12&#125;$</span><br><span class="line">// 匹配5-12位的数字</span><br></pre></td></tr></table></figure>
-<h1><span id="字符重复">字符重复</span></h1>
-<table>
-<thead>
-<tr>
-<th>元字符</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>*</td>
-<td>重复零次或更多次</td>
-</tr>
-<tr>
-<td>+</td>
-<td>重复一次或更多次</td>
-</tr>
-<tr>
-<td>?</td>
-<td>重复零次或一次</td>
-</tr>
-<tr>
-<td>{n}</td>
-<td>重复n次</td>
-</tr>
-<tr>
-<td>{n,}</td>
-<td>重复n次或更多次</td>
-</tr>
-<tr>
-<td>{n,m}</td>
-<td>重复n到m次</td>
-</tr>
-</tbody>
-</table>
-<h1><span id="字符类">字符类</span></h1>
-<p>若想要查找数字、字母，则可以将需要查找的字符列在方括号里面：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[abcd]</span><br><span class="line"></span><br><span class="line">[a-z0-9A-Z_]</span><br></pre></td></tr></table></figure>
-<h1><span id="分歧条件">分歧条件</span></h1>
-<p><strong>分枝条件</strong> 指的是有几种规则，如果满足其中任意一种规则都应该当成匹配；</p>
-<p><strong>使用<code>|</code>符号隔开。</strong></p>
-<p>eg：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\d&#123;5&#125;-\d&#123;4&#125;|\d&#123;5&#125;</span><br></pre></td></tr></table></figure>
-<h1><span id="分组">分组</span></h1>
-<p>当想要重复多个字符的时候，可以使用小括号指定子表达式（即，分组）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(\d&#123;1,3&#125;\.)&#123;3&#125;\d&#123;1,3&#125;</span><br><span class="line">\\可以重复3个 \d&#123;1,3&#125;\.。</span><br></pre></td></tr></table></figure>
-<h1><span id="反义">反义</span></h1>
-<p>查找不属于定义的字符类的字符。</p>
-<table>
-<thead>
-<tr>
-<th>元字符</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>\W</td>
-<td>匹配任意不是字母，数字，下划线，汉字的字符</td>
-</tr>
-<tr>
-<td>\S</td>
-<td>匹配任意不是空白符的字符</td>
-</tr>
-<tr>
-<td>\D</td>
-<td>匹配任意非数字的字符</td>
-</tr>
-<tr>
-<td>\B</td>
-<td>匹配不是单词开头或结束的位置</td>
-</tr>
-<tr>
-<td>[^x]</td>
-<td>匹配除了x以外的任意字符</td>
-</tr>
-<tr>
-<td>[^aeiou]</td>
-<td>匹配除了aeiou这几个字母以外的任意字符</td>
-</tr>
-</tbody>
-</table>
-<h1><span id="向后引用">向后引用</span></h1>
-<p>使用小括号指定一个子表达式后，<strong>匹配这个子表达式的文本</strong>，可以在表达式或其他程序中作进一步的处理。默认情况下，每个分组会自动拥有一个组号。</p>
-<p>向后引用用于重复搜索前面某个分组匹配的文本。</p>
-<p>eg：</p>
-<p>\1代表分组1匹配的文本<br>
-\0代表整个正则表达式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\b(\w+)\b\s+\1\b</span><br><span class="line"></span><br><span class="line">// 可以匹配go go或者kitty kitty</span><br></pre></td></tr></table></figure>
-<p>常用的分组语法</p>
-<table>
-<thead>
-<tr>
-<th>代码</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>(exp)</td>
-<td>匹配exp,并捕获文本到自动命名的组里</td>
-</tr>
-<tr>
-<td>(?<name>exp)</name></td>
-<td>匹配exp,并捕获文本到名称为name的组里，也可以写成(?'name’exp)</td>
-</tr>
-<tr>
-<td>(?:exp)</td>
-<td>匹配exp,不捕获匹配的文本，也不给此分组分配组号</td>
-</tr>
-<tr>
-<td>(?=exp)</td>
-<td>匹配exp前面的位置</td>
-</tr>
-<tr>
-<td>(?&lt;=exp)</td>
-<td>匹配exp后面的位置</td>
-</tr>
-<tr>
-<td>(?!exp)</td>
-<td>匹配后面跟的不是exp的位置</td>
-</tr>
-<tr>
-<td>(?&lt;!exp)</td>
-<td>匹配前面不是exp的位置</td>
-</tr>
-<tr>
-<td>(?#comment)</td>
-<td>这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读</td>
-</tr>
-</tbody>
-</table>
-<h1><span id="零宽断言">零宽断言</span></h1>
-<p><strong>(?=exp)</strong> 它断言自身出现的位置的后面能匹配表达式exp。比如\b\w+(?=ing\b)，匹配以ing结尾的单词的前面部分(除了ing以外的部分)</p>
-<p>查找I’m singing while you’re dancing.时，它会匹配sing和danc。</p>
-<p><strong>(?&lt;=exp)</strong> 它断言自身出现的位置的前面能匹配表达式exp。比如(?&lt;=\bre)\w+\b会匹配以re开头的单词的后半部分(除了re以外的部分)，例如在查找reading a book时，它匹配ading</p>
-<h1><span id="负向零宽断言">负向零宽断言</span></h1>
-<p>负向零宽断言只匹配一个位置，并不消费任何字符。</p>
-<p>eg:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">\b\w*q(?!u)\w*\b</span><br><span class="line">// 匹配存在q且q后面不为u的单词。</span><br><span class="line"></span><br><span class="line">\d&#123;3&#125;(?!\d)</span><br><span class="line">// 匹配三位数字，而且这三位数字的后面不能是数字；</span><br><span class="line"></span><br><span class="line">\b((?!abc)\w)+\b</span><br><span class="line">// 匹配不包含连续字符串abc的单词</span><br><span class="line"></span><br><span class="line">(?&lt;![a-z])\d&#123;7&#125;</span><br><span class="line">// 匹配前面不是小写字母的七位数字</span><br></pre></td></tr></table></figure>
-<h1><span id="贪婪与懒惰">贪婪与懒惰</span></h1>
-<p>当正则表达式中包含能够接受重复的限定符时，<strong>通常</strong>是要匹配尽可能多的字符。<br>
-这就叫<strong>贪婪匹配</strong></p>
-<p>eg:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a.*b</span><br><span class="line">// 匹配最长的a开头b结尾的字符串</span><br></pre></td></tr></table></figure>
-<p>而当正则表达式需要匹配尽可能少的字符时，就叫<strong>懒惰匹配</strong></p>
-<p>eg:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a.*?b</span><br><span class="line"></span><br><span class="line">// 匹配最短的以a开头b结尾的字符串</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>.*?</code>就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复</p>
-</blockquote>
-<p><strong>懒惰限定符：</strong></p>
-<table>
-<thead>
-<tr>
-<th>代码</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>*?</td>
-<td>重复任意次，但尽可能少重复</td>
-</tr>
-<tr>
-<td>+?</td>
-<td>重复1次或更多次，但尽可能少重复</td>
-</tr>
-<tr>
-<td>??</td>
-<td>重复0次或1次，但尽可能少重复</td>
-</tr>
-<tr>
-<td>{n,m}?</td>
-<td>重复n到m次，但尽可能少重复</td>
-</tr>
-<tr>
-<td>{n,}?</td>
-<td>重复n次以上，但尽可能少重复</td>
-</tr>
-</tbody>
-</table>
+                <h2><span id="function类型">Function类型</span></h2>
+<p>在ECMAScript中，每个函数都是一个函数对象，都是Function类型的实例，且都和其他引用类型一样具有属性和方法。</p>
+<p>函数名实际上是一个指向函数对象的指针，不会和某个函数绑定。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 相当于：</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> sum = <span class="function"><span class="keyword">function</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> sum = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"num1"</span>, <span class="string">"num2"</span>, <span class="string">"return num1 + num2"</span>);</span><br></pre></td></tr></table></figure>
+<p>以上代码意味着，一个函数可能会有多个名字：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> anothorSum = sum;</span><br><span class="line"><span class="comment">// 将一个anothorSum变量的值设置为sum的值。使得他们指向了同一个函数。</span></span><br></pre></td></tr></table></figure>
+<h3><span id="没有重载">没有重载</span></h3>
+<p>ECMAScript函数是没有重载的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addSomeNumber</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num + <span class="number">100</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addSomeNumber</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num + <span class="number">200</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 相当于</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> addSomeNumber = <span class="function"><span class="keyword">function</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num + <span class="number">100</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> addSomeNumber = <span class="function"><span class="keyword">function</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num + <span class="number">200</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码将addSomeNumber变量赋值为先后两个函数对象。后一个函数对象覆盖了前一个函数对象嗯。</p>
+<h3><span id="函数的声明amp函数表达式">函数的声明&amp;函数表达式</span></h3>
+<p>对于函数声明，解析器会先读取声明，并使其在执行任何代码之前可用。而对于函数表达式，则必须等到解析器执行到他所在的代码行才会被解释。</p>
+<h3><span id="作为值的函数">作为值的函数</span></h3>
+<p>ECMAScript中的函数名本身就是一个变量，所以所有的函数都可以被当做值来使用。所以可以把一个函数传递给另一个函数，并且可以将一个函数作为另一个函数的结果返回。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callSomeFunction</span>(<span class="params">someFunction, someArgument</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> someFunction(someArgument);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add10</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num + <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result1 = callSomeFunction(add10, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">alert(result1); <span class="comment">// 20</span></span><br></pre></td></tr></table></figure>
 <hr>
-<p>学习资料来自：<a href="https://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="noopener">https://deerchao.net/tutorials/regex/regex.htm</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createComparsionFunction</span>(<span class="params">propertyName</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">object1, object2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> value1 = object1[propertyName];</span><br><span class="line">    <span class="keyword">var</span> value2 = object2[propertyName];</span><br><span class="line">    <span class="keyword">if</span> (value1 &lt; value2) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value1 &gt; value2) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="函数内部属性">函数内部属性</span></h3>
+<p><strong>arguments和this</strong></p>
+<p>arguments的作用是用于保存函数参数。而这个对象还有一个叫callee的属性，用于指向拥有这个arguments对象的函数。</p>
+<p>对于一个递归函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (num &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> num * factorial(num - <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果factorial函数被赋给另一个变量，而factorial变量被赋值为null的话……那么上述代码就挂了。</p>
+<p>所以有了callee对象，就衍生了下面这样的用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function factorial(num) &#123;</span><br><span class="line">  if (num &lt;= 1) &#123;</span><br><span class="line">    return 1;</span><br><span class="line">  &#125;else &#123;</span><br><span class="line">    return num * arguments.callee(num - 1);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样函数名和函数体就解耦了。</p>
+<p>另一个对象<strong>this</strong> 其行为跟Java中的this类似。this引用的是函数赖以执行的环境对象。</p>
+<p>eg： 在网页的全局作用域中调用函数时，则this引用的是window。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.color = <span class="string">"red"</span>;</span><br><span class="line"><span class="keyword">var</span> o = &#123;<span class="attr">color</span>: <span class="string">"blue"</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayColor</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.color);</span><br><span class="line">&#125;</span><br><span class="line">o.sayColor = sayColor;</span><br><span class="line">o.sayColor(); <span class="comment">// blue</span></span><br></pre></td></tr></table></figure>
+<p><strong>ECMAScript 5规范了另一个函数对象的属性：caller。这个属性保存了调用当前函数的函数的引用。若在全局作用域中调用当前函数，则该值为null</strong></p>
+<h3><span id="函数属性和方法">函数属性和方法</span></h3>
+<p>每个函数都包含：length和prototype两个属性。</p>
+<p><strong>length：</strong> 表示函数希望接收的明明参数的个数<br>
+<strong>prototype：</strong> 包含了引用类型的所有实例方法</p>
+<p>每个函数包含了：apply()和call()两个方法。这两个方法的用途都是在特定的作用域中调用函数。</p>
+<p><strong>apply()：</strong> 接收两个参数：运行函数的作用域，参数数组。<br>
+<strong>call()：</strong> 接收两个参数：运行函数的作用域，传入其余参数。</p>
+<p>这两个方法能够扩充函数赖以运行的作用域。</p>
+<p>eg:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.color = <span class="string">"red"</span>;</span><br><span class="line"><span class="keyword">var</span> o = &#123;<span class="attr">color</span>: <span class="string">"blue"</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayColor</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.color);</span><br><span class="line">&#125;</span><br><span class="line">sayColor(); <span class="comment">// red</span></span><br><span class="line"></span><br><span class="line">sayColor.call(<span class="keyword">this</span>); <span class="comment">// red</span></span><br><span class="line">sayColor.call(<span class="built_in">window</span>); <span class="comment">// red</span></span><br><span class="line">sayColor.call(o); <span class="comment">// blue</span></span><br></pre></td></tr></table></figure>
+<h2><span id="基本包装类型">基本包装类型</span></h2>
+<p>ECMAScript提供了三个特殊的引用类型：Boolean、Number、String.</p>
+<p>每当读取一个基本类型值的时候，后台就会创建一个对应基本包装类型的对象。</p>
+<p>引用类型和基本包装类型的区别在于对象的生存期：使用new操作符创建的引用类型的实例，在执行流离开当前作用域前都会一直被存在内存中。而自动创建的基本包装类型的对象，只存在于一行代码的执行瞬间之后会立即被销毁。</p>
+<p><strong>那么，就不能在运行时为基本类型值添加属性和方法了。</strong></p>
 
                 
 
@@ -454,7 +264,7 @@
                     
                     
                         <li class="next">
-                            <a href="/2018/09/11/JS_2/" data-toggle="tooltip" data-placement="top" title="ECMAScript学习笔记（四）">Next Post &rarr;</a>
+                            <a href="/2018/09/11/Pattern/" data-toggle="tooltip" data-placement="top" title="关于正则表达式">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -493,7 +303,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#杂类" title="杂类">杂类</a>
+                          <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
                         
                     </div>
                 </section>
@@ -548,8 +358,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "csming1995";
-    var disqus_identifier = "https://csming1995.github.io/2018/09/11/JS_3/";
-    var disqus_url = "https://csming1995.github.io/2018/09/11/JS_3/";
+    var disqus_identifier = "https://csming1995.github.io/2018/09/12/JS_3/";
+    var disqus_url = "https://csming1995.github.io/2018/09/12/JS_3/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

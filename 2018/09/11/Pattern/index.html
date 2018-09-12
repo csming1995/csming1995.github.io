@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Python匿名函数 - 十一月 | 深入迷雾寻找火光
+          关于正则表达式 - 十一月 | 深入迷雾寻找火光
         
     </title>
 
-    <link rel="canonical" href="https://csming1995.github.io/2017/04/16/python学习日记08/">
+    <link rel="canonical" href="https://csming1995.github.io/2018/09/11/Pattern/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -86,14 +86,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#python" title="python">python</a>
+                              <a class="tag" href="/tags/#杂类" title="杂类">杂类</a>
                             
                         </div>
-                        <h1>Python匿名函数</h1>
+                        <h1>关于正则表达式</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Csming on
-                            2017-04-16
+                            2018-09-11
                         </span>
                     </div>
                 
@@ -210,55 +210,241 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <hr>
-<h1><span id="匿名函数">匿名函数</span></h1>
-<p>不显式定义的函数</p>
+                <h1><span id="我们说的正则表达式到底是啥_">我们说的正则表达式到底是啥<code>?_?</code></span></h1>
+<p>正则表达式，是用于<strong>描述</strong> 需要查找的符合某些具有<strong>复杂规则</strong> 的字符串的工具</p>
+<h1><span id="元字符">元字符</span></h1>
+<table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.</td>
+<td>匹配除换行符以外的任意字符</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配零个或多个的字符</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配一个或多个字符</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配字母或数字或下划线或汉字</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配任意的空白符</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配数字</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>匹配单词的开始或结束</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配字符串的开始</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配字符串的结束</td>
+</tr>
+</tbody>
+</table>
 <p>eg：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lambda</span> x: x * x</span><br><span class="line"></span><br><span class="line"><span class="comment"># 相当于：</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x * x</span><br></pre></td></tr></table></figure>
-<p>实例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list(map(<span class="keyword">lambda</span> x: x * x, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]))</span><br><span class="line"><span class="comment"># [1, 4, 9, 16, 25, 36, 49, 64, 81]</span></span><br></pre></td></tr></table></figure>
-<p><strong>匿名函数只能有一个表达式，不用写return；表达式的结果就是返回值；</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">\ba\w*\b </span><br><span class="line">//匹配字幕a开头的单词（\ba），然后任意数量的字母数字下划线或者汉字(\w*), 最后以单词结束(\b)</span><br><span class="line"></span><br><span class="line">\d+</span><br><span class="line">// 匹配一个或多个连续的数字</span><br><span class="line"></span><br><span class="line">\b\w&#123;6&#125;\b</span><br><span class="line">// 匹配留个字符的单词&#123;6&#125;-&gt;表示限定6个字符</span><br><span class="line"></span><br><span class="line">^\d&#123;5,12&#125;$</span><br><span class="line">// 匹配5-12位的数字</span><br></pre></td></tr></table></figure>
+<h1><span id="字符重复">字符重复</span></h1>
+<table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>重复零次或更多次</td>
+</tr>
+<tr>
+<td>+</td>
+<td>重复一次或更多次</td>
+</tr>
+<tr>
+<td>?</td>
+<td>重复零次或一次</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>重复n次</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>重复n次或更多次</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>重复n到m次</td>
+</tr>
+</tbody>
+</table>
+<h1><span id="字符类">字符类</span></h1>
+<p>若想要查找数字、字母，则可以将需要查找的字符列在方括号里面：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[abcd]</span><br><span class="line"></span><br><span class="line">[a-z0-9A-Z_]</span><br></pre></td></tr></table></figure>
+<h1><span id="分歧条件">分歧条件</span></h1>
+<p><strong>分枝条件</strong> 指的是有几种规则，如果满足其中任意一种规则都应该当成匹配；</p>
+<p><strong>使用<code>|</code>符号隔开。</strong></p>
 <p>eg：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x: x * x</span><br><span class="line"></span><br><span class="line">f(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 25</span></span><br></pre></td></tr></table></figure>
-<p><strong>也可以把匿名函数作为返回值返回</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">lambda</span>: x * x + y * y</span><br></pre></td></tr></table></figure>
-<h1><span id="装饰器">装饰器</span></h1>
-<ul>
-<li><strong>函数对象有一个__name__属性，可以获取函数的名字</strong></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">now</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"3017-4-16"</span>)</span><br><span class="line"></span><br><span class="line">now.__name__</span><br><span class="line"><span class="comment"># now</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>decorator 是一个返回函数的高阶函数；</strong><br>
-<strong>要增强now()函数的功能，比如，在函数调用前后自动打印日志等；但不希望修改now()函数的定义，这种代码运行期间动态增加功能的方式，就称为装饰器（decorator）；</strong></li>
-</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\d&#123;5&#125;-\d&#123;4&#125;|\d&#123;5&#125;</span><br></pre></td></tr></table></figure>
+<h1><span id="分组">分组</span></h1>
+<p>当想要重复多个字符的时候，可以使用小括号指定子表达式（即，分组）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(\d&#123;1,3&#125;\.)&#123;3&#125;\d&#123;1,3&#125;</span><br><span class="line">\\可以重复3个 \d&#123;1,3&#125;\.。</span><br></pre></td></tr></table></figure>
+<h1><span id="反义">反义</span></h1>
+<p>查找不属于定义的字符类的字符。</p>
+<table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\W</td>
+<td>匹配任意不是字母，数字，下划线，汉字的字符</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配任意不是空白符的字符</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>匹配任意非数字的字符</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>匹配不是单词开头或结束的位置</td>
+</tr>
+<tr>
+<td>[^x]</td>
+<td>匹配除了x以外的任意字符</td>
+</tr>
+<tr>
+<td>[^aeiou]</td>
+<td>匹配除了aeiou这几个字母以外的任意字符</td>
+</tr>
+</tbody>
+</table>
+<h1><span id="向后引用">向后引用</span></h1>
+<p>使用小括号指定一个子表达式后，<strong>匹配这个子表达式的文本</strong>，可以在表达式或其他程序中作进一步的处理。默认情况下，每个分组会自动拥有一个组号。</p>
+<p>向后引用用于重复搜索前面某个分组匹配的文本。</p>
+<p>eg：</p>
+<p>\1代表分组1匹配的文本<br>
+\0代表整个正则表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\b(\w+)\b\s+\1\b</span><br><span class="line"></span><br><span class="line">// 可以匹配go go或者kitty kitty</span><br></pre></td></tr></table></figure>
+<p>常用的分组语法</p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(exp)</td>
+<td>匹配exp,并捕获文本到自动命名的组里</td>
+</tr>
+<tr>
+<td>(?<name>exp)</name></td>
+<td>匹配exp,并捕获文本到名称为name的组里，也可以写成(?'name’exp)</td>
+</tr>
+<tr>
+<td>(?:exp)</td>
+<td>匹配exp,不捕获匹配的文本，也不给此分组分配组号</td>
+</tr>
+<tr>
+<td>(?=exp)</td>
+<td>匹配exp前面的位置</td>
+</tr>
+<tr>
+<td>(?&lt;=exp)</td>
+<td>匹配exp后面的位置</td>
+</tr>
+<tr>
+<td>(?!exp)</td>
+<td>匹配后面跟的不是exp的位置</td>
+</tr>
+<tr>
+<td>(?&lt;!exp)</td>
+<td>匹配前面不是exp的位置</td>
+</tr>
+<tr>
+<td>(?#comment)</td>
+<td>这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读</td>
+</tr>
+</tbody>
+</table>
+<h1><span id="零宽断言">零宽断言</span></h1>
+<p><strong>(?=exp)</strong> 它断言自身出现的位置的后面能匹配表达式exp。比如\b\w+(?=ing\b)，匹配以ing结尾的单词的前面部分(除了ing以外的部分)</p>
+<p>查找I’m singing while you’re dancing.时，它会匹配sing和danc。</p>
+<p><strong>(?&lt;=exp)</strong> 它断言自身出现的位置的前面能匹配表达式exp。比如(?&lt;=\bre)\w+\b会匹配以re开头的单词的后半部分(除了re以外的部分)，例如在查找reading a book时，它匹配ading</p>
+<h1><span id="负向零宽断言">负向零宽断言</span></h1>
+<p>负向零宽断言只匹配一个位置，并不消费任何字符。</p>
 <p>eg:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span><span class="params">(func)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kw)</span>:</span></span><br><span class="line">        print(<span class="string">'call %s():'</span> % func.__name__)</span><br><span class="line">        <span class="keyword">return</span> func(*args, **kw)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
-<p><strong>借助Python的@语法，把decorator置于函数的定义处</strong><br>
-然后调用函数时，还会在运行now()函数前打印一行日志<br>
-eg：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@log</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">now</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"3017-4-16"</span>)</span><br><span class="line"></span><br><span class="line">now()</span><br><span class="line"></span><br><span class="line"><span class="comment"># call now()</span></span><br><span class="line"><span class="comment"># 3017-4-16</span></span><br></pre></td></tr></table></figure>
-<p><strong>@log 相当于执行了：now = log(now)</strong></p>
-<p>log()就是一个decorator，返回一个函数；所以原来的now()函数仍然存在，智慧现在同名的now变量指向了新的函数；于是调用now()将执行新函数；即，log()函数中返回的wrapper函数；（好像明白了什么，这算是拓展功能之类的吗）</p>
-<p><strong>如果decorator本身需要传入参数，那么编写一个返回decorator的高阶函数</strong><br>
-eg：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span><span class="params">(text)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decorator</span><span class="params">(func)</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kw)</span>:</span></span><br><span class="line">            print(<span class="string">'%s %s():'</span> % (text, func.__name__))</span><br><span class="line">            <span class="keyword">return</span> func(*args, **kw)</span><br><span class="line">        <span class="keyword">return</span> wrapper</span><br><span class="line">    retrun decorator</span><br><span class="line"></span><br><span class="line"><span class="meta">@log('execute')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">now</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"3017-4-16"</span>)</span><br><span class="line"><span class="comment"># now()</span></span><br><span class="line"><span class="comment"># execute now():</span></span><br><span class="line"><span class="comment"># 3017-4-16</span></span><br></pre></td></tr></table></figure>
-<p><strong>相当于：now = log(‘execute’)(now)</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">\b\w*q(?!u)\w*\b</span><br><span class="line">// 匹配存在q且q后面不为u的单词。</span><br><span class="line"></span><br><span class="line">\d&#123;3&#125;(?!\d)</span><br><span class="line">// 匹配三位数字，而且这三位数字的后面不能是数字；</span><br><span class="line"></span><br><span class="line">\b((?!abc)\w)+\b</span><br><span class="line">// 匹配不包含连续字符串abc的单词</span><br><span class="line"></span><br><span class="line">(?&lt;![a-z])\d&#123;7&#125;</span><br><span class="line">// 匹配前面不是小写字母的七位数字</span><br></pre></td></tr></table></figure>
+<h1><span id="贪婪与懒惰">贪婪与懒惰</span></h1>
+<p>当正则表达式中包含能够接受重复的限定符时，<strong>通常</strong>是要匹配尽可能多的字符。<br>
+这就叫<strong>贪婪匹配</strong></p>
+<p>eg:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a.*b</span><br><span class="line">// 匹配最长的a开头b结尾的字符串</span><br></pre></td></tr></table></figure>
+<p>而当正则表达式需要匹配尽可能少的字符时，就叫<strong>懒惰匹配</strong></p>
+<p>eg:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a.*?b</span><br><span class="line"></span><br><span class="line">// 匹配最短的以a开头b结尾的字符串</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>以上两种decorator的定义都没有问题，但还差最后一步。因为我们讲了函数也是对象，它有__name__等属性，但你去看经过decorator装饰之后的函数，它们的__name__已经从原来的’now’变成了’wrapper’<br>
-不需要编写wrapper.<strong>name</strong> = func.__name__这样的代码，Python内置的functools.wraps就是干这个事的</p>
+<p><code>.*?</code>就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复</p>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">    @functools.wraps(func)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kw)</span>:</span></span><br><span class="line">        print(<span class="string">'call %s():'</span> % func.__name__)</span><br><span class="line">        <span class="keyword">return</span> func(*args, **kw)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
-<p><strong>import functools是导入functools模块</strong></p>
-<h1><span id="偏函数">偏函数</span></h1>
-<p><strong>如果有一个函数：func(xx ,xxx);要传入两个参数；如果，我们想要调用之传入一个参数的该函数，可以声明一个新函数;eg：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">int2</span><span class="params">(x, base=<span class="number">2</span>)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> int(x, base)</span><br><span class="line"></span><br><span class="line">int2(x)</span><br></pre></td></tr></table></figure>
-<p><strong>functools.partial可以帮助我们创建这样的偏函数；不需要我们自己定义int2()；</strong><br>
-eg:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int2 = functools.partial(int, base=<span class="number">2</span>)</span><br><span class="line">int2(<span class="string">'100000'</span>)</span><br></pre></td></tr></table></figure>
-<p>新的int2函数，仅仅是把base参数重新设定默认值为2，但也可以在函数调用时传入其他值</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int2(<span class="string">'1000000'</span>, base=<span class="number">10</span>)</span><br><span class="line"><span class="comment"># 1000000</span></span><br></pre></td></tr></table></figure>
+<p><strong>懒惰限定符：</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*?</td>
+<td>重复任意次，但尽可能少重复</td>
+</tr>
+<tr>
+<td>+?</td>
+<td>重复1次或更多次，但尽可能少重复</td>
+</tr>
+<tr>
+<td>??</td>
+<td>重复0次或1次，但尽可能少重复</td>
+</tr>
+<tr>
+<td>{n,m}?</td>
+<td>重复n到m次，但尽可能少重复</td>
+</tr>
+<tr>
+<td>{n,}?</td>
+<td>重复n次以上，但尽可能少重复</td>
+</tr>
+</tbody>
+</table>
 <hr>
-<p>参考资料：<a href="http://www.liaoxuefeng.com/" target="_blank" rel="noopener">http://www.liaoxuefeng.com/</a></p>
+<p>学习资料来自：<a href="https://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="noopener">https://deerchao.net/tutorials/regex/regex.htm</a></p>
 
                 
 
@@ -267,12 +453,12 @@ eg:</p>
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2017/04/16/python学习日记09/" data-toggle="tooltip" data-placement="top" title="Python模块">&larr; Previous Post</a>
+                            <a href="/2018/09/12/JS_3/" data-toggle="tooltip" data-placement="top" title="ECMAScript学习笔记（五）">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2017/04/15/python学习日记06/" data-toggle="tooltip" data-placement="top" title="我与Py的那些事——高级特性">Next Post &rarr;</a>
+                            <a href="/2018/09/11/JS_2/" data-toggle="tooltip" data-placement="top" title="ECMAScript学习笔记（四）">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -311,7 +497,7 @@ eg:</p>
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#python" title="python">python</a>
+                          <a class="tag" href="/tags/#杂类" title="杂类">杂类</a>
                         
                     </div>
                 </section>
@@ -366,8 +552,8 @@ eg:</p>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "csming1995";
-    var disqus_identifier = "https://csming1995.github.io/2017/04/16/python学习日记08/";
-    var disqus_url = "https://csming1995.github.io/2017/04/16/python学习日记08/";
+    var disqus_identifier = "https://csming1995.github.io/2018/09/11/Pattern/";
+    var disqus_url = "https://csming1995.github.io/2018/09/11/Pattern/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
