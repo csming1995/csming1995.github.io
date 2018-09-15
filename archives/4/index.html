@@ -209,6 +209,42 @@
 
 <div class="post-preview">
 
+    <a href="/2017/04/17/python学习日记11/">
+        <h2 class="post-title">
+            Python的继承与多态
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            我们定义跟一个class的时候，可以从某个现有的class继承，新的class就是子类；
+被继承的class叫做基类（就是老被啦~）
+
+初次使用继承
+首先编写一个基类；
+然后编写子类，直接继承基类；此时，子类的实例就可以直接调用父类的方法了；(如Dog类)
+当然，子类可以定义自己的方法；
+而如果子类定义了与父类的方法重名时，就会将父类的方法覆盖
+12345678910111213class ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-04-17
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#python" title="python">python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2017/04/17/python学习日记10/">
         <h2 class="post-title">
             Python的面向对象
@@ -314,36 +350,6 @@ eg：
 
 <div class="post-preview">
 
-    <a href="/2017/04/15/python学习日记06/">
-        <h2 class="post-title">
-            我与Py的那些事——高级特性
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            切片
-取一个list或tuple的部分元素
-1234567891011121314L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack']# ---------------------------------------L[0:3] L[1:3] # 方法1L[:3] # 方法2L[-2:] # 方法3L[:10:2] # 前10个数中每2个取1个L[......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-04-15
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#python" title="python">python</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
     <a href="/2017/04/15/python学习日记07/">
         <h2 class="post-title">
             Python函数式编程
@@ -365,6 +371,36 @@ eg：
 
 函数名也是变量
 函数名其实就是指向函数的变量！对于abs()这个函数，完全可以把函数名abs看成变......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-04-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#python" title="python">python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/04/15/python学习日记06/">
+        <h2 class="post-title">
+            我与Py的那些事——高级特性
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            切片
+取一个list或tuple的部分元素
+1234567891011121314L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack']# ---------------------------------------L[0:3] L[1:3] # 方法1L[:3] # 方法2L[-2:] # 方法3L[:10:2] # 前10个数中每2个取1个L[......
         </div>
     </a>
     
@@ -426,18 +462,19 @@ Python可以处理任意大小的整数，包括负整数（略）
 
 <div class="post-preview">
 
-    <a href="/2017/04/15/python学习日记04/">
+    <a href="/2017/04/15/python学习日记03/">
         <h2 class="post-title">
-            我与Py的那些事——条件判断
+            我与Py的那些事——list与tuple
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            条件判断
-12345678if &lt;条件判断1&gt;:    &lt;执行1&gt;elif &lt;条件判断2&gt;:    &lt;执行2&gt;elif &lt;条件判断3&gt;:    &lt;执行3&gt;else:    &lt;执行4&gt;
-eg:
-1234567age = 20if age &gt;= 6:    print('teenager')elif age......
+            list
+list是Python内置的数据类型；是一种有序的集合，可以随时添加和删除其中的元素
+123&gt;&gt;&gt; classmates = ['Michael', 'Bob', 'Tracy']&gt;&gt;&gt; classmates# ['Michael', 'Bob', 'Tracy']
+那么classmates就是一个list；
+可以使用len()函数获得list元......
         </div>
     </a>
     
@@ -499,65 +536,24 @@ int() float() str() bool()
 
 <div class="post-preview">
 
-    <a href="/2017/04/15/python学习日记03/">
+    <a href="/2017/04/15/python学习日记04/">
         <h2 class="post-title">
-            我与Py的那些事——list与tuple
+            我与Py的那些事——条件判断
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            list
-list是Python内置的数据类型；是一种有序的集合，可以随时添加和删除其中的元素
-123&gt;&gt;&gt; classmates = ['Michael', 'Bob', 'Tracy']&gt;&gt;&gt; classmates# ['Michael', 'Bob', 'Tracy']
-那么classmates就是一个list；
-可以使用len()函数获得list元......
+            条件判断
+12345678if &lt;条件判断1&gt;:    &lt;执行1&gt;elif &lt;条件判断2&gt;:    &lt;执行2&gt;elif &lt;条件判断3&gt;:    &lt;执行3&gt;else:    &lt;执行4&gt;
+eg:
+1234567age = 20if age &gt;= 6:    print('teenager')elif age......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
             2017-04-15
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#python" title="python">python</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2017/04/09/python学习日记01/">
-        <h2 class="post-title">
-            我与Py的那些事——输入输出
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            最近受了老板（一折）的“蛊惑”入了py坑；虽然刚学，但觉得py跟以前学的C语言族的语言很不一样，很hacker……学习过程中主要看了廖雪峰的教程
-
-第一个程序
-
-安装完python后，在命令提示符中输入“python”；进入Python编辑器；
-
-两种编写方式
-
-第一种是在命令提示符下的；
-第一次写的代码如下；
-
-12&gt;&gt;&gt;100+200300
-12&gt;&gt;&gt;......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-04-09
         </p>
         <div class="tags">
             
@@ -657,7 +653,7 @@ list是Python内置的数据类型；是一种有序的集合，可以随时添�
             
         
             
-            <a href="/tags/#JavaScript" title="JavaScript" rel="8">JavaScript</a>
+            <a href="/tags/#JavaScript" title="JavaScript" rel="9">JavaScript</a>
             
         
             
@@ -732,6 +728,10 @@ list是Python内置的数据类型；是一种有序的集合，可以随时添�
     <ul>
       
         <li>
+          <a href="/2018/09/13/JS_6/">ECMAScript学习笔记（七）——集成</a>
+        </li>
+      
+        <li>
           <a href="/2018/09/13/JS_5/">ECMAScript学习笔记（六）——对象的创建</a>
         </li>
       
@@ -745,10 +745,6 @@ list是Python内置的数据类型；是一种有序的集合，可以随时添�
       
         <li>
           <a href="/2018/09/11/Pattern/">关于正则表达式</a>
-        </li>
-      
-        <li>
-          <a href="/2018/09/11/JS_2/">ECMAScript学习笔记（三）</a>
         </li>
       
     </ul>
@@ -797,7 +793,7 @@ list是Python内置的数据类型；是一种有序的集合，可以随时添�
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>

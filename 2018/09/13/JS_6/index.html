@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          ECMAScript学习笔记（七）——集成 - 十一月 | 深入迷雾寻找火光
+        
+    </title>
+
+    <link rel="canonical" href="https://csming1995.github.io/2018/09/13/JS_6/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/bg2.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
+                            
+                        </div>
+                        <h1>ECMAScript学习笔记（七）——集成</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Csming on
+                            2018-09-13
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Csming</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>ECMAScript依靠原型链来实现继承；</p>
+<h3><span id="原型链">原型链</span></h3>
+<p>原型链，是利用原型让一个引用类型继承另一个引用类型的属性和方法。</p>
+<p><strong>每个构造函数都有一个原型对象，原型对象包含一个指向构造函数的指针，而实例都包含一个指向原型对象的内部指针。</strong></p>
+<p>如果，一个原型又是另一个原型的实例，那么上述关系依旧成立，如此层层递进，就构成了实例和原型的链条，就是所谓的<strong>原型链</strong></p>
+<p>eg:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.property = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SuperType.prototype.getSuperValue = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.property;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.subproperty = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SubType.prototype = <span class="keyword">new</span> SuperType();</span><br><span class="line"></span><br><span class="line">SubType.prototype.getSubValue = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.subproperty;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> SubType();</span><br></pre></td></tr></table></figure>
+<p><strong>以上代码定义了两个类型：SuperType和SubType。</strong> SubType继承了SuperType。 这个继承是通过：创建一个SuperType的实例，然后将这个实例赋值给SubType.prototype实现的。</p>
+<p>实现的本质是：重写原型对象，代之以一个新类型的实例。</p>
+<p><strong>所有的引用类型都默认几成了Object。这个继承也是通过原型链实现的。</strong></p>
+<p><strong>原型和实例的关系：</strong> 可以通过instanceof操作符和isPrototypeOf()方法来确认。</p>
+<p><strong>给原型添加方法的代码，一定要放在替换原型的语句之后。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.property = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line">SuperType.prototype.getSuperValue = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.property;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.subproperty = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SubType.prototype = <span class="keyword">new</span> SubperType();</span><br><span class="line"></span><br><span class="line">SubType.prototype.getSubValue = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">this</span>.subproperty;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SubType.prototype.getSuperValue = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> SubType();</span><br><span class="line">alert(instance.getSuperType()); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>以上代码，添加了getSubValue()方法到SubType中，而重写了SubType中的getSubType()方法，将SuperType中的getSuperValue()覆盖了。</p>
+<h4><span id="原型链的问题">原型链的问题</span></h4>
+<p><strong>1.在通过原型实现继承时，原型会变成另一个类型的实例。于是，原先的实例属性就会变成现在的原型属性了。</strong></p>
+<p>eg:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.color = &#123;<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SubType.prototype = <span class="keyword">new</span> SuperType();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance1 = <span class="keyword">new</span> SubType();</span><br><span class="line">instance1.colors.push(<span class="string">"black"</span>);</span><br><span class="line">alert(instance1.colors); <span class="comment">// red, blue, green, black</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance2 = <span class="keyword">new</span> SubType();</span><br><span class="line">alert(instance2.colors); <span class="comment">// red, blue, green, black</span></span><br></pre></td></tr></table></figure>
+<p><strong>2.创建子类型的实例时，不能向超类型的构造函数中传递参数。</strong></p>
+<h3><span id="借用构造函数">借用构造函数</span></h3>
+<p>为了解决原型中包含引用类型值，所带来的问题。人们开始使用一种叫<code>借用构造函数</code>的技术（伪造对象，或者经典继承）。</p>
+<p>这种方法：在子类型构造器的内部调用超类型的构造函数。</p>
+<p>eg:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.colors = [<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  SuperType.call(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance1 = <span class="keyword">new</span> SubType();</span><br><span class="line">instance1.colors.push(<span class="string">"black"</span>); <span class="comment">// red, blue, green, black</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance2 = <span class="keyword">new</span> SubTyp();</span><br><span class="line">instance2.colors <span class="comment">// red, blue, green</span></span><br></pre></td></tr></table></figure>
+<p>上述代码，在构造函数中，调用了超类型的构造函数。等于说是在这个构造函数中，执行了一边超类型的构造函数的代码。</p>
+<p><strong>另外，这个方式还可以像超类型的构造函数传递参数：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  SuperType.call(<span class="keyword">this</span>, <span class="string">"Nicholas"</span>);</span><br><span class="line">  <span class="keyword">this</span>.age = <span class="number">29</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> SubType();</span><br><span class="line">alert(instance.name); <span class="comment">// "Nicholas"</span></span><br><span class="line">alert(instance.age); <span class="comment">// 29</span></span><br></pre></td></tr></table></figure>
+<p><strong>这种方式存在的问题：</strong> 这种方式的继承，方法都在构造函数中定义，所以就没办法做函数复用了。</p>
+<h3><span id="组合继承">组合继承</span></h3>
+<p>组合继承，是指将原型链和借用构造函数组合。</p>
+<p>eg：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">  <span class="keyword">this</span>.colors = &#123;<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SuperType.prototype.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  SuperType.call(<span class="keyword">this</span>, name);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SubType.prototype = <span class="keyword">new</span> SuperType();</span><br><span class="line"></span><br><span class="line">SubType.prototype.sayAge = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.age);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance1 = <span class="keyword">new</span> SubType(<span class="string">"Nicholas"</span>, <span class="number">29</span>);</span><br><span class="line">instance1.colors.push(<span class="string">"black"</span>); <span class="comment">// red, blue, green, black</span></span><br><span class="line">instance1.sayName(); <span class="comment">// Nicholas</span></span><br><span class="line">instance1.sayAge(); <span class="comment">// 29</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance2 = <span class="keyword">new</span> SubType(<span class="string">"Gred"</span>, <span class="number">27</span>);</span><br><span class="line">instance2.colors; <span class="comment">// red, blue, green</span></span><br><span class="line">instance2.sayName(); <span class="comment">// Gred</span></span><br><span class="line">instance2.sayAge(); <span class="comment">// 27</span></span><br></pre></td></tr></table></figure>
+<p>这是JavaScript中最常用的继承模式了。</p>
+<h3><span id="原型式继承">原型式继承</span></h3>
+<p>基于原有的对象创建新对象，就不必创建自定义类型了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">object</span>(<span class="params">o</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">  F.prototype = o;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  name: <span class="string">"Nicholas"</span>,</span><br><span class="line">  friends: [<span class="string">"Shelby"</span>, <span class="string">"Court"</span>, <span class="string">"Van"</span>]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> anotherPerson = object(person);</span><br><span class="line">anotherPerson.name = <span class="string">"Greg"</span>;</span><br><span class="line">anotherPerson.friends.push(<span class="string">"Rob"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> yetAnothorPerson = object(person);</span><br><span class="line">yetAnothorPerson.name = <span class="string">"Linda"</span>;</span><br><span class="line">yetAnothorPerson.friends.push(<span class="string">"Barbie"</span>);</span><br><span class="line"></span><br><span class="line">alert(person.friends); <span class="comment">// "Shelby", "Court", "Van", "Rob", "Barbie"</span></span><br></pre></td></tr></table></figure>
+<p>这种原型式继承，要求必须有一个对象可以作为另一个对象的基础。</p>
+<p><strong>ECMAScript 5新增的Object.create()方法，规范了原型式继承：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  name: <span class="string">"Nicholas"</span>,</span><br><span class="line">  friends: [<span class="string">"Shelby"</span>, <span class="string">"Court"</span>, <span class="string">"Van"</span>]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> anotherPerson = Objcet.create(person);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> yetAnothorPerson = Objcet.create(person, &#123;</span><br><span class="line">  name: &#123;</span><br><span class="line">    value: <span class="string">"Greg"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这种方式，适用于只想让一个对象和另一个对象保持相思的情况。</p>
+<h3><span id="寄生式继承">寄生式继承</span></h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createAnther</span>(<span class="params">original</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> clone = object(original);</span><br><span class="line">  clone.sayHi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"Hi"</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> clone;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/09/13/JS_5/" data-toggle="tooltip" data-placement="top" title="ECMAScript学习笔记（六）——对象的创建">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://jalan.space/" target="_blank">Jayang</a></li>
+                    
+                        <li><a href="https://jariver.github.io/" target="_blank">Jariver</a></li>
+                    
+                        <li><a href="https://www.ruphi.cn/" target="_blank">RuphiLau</a></li>
+                    
+                        <li><a href="http://ruiyuhuang.cn/" target="_blank">Ruiyu</a></li>
+                    
+                        <li><a href="https://yx1aoq1.github.io/" target="_blank">Yx1aoq1</a></li>
+                    
+                        <li><a href="https://www.and-who.cn/" target="_blank">Paopao</a></li>
+                    
+                        <li><a href="http://www.cnblogs.com/zzy19961112/" target="_blank">Dudu</a></li>
+                    
+                        <li><a href="http://www.hs97.cn/" target="_blank">Handsome</a></li>
+                    
+                        <li><a href="https://mysteryhjj.github.io/" target="_blank">Junjun</a></li>
+                    
+                        <li><a href="https://tsingfunlee.github.io/" target="_blank">tsingfunlee</a></li>
+                    
+                        <li><a href="https://mychiaki.github.io/" target="_blank">Chiaki</a></li>
+                    
+                        <li><a href="https://blog.weafung.com" target="_blank">weafung</a></li>
+                    
+                        <li><a href="https://zhangsihuai.github.io/" target="_blank">CodePlay</a></li>
+                    
+                        <li><a href="http://lizimeow.cn/" target="_blank">Lizi</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "csming1995";
+    var disqus_identifier = "https://csming1995.github.io/2018/09/13/JS_6/";
+    var disqus_url = "https://csming1995.github.io/2018/09/13/JS_6/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/少铭-陈-5049a6138">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Csming 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://csming1995.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://csming1995.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
