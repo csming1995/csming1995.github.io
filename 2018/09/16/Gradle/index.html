@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          关于Gradle - 十一月 | 深入迷雾寻找火光
+        
+    </title>
+
+    <link rel="canonical" href="https://csming1995.github.io/2018/09/16/Gradle/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/bg2.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#杂类" title="杂类">杂类</a>
+                            
+                        </div>
+                        <h1>关于Gradle</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Csming on
+                            2018-09-16
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Csming</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="什么是gradle">什么是Gradle</span></h1>
+<p>Gradle是基于Apache Ant和Apache Maven概念的自动化构建工具。他使用一种基于Groovy的DSL来声明项目设置。</p>
+<p>Gradle能够：</p>
+<p>自动处理包相依关系（取自 Maven Repos 的概念）<br>
+自动处理布署问题（取自 Ant 的概念）<br>
+条件判断写法直觉（使用 Groovy 语言）</p>
+<h1><span id="gradle的编译过程">Gradle的编译过程</span></h1>
+<p>Gradle中有两个对象：Project、Task。</p>
+<p>每个项目的编译至少有一个Project，一个build.gradle就代表一个project，每个project里面包含了多个task，task里包含了多格action。action包含了需要被执行的代码。</p>
+<p>编译过程中，Gradle会根据build相关文件，聚合所有的project和task，执行task中的action。</p>
+<p>执行顺序由依赖逻辑来保证。所有的task都需要依赖其他task来执行，没有被依赖的task首先被执行。</p>
+<p><strong>编译过程分为：</strong></p>
+<p>1.初始化阶段： 创建project对象。</p>
+<p>2.配置阶段： 执行所有的编译脚本，同事创建project的所有task。</p>
+<p>3.gradle根据传入的参数决定如何执行这些task。</p>
+<h2><span id="gradle-files">Gradle Files</span></h2>
+<p>setting.gradle 用于定义加入编译过程的module</p>
+<p>顶层的build.gradle 最终被应用到所有项目中</p>
+<h3><span id="顶层的buildgradle">顶层的build.gradle</span></h3>
+<p><strong>buildscript：</strong> 定义了Android编译工具的类路径。</p>
+<p><strong>allprojects：</strong> 定义的属性会被应用到所有module中。</p>
+<h3><span id="每个项目的buildgradle">每个项目的build.gradle</span></h3>
+<p><strong>1.apply plugin：</strong> 定义了gradle插件。</p>
+<p>eg：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apply plugin <span class="string">"com.android.application"</span></span><br></pre></td></tr></table></figure>
+<p><strong>2.android：</strong> 用于配置android的所有特殊配置。这个是前年声明的plugin提供的</p>
+<p><strong>（1）defaultConfig：</strong> 程序的默认配置。</p>
+<p><strong>（2）buildType：</strong> 定义了编译类型。可以针对每个类型进行不同的配置。（release。debug等）</p>
+<p><strong>3.dependencies：</strong> 是gradle的依赖配置。定义了当前项目需要依赖的其他库。</p>
+<h2><span id="gradle-wrapper">Gradle Wrapper</span></h2>
+<p>gradle wrapper用于处理对以往项目的兼容性问题。</p>
+<h2><span id="gradle-basics">Gradle basics</span></h2>
+<p>Gradle会根据build文件的配置生成不同的task。我们可以直接单独执行每个task。</p>
+<p><strong>可以使用<code>./gradlew task</code>列出所有的task。如果想要列出每个task对应依赖的其他task，可以使用<code>./gradlew task -all</code></strong></p>
+<h2><span id="android-tasks">Android tasks</span></h2>
+<p>基本的四个task:</p>
+<p><strong>1.assemble：</strong> 对所有的buildType 生成apk包<br>
+<strong>2.clean：</strong> 移除所有的编译输出文件，比如apk包<br>
+<strong>3.check：</strong> 执行lint检测编译<br>
+<strong>4.build：</strong> 同时执行assemble和check命令</p>
+<h2><span id="configuration">Configuration</span></h2>
+<h3><span id="buildconfig">BuildConfig</span></h3>
+<p>可以在buildTypes中配置一些key-value对。他们会体现在BuildConfig中</p>
+<h2><span id="repositories">repositories</span></h2>
+<p><strong>Repositories：</strong>  就是代码仓库，我们平时的添加的一些 dependency就是从这里下载的，Gradle 支持三种类型的仓库：Maven,Ivy和一些静态文件或者文件夹。</p>
+<p>在执行阶段，gradle会从仓库中取出对应需要的依赖文件。</p>
+<p>除了使用远程库以外，还可以使用相对路径配置本地仓库：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">repositorys &#123;</span><br><span class="line">  <span class="keyword">flatDir</span> &#123;</span><br><span class="line">    dirs <span class="string">"aars"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="local-dependencies">Local dependencies</span></h3>
+<h4><span id="file-dependencies">File dependencies</span></h4>
+<p>通过files()方法可以添加文件依赖，也可以通过fileTree()添加一个文件夹：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">  <span class="keyword">compile</span> <span class="keyword">fileTree</span>(dir: <span class="string">'libs'</span>, <span class="keyword">include</span>: [<span class="string">'*.jar'</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4><span id="native-libraries">Native libraries</span></h4>
+<p>配置本地<code>.so</code>库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">  sourceSets.main&#123;</span><br><span class="line">    jniLibs.srcDir &apos;src/main/libs&apos;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4><span id="library-projects">Library projects</span></h4>
+<p>如果要写一个library项目让其他项目引用，则需要使用一下plugin：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: <span class="string">'com.android.library'</span></span><br></pre></td></tr></table></figure>
+<h3><span id="build-variants">Build Variants</span></h3>
+<p>编译时动态根据当前的编译类型输出不用样式的apk文件。这时候就需要使用buildType了</p>
+<h4><span id="buildtype">BuildType</span></h4>
+<h4><span id="source-sets">Source Sets</span></h4>
+<p>每当创建新的build type的时候，gradle默认会创建一个信息source set。我们可以建立与main文件夹同级的文件夹，根据编译类型的不同可以选择对某些源码直接进行替换。</p>
+<h3><span id="product-flavors">Product flavors</span></h3>
+<p>前面build type的做法能够对同一份源码编译同一个程序的不同类型，如果我们需要针对同一份源码编译不同的程序，就需要用到Product flavors；</p>
+<p>所有的product flavor版本和defaultConfig共享所有属性</p>
+<p>和build type一样，product flavor也有自己的source set文件夹。除此之外，build type和product flavor可以结合，他们的文件夹里面的文件优先级甚至高于单独的build type和product flavor文件夹的优先级。</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">  flavorDimensions <span class="string">"color"</span>, <span class="string">"price"</span></span><br><span class="line"></span><br><span class="line">  productFlavors &#123;</span><br><span class="line">    red &#123;</span><br><span class="line">      flavorDimension <span class="string">"color"</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    blue &#123;</span><br><span class="line">      flavorDimension <span class="string">"color"</span></span><br><span class="line">    &#125;</span><br><span class="line">    free &#123;</span><br><span class="line">      flavorDimension <span class="string">"price"</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    paid &#123;</span><br><span class="line">      flavvorDimension <span class="string">"price"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="signing-configurations">Signing configurations</span></h3>
+<p>签名相关。</p>
+<p>当我们打包市场版时，我们需要输入keystore数据，如果是debug版本系统会帮我们配置这些信息。这些信息在gradle中都配置在signingConfigs中：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">  signingConfigs &#123;</span><br><span class="line">    staging.initWith(signingConfigs.debug)</span><br><span class="line"></span><br><span class="line">    release &#123;</span><br><span class="line">      storeFile <span class="keyword">file</span>(<span class="string">"release.keystore"</span>)</span><br><span class="line">      storePassword <span class="string">"secretpassword"</span></span><br><span class="line">      keyAlias <span class="string">"gradleforandroid"</span></span><br><span class="line">      keyPassword <span class="string">"secretpassword"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置之后可以再build type中直接使用</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">  buildTypes &#123;</span><br><span class="line">    release &#123;</span><br><span class="line">      signingConfig signingConfigs.release</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="optimize">Optimize</span></h3>
+<h4><span id="speeding-up-multimodule-builds">Speeding up multimodule builds</span></h4>
+<p>可以通过以下方式加快gradle编译：</p>
+<p><strong>开启并行编译：</strong> 在项目根目录下的gradle.properties中设置</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.gradle.parallel=<span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<p><strong>开启编译守护进程：</strong> 该进程在第一次启动后会一直存在，当第二次编译的时候，可以重用该进程。</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.gradle.daemon=<span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<p><strong>加大可用编译内存：</strong></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.gradle.jvmargs=-Xms256m -Xmx1024m</span><br></pre></td></tr></table></figure>
+<h3><span id="reducing-apk-file">Reducing apk file</span></h3>
+<p>在编译时，我们可能会有很多资源并没有用到，此时可以通过<code>shrinkResources</code>来优化我们的资源文件，除去不必要的资源</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">  buildTypes &#123;</span><br><span class="line">    release &#123;</span><br><span class="line">      minifyEnabled = <span class="keyword">true</span></span><br><span class="line">      shrinkResources = <span class="keyword">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>某些情况下，一些资源需要通过动态加载的方式载入，这时候就需要在res/raw/下简历一个keep.xml文件，通过以下方式keep资源：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">resources</span> <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:keep</span>=<span class="string">"@layout/l_used*_c,@layout/l_used_a,@layout/l_used_b*"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:discard</span>=<span class="string">"@layout/unused2"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h4><span id="manual-shrinking">Manual shrinking</span></h4>
+<p>对于一些特殊文件或者文件夹，例如国际化资源文件、屏幕适配资源等。如果我们已经确定过了某种幸好，而不需要重新适配，就可以去掉不可能被适配的资源：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">android&#123;</span><br><span class="line">  defaultConfig &#123;</span><br><span class="line">    resConfigs <span class="string">"hdpi"</span>, <span class="string">"xhdpi"</span>, <span class="string">"xxhdpi"</span>, <span class="string">"xxxhdpi"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="profiling">Profiling</span></h3>
+<p>当我们执行所有task的时候，都可以添加–profile参数生成一份执行报告在<code>reports/profile</code>中。</p>
+<h3><span id="practice">Practice</span></h3>
+<p>在开发中，我们可能需要自己自定义task。这就需要用到Groovy了。</p>
+<h4><span id="groovy">Groovy</span></h4>
+<p>Groovy我打算专门去学习一下。这里就不记录了。</p>
+<h3><span id="通过hook-android编译插件重命名apk">通过hook Android编译插件重命名apk</span></h3>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">android.applicationVariants.all &#123;</span><br><span class="line">  variant.outputs.<span class="keyword">each</span> &#123; output -&gt;</span><br><span class="line">    <span class="keyword">def</span> <span class="keyword">file</span> = output.outputFile</span><br><span class="line"></span><br><span class="line">    output.outputFile = <span class="keyword">new</span> <span class="keyword">File</span>(<span class="keyword">file</span>.parent, <span class="keyword">file</span>.name.replace(<span class="string">".apk"</span>, <span class="string">"-$&#123;variant.versionName&#125;.apk"</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>学习资料来自：<a href="https://www.jianshu.com/p/9df3c3b6067a" target="_blank" rel="noopener">https://www.jianshu.com/p/9df3c3b6067a</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/09/16/JS_7/" data-toggle="tooltip" data-placement="top" title="ECMAScript学习笔记（八）——函数表达式">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#杂类" title="杂类">杂类</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://jalan.space/" target="_blank">Jayang</a></li>
+                    
+                        <li><a href="https://jariver.github.io/" target="_blank">Jariver</a></li>
+                    
+                        <li><a href="https://www.ruphi.cn/" target="_blank">RuphiLau</a></li>
+                    
+                        <li><a href="http://ruiyuhuang.cn/" target="_blank">Ruiyu</a></li>
+                    
+                        <li><a href="https://yx1aoq1.github.io/" target="_blank">Yx1aoq1</a></li>
+                    
+                        <li><a href="https://www.and-who.cn/" target="_blank">Paopao</a></li>
+                    
+                        <li><a href="http://www.cnblogs.com/zzy19961112/" target="_blank">Dudu</a></li>
+                    
+                        <li><a href="http://www.hs97.cn/" target="_blank">Handsome</a></li>
+                    
+                        <li><a href="https://mysteryhjj.github.io/" target="_blank">Junjun</a></li>
+                    
+                        <li><a href="https://tsingfunlee.github.io/" target="_blank">tsingfunlee</a></li>
+                    
+                        <li><a href="https://mychiaki.github.io/" target="_blank">Chiaki</a></li>
+                    
+                        <li><a href="https://blog.weafung.com" target="_blank">weafung</a></li>
+                    
+                        <li><a href="https://zhangsihuai.github.io/" target="_blank">CodePlay</a></li>
+                    
+                        <li><a href="http://lizimeow.cn/" target="_blank">Lizi</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "csming1995";
+    var disqus_identifier = "https://csming1995.github.io/2018/09/16/Gradle/";
+    var disqus_url = "https://csming1995.github.io/2018/09/16/Gradle/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/少铭-陈-5049a6138">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Csming 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://csming1995.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://csming1995.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
