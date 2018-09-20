@@ -209,6 +209,42 @@
 
 <div class="post-preview">
 
+    <a href="/2017/03/12/JVM学习笔记-3/">
+        <h2 class="post-title">
+            JVM学习——gc回收机制
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+最近复习Java基础细节的时候看Thking in Java；书上有提到两种垃圾回收机制，“停止-复制”、“标记-清扫”；
+
+
+
+**停止-复制：**将暂停程序的运行，然后将所有存活的对象从当前堆复制到另一个堆，而没有被复制的对象都是垃圾；当对象被复制到新堆时，它们是一个挨着一个的，所以新堆保持紧凑排列；然后就可以直接分配新空间了
+
+
+**标记-清扫：**从堆栈和静态存储区出发，遍历所有的......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2017/03/12/JVM学习笔记-2/">
         <h2 class="post-title">
             JVM学习——堆和栈的区别
@@ -538,41 +574,6 @@ Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2017/01/20/Android自定义View-4/">
-        <h2 class="post-title">
-            Android自定义View——动画学习笔记
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            实质
-每一帧绘制不同内容
-基本过程
-开始动画后，调用View的invalidate触发重绘。重绘后检查动画是否停止，若未停止则继续调用invalidate触发下一帧（下一次重绘），直到动画结束。
-重绘时View的draw方法会被调用，根据动画的进行绘制不同的内容，如某个被绘制元素的大小变化、角度旋转、透明度变化等，这样即会产生动画。
-动画的推进过程一般都会有一个变化量，这个变量会被用到dra......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-01-20
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -661,7 +662,7 @@ Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形
             
         
             
-            <a href="/tags/#JavaScript" title="JavaScript" rel="10">JavaScript</a>
+            <a href="/tags/#JavaScript" title="JavaScript" rel="11">JavaScript</a>
             
         
             
@@ -738,6 +739,10 @@ Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形
     <ul>
       
         <li>
+          <a href="/2018/09/17/JS_DOM/">JavaScript——DOM</a>
+        </li>
+      
+        <li>
           <a href="/2018/09/16/Gradle/">关于Gradle</a>
         </li>
       
@@ -751,10 +756,6 @@ Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形
       
         <li>
           <a href="/2018/09/13/JS_5/">ECMAScript学习笔记（六）——对象的创建</a>
-        </li>
-      
-        <li>
-          <a href="/2018/09/13/JS_4/">ECMAScript学习笔记（五）</a>
         </li>
       
     </ul>
@@ -803,7 +804,7 @@ Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>

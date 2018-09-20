@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          我与Py的那些事——条件判断 - 十一月 | 深入迷雾寻找火光
+          JavaScript——DOM - 十一月 | 深入迷雾寻找火光
         
     </title>
 
-    <link rel="canonical" href="https://csming1995.github.io/2017/04/15/python学习日记04/">
+    <link rel="canonical" href="https://csming1995.github.io/2018/09/17/JS_DOM/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -86,14 +86,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#python" title="python">python</a>
+                              <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
                             
                         </div>
-                        <h1>我与Py的那些事——条件判断</h1>
+                        <h1>JavaScript——DOM</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Csming on
-                            2017-04-15
+                            2018-09-17
                         </span>
                     </div>
                 
@@ -210,25 +210,74 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="条件判断">条件判断</span></h1>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> &lt;条件判断<span class="number">1</span>&gt;:</span><br><span class="line">    &lt;执行<span class="number">1</span>&gt;</span><br><span class="line"><span class="keyword">elif</span> &lt;条件判断<span class="number">2</span>&gt;:</span><br><span class="line">    &lt;执行<span class="number">2</span>&gt;</span><br><span class="line"><span class="keyword">elif</span> &lt;条件判断<span class="number">3</span>&gt;:</span><br><span class="line">    &lt;执行<span class="number">3</span>&gt;</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    &lt;执行<span class="number">4</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>eg:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">age = <span class="number">20</span></span><br><span class="line"><span class="keyword">if</span> age &gt;= <span class="number">6</span>:</span><br><span class="line">    print(<span class="string">'teenager'</span>)</span><br><span class="line"><span class="keyword">elif</span> age &gt;= <span class="number">18</span>:</span><br><span class="line">    print(<span class="string">'adult'</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">'kid'</span>)</span><br></pre></td></tr></table></figure>
-<hr>
-<ul>
-<li><strong>然后有一点，就是利用input()输入时，输入默认为str类型</strong><br>
-<strong>所以输入后需要转型</strong></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = input()</span><br><span class="line">birth = int(s)</span><br></pre></td></tr></table></figure>
-<p>int()函数会判断参数是否是合法数字</p>
-<h1><span id="循环">循环</span></h1>
-<p>循环有两种方式，for和while</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> ...</span><br><span class="line"></span><br><span class="line">sum = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]:</span><br><span class="line">	sum = sum + x</span><br><span class="line">print(sum)</span><br><span class="line"></span><br><span class="line">list(range(<span class="number">5</span>))</span><br><span class="line">sum = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">101</span>)</span><br><span class="line">	sum = sum + x</span><br><span class="line">print(sum)</span><br><span class="line"><span class="comment"># --------------------------------------</span></span><br><span class="line">sum = <span class="number">0</span></span><br><span class="line">n = <span class="number">99</span></span><br><span class="line"><span class="keyword">while</span> n &gt; <span class="number">0</span>:</span><br><span class="line">	sum = sum + n</span><br><span class="line">	n = n <span class="number">-2</span></span><br><span class="line">print(sum)</span><br></pre></td></tr></table></figure>
-<h1><span id="break与continue">break与continue</span></h1>
-<p>break语句可以提前退出循环<br>
-通过continue语句，跳过当前的这次循环，直接开始下一次循环</p>
-<hr>
-<p>参考资料：<a href="http://www.liaoxuefeng.com/" target="_blank" rel="noopener">http://www.liaoxuefeng.com/</a></p>
+                <h1><span id="dom是什么">DOM是什么</span></h1>
+<p>DOM是针对HTML和XML文档的一个API。</p>
+<p>DOM描绘了一个层次化的节点树。</p>
+<p>DOM允许开发人员：添加、移除、修改页面的某一部分。</p>
+<p>现在DOM已经成为表现和操作页面标记的真正跨平台、语言中立的方式了。</p>
+<h1><span id="dom1级">DOM1级</span></h1>
+<p>DOM1提供了基本的文档结构及查询的接口。</p>
+<h2><span id="节点层次">节点层次</span></h2>
+<p>DOM可以将任何的HTML或者XML文档描绘成一个由多层节点构成的结构。</p>
+<p>节点分为几种不同的类型。每种类型分别表示文档中不同的信息及标记。每个节点都拥有各自的特点、数据和方法，以及和其他节点存在的某种关系。</p>
+<p><strong>每一段标记都可以通过树中的一个节点来表示：</strong> HTML元素通过元素节点表示，特性（attribute）通过特性节点表示，文档类型通过文档类型节点表示，注释通过注释节点表示。</p>
+<p><strong>总共有12中节点类型，这些类型都继承自一个基类：</strong> Node类型</p>
+<h3><span id="node类型">Node类型</span></h3>
+<p>DOM1级定义了一个Node接口，这个接口将由DOM中的所有节点类型实现。</p>
+<p>Node接口，在JavaScript中是作为Node类型实现的。（除了IE之外，其他浏览器都可以访问到这个类型。）</p>
+<p>所有节点类型都共享相同的基本属性和方法：</p>
+<p><strong>nodeType属性</strong> 用于表明节点的类型。节点类型在Node中定义类12个常量</p>
+<p><strong>(1)Node.ELEMENT_NODE(1)</strong><br>
+<strong>(2)Node.ATTRIBUTE_NODE(2)</strong><br>
+<strong>(3)Node.TEXT_NODE(3)</strong><br>
+<strong>(4)Node.CDATA_SECTION_NODE(4)</strong><br>
+<strong>(5)Node.ENTITY_REFERENCE_NODE(5)</strong><br>
+<strong>(6)Node.ENTITY_NODE(6)</strong><br>
+<strong>(7)Node.PROCESSING_INSTRUCTION_NODE(7)</strong><br>
+<strong>(8)Node.COMMENT_NODE(8)</strong><br>
+<strong>(9)Node.DOCUMENT_NODE(9)</strong><br>
+<strong>(10)Node.DOCUMENT_TYPE_NODE(10)</strong><br>
+<strong>(11)Node.DOCUMENT_FRAGMENT_NODE(11)</strong><br>
+<strong>(12)Node.NOTATION_NODE(12)</strong></p>
+<p>可以通过比较上面的常量，以确定节点的类型：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (someNode.nodeType == Node.ELEMENT_NODE) &#123;</span><br><span class="line">  alert(<span class="string">"Node is an element"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 由于在IE中无法访问Node，故上述代码无效。</span></span><br><span class="line"><span class="comment">// 可用以下代码代替：</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (someNode.nodeType == <span class="number">1</span>) &#123;</span><br><span class="line">   alert(<span class="string">"Node is an element"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4><span id="nodename和nodevalue属性">nodeName和nodeValue属性</span></h4>
+<p>通过nodeName和nodeValue可以了解节点的具体信息。</p>
+<h4><span id="节点关系">节点关系</span></h4>
+<p>文档中的所有节点之间都存在关系。</p>
+<p>以HTML中为例：<code>&lt;body&gt;</code>元素可以看成是<code>&lt;html&gt;</code>元素的子元素，而<code>&lt;html&gt;</code>就是<code>&lt;body&gt;</code>的父元素。<br>
+而<code>&lt;head&gt;</code>元素和<code>&lt;body&gt;</code>元素是同胞元素，因为都是<code>&lt;html&gt;</code>的直接子元素。</p>
+<p><strong>每个节点都有一个childNodes属性，其中保存着一个NodeList对象。</strong> NodeList是一种类数组对象，用于保存一组有序的节点，可以通过位置访问这些节点。</p>
+<p><strong>NodeList对象是基于DOM结构动态执行查询的结果，因此DOM结构的变化能够自动反映在NodeList对象中。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> firstChild = someNode.childNodes[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">var</span> secondeChild = someNode.childNodes.item(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">var</span> count = someNode.childNodes.length;</span><br></pre></td></tr></table></figure>
+<p><strong>length属性表示的是，访问NodeList的那一刻，其中包含的节点数。</strong></p>
+<p><strong>可以使用Array.prototype.slice()方法将NodeList转换为数组。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arrayOfNodes = <span class="built_in">Array</span>.prototype.slice.call(someNode.childNodes, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<p>但是，如果想要在IE中将NodeList转换为数组，必须手动枚举所有成员：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">convertToArray</span>(<span class="params">nodes</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> array = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    array = <span class="built_in">Array</span>.prototype.slice.call(nodes, <span class="number">0</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span>(ex) &#123;</span><br><span class="line">    array = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, len = nodes.lengthm i &lt; len; i++) &#123;</span><br><span class="line">      array.push(nodes[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>每个节点有一个parentNode属性，用于指向父节点。而在同一个父元素下的每个子节点中有previousSibling和nextSibling属性，用于访问同一列表中的其他节点。</strong></p>
+<p><strong>另外，父节点有firstChild何lastChild属性来指向第一个和最后一个子节点。</strong></p>
+<p><strong>最后，所有节点都有一个属性：ownerDocument，用于访问整个文档的文档节点。</strong></p>
+<h4><span id="操作节点">操作节点</span></h4>
+<p>由于关系指针都是只读的，故DOM提供了一些操作节点的方法；</p>
+<p><strong>appendChild():</strong> 用于向childNodes列表的末尾添加一个节点。添加节点后，childNodes的新增节点、父节点以之前的最后一个子节点的关系指针都会得到更新。</p>
+<p>更新后，appendChild()返回新增的节点：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> returnedNode = someNode.appendChild(newNode);</span><br><span class="line">alert(returnedNode == newNode);</span><br><span class="line">alert(someNode.lastChild == newNode);</span><br></pre></td></tr></table></figure>
+<p><strong>如果传入到appendChild()的节点已经是文档的一部分了。那么这个节点将会从原来的位置移到新的位置。因为任何DOM节点都不能同时出现在文档中的多个位置上。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> returnedNode = someNode.appendChild(someNode.firstNode);</span><br><span class="line">alert(returnedNode == someNode.firstChild); <span class="comment">// false</span></span><br><span class="line">alert(returnedNode == someNode.lastChild); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p><strong>insertBefore()方法，能够将把节点放在childNoes列表中的某个特定的位置上。需要传入两个参数：要插入的节点和作为参照的节点：</strong> 插入节点后，被插入的节点会变成参照节点的前一个通报节点，同事被方法返回。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">returnedNode = someNode.insertBefore(newNode, <span class="literal">null</span>); <span class="comment">// 插入后成为最后一个子节点</span></span><br><span class="line">alert(newNode == someNode.lastChild); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> returnedNode = someNode.insertBefore(newNode, someNode.firstChild); <span class="comment">// 插入后城后第一个子节点</span></span><br><span class="line">alert(returnedNode == newNode); <span class="comment">// true</span></span><br><span class="line">alert(newNode == someNode.firstChild); <span class="comment">// t</span></span><br><span class="line"></span><br><span class="line">returnedNode = someNode.insertBefore(newNode, someNode.lastChild); <span class="comment">// 插入到最后一个子节点前</span></span><br><span class="line">alert(newNode == someNode.childNodes[someNode.childNodes.lenght - <span class="number">2</span>]);<span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p><strong>replaceChild()能够移除节点，接收两个参数：要插入的节点和要替换的节点：</strong> 要替换的节点，将会由这个方法返回，并且从文档树中被移除。同时，由要插入的节点占据其位置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> returnedNode = someNode.replaceChild(newNode, someNode.firstChild); <span class="comment">// 替换第一个子节点</span></span><br><span class="line"></span><br><span class="line">returnedNode = someNode.replaceChild(newNode, someNode.lastChild); <span class="comment">// 替换最后一个子节点</span></span><br></pre></td></tr></table></figure>
+<p><strong>removeChild()方法可以移除一个节点， 接收一个参数：要移除的节点</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> formerFirstChild = someNode.removeChild(someNode.firstChild); <span class="comment">// 移除第一个子节点</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> formerLastChild = someNode.removeChild(someNode.lastChild); <span class="comment">// 移除最后一个子节点</span></span><br></pre></td></tr></table></figure>
+<h4><span id="其他方法">其他方法</span></h4>
+<p><strong>cloneNode()方法用于创建调用这个方法的节点的一个完全相同的副本；其接收一个参数: 是否执行深拷贝</strong> 在参数为true的时候，会复制节点及其整个子节点树。在参数为false的时候，只赋值节点本身。</p>
+<p>复制后返回的节点副本属于文档所有，但没有为它指定父节点。如果不使用节点操作方法将其添加到文档中，他会成为一个”孤儿“</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> deepList = myList.cloneNode(<span class="literal">true</span>);</span><br><span class="line">alert(deepList.childNodes.length);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> shallowList = myList.cloneNode(<span class="literal">false</span>);</span><br><span class="line">alert(shallow.childnodes.length);</span><br></pre></td></tr></table></figure>
+<p><strong>normalize()方法，可以处理文档树中的文本节点。</strong></p>
+<p>由于文本节点可能不包含文本，或者接连出现两个文本节点的情况。这个方法能够在调用该方法的节点的后代节点中查找这两种情况的节点，并删除它们。</p>
+<h3><span id="document类型">Document类型</span></h3>
 
                 
 
@@ -236,13 +285,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2017/04/15/python学习日记02/" data-toggle="tooltip" data-placement="top" title="我与Py的那些事——Python基础">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2017/04/09/python学习日记01/" data-toggle="tooltip" data-placement="top" title="我与Py的那些事——输入输出">Next Post &rarr;</a>
+                            <a href="/2018/09/16/Gradle/" data-toggle="tooltip" data-placement="top" title="关于Gradle">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -281,7 +326,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#python" title="python">python</a>
+                          <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
                         
                     </div>
                 </section>
@@ -336,8 +381,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "csming1995";
-    var disqus_identifier = "https://csming1995.github.io/2017/04/15/python学习日记04/";
-    var disqus_url = "https://csming1995.github.io/2017/04/15/python学习日记04/";
+    var disqus_identifier = "https://csming1995.github.io/2018/09/17/JS_DOM/";
+    var disqus_url = "https://csming1995.github.io/2018/09/17/JS_DOM/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
