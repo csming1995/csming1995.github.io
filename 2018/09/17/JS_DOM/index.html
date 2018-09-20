@@ -278,6 +278,30 @@
 <p><strong>normalize()方法，可以处理文档树中的文本节点。</strong></p>
 <p>由于文本节点可能不包含文本，或者接连出现两个文本节点的情况。这个方法能够在调用该方法的节点的后代节点中查找这两种情况的节点，并删除它们。</p>
 <h3><span id="document类型">Document类型</span></h3>
+<p>js通过Document类型表示文档。</p>
+<p>在浏览器中，document对象是HTMLDocument的一个实例。表示了整个HTML页面。document对象是window对象的一个属性。</p>
+<p>Document节点具有下列特征：</p>
+<p><strong>1.nodeType: 9</strong><br>
+<strong>2.nodeName: &quot;#document&quot;</strong><br>
+<strong>3.nodeValue: null</strong><br>
+<strong>4.parentNode: null</strong><br>
+<strong>5.ownerDocument: null</strong></p>
+<p>其子节点可能是一个DocumentType、Element、ProcessingInstruction或Comment；</p>
+<p>Document类型表示HTML页面或者其他基于XML的文档。</p>
+<p>通过document对象，我们可以取得与页面有关的信息，并且能够操作页面的外观及其底层结构。</p>
+<h4><span id="文档的子节点">文档的子节点</span></h4>
+<p><strong>访问子节点的方式：</strong></p>
+<p>1.通过documentElement访问HTML页面中的<code>&lt;html&gt;</code>元素。<br>
+2.通过childNodes列表访问文档元素。<br>
+3.通过body访问<code>&lt;body&gt;</code>元素。<br>
+4.通过doctype可以访问<code>&lt;!DOCTYPE&gt;</code>的信息</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> html = <span class="built_in">document</span>.documentElement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> body = <span class="built_in">document</span>.body;</span><br></pre></td></tr></table></figure>
+<h4><span id="文档信息">文档信息</span></h4>
+<p>document对象提供了一些网页的信息；</p>
+<p>1.title: 包含了<code>&lt;title&gt;</code>元素中的文本。</p>
+<ol>
+<li></li>
+</ol>
 
                 
 
