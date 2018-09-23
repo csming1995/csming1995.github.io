@@ -18,7 +18,7 @@
         
     </title>
 
-    <link rel="canonical" href="https://csming1995.github.io/2018/09/17/JS_DOM/">
+    <link rel="canonical" href="https://csming1995.github.io/2018/09/24/JS_DOM/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -93,7 +93,7 @@
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Csming on
-                            2018-09-17
+                            2018-09-24
                         </span>
                     </div>
                 
@@ -391,6 +391,75 @@ style在通过getAttribute()方法获取时，会返回一个字符串，而通�
 <h4><span id="创建文本节点">创建文本节点</span></h4>
 <p>可以使用document.createTextNode()创建新的文本节点。该方法传入要插入节点中的文本。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> textNode = <span class="built_in">document</span>.createTextNode(<span class="string">"xxxxx"</span>);</span><br></pre></td></tr></table></figure>
+<p>在创建新文本节点的同时，也会为其设置ownerDocument属性。不过，除非把新节点添加到文档树中已存在的节点中，否则我们不会再浏览器窗口中看到新节点。</p>
+<p><strong>正常情况下，每个元素只有一个文本节点，但是特定情况下也会存在多个：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> element = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</span><br><span class="line">element.className = <span class="string">"message"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> textNode = <span class="built_in">document</span>.createTextNode(<span class="string">"Hello World"</span>);</span><br><span class="line">element.appendChild(textNode);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> anotherTextNode = docuemnt.createTextNode(<span class="string">"Yippee!"</span>);</span><br><span class="line">element.appendChild(anotherTextNode);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.body.appendChild(element);</span><br></pre></td></tr></table></figure>
+<p>上述代码将会在element节点下创建两个文本节点。</p>
+<h4><span id="规范化文本节点">规范化文本节点</span></h4>
+<p>DOM文档存在相邻的同胞文本节点会导致混乱。</p>
+<p>故，可以使用Node类型提供的normalize()方法将所有文本节点合并成一个文本节点。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> element = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</span><br><span class="line">element.className = <span class="string">"message"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> textNode = <span class="built_in">document</span>.createTextNode(<span class="string">"Hello World"</span>);</span><br><span class="line">element.appendChild(textNode);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> anotherTextNode = docuemnt.createTextNode(<span class="string">"Yippee!"</span>);</span><br><span class="line">element.appendChild(anotherTextNode);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.body.appendChild(element);</span><br><span class="line"></span><br><span class="line">element.childNodes.length; <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line">element.normalize();</span><br><span class="line">element.childNodes.length; <span class="comment">// 1</span></span><br><span class="line">element.firstChild.nodeValue; <span class="comment">// "Hello World!Yippee!"</span></span><br></pre></td></tr></table></figure>
+<h4><span id="分割文本节点">分割文本节点</span></h4>
+<p><strong>splitText()方法能够将一个文本节点分成两个文本节点。</strong> （<br>
+即，指定位置分割nodeValue）</p>
+<p>原本的文本节点将会包含从开始到指定位置之前的内容。新文本节点将会包含剩下的文本，并被返回。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> element = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</span><br><span class="line">element.className = <span class="string">"message"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> textNode = <span class="built_in">document</span>.createTextNode(<span class="string">"Hello World"</span>);</span><br><span class="line">element.appendChild(textNode);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.body.appendChild(element);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> newNode = element.firstChild.splitText(<span class="number">5</span>);</span><br><span class="line">element.firstChild.nodeValue; <span class="comment">// "Hello"</span></span><br><span class="line">newNode.nodeValue; <span class="comment">// " World!"</span></span><br><span class="line">element.childNodes.length; <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<h3><span id="comment类型">Comment类型</span></h3>
+<p>Comment是DOM中的注释。</p>
+<p>Comment类型包含以下特征：</p>
+<p><strong>1.nodeType: 8</strong><br>
+<strong>2.nodeName: &quot;#comment&quot;</strong><br>
+<strong>3.nodeValue: 注释的内容</strong><br>
+<strong>4.parentNode: Document或Element</strong><br>
+<strong>5.没有子节点</strong></p>
+<p>Comment议程于Text类型。拥有Text类型中除了splitText外的所有方法。Comment一般很少被用到。</p>
+<h3><span id="cdatasection类型">CDATASection类型</span></h3>
+<p>CDATASection类型只针对XML的文档。表示CDATA区域。</p>
+<p>CDATASection类型也继承于Text类型。拥有除了splitText外的所有Text方法。</p>
+<p>CDATASection节点具有下列特征：</p>
+<p><strong>1.nodeType: 4</strong><br>
+<strong>2.nodeName: &quot;#cdata-section&quot;</strong><br>
+<strong>3.nodeValue: CDATA区域的内容</strong><br>
+<strong>4.parentNode: Document或Element</strong><br>
+<strong>5.没有子节点</strong></p>
+<h3><span id="documenttype类型">DocumentType类型</span></h3>
+<p>DocumentType类型在浏览器中不太常用；</p>
+<p>DocumentType具有文档的doctype有关的所有信息，其有以下特征：</p>
+<p><strong>1.nodeType: 10</strong><br>
+<strong>2.nodeName: doctype的名称</strong><br>
+<strong>3.nodeValue: null</strong><br>
+<strong>4.parentNode: Document</strong><br>
+<strong>5.没有子节点</strong></p>
+<h3><span id="documentfragment类型">DocumentFragment类型</span></h3>
+<p>DocumentFragment在文档中没有对应的标记。</p>
+<p>DOM规定文档片段是一种轻量级的文档，可以包含和控制节点，但不想完整的文档那样占用额外的资源。</p>
+<p>DocumentFragment节点具有以下特征：</p>
+<p><strong>1.nodeType: 11</strong><br>
+<strong>2.nodeName: &quot;#document-fragment&quot;</strong><br>
+<strong>3.nodeValue: null</strong><br>
+<strong>4.parentNode: null</strong><br>
+<strong>5.子节点可以是Element、ProcessingInstruction、Comment、Text、CDATASectin或者EntityReference</strong></p>
+<p>虽然不能将文档片段加入文档，但是可以将其作为一个“仓库”使用。在里面保存将要添加到文档中的节点。</p>
+<p>文档片段继承了Node的所有方法，通常用于执行针对文档的DOM操作。 <strong>如果文档中的节点添加到文档片段中，就会从文档树中移除该节点。</strong></p>
+<p>可以通过appendChild()或insertBefore()方法将文档片段中的内容添加到文档中。这样做会将文档片段的所有子节点添加到相应位置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fragment = <span class="built_in">document</span>.createDocumentFragment();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ul = <span class="built_in">document</span>.getElementById(<span class="string">"myList"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> il = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">  li = <span class="built_in">document</span>.createElement(<span class="string">"li"</span>);</span><br><span class="line">  li.appendChild(<span class="built_in">document</span>.createTextNode(<span class="string">"Item "</span> + (i + <span class="number">1</span>)));</span><br><span class="line">  fragment.appendChild(li);</span><br><span class="line">&#125;</span><br><span class="line">ul.appendChild(fragment);</span><br></pre></td></tr></table></figure>
+<h3><span id="attr类型">Attr类型</span></h3>
+<p>元素的特性在DOM中以Attr类型表示。</p>
+<p><strong>1.nodeType: 11</strong><br>
+<strong>2.nodeName: 特性的名称</strong><br>
+<strong>3.nodeValue: 特性的值</strong><br>
+<strong>4.parentNode: null</strong><br>
+<strong>5.不支持子节点，但是在XML中的子节点可以是Text或EntityReference。</strong></p>
+<h2><span id="dom操作技术">DOM操作技术</span></h2>
+<h3><span id="动态脚本">动态脚本</span></h3>
+<p>页面加载时不存在，但将来的某一时刻通过修改DOM动态添加的脚本。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadScript</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</span><br><span class="line">  script.type = <span class="string">"text/javascript"</span>;</span><br><span class="line">  script.src = url;</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(script);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadScript</span>(<span class="params">code</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</span><br><span class="line">  script.type = <span class="string">"text/javascript"</span>;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    script.appendChild(code);</span><br><span class="line">  &#125;<span class="keyword">catch</span>(ex) &#123;</span><br><span class="line">    script.text = code;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(script);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="动态样式">动态样式</span></h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadStyle</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> link = <span class="built_in">document</span>.createElement(<span class="string">"link"</span>);</span><br><span class="line">  link.rel = <span class="string">"stylesheet"</span>;</span><br><span class="line">  link.type = <span class="string">"text/css"</span>;</span><br><span class="line">  link.href = url;</span><br><span class="line">  <span class="keyword">var</span> head = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"head"</span>)[<span class="number">0</span>];</span><br><span class="line">  head.appendChild(link);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadStyle</span>(<span class="params">css</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">"style"</span>);</span><br><span class="line">  style.type = <span class="string">"text/css"</span>;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    stype.appendChild(<span class="built_in">document</span>.createTextNode(css));</span><br><span class="line">  &#125;<span class="keyword">catch</span>(ex) &#123;</span><br><span class="line">    style.stypeSheet.cssText = css;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> head = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"head"</span>)[<span class="number">0</span>];</span><br><span class="line">  head.appendChild(style);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="操作表格">操作表格</span></h3>
+<p>太麻烦了，略。</p>
+<h3><span id="使用nodelist">使用NodeList</span></h3>
+<p>NodeList是动态的，当文档结构变化时，他们都会得到更新。因此，NodeList会保存着最新最准确的信息。</p>
 
                 
 
@@ -494,8 +563,8 @@ style在通过getAttribute()方法获取时，会返回一个字符串，而通�
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "csming1995";
-    var disqus_identifier = "https://csming1995.github.io/2018/09/17/JS_DOM/";
-    var disqus_url = "https://csming1995.github.io/2018/09/17/JS_DOM/";
+    var disqus_identifier = "https://csming1995.github.io/2018/09/24/JS_DOM/";
+    var disqus_url = "https://csming1995.github.io/2018/09/24/JS_DOM/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
