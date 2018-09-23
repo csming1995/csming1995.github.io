@@ -256,7 +256,7 @@
 <p>但是，如果想要在IE中将NodeList转换为数组，必须手动枚举所有成员：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">convertToArray</span>(<span class="params">nodes</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> array = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    array = <span class="built_in">Array</span>.prototype.slice.call(nodes, <span class="number">0</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span>(ex) &#123;</span><br><span class="line">    array = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, len = nodes.lengthm i &lt; len; i++) &#123;</span><br><span class="line">      array.push(nodes[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>每个节点有一个parentNode属性，用于指向父节点。而在同一个父元素下的每个子节点中有previousSibling和nextSibling属性，用于访问同一列表中的其他节点。</strong></p>
-<p><strong>另外，父节点有firstChild何lastChild属性来指向第一个和最后一个子节点。</strong></p>
+<p><strong>另外，父节点有firstChild和lastChild属性来指向第一个和最后一个子节点。</strong></p>
 <p><strong>最后，所有节点都有一个属性：ownerDocument，用于访问整个文档的文档节点。</strong></p>
 <h4><span id="操作节点">操作节点</span></h4>
 <p>由于关系指针都是只读的，故DOM提供了一些操作节点的方法；</p>
@@ -298,10 +298,99 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> html = <span class="built_in">document</span>.documentElement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> body = <span class="built_in">document</span>.body;</span><br></pre></td></tr></table></figure>
 <h4><span id="文档信息">文档信息</span></h4>
 <p>document对象提供了一些网页的信息；</p>
-<p>1.title: 包含了<code>&lt;title&gt;</code>元素中的文本。</p>
-<ol>
-<li></li>
-</ol>
+<p>1.title: 包含了<code>&lt;title&gt;</code>元素中的文本。可以取得当前页面的标题。<br>
+2.URL: 包含了页面完整的URL。<br>
+3.domain: 包含了页面的域名<br>
+4.referrer:  保存了链接到当前页面的那个页面的URL。在没有来源页的时候表现为空字符串。</p>
+<p>上述的信息中，只有domain是可以设置的。但只能设置为URL中包含的域。</p>
+<h4><span id="查找元素">查找元素</span></h4>
+<p>在DOM的应用中，常需要获得某个或某组元素的引用，然后对这些元素做一些操作。</p>
+<p>取得元素的操作可以由document对象的几个方法来实现：</p>
+<p><strong>1.getElementById():</strong> 该方法接收元素的ID。若找到对应元素则返回该元素，若找不到则返回null。 若页面中存在多个id相同的元素，则获取第一个出现的元素。</p>
+<p><strong>2.getElementsByTagName():</strong> 该方法接收元素的标签名，然后返回包含零或多个元素的NodeList。在HTML文档中，会返回一个HTMLCollection对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> images = <span class="built_in">document</span>.getElementByTagName(<span class="string">"img"</span>);</span><br><span class="line"></span><br><span class="line">images.length;</span><br><span class="line">images[<span class="number">0</span>].src;</span><br><span class="line">images.item(<span class="number">0</span>).src;</span><br></pre></td></tr></table></figure>
+<p><strong>HTMLCollection还有一个namedItem()方法：</strong> 可以通过元素的<code>name</code>特性获得集合中的项。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myImage = images.namedItem(<span class="string">"myImage"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myImage = images[<span class="string">"myImage"</span>];</span><br></pre></td></tr></table></figure>
+<p><strong>3.getElementsByName():</strong> 该方法会返回给定name特性的所有元素。</p>
+<h4><span id="特殊集合">特殊集合</span></h4>
+<p>除了属性和方法外，document对象还有一些特殊的集合。</p>
+<p>(1)document.anchors 包含文档所有带name特性的<code>&lt;a&gt;</code>元素<br>
+(2)document.applets 包含文档所有的<code>&lt;applet&gt;</code>元素<br>
+(3)document.forms 包含文档所有的<code>&lt;form&gt;</code>元素<br>
+(4)document.images 包含文档所有的<code>&lt;img&gt;</code>元素<br>
+(5)document.links 包含文档所有带href特性的<code>&lt;a&gt;</code>元素</p>
+<h4><span id="dom一致性检测">DOM一致性检测</span></h4>
+<p>可以利用document.implementation的hasFeature()方法判断浏览器对DOM的实现。该方法接收要检测的DOM功能和版本号。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hasXmlDom = <span class="built_in">document</span>.implementation.hasFeature(<span class="string">"XML"</span>, <span class="string">"1.0"</span>);</span><br></pre></td></tr></table></figure>
+<h4><span id="文档写入">文档写入</span></h4>
+<p>将输入流写入到网页中：write(), writeln(), open(), close().</p>
+<p><strong>write()和writeln()方法：</strong> 接收要写入输出流中的文本。则write()方法将接收的文本直接写入，而writeln()方法会在字符串的末尾添加一个换行符。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>document.write() Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>The current date and time is:</span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.write(<span class="string">"&lt;strong&gt;"</span> + (<span class="keyword">new</span> <span class="built_in">Date</span>()).toString() + <span class="string">"&lt;/strong&gt;"</span>)</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上述代码，将会创建一个DOM元素。</p>
+<p>write()和writeln()可以动态的包含外部资源。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>document.write() Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="xml">        document.write("<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">\</span>"<span class="attr">text</span>/<span class="attr">javascirpt</span>\" <span class="attr">src</span>=<span class="string">\</span>"<span class="attr">file.js</span>\"&gt;</span><span class="undefined">"</span></span></span><br><span class="line"><span class="javascript">        + <span class="string">"&lt;\/script&gt;"</span>)</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3><span id="element类型">Element类型</span></h3>
+<p>Element类型用于表现XML或HTML元素。</p>
+<p>Element具有下列特征：</p>
+<p><strong>1.nodeType: 1</strong><br>
+<strong>2.nodeName: 为标签名</strong><br>
+<strong>3.nodeValue: null</strong><br>
+<strong>4.parentNode: Document或Element</strong> 而其子节点可能为Element、Text、Comment、ProcessingInstruction、CDATASection或EntityReference。</p>
+<p>可以使用nodeName或者tagName访问元素的标签名。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div = <span class="built_in">document</span>.getElementById(<span class="string">"myDiv"</span>);</span><br><span class="line">div.tagName;</span><br><span class="line">div.nodeName;</span><br></pre></td></tr></table></figure>
+<h4><span id="html元素">HTML元素</span></h4>
+<p>所有的HTML元素都由HTMLElement类型表示。</p>
+<p>每个HTML元素都存在以下特性：</p>
+<p><strong><a href="http://1.id" target="_blank" rel="noopener">1.id</a>:</strong> 元素在文档中的位移标识符<br>
+<strong>2.title:</strong> 有关元素的附加说明信息<br>
+<strong>3.lang:</strong> 元素内容的语言代码<br>
+<strong>4.dir:</strong> 语言的方向。<br>
+<strong>5.className:</strong> 与元素的class特性对应，即为元素指定的CSS类。</p>
+<h4><span id="操作特性">操作特性</span></h4>
+<p>每个元素都有一或多个特性，这些特性的用途是给出相应元素或内容的附加信息。能够以三个方法操作特性：</p>
+<p><strong>1.getAttribute():</strong> 获取指定特性名的特性值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div = <span class="built_in">document</span>.getElementById(<span class="string">"myDiv"</span>);</span><br><span class="line">div.getAttribute(<span class="string">"id"</span>);</span><br><span class="line">div.getAttribite(<span class="string">"class"</span>);</span><br><span class="line">div.getAttribute(<span class="string">"title"</span>);</span><br><span class="line">div.getAttribite(<span class="string">"lang"</span>);</span><br><span class="line">div.getAttribute(<span class="string">"dir"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以通过属性的方式获取</span></span><br><span class="line">div.id;</span><br><span class="line">div.title;</span><br><span class="line">div.align;</span><br></pre></td></tr></table></figure>
+<p>有两种特殊特性：style和onclick。<br>
+style在通过getAttribute()方法获取时，会返回一个字符串，而通过属性的方式访问时会返回一个对象。</p>
+<p>onclick：在元素上使用时，onclick特性包含的是js代码如果通过getAttribute()方法访问则返回字符串。而通过属性访问时，则会返回一个函数。</p>
+<p><strong>2.setAttribute():</strong> 接收两个参数，一个是特性名，一个是值。若特性已经存在，则setAttribute()指定的值会替换原有的值。若不存在，则创建该属性，并设置相应的值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">div.setAttribute(<span class="string">"id"</span>, <span class="string">"someOtherId"</span>);</span><br><span class="line">div.setAttribute(<span class="string">"class"</span>, <span class="string">"ft"</span>);</span><br><span class="line">div.setAttribute(<span class="string">"title"</span>, <span class="string">"Some other text"</span>);</span><br><span class="line">div.setAttribute(<span class="string">"lang"</span>, <span class="string">"fr"</span>);</span><br><span class="line">div.setAttribute(<span class="string">"dir"</span>, <span class="string">"rtl"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以通过属性的方式操作</span></span><br><span class="line">div.id = <span class="string">"someOtherId"</span>;</span><br><span class="line">div.title = <span class="string">"Some other text"</span>;</span><br><span class="line">div.lang = <span class="string">"fr"</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>3.removeAttribute():</strong> 该方法会将特性直接删除。</p>
+<h4><span id="attributes属性">attributes属性</span></h4>
+<p>Element类型是使用attributes属性的唯一一个DOM节点类型。</p>
+<p>attributes包含一个NamedNodeMap。元素的每一个特性都由一个Attr节点表示。NamedNodeMap包含以下方法：</p>
+<p><strong>1.getNamedItem(name):</strong> 返回nodeName属性等于name的节点。<br>
+<strong>2.removeNamedItem(name):</strong> 从列表中删除nodeName属性等于name的节点<br>
+<strong>3.setNamedItem(node):</strong> 向列表中添加节点，以节点的nodeName属性为索引<br>
+<strong>4.item(pos):</strong> 返回位于pos位置的节点。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> id = element.attributes.getNamedItem(<span class="string">"id"</span>).nodeValue;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> id = element.attributes[<span class="string">"id"</span>].nodeValue;</span><br><span class="line"></span><br><span class="line">element.attributes[<span class="string">"id"</span>].nodeValue = <span class="string">"someOtherId"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> oldAttr = element.attributes.removeNamedItem(<span class="string">"id"</span>);</span><br><span class="line"></span><br><span class="line">element.attributes.setNamedItem(newAttr);</span><br></pre></td></tr></table></figure>
+<h4><span id="创建元素">创建元素</span></h4>
+<p>可以使用document.createElement()方法创建新元素。该方法接收一个参数：要创建元素的标签名。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</span><br></pre></td></tr></table></figure>
+<p>然后可以将元素添加到文档中。</p>
+<h4><span id="元素的子节点">元素的子节点</span></h4>
+<p>元素的childNodes包含了它的所有子节点。这些子节点可能是元素，文本节点，注释或处理指令。</p>
+<h3><span id="text类型">Text类型</span></h3>
+<p>文本节点由Text类型表示。包含的可以是纯文本内容。纯文本可以包含转义后的HTML字符，但不能包含HTML代码。</p>
+<p>Text节点具有以下特征：</p>
+<p><strong>1.nodeType: 3</strong><br>
+<strong>2.nodeName: &quot;#text&quot;</strong><br>
+<strong>3.nodeValue: null</strong><br>
+<strong>4.parentNode: Element</strong><br>
+<strong>5.没有子节点</strong> ，可以通过nodeValue或者data属性访问&amp;修改Text节点中包含的文本。</p>
+<p>Text节点具有以下方法：</p>
+<p><strong>1.appendData(text):</strong> 将text添加到节点末尾<br>
+<strong>2.deleteData(offset, count):</strong> 删除从offset开始的count歌字符。<br>
+<strong>3.insertData(offset, text):</strong> 在offset的位置插入text<br>
+<strong>4.replaceData(offset, count, text):</strong> 用text替换从offset指定的位置开始的count个字符。<br>
+<strong>5.spliteText(offset):</strong> 从offset指定的位置将当前文本节点分成两个文本<br>
+<strong>6.substringData(offset, count):</strong> 提取从offset指定的位置开始的count个字符的字符串。</p>
+<hr>
+<p>在默认情况下，每个可以包含内容的元素最多只有一个文本节点，并且确实有内容存在。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 没有文本节点 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 有一个文本节点 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 有一个文本节点 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello World！<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4><span id="创建文本节点">创建文本节点</span></h4>
+<p>可以使用document.createTextNode()创建新的文本节点。该方法传入要插入节点中的文本。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> textNode = <span class="built_in">document</span>.createTextNode(<span class="string">"xxxxx"</span>);</span><br></pre></td></tr></table></figure>
 
                 
 
