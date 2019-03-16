@@ -209,56 +209,6 @@
 
 <div class="post-preview">
 
-    <a href="/2017/03/14/Android自定义View-10/">
-        <h2 class="post-title">
-            Android自定义View——PathMeasure学(A)习(P)笔(I)记(jilu)
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            PathMeasure是什么
-PathMeasure是用来测量Path类的
-API:
-
-
-
-方法名
-用处
-
-
-
-
-PathMeasure()
-创建一个空的PathMeasure
-
-
-PathMeasure(Path path,boolean forceClosed)
-创建 PathMeasure 并关联一个指定的Path(Path需要已经创建完成)。
-
-
-void setPath(Path ......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-03-14
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
     <a href="/2017/03/13/Linux常用命令记录/">
         <h2 class="post-title">
             Linux的常用命令记录
@@ -485,18 +435,23 @@ Java源文件通过编译器能够生产相应的.class文件（字节码文件�
 
 <div class="post-preview">
 
-    <a href="/2017/03/05/Android自定义View-7/">
+    <a href="/2017/03/05/Android自定义View-8/">
         <h2 class="post-title">
-            Android自定义View——Canvas操作学习笔记
+            Android自定义View——Path操作学习笔记
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            Canvas的基本操作
-位移（translate）
-translate是坐标系的移动，可以为图形绘制选择一个合适的坐标系
-1234567891011// 省略了创建画笔的代码// 在坐标原点绘制一个黑色圆形mPaint.setColor(Color.BLACK);canvas.translate(200,200);canvas.drawCircle(0,0,100,mPaint);// 在坐......
+            Path简介
+Path封装了直线曲线构成的几何路径；
+可以利用Canvas的drawPath绘制；也可以用于剪裁画布，根据路径绘制文字；也可以用于描述一个图像的轮廓；
+有开放和封闭路径的区别；
+Paht常用方法
+
+**移动起点moveTo:**移动下一次操作的起点位置
+**设置终点setLastPoint:**重置当前path中最后一个点位置，如果在绘制之前调用，效果和moveTo相同
+**......
         </div>
     </a>
     
@@ -518,23 +473,18 @@ translate是坐标系的移动，可以为图形绘制选择一个合适的坐�
 
 <div class="post-preview">
 
-    <a href="/2017/03/05/Android自定义View-8/">
+    <a href="/2017/03/05/Android自定义View-7/">
         <h2 class="post-title">
-            Android自定义View——Path操作学习笔记
+            Android自定义View——Canvas操作学习笔记
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            Path简介
-Path封装了直线曲线构成的几何路径；
-可以利用Canvas的drawPath绘制；也可以用于剪裁画布，根据路径绘制文字；也可以用于描述一个图像的轮廓；
-有开放和封闭路径的区别；
-Paht常用方法
-
-**移动起点moveTo:**移动下一次操作的起点位置
-**设置终点setLastPoint:**重置当前path中最后一个点位置，如果在绘制之前调用，效果和moveTo相同
-**......
+            Canvas的基本操作
+位移（translate）
+translate是坐标系的移动，可以为图形绘制选择一个合适的坐标系
+1234567891011// 省略了创建画笔的代码// 在坐标原点绘制一个黑色圆形mPaint.setColor(Color.BLACK);canvas.translate(200,200);canvas.drawCircle(0,0,100,mPaint);// 在坐......
         </div>
     </a>
     
@@ -590,6 +540,42 @@ Java程序写好后，是由若干个class文件组织而成的一个完整的Ja
 </div>
 <hr>
 
+<div class="post-preview">
+
+    <a href="/2017/02/10/Android自定义View-6/">
+        <h2 class="post-title">
+            Android自定义View——Canvas图形/图片/文字绘制学习笔记
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Canvas简介
+Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形绘制的基础
+有两大特点：1.可操作性强；2.比较难用（组合操作）
+常用操作
+
+**绘制颜色：**drawColor, drawRGB, drawARGB；使用单一颜色填充整个画布
+**绘制基本形状：**drawPoint, drawPoints, drawLine, drawLines, drawRect, d......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-02-10
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#android" title="android">android</a>
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
 
 
 <!-- Pager -->
@@ -630,11 +616,11 @@ Java程序写好后，是由若干个class文件组织而成的一个完整的Ja
     <div class="tags">
         
             
-            <a href="/tags/#android" title="android" rel="22">android</a>
+            <a href="/tags/#android" title="android" rel="21">android</a>
             
         
             
-            <a href="/tags/#java" title="java" rel="28">java</a>
+            <a href="/tags/#java" title="java" rel="27">java</a>
             
         
             
@@ -818,7 +804,7 @@ Java程序写好后，是由若干个class文件组织而成的一个完整的Ja
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
@@ -827,7 +813,7 @@ Java程序写好后，是由若干个class文件组织而成的一个完整的Ja
 
     <h5>categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/leetcode/">leetcode</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/unity/">unity</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/写着代码就开始胡言乱语/">写着代码就开始胡言乱语</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实习日记/">实习日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编译原理/">编译原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/集合/">集合</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/leetcode/">leetcode</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/unity/">unity</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/写着代码就开始胡言乱语/">写着代码就开始胡言乱语</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实习日记/">实习日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编译原理/">编译原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/集合/">集合</a><span class="category-list-count">1</span></li></ul>
     </div>
 
         <hr>
