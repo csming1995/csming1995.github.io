@@ -209,381 +209,25 @@
 
 <div class="post-preview">
 
-    <a href="/2017/01/22/Android自定义View-5/">
+    <a href="/2014/09/04/hello-world/">
         <h2 class="post-title">
-            Android自定义View——绘制流程学习笔记
+            Hello World
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            自定义View绘制流程函数调用链
+            Welcome to My New World
 
-自定义View分类
-自定义ViewGroup&amp;自定义View
-1.自定义ViewGroup
-自定义ViewGroup一般是利用现有的组件根据特定的布局方式来组成新的组件，大多继承自ViewGroup或各种Layout，包含有子View。
-
-例如：应用底部导航条中的条目，一般都是上面图标(ImageView)，下面文字(TextView)，那么这两个......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-01-22
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2017/01/20/Android自定义View-4/">
-        <h2 class="post-title">
-            Android自定义View——动画学习笔记
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            实质
-每一帧绘制不同内容
-基本过程
-开始动画后，调用View的invalidate触发重绘。重绘后检查动画是否停止，若未停止则继续调用invalidate触发下一帧（下一次重绘），直到动画结束。
-重绘时View的draw方法会被调用，根据动画的进行绘制不同的内容，如某个被绘制元素的大小变化、角度旋转、透明度变化等，这样即会产生动画。
-动画的推进过程一般都会有一个变化量，这个变量会被用到dra......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-01-20
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2017/01/16/Android自定义View-3/">
-        <h2 class="post-title">
-            Android自定义View——绘图API学习笔记
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Matrix
-Canvas.[translate,scale,rotate,skew]方法
-**Matrix.**set/pre/post[translate,scale,rotate,skew]方法
-平移、缩放、旋转、斜切
-我们通过调用Canvas.translate等方法，可以使后续在此Canvas上绘制操作的绘制区域变化，如translate(5,0)，则后续所有绘制操作的绘制区域都会......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-01-16
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2017/01/15/Android自定义View-2/">
-        <h2 class="post-title">
-            Android自定义View——颜色学习笔记
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            颜色
-安卓支持的颜色模式
-
-ARGB8888: 四通道高精度(32位)
-ARGB4444: 四通道低精度(16位)
-RGB565:   屏幕默认模式(16位)
-Alpha8:   仅有透明通道(8位)
-PS：其中字母表示通道类型，数值表示该类型用多少位二进制来描述。如ARGB8888则表示有四个通道(ARGB),每个对应的通道均用8位来描述。
-
-我们常用的是ARGB8888和ARGB4444......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-01-15
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/21/Android自定义View-1/">
-        <h2 class="post-title">
-            Android自定义View——角度与弧度学习笔记
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            目的
-为什么需要角度与弧度
-自定义View的一些效果，是将一些简单的东西，通过数学的计算组合在一起的；
-可能会涉及到画布的相关操作(旋转)，以及一些正余弦函数的计算等，这些内容就会用到一些角度、弧度相关的知识。
-为什么对角的描述有角度和弧度
-为了精确描述一个角的大小
-由于两者进制是不同的(角度是60进制，弧度是10进制),在合适的地方使用合适的单位来描述会更加方便。
-
-#角度与弧度的定义
-
-......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2016-12-21
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/17/Android自定义View-0/">
-        <h2 class="post-title">
-            Android自定义View——坐标系学习笔记
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            屏幕坐标系与数学坐标系
-移动设备一般定义屏幕左上角为坐标原点；向右为x轴增大方向，向下为y轴增大方向
-View的坐标系
-View的坐标系统是相对于父空间而言的
-1234getTop();       //获取子View左上角距父View顶部的距离getLeft();      //获取子View左上角距父View左侧的距离getBottom();    //获取子View右下角距父View顶......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2016-12-17
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/11/android开发小记03/">
-        <h2 class="post-title">
-            Android开发小记(三)
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            AsyncTask使用的时候遇到了一个小问题
-
-最近的软工实践项目中，在网络请求的时候使用到了AsyncTask异步的方法
-队友小超超在使用过程中发现， doInGround()方法中使用的HttpUtil的回调方法一直没办法结束
-使得在onPsotExcute()方法有时候回得不到调用，使得UI没有更改
-最终无法显示数据
-我觉得这个似乎是因为doInGround方法调用的回调函数没办法返回......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2016-12-11
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/10/android开发小记02/">
-        <h2 class="post-title">
-            Android开发小记(二)
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            新增资源无法通过编译
-
-Android Studio提示以下信息
-
-
-Error:Execution failed for task ‘:app:mergeDebugResources’. &gt; Crunching Cruncher scrollbar_thumb.9.png failed, see logs
-
-
-解决方法
-在build.gradle中添加如下字段
-
-
-aaptOptio......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2016-12-10
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/04/Daily05/">
-        <h2 class="post-title">
-            日记-2016-12-04
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            考完接口啦
-反正能想到的点我都写上了
-哼
-我这么帅一定会有个好结果的对不对
-
-下午写蓝桥杯的校选，写完前三题脖子痛的受不了
-于是去打球运动了=。=
-算是个烂尾吧略略略
-
-于是去打球了
-感觉还不错=。=
-嘻嘻嘻，难得的准星
-
-晚上要去看《你的名字》了
-“不忘初心，一定能等到你的名字~”
-
-嘛，考完试要回归正常生活了
-手头的三个项目希望可以尽快结束
-
-说到这个
-好像又有个项目要去谈了
-
-好吧，重......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2016-12-04
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#想当一个有趣的人" title="想当一个有趣的人">想当一个有趣的人</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/02/Daily04/">
-        <h2 class="post-title">
-            日记-2016-12-02
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            考完图形学，觉得突然想涂涂画画
-想养一只猫
-
-
-
-
-
-
-如果你也爱我~
 ...
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
-            2016-12-02
+            2014-09-04
         </p>
         <div class="tags">
-            
-              <a href="/tags/#想当一个有趣的人" title="想当一个有趣的人">想当一个有趣的人</a>
             
         </div>
     
@@ -601,10 +245,6 @@ aaptOptio......
             <a href="/archives/6/">&larr; Newer Posts</a>
         </li>
     
-    
-        <li class="next">
-            <a href="/archives/8/">Older Posts &rarr;</a>
-        </li>
     
 </ul>
 
@@ -641,17 +281,13 @@ aaptOptio......
             
         
             
-            <a href="/tags/#想当一个有趣的人" title="想当一个有趣的人" rel="9">想当一个有趣的人</a>
-            
         
-            
-            <a href="/tags/#Dart" title="Dart" rel="2">Dart</a>
             
         
             
         
             
-            <a href="/tags/#Java" title="Java" rel="14">Java</a>
+            <a href="/tags/#Java" title="Java" rel="5">Java</a>
             
         
             
@@ -662,8 +298,6 @@ aaptOptio......
             <a href="/tags/#unity3d" title="unity3d" rel="2">unity3d</a>
             
         
-            
-            <a href="/tags/#python" title="python" rel="15">python</a>
             
         
             
@@ -679,7 +313,7 @@ aaptOptio......
             
         
             
-            <a href="/tags/#JavaScript" title="JavaScript" rel="12">JavaScript</a>
+            <a href="/tags/#JavaScript" title="JavaScript" rel="11">JavaScript</a>
             
         
             
@@ -825,7 +459,7 @@ aaptOptio......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
@@ -834,7 +468,7 @@ aaptOptio......
 
     <h5>categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/leetcode/">leetcode</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/unity/">unity</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/写着代码就开始胡言乱语/">写着代码就开始胡言乱语</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实习日记/">实习日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编译原理/">编译原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/集合/">集合</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/leetcode/">leetcode</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/unity/">unity</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/写着代码就开始胡言乱语/">写着代码就开始胡言乱语</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实习日记/">实习日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编译原理/">编译原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/集合/">集合</a><span class="category-list-count">1</span></li></ul>
     </div>
 
         <hr>
@@ -894,7 +528,7 @@ aaptOptio......
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Csming 2018 
+                    Copyright &copy; Csming 2019 
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">

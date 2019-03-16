@@ -14,6 +14,13 @@
     </url>
 
     <url>
+        <loc>https://csming1995.github.io/categories/%E5%86%99%E7%9D%80%E4%BB%A3%E7%A0%81%E5%B0%B1%E5%BC%80%E5%A7%8B%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%AD/</loc>
+        <lastmod>2018-04-06T14:14:40.997Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://csming1995.github.io/categories/unity/</loc>
         <lastmod>2018-04-06T14:14:45.971Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -23,6 +30,13 @@
     <url>
         <loc>https://csming1995.github.io/categories/android/</loc>
         <lastmod>2018-04-06T14:16:00.130Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://csming1995.github.io/categories/python/</loc>
+        <lastmod>2018-04-06T14:16:40.464Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -56,29 +70,8 @@
     </url>
 
     <url>
-        <loc>https://csming1995.github.io/categories/JavaWeb/</loc>
-        <lastmod>2018-04-06T14:19:21.678Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://csming1995.github.io/categories/java/</loc>
         <lastmod>2018-04-06T14:19:24.439Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://csming1995.github.io/categories/python/</loc>
-        <lastmod>2018-04-06T14:19:27.283Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://csming1995.github.io/categories/%E5%86%99%E7%9D%80%E4%BB%A3%E7%A0%81%E5%B0%B1%E5%BC%80%E5%A7%8B%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%AD/</loc>
-        <lastmod>2018-04-06T14:19:31.026Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

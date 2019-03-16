@@ -209,70 +209,31 @@
 
 <div class="post-preview">
 
-    <a href="/2017/03/13/Linux常用命令记录/">
+    <a href="/2016/11/16/让EditText不捕获焦点的小技巧/">
         <h2 class="post-title">
-            Linux的常用命令记录
+            让EditText不捕获焦点的小技巧
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            
-**复制：**cp -v 源文件路径 目标文件路径
-**移动：**mv -v 源文件路径 目标文件路径
-**删除：**rm -v 文件路径
-		rmdir -v 文件夹路径–文件夹要为空
-		rm -rv 文件夹路径–递归删除文件夹及其子文件
-**创建文件夹：**mkdir -v 文件夹名字（在当前目录创建文件夹）
-**创建文件：**touch 文件路径（创建一个空文件）
+            让EditText默认不捕捉焦点的小技巧
 
+你是否会为每次打开登录界面时，username的EditText总是处于输入状态而烦恼
 
+只要在布局界面加入这行代码，即可解决您的烦恼~
 
-**显示当......
+12345678&lt;LinearLayout       android:id="@+id/default_focused_view"       android:layout_width="0dp"   ......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
-            2017-03-13
+            2016-11-16
         </p>
         <div class="tags">
             
-              <a href="/tags/#Linux" title="Linux">Linux</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2017/03/12/JVM学习笔记-3/">
-        <h2 class="post-title">
-            JVM学习——gc回收机制
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-最近复习Java基础细节的时候看Thking in Java；书上有提到两种垃圾回收机制，“停止-复制”、“标记-清扫”；
-
-
-
-**停止-复制：**将暂停程序的运行，然后将所有存活的对象从当前堆复制到另一个堆，而没有被复制的对象都是垃圾；当对象被复制到新堆时，它们是一个挨着一个的，所以新堆保持紧凑排列；然后就可以直接分配新空间了
-
-
-**标记-清扫：**从堆栈和静态存储区出发，遍历所有的......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-03-12
-        </p>
-        <div class="tags">
+              <a href="/tags/#android" title="android">android</a>
             
               <a href="/tags/#java" title="java">java</a>
             
@@ -284,30 +245,64 @@
 
 <div class="post-preview">
 
-    <a href="/2017/03/12/JVM学习笔记-2/">
+    <a href="/2016/11/04/写在1-1/">
         <h2 class="post-title">
-            JVM学习——堆和栈的区别
+            写在2016.1.1的一点
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            
-在学习JVM运行机制的时候，运行时数据内存分为堆内存和栈内存；记得看Thking in Java时，曾看到过，栈内存存放的是基本类型的变量和对象的引用；而堆内存存放的则是对象；
+            那一年的小事
 
-堆内存
-作用是用于存储Java中的对象和数组，当我们new一个对象或者创建一个数组的时候，就会在堆内存中开辟一段空间给它，用于存放
-堆内存的特点
-1.堆可以看做队列，先进先出，后进后出
-2.堆可以动态分配内存大小......
+写在2016.1.1的一点半
+五月天说，时间是贼，偷走一切。
+一年前一年后，看到的好像还是同一片烟花。说不清对焰火有什么迷恋，只是在燃烧一瞬间才有的美感，才最让人爱惜。
+年岁痴长，岁月里所发生的确是历历在目。失去的得到的，年前的年后的，怎么能是一样的光景。好在，得到的不必失去的少，失去的也并不比得到的多。
+一年前的光景，跟现在早已事事非。因为一些原因所失去的真的非常多。因为另......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
-            2017-03-12
+            2016-11-04
         </p>
         <div class="tags">
+            
+              <a href="/tags/#想当一个有趣的人" title="想当一个有趣的人">想当一个有趣的人</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/11/03/android开发小记01/">
+        <h2 class="post-title">
+            Android开发小记(一)——侧滑菜单实现
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            简介drawerlayout
+
+drawerlayout大概就是抽屉的意思
+Support Library包中实现了侧滑菜单效果的控件
+drawerLayout分为侧边菜单和主内容区两部分
+drawerLayout其实是一个布局控件，跟LinearLayout等控件是一种东西，但是drawerLayout带有滑动的功能。只要按照drawerLayout的规定布局方式写完布局，就能有侧滑的效果......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2016-11-03
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#android" title="android">android</a>
             
               <a href="/tags/#java" title="java">java</a>
             
@@ -319,32 +314,32 @@
 
 <div class="post-preview">
 
-    <a href="/2017/03/12/JVM学习笔记-1/">
+    <a href="/2016/11/01/JDBC学习记录/">
         <h2 class="post-title">
-            JVM学习——Native方法
+            JDBC学习记录
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
             
-在学习JVM运行机制的时候，发现本地方法区是用于执行Native方法的；故有此疑问，什么是Native方法呢？
-
-什么是Native方法
-一个Native Method就是一个java调用非java代码的接口（NDK也跟这有关吗？（疑问）
-一个Native Method由非java语言实现
-
-在定义一个native method时，并不提供实现体（有些像定义一个java interface......
+JDBC连接数据库
+1.加载驱动程序
+12Class.forName(driver);driver = “com.MySQL.jdbc.Driver”
+2.创建连接对象
+12String url = "jdbc:mysql://localhost:3306/test";//url中test指的是数据库名Connection con = DriverManager.getConnection......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
-            2017-03-12
+            2016-11-01
         </p>
         <div class="tags">
             
-              <a href="/tags/#java" title="java">java</a>
+              <a href="/tags/#Java" title="Java">Java</a>
+            
+              <a href="/tags/#JDBC" title="JDBC">JDBC</a>
             
         </div>
     
@@ -354,78 +349,49 @@
 
 <div class="post-preview">
 
-    <a href="/2017/03/11/JVM学习笔记-0/">
+    <a href="/2016/10/27/反编译-1/">
         <h2 class="post-title">
-            JVM学习——运行机制原理
+            第一次反编译的经历
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
             
-最近学习了ClassLoader；进而开始学习Java虚拟机的相关知识，进而深入理解Java的原理
+First.
 
-什么是JVM
+将apk拓展名改为.zip
+打开后会有以下这些文件
 
-JVM——Java虚拟机
-JVM是可运行Java代码的虚拟计算机；JVM包括一套字节码指令集、一组寄存器、一个栈、一个垃圾回收堆和一个存储方法域；
 
-JVM
-Java源文件通过编译器能够生产相应的.class文件（字节码文件）；而字节码文件又通过Java虚拟机中的解释器（字......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-03-11
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-        </div>
-    
 
-</div>
-<hr>
+Second.
 
-<div class="post-preview">
+将其中的classes.dex拖放到dex2jar工具文件夹下
+该文件夹下应当有dex2jar.bat文件
 
-    <a href="/2017/03/09/Android自定义View-9/">
-        <h2 class="post-title">
-            Android自定义View——贝塞尔曲线学习笔记
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            贝塞尔曲线
-贝塞尔曲线奠定了计算机绘图的基础(它可以将任何复杂的图形用精确的数学语言进行描述)
-有开放和封闭路径的区别；
-理解贝塞尔曲线的原理
-贝塞尔曲线是由一系列点来控制曲线状态的
 
-**数据点：**确定曲线的起始和结束位置
-**控制点：**确定曲线的弯曲程度
+Thrid.
 
-一阶曲线
-一阶曲线是没有控制点的，仅有两个数据点(A 和 B)，最终效果一个线段；类似于lineTo；
-生成过程：
+在dos下，进入dex2jar工具文件夹下
+运行：dex2jar.bat classes.dex
+然后classes.dex文件会被反编译为.jar文件
 
-二阶曲线
+Forth.
+
 ......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
-            2017-03-09
+            2016-10-27
         </p>
         <div class="tags">
             
-              <a href="/tags/#android" title="android">android</a>
+              <a href="/tags/#Java" title="Java">Java</a>
             
-              <a href="/tags/#java" title="java">java</a>
+              <a href="/tags/#反编译apk" title="反编译apk">反编译apk</a>
             
         </div>
     
@@ -435,30 +401,27 @@ Java源文件通过编译器能够生产相应的.class文件（字节码文件�
 
 <div class="post-preview">
 
-    <a href="/2017/03/05/Android自定义View-7/">
+    <a href="/2016/10/23/property操作/">
         <h2 class="post-title">
-            Android自定义View——Canvas操作学习笔记
+            property操作
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            Canvas的基本操作
-位移（translate）
-translate是坐标系的移动，可以为图形绘制选择一个合适的坐标系
-1234567891011// 省略了创建画笔的代码// 在坐标原点绘制一个黑色圆形mPaint.setColor(Color.BLACK);canvas.translate(200,200);canvas.drawCircle(0,0,100,mPaint);// 在坐......
+            
+property的一些读写修改操作
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283import Java.io.Buffer......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
-            2017-03-05
+            2016-10-23
         </p>
         <div class="tags">
             
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#java" title="java">java</a>
+              <a href="/tags/#Java" title="Java">Java</a>
             
         </div>
     
@@ -468,35 +431,51 @@ translate是坐标系的移动，可以为图形绘制选择一个合适的坐�
 
 <div class="post-preview">
 
-    <a href="/2017/03/05/Android自定义View-8/">
+    <a href="/2016/10/12/Java日期处理/">
         <h2 class="post-title">
-            Android自定义View——Path操作学习笔记
+            Java日期处理
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            Path简介
-Path封装了直线曲线构成的几何路径；
-可以利用Canvas的drawPath绘制；也可以用于剪裁画布，根据路径绘制文字；也可以用于描述一个图像的轮廓；
-有开放和封闭路径的区别；
-Paht常用方法
+            
+Date类
 
-**移动起点moveTo:**移动下一次操作的起点位置
-**设置终点setLastPoint:**重置当前path中最后一个点位置，如果在绘制之前调用，效果和moveTo相同
-**......
+构造函数：
+Date()
+Date(long millisec)
+其中millisec为毫秒，从1970年1月1日开始计算
+一些相关函数：
+
+
+
+
+Num
+方法
+含义
+
+
+
+
+1
+boolean after(Date date)
+如果比给定的日期晚，则返回true，否则返回false
+
+
+2
+boolean before(Date date)
+如果比给定的日期早，则返回tru......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
-            2017-03-05
+            2016-10-12
         </p>
         <div class="tags">
             
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#java" title="java">java</a>
+              <a href="/tags/#Java" title="Java">Java</a>
             
         </div>
     
@@ -506,33 +485,41 @@ Paht常用方法
 
 <div class="post-preview">
 
-    <a href="/2017/02/28/ClassLoader学习记录/">
+    <a href="/2016/10/12/虚拟校园开发记录/">
         <h2 class="post-title">
-            ClassLoader深入学习记录
+            虚拟校园开发记录
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
             
-最近为了学习Java底层，因而学习了ClassLoader；准备下一阶段学习JVM原理
+2015.11.21 23：36
 
-ClassLoader是什么
+这一次的场景搭建，采取极简，UV贴图的方式，试图让福州大学在线漫游实现移动端的开发
+模型搭建的过程中，尽量将边压缩到最简，通过实际拍照贴图，实现场景的搭建
+远景采用贴图平面的方式处理，以尽可能达到最优化
+场景搭建的进度过半
+难点主要在于材质贴图以及地形的构建
 
-ClassLoader是Java的类加载机制
-ClassLoader用于动态加载class文件到内存中
 
-Java程序写好后，是由若干个class文件组织而成的一个完整的Java应用程序；程序运行时，会调用改程序的一个入口函数来调用系统的相关功能；这些功能被封装在不同的......
+
+
+
+
+2015.12.16 2：02
+
+将地形准备好，通过地图描线，将大部分建筑放在相应位......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
-            2017-02-28
+            2016-10-12
         </p>
         <div class="tags">
             
-              <a href="/tags/#java" title="java">java</a>
+              <a href="/tags/#unity3d" title="unity3d">unity3d</a>
             
         </div>
     
@@ -542,33 +529,76 @@ Java程序写好后，是由若干个class文件组织而成的一个完整的Ja
 
 <div class="post-preview">
 
-    <a href="/2017/02/10/Android自定义View-6/">
+    <a href="/2016/10/12/android内嵌unity/">
         <h2 class="post-title">
-            Android自定义View——Canvas图形/图片/文字绘制学习笔记
+            android内嵌unity方法
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            Canvas简介
-Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形绘制的基础
-有两大特点：1.可操作性强；2.比较难用（组合操作）
-常用操作
-
-**绘制颜色：**drawColor, drawRGB, drawARGB；使用单一颜色填充整个画布
-**绘制基本形状：**drawPoint, drawPoints, drawLine, drawLines, drawRect, d......
+            
+最近因为跟小伙伴在制作一个App参加比赛，由于有unity的开发经验，突发奇想的想要在Android应用中内嵌unity提供模型展示的功能。
+为此，我们查阅了不少资料。大多发现的是unity中内嵌Android的文章。Android内嵌unity的似乎大多是从Android中导出Jar包再导入unity中开发的，这样似乎对于我们主要开发Android应用来说有些繁复=。=于是后来跟小伙伴研......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
-            2017-02-10
+            2016-10-12
         </p>
         <div class="tags">
             
               <a href="/tags/#android" title="android">android</a>
             
-              <a href="/tags/#java" title="java">java</a>
+              <a href="/tags/#unity3d" title="unity3d">unity3d</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/10/10/FIRSTandFOLLOW/">
+        <h2 class="post-title">
+            编译原理FIRST和FOLLOW集的求解
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+FIRST
+
+能由非终结符号推出的所有的开头符号(终结符)或可能的ε
+假设有以下文法：
+
+
+S→ABc
+A→a|ε
+B→b|ε
+
+
+则：FIRST(A)={a,ε},FIRST(B)={b,ε}
+由于从S可以推得aBc，bc，c，故FIRST(S）=｛a，b，c｝
+
+
+FOLLOW
+
+紧跟随其后面的终结符号或＃
+把所有包含你要求的符号的产生式都找出来，再看哪个有用。 Follow（S）=｛......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2016-10-10
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#编译原理" title="编译原理">编译原理</a>
             
         </div>
     
@@ -626,17 +656,13 @@ Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形
             
         
             
-            <a href="/tags/#想当一个有趣的人" title="想当一个有趣的人" rel="9">想当一个有趣的人</a>
-            
         
-            
-            <a href="/tags/#Dart" title="Dart" rel="2">Dart</a>
             
         
             
         
             
-            <a href="/tags/#Java" title="Java" rel="14">Java</a>
+            <a href="/tags/#Java" title="Java" rel="5">Java</a>
             
         
             
@@ -647,8 +673,6 @@ Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形
             <a href="/tags/#unity3d" title="unity3d" rel="2">unity3d</a>
             
         
-            
-            <a href="/tags/#python" title="python" rel="15">python</a>
             
         
             
@@ -664,7 +688,7 @@ Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形
             
         
             
-            <a href="/tags/#JavaScript" title="JavaScript" rel="12">JavaScript</a>
+            <a href="/tags/#JavaScript" title="JavaScript" rel="11">JavaScript</a>
             
         
             
@@ -810,7 +834,7 @@ Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
@@ -819,7 +843,7 @@ Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形
 
     <h5>categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/leetcode/">leetcode</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/unity/">unity</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/写着代码就开始胡言乱语/">写着代码就开始胡言乱语</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实习日记/">实习日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编译原理/">编译原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/集合/">集合</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/leetcode/">leetcode</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/unity/">unity</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/写着代码就开始胡言乱语/">写着代码就开始胡言乱语</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实习日记/">实习日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编译原理/">编译原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/集合/">集合</a><span class="category-list-count">1</span></li></ul>
     </div>
 
         <hr>
@@ -879,7 +903,7 @@ Canvas成为画布；可以在上面绘制任何图案，是安卓平台2D图形
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Csming 2018 
+                    Copyright &copy; Csming 2019 
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">

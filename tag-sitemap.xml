@@ -23,8 +23,22 @@
     </url>
 
     <url>
+        <loc>https://csming1995.github.io/tags/%E6%83%B3%E5%BD%93%E4%B8%80%E4%B8%AA%E6%9C%89%E8%B6%A3%E7%9A%84%E4%BA%BA/</loc>
+        <lastmod>2018-04-06T14:14:40.997Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://csming1995.github.io/tags/unity3d/</loc>
         <lastmod>2018-04-06T14:15:04.654Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://csming1995.github.io/tags/python/</loc>
+        <lastmod>2018-04-06T14:16:40.464Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -51,6 +65,13 @@
     </url>
 
     <url>
+        <loc>https://csming1995.github.io/tags/Java/</loc>
+        <lastmod>2018-04-06T14:18:41.658Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://csming1995.github.io/tags/JDBC/</loc>
         <lastmod>2018-04-06T14:18:41.658Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -58,29 +79,8 @@
     </url>
 
     <url>
-        <loc>https://csming1995.github.io/tags/Java/</loc>
-        <lastmod>2018-04-06T14:19:21.678Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://csming1995.github.io/tags/java/</loc>
         <lastmod>2018-04-06T14:19:24.439Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://csming1995.github.io/tags/python/</loc>
-        <lastmod>2018-04-06T14:19:27.283Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://csming1995.github.io/tags/%E6%83%B3%E5%BD%93%E4%B8%80%E4%B8%AA%E6%9C%89%E8%B6%A3%E7%9A%84%E4%BA%BA/</loc>
-        <lastmod>2018-04-06T14:19:31.026Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -95,13 +95,6 @@
     <url>
         <loc>https://csming1995.github.io/tags/android/</loc>
         <lastmod>2018-04-15T11:12:09.699Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://csming1995.github.io/tags/Dart/</loc>
-        <lastmod>2018-05-25T15:47:12.527Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

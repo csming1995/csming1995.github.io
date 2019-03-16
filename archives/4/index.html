@@ -209,26 +209,47 @@
 
 <div class="post-preview">
 
-    <a href="/2017/04/25/leetcode-2/">
+    <a href="/2017/03/14/Android自定义View-10/">
         <h2 class="post-title">
-            2. Add Two Numbers
+            Android自定义View——PathMeasure学(A)习(P)笔(I)记(jilu)
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            
-You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and retu......
+            PathMeasure是什么
+PathMeasure是用来测量Path类的
+API:
+
+
+
+方法名
+用处
+
+
+
+
+PathMeasure()
+创建一个空的PathMeasure
+
+
+PathMeasure(Path path,boolean forceClosed)
+创建 PathMeasure 并关联一个指定的Path(Path需要已经创建完成)。
+
+
+void setPath(Path ......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
-            2017-04-25
+            2017-03-14
         </p>
         <div class="tags">
             
-              <a href="/tags/#leetcode" title="leetcode">leetcode</a>
+              <a href="/tags/#android" title="android">android</a>
+            
+              <a href="/tags/#java" title="java">java</a>
             
         </div>
     
@@ -238,28 +259,36 @@ You are given two non-empty linked lists representing two non-negative integers.
 
 <div class="post-preview">
 
-    <a href="/2017/04/25/leetcode-1/">
+    <a href="/2017/03/13/Linux常用命令记录/">
         <h2 class="post-title">
-            1.Two Sum
+            Linux的常用命令记录
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
             
-Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+**复制：**cp -v 源文件路径 目标文件路径
+**移动：**mv -v 源文件路径 目标文件路径
+**删除：**rm -v 文件路径
+		rmdir -v 文件夹路径–文件夹要为空
+		rm -rv 文件夹路径–递归删除文件夹及其子文件
+**创建文件夹：**mkdir -v 文件夹名字（在当前目录创建文件夹）
+**创建文件：**touch 文件路径（创建一个空文件）
 
-You may assume that each input would have exactly one solution, and you may not use the s......
+
+
+**显示当......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
-            2017-04-25
+            2017-03-13
         </p>
         <div class="tags">
             
-              <a href="/tags/#leetcode" title="leetcode">leetcode</a>
+              <a href="/tags/#Linux" title="Linux">Linux</a>
             
         </div>
     
@@ -269,32 +298,184 @@ You may assume that each input would have exactly one solution, and you may not 
 
 <div class="post-preview">
 
-    <a href="/2017/04/24/python学习日记13/">
+    <a href="/2017/03/12/JVM学习笔记-3/">
         <h2 class="post-title">
-            Python序列化
+            JVM学习——gc回收机制
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            我们把变量从内存中变成可存储或传输的过程称之为序列化，在Python中叫pickling
+            
+最近复习Java基础细节的时候看Thking in Java；书上有提到两种垃圾回收机制，“停止-复制”、“标记-清扫”；
 
-序列化
-被序列化后，可以将序列化后的内容写入磁盘，或者通过网络传输到别的机器上；
-相反，把变量从序列化的对象重新读入内存，则成为反序列化：unpicking；
-Python提供 pickle 模块实现序列化
-pickle.dumps将任意对象序列化为bytes；然后就可以将这个bytes写入文件了；
+
+
+**停止-复制：**将暂停程序的运行，然后将所有存活的对象从当前堆复制到另一个堆，而没有被复制的对象都是垃圾；当对象被复制到新堆时，它们是一个挨着一个的，所以新堆保持紧凑排列；然后就可以直接分配新空间了
+
+
+**标记-清扫：**从堆栈和静态存储区出发，遍历所有的......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/12/JVM学习笔记-2/">
+        <h2 class="post-title">
+            JVM学习——堆和栈的区别
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+在学习JVM运行机制的时候，运行时数据内存分为堆内存和栈内存；记得看Thking in Java时，曾看到过，栈内存存放的是基本类型的变量和对象的引用；而堆内存存放的则是对象；
+
+堆内存
+作用是用于存储Java中的对象和数组，当我们new一个对象或者创建一个数组的时候，就会在堆内存中开辟一段空间给它，用于存放
+堆内存的特点
+1.堆可以看做队列，先进先出，后进后出
+2.堆可以动态分配内存大小......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/12/JVM学习笔记-1/">
+        <h2 class="post-title">
+            JVM学习——Native方法
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+在学习JVM运行机制的时候，发现本地方法区是用于执行Native方法的；故有此疑问，什么是Native方法呢？
+
+什么是Native方法
+一个Native Method就是一个java调用非java代码的接口（NDK也跟这有关吗？（疑问）
+一个Native Method由非java语言实现
+
+在定义一个native method时，并不提供实现体（有些像定义一个java interface......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/11/JVM学习笔记-0/">
+        <h2 class="post-title">
+            JVM学习——运行机制原理
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+最近学习了ClassLoader；进而开始学习Java虚拟机的相关知识，进而深入理解Java的原理
+
+什么是JVM
+
+JVM——Java虚拟机
+JVM是可运行Java代码的虚拟计算机；JVM包括一套字节码指令集、一组寄存器、一个栈、一个垃圾回收堆和一个存储方法域；
+
+JVM
+Java源文件通过编译器能够生产相应的.class文件（字节码文件）；而字节码文件又通过Java虚拟机中的解释器（字......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-11
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/09/Android自定义View-9/">
+        <h2 class="post-title">
+            Android自定义View——贝塞尔曲线学习笔记
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            贝塞尔曲线
+贝塞尔曲线奠定了计算机绘图的基础(它可以将任何复杂的图形用精确的数学语言进行描述)
+有开放和封闭路径的区别；
+理解贝塞尔曲线的原理
+贝塞尔曲线是由一系列点来控制曲线状态的
+
+**数据点：**确定曲线的起始和结束位置
+**控制点：**确定曲线的弯曲程度
+
+一阶曲线
+一阶曲线是没有控制点的，仅有两个数据点(A 和 B)，最终效果一个线段；类似于lineTo；
+生成过程：
+
+二阶曲线
 ......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
-            2017-04-24
+            2017-03-09
         </p>
         <div class="tags">
             
-              <a href="/tags/#python" title="python">python</a>
+              <a href="/tags/#android" title="android">android</a>
+            
+              <a href="/tags/#java" title="java">java</a>
             
         </div>
     
@@ -304,33 +485,30 @@ pickle.dumps将任意对象序列化为bytes；然后就可以将这个bytes写�
 
 <div class="post-preview">
 
-    <a href="/2017/04/21/python学习日记12/">
+    <a href="/2017/03/05/Android自定义View-7/">
         <h2 class="post-title">
-            Python的IO编程
+            Android自定义View——Canvas操作学习笔记
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            今天本来想要看动漫的，结果辣鸡锐捷又断网；
-呵，辣鸡锐捷
-一个网站要让我们可以看视频，就要涉及到网络编程啦~
-那么，我们怎么样通过Python来实现文件的读写，还有网络操作呢~
-
-同步和异步的区别
-同步就是一步一步进行的操作；
-就是说，我们在进行网络操作或者文件读写（如：从网上下载东西），在这段时间里，我们就只做这个操作，等这个操作完成之后，才进行下一个步骤
-那么异步呢，就是可以在进行网络操......
+            Canvas的基本操作
+位移（translate）
+translate是坐标系的移动，可以为图形绘制选择一个合适的坐标系
+1234567891011// 省略了创建画笔的代码// 在坐标原点绘制一个黑色圆形mPaint.setColor(Color.BLACK);canvas.translate(200,200);canvas.drawCircle(0,0,100,mPaint);// 在坐......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
-            2017-04-21
+            2017-03-05
         </p>
         <div class="tags">
             
-              <a href="/tags/#python" title="python">python</a>
+              <a href="/tags/#android" title="android">android</a>
+            
+              <a href="/tags/#java" title="java">java</a>
             
         </div>
     
@@ -340,33 +518,35 @@ pickle.dumps将任意对象序列化为bytes；然后就可以将这个bytes写�
 
 <div class="post-preview">
 
-    <a href="/2017/04/17/python学习日记11/">
+    <a href="/2017/03/05/Android自定义View-8/">
         <h2 class="post-title">
-            Python的继承与多态
+            Android自定义View——Path操作学习笔记
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            我们定义跟一个class的时候，可以从某个现有的class继承，新的class就是子类；
-被继承的class叫做基类（就是老被啦~）
+            Path简介
+Path封装了直线曲线构成的几何路径；
+可以利用Canvas的drawPath绘制；也可以用于剪裁画布，根据路径绘制文字；也可以用于描述一个图像的轮廓；
+有开放和封闭路径的区别；
+Paht常用方法
 
-初次使用继承
-首先编写一个基类；
-然后编写子类，直接继承基类；此时，子类的实例就可以直接调用父类的方法了；(如Dog类)
-当然，子类可以定义自己的方法；
-而如果子类定义了与父类的方法重名时，就会将父类的方法覆盖
-12345678910111213class ......
+**移动起点moveTo:**移动下一次操作的起点位置
+**设置终点setLastPoint:**重置当前path中最后一个点位置，如果在绘制之前调用，效果和moveTo相同
+**......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
-            2017-04-17
+            2017-03-05
         </p>
         <div class="tags">
             
-              <a href="/tags/#python" title="python">python</a>
+              <a href="/tags/#android" title="android">android</a>
+            
+              <a href="/tags/#java" title="java">java</a>
             
         </div>
     
@@ -376,172 +556,33 @@ pickle.dumps将任意对象序列化为bytes；然后就可以将这个bytes写�
 
 <div class="post-preview">
 
-    <a href="/2017/04/17/python学习日记10/">
+    <a href="/2017/02/28/ClassLoader学习记录/">
         <h2 class="post-title">
-            Python的面向对象
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            所谓，面向对象编程，首先你得需要有一个对象；
-额，我是说，面向对象编程，就是Object Oriented Programming，简称OOP；
-
-Python面向对象
-采用面向对象的程序设计思想，我们首选思考的不是程序的执行流程，而是Student这种数据类型应该被视为一个对象，这个对象拥有name和score这两个属性（Property）
-给对象发消息实际上就是调用对象对应的关联函数，我......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-04-17
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#python" title="python">python</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2017/04/16/python学习日记09/">
-        <h2 class="post-title">
-            Python模块
+            ClassLoader深入学习记录
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
             
-模块
-Module
-当代码越写越多；同个文件的代码越来越长，就会越来越不容易维护；
-可以将很多函数分组，分别放在不同的文件中；这样，每个文件包含的代码就少了；
-提高了代码的可维护性、代码重用；
-还可以避免函数名和变量名冲突。相同名字的函数和变量完全可以分别存在不同的模块中，因此，我们自己在编写模块时，不必考虑名字会与其他模块冲突
-但是不要和Python的内置函数名字冲突；
+最近为了学习Java底层，因而学习了ClassLoader；准备下一阶段学习JVM原理
 
-为了避免模块名......
+ClassLoader是什么
+
+ClassLoader是Java的类加载机制
+ClassLoader用于动态加载class文件到内存中
+
+Java程序写好后，是由若干个class文件组织而成的一个完整的Java应用程序；程序运行时，会调用改程序的一个入口函数来调用系统的相关功能；这些功能被封装在不同的......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
-            2017-04-16
+            2017-02-28
         </p>
         <div class="tags">
             
-              <a href="/tags/#python" title="python">python</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2017/04/16/python学习日记08/">
-        <h2 class="post-title">
-            Python匿名函数
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-匿名函数
-不显式定义的函数
-eg：
-123456lambda x: x * x# 相当于：def f(x):    return x * x
-实例：
-12list(map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9]))# [1, 4, 9, 16, 25, 36, 49, 64, 81]
-匿名函数只能有一个表达式，不用写return；表达式的结......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-04-16
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#python" title="python">python</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2017/04/15/python学习日记06/">
-        <h2 class="post-title">
-            我与Py的那些事——高级特性
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            切片
-取一个list或tuple的部分元素
-1234567891011121314L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack']# ---------------------------------------L[0:3] L[1:3] # 方法1L[:3] # 方法2L[-2:] # 方法3L[:10:2] # 前10个数中每2个取1个L[......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-04-15
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#python" title="python">python</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2017/04/15/python学习日记07/">
-        <h2 class="post-title">
-            Python函数式编程
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            函数式编程（请注意多了一个“式”字）——Functional Programming，虽然也可以归结到面向过程的程序设计，但其思想更接近数学计算
-
-高阶函数
-
-变量可指向函数
-
-123a = abs(-10)print(a)# 10
-
-123f = absprint(f(-10))# 10
-
-
-函数名也是变量
-函数名其实就是指向函数的变量！对于abs()这个函数，完全可以把函数名abs看成变......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-04-15
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#python" title="python">python</a>
+              <a href="/tags/#java" title="java">java</a>
             
         </div>
     
@@ -599,17 +640,13 @@ eg：
             
         
             
-            <a href="/tags/#想当一个有趣的人" title="想当一个有趣的人" rel="9">想当一个有趣的人</a>
-            
         
-            
-            <a href="/tags/#Dart" title="Dart" rel="2">Dart</a>
             
         
             
         
             
-            <a href="/tags/#Java" title="Java" rel="14">Java</a>
+            <a href="/tags/#Java" title="Java" rel="5">Java</a>
             
         
             
@@ -620,8 +657,6 @@ eg：
             <a href="/tags/#unity3d" title="unity3d" rel="2">unity3d</a>
             
         
-            
-            <a href="/tags/#python" title="python" rel="15">python</a>
             
         
             
@@ -637,7 +672,7 @@ eg：
             
         
             
-            <a href="/tags/#JavaScript" title="JavaScript" rel="12">JavaScript</a>
+            <a href="/tags/#JavaScript" title="JavaScript" rel="11">JavaScript</a>
             
         
             
@@ -783,7 +818,7 @@ eg：
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
@@ -792,7 +827,7 @@ eg：
 
     <h5>categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/leetcode/">leetcode</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/unity/">unity</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/写着代码就开始胡言乱语/">写着代码就开始胡言乱语</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实习日记/">实习日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编译原理/">编译原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/集合/">集合</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/leetcode/">leetcode</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/unity/">unity</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/写着代码就开始胡言乱语/">写着代码就开始胡言乱语</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实习日记/">实习日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编译原理/">编译原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/集合/">集合</a><span class="category-list-count">1</span></li></ul>
     </div>
 
         <hr>
@@ -852,7 +887,7 @@ eg：
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Csming 2018 
+                    Copyright &copy; Csming 2019 
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
