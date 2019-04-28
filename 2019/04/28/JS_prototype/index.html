@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          JavaScript的原型 - 十一月 | 深入迷雾寻找火光
+        
+    </title>
+
+    <link rel="canonical" href="https://csming1995.github.io/2019/04/28/JS_prototype/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/bg2.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
+                            
+                        </div>
+                        <h1>JavaScript的原型</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Csming on
+                            2019-04-28
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Csming</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/resume/">Resume</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="javascript的原型">JavaScript的原型</span></h1>
+<p>JavaScript在ECMA6的class这些关键字出来之前，面向对象编程的方式是基于函数和原型链来实现的。这边涉及到两个东西：contructor和prototype。</p>
+<p>本文首先从如何构造一个JavaScript的对象，再到构造函数，再到原型链的顺序来阐述。</p>
+<h2><span id="如何构造一个javascript的object">如何构造一个JavaScript的object</span></h2>
+<p>在JavaScript中构造一个对象对便捷的方式如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> object = &#123;</span><br><span class="line">  property1: <span class="string">"value1"</span>,</span><br><span class="line">  property2: <span class="string">"value2"</span>,</span><br><span class="line">  method1: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.property);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码能够直接创建一个对象。利用typeof可以得到object的类型：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">console.log(typeof object); // &quot;object&quot;</span><br></pre></td></tr></table></figure>
+<p>这样做可以非常便捷的得到一个object，但是问题来了，如果需要创建多个属性和方法均一样的对象，使用上述的方法，就会出现问题了。代码就会变成如下这样：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> object1 = &#123;</span><br><span class="line">  property1: <span class="string">"value1"</span>,</span><br><span class="line">  property2: <span class="string">"value2"</span>,</span><br><span class="line">  method1: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.property);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> object2 = &#123;</span><br><span class="line">  property1: <span class="string">"value1"</span>,</span><br><span class="line">  property2: <span class="string">"value2"</span>,</span><br><span class="line">  method1: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.property);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> object3 = &#123;</span><br><span class="line">  property1: <span class="string">"value1"</span>,</span><br><span class="line">  property2: <span class="string">"value2"</span>,</span><br><span class="line">  method1: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.property);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>如上代码所示，这样创建对象是非常灾难的，并且没有一个固定的模板可以用于创建对象，每次创建对象时需要从已经创建的对象中拷贝属性再进行修改，非常不科学。</p>
+<p><strong>于是，这时候就需要用到构建函数了。</strong></p>
+<h2><span id="构造函数">构造函数</span></h2>
+<p>在别的语言中，有class这个概念，但是在JavaScript中没有（在ECMA6之前没有）。JavaScript的对象体系是基于构造函数（contructor）和原型链（prototype）的。构造函数可以作为对象的模板。</p>
+<p>eg:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> User = <span class="function"><span class="keyword">function</span> (<span class="params">username, description</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.username = username;</span><br><span class="line">  <span class="keyword">this</span>.description = description;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> user1 = <span class="keyword">new</span> User(<span class="string">"Jack"</span>, <span class="string">"A man"</span>);</span><br><span class="line"><span class="keyword">var</span> user2 = <span class="keyword">new</span> User(<span class="string">"Rose"</span>, <span class="string">"A woman"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(user1.username); <span class="comment">// "Jack"</span></span><br><span class="line"><span class="built_in">console</span>.log(user2.username); <span class="comment">// "Rose"</span></span><br></pre></td></tr></table></figure>
+<p>上述代码将User作为一个构造函数，然后通过new操作符创建了一个user1的对象。</p>
+<p>可以看出构造函数的声明和普通函数一样。只是函数名的首字母作了大写，这个并不是硬性的，只是为了表示和普通函数的区别。因此普通函数也可以跟new操作符配合使用作为构造函数。当然，如果构造函数不和new操作符一起使用，则会被当做一个普通函数。此处不再赘述。</p>
+<p>这边需要注意的是：<br>
+<strong>1.构造函数的内部用<code>this</code>来表示即将创建的对象。</strong><br>
+<strong>2.操作符new用于根据构造函数创建一个对象</strong></p>
+<p>那么这边虽然实现了利用模板（构造函数）来创建对象的问题，但是仍然面临一个问题。<br>
+这边有这么个情况：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> User = <span class="function"><span class="keyword">function</span> (<span class="params">username, description</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.username = username;</span><br><span class="line">  <span class="keyword">this</span>.description = description;</span><br><span class="line">  <span class="keyword">this</span>.doSomething = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(username + <span class="string">' '</span> + description);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> user1 = <span class="keyword">new</span> User(<span class="string">"Jack"</span>, <span class="string">"A man"</span>);</span><br><span class="line"><span class="keyword">var</span> user2 = <span class="keyword">new</span> User(<span class="string">"Rose"</span>, <span class="string">"A woman"</span>);</span><br></pre></td></tr></table></figure>
+<p>上述构造函数在执行构造函数代码的时候才将doSomething方法的方法体赋值给doSomething这个属性。那么，在每次执行构造函数代码的时候都会走这个逻辑。于是，每生成一个新的对象，都会生成一个新的doSomething方法。让我们测试一下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">user1.doSomething === user2.doSomething; <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>通过上述代码的运行结果，我们可以得知，user1和user2中的doSomething方法并不是同一个。在其他语言，比如Java中，我们的实例方法，都是指向同一个地址的方法的。那么在JavaScript中的这一现象，显然不是那么的友好。试想一下，如果有1000个User对象，那么就会有1000个doSomething方法，而doSomething的方法体都是一样的，这样造成了不必要的开销。</p>
+<p>那么这时候，就需要用到JavaScript中的原型（prototype）了</p>
+<h2><span id="原型">原型</span></h2>
+<h3><span id="prototype">prototype</span></h3>
+<p>JavaScript的每个函数都会有一个<code>prototype</code>属性，这个属性将会指向一个对象。这个对象的所有属性和方法，都能被实例对象所共享。那么，如果将上一节中的doSomething方法放在<code>prototype</code>中，就可以处理掉不必要的开销:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var User = function (username, description) &#123;</span><br><span class="line">  this.username = username;</span><br><span class="line">  this.description = description;</span><br><span class="line">&#125;</span><br><span class="line">User.prototype.doSomething = function() &#123;</span><br><span class="line">  console.log(username + &apos; &apos; + description);</span><br><span class="line">&#125;</span><br><span class="line">var user1 = new User(&quot;Jack&quot;, &quot;A man&quot;);</span><br><span class="line">var user2 = new User(&quot;Rose&quot;, &quot;A woman&quot;);</span><br><span class="line">user1.doSomething(); // Jack A man</span><br><span class="line">user2.doSomething(); // Rose A woman</span><br><span class="line">user1.doSomething === user2.doSomething; // true</span><br></pre></td></tr></table></figure>
+<p>这边使用了prototype之后，会有这么一个现象，就是对象在调用某个方法或使用某个属性的时候，会先查找自身有没有这个方法或者属性，如果有则直接使用，否则才回去原型对象中查找。如果原型对象没有这个方法或属性，则会再想原型对象的原型对象去查找，直到找到需要的方法或属性，或者一直追溯到了Object的原型。object的原型对象的原型对象是null的。</p>
+<p>这个就是原型链了。然后这边如果追溯的层级过深的话是比较消耗性能的。</p>
+<p>如果对象具有跟prototype所指向的对象名字一样的属性，那么在获取该属性时，会读取对象自身的属性值。</p>
+<p>eg:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> object = &#123;</span><br><span class="line">  property1: <span class="string">"value1"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Contructor = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.property2: <span class="string">"value2"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Contructor.prototype = object;</span><br><span class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> Contructor();</span><br><span class="line"><span class="built_in">console</span>.log(instance.property1); <span class="comment">// value1</span></span><br><span class="line"></span><br><span class="line">instance.property1 = <span class="string">"value2"</span></span><br><span class="line"><span class="built_in">console</span>.log(instance.property1); <span class="comment">// value2</span></span><br></pre></td></tr></table></figure>
+<p>通过将构造函数的prototype属性指向一个对象，能够让通过该构造函数创建的实例对象，能够使用prototype属性所指向的这个对象的属性和方法。比如，如果将prototype指向一个数组，那么实例对象就可以调用数组的方法。</p>
+<p>这里借鉴一下阮一峰老师的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> MyArray = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">MyArray.prototype = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">MyArray.prototype.constructor = MyArray;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mine = <span class="keyword">new</span> MyArray();</span><br><span class="line">mine.push(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">mine.length <span class="comment">// 3</span></span><br><span class="line">mine <span class="keyword">instanceof</span> <span class="built_in">Array</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>这边的这个操作，就相当于使MyArray继承了Array类了。这也就是后面要提的利用原型链做继承。</p>
+<h3><span id="contructor">contructor</span></h3>
+<p><strong>上述代码还提到了contructor属性。</strong> 这个属性用于指向构造函数。默认的情况下指向的是当前prototype指向的对象所在的构造函数。在修改了原型对象之后，一般会同时修改contructor属性。例如，上述代码中，在执行完<code>MyArray.prototype = new Array();</code>这句时，contructor会指向Array。之后我们将它指回MyArray。</p>
+<p>contructor属性用于告知我们实例对象是由哪个构造函数创建的。</p>
+<p>另外，有了contructor属性之后，就可以从一个实例对象直接创建另一个实例对象了：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> User = <span class="function"><span class="keyword">function</span> (<span class="params">username, description</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.username = username;</span><br><span class="line">  <span class="keyword">this</span>.description = description;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> user1 = <span class="keyword">new</span> User(<span class="string">"Jack"</span>, <span class="string">"A man"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> user2 = user1.contructor(<span class="string">"Rose"</span>, <span class="string">"A woman"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(user2 <span class="keyword">instanceof</span> User); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h2><span id="构造函数的继承">构造函数的继承</span></h2>
+<p>让一个构造函数继承另一个构造函数：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Super</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.a = <span class="string">'a'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Sub</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  Super.call(<span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">this</span>.b = <span class="string">'b'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Sub.prototype = <span class="built_in">Object</span>.create(Super.prototype)</span><br><span class="line">Sub.prototype.contructor = Sub;</span><br></pre></td></tr></table></figure>
+<p><strong>1.上述代码，在Sub构造函数开始的时候调用Super, 执行完毕后走自己的逻辑。</strong> <code>Super.call(this)</code>表示将将传入的this作为执行函数中this的指向，然后调用Super的逻辑。也就是说这里是为了将Super中的this指向Sub中的this。这是因为JavaScript的this指向的是当前调用环境的this。如果不做这样的处理，Super在调用的时候，this可能会指向全局作用域，导致不必要的异常。</p>
+<p><strong>然后将Sub的prototype指向由Super为原型创建的对象，之后将contructor指向自己。在将Sub的prototype指向Super的时候，contructor会自动指向Super，所以之后需要将其赋值为自身，也就是Sub</strong></p>
+<hr>
+<p>到此，原型和原型链的东西差不多就说完了。这里总结一下构造函数，prototype，contructor和实例对象的关系：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Super</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.a = <span class="string">'a'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Sub</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  Super.call(<span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">this</span>.b = <span class="string">'b'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Sub.prototype = <span class="built_in">Object</span>.create(Super.prototype)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> sub = <span class="keyword">new</span> Sub();</span><br><span class="line">sub.__proto__ === Sub.prototype; <span class="comment">// true</span></span><br><span class="line">sub.contructor === Sub;          <span class="comment">// true</span></span><br><span class="line">Sub.prototype.contructor === Sub;<span class="comment">// true</span></span><br><span class="line">Sub.prototype.prototype.contructor === Super;<span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>参考：<a href="https://wangdoc.com/javascript/oop/prototype.html" target="_blank" rel="noopener">阮一峰老师的JavaScript教程</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2019/09/24/JS_DOM_1/" data-toggle="tooltip" data-placement="top" title="JavaScript——DOM扩展">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2019/03/16/ColorfulNavigationBar/" data-toggle="tooltip" data-placement="top" title="ColorfulNavigationBar">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://jalan.space/" target="_blank">Jayang</a></li>
+                    
+                        <li><a href="https://segmentfault.com/u/mymmon" target="_blank">mymmon</a></li>
+                    
+                        <li><a href="https://www.ruphi.cn/" target="_blank">RuphiLau</a></li>
+                    
+                        <li><a href="https://moonshoter.github.io" target="_blank">MoonShoter</a></li>
+                    
+                        <li><a href="http://ruiyuhuang.cn/" target="_blank">Ruiyu</a></li>
+                    
+                        <li><a href="https://yx1aoq1.github.io/" target="_blank">Yx1aoq1</a></li>
+                    
+                        <li><a href="https://jariver.github.io/" target="_blank">Jariver</a></li>
+                    
+                        <li><a href="https://www.and-who.cn/" target="_blank">Paopao</a></li>
+                    
+                        <li><a href="http://www.cnblogs.com/zzy19961112/" target="_blank">Dudu</a></li>
+                    
+                        <li><a href="http://www.hs97.cn/" target="_blank">Handsome</a></li>
+                    
+                        <li><a href="https://mysteryhjj.github.io/" target="_blank">Junjun</a></li>
+                    
+                        <li><a href="https://tsingfunlee.github.io/" target="_blank">tsingfunlee</a></li>
+                    
+                        <li><a href="https://mychiaki.github.io/" target="_blank">Chiaki</a></li>
+                    
+                        <li><a href="https://blog.weafung.com" target="_blank">weafung</a></li>
+                    
+                        <li><a href="https://zhangsihuai.github.io/" target="_blank">CodePlay</a></li>
+                    
+                        <li><a href="http://lizimeow.cn/" target="_blank">Lizi</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "csming1995";
+    var disqus_identifier = "https://csming1995.github.io/2019/04/28/JS_prototype/";
+    var disqus_url = "https://csming1995.github.io/2019/04/28/JS_prototype/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/csming1995">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/少铭-陈-5049a6138">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Csming 2019 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://csming1995.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://csming1995.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

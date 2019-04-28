@@ -216,6 +216,49 @@
 
 <div class="post-preview">
 
+    <a href="/2017/03/14/Android自定义View-11/">
+        <h2 class="post-title">
+            Android自定义View——Matrix学习笔记
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Matrix是什么
+Matrix是一个矩阵，用于坐标映射，数制转换
+
+可以运用于View、图片、动画效果等各个方面
+画布操作是对Matrix的封装；Matrix更接近底层
+
+基本原理
+最根本的作用就是坐标转换
+(这涉及到了图形学的知识)
+
+我们所用到的变换均属于仿射变换，仿射变换是 线性变换(缩放，旋转，错切) 和 平移变换(平移) 的复合；
+
+
+**基本变换有4种: **平移(transl......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Csming on
+            2017-03-14
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#android" title="android">android</a>
+            
+              <a href="/tags/#java" title="java">java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2017/03/14/Android自定义View-10/">
         <h2 class="post-title">
             Android自定义View——PathMeasure学(A)习(P)笔(I)记(jilu)
@@ -492,44 +535,6 @@ Java源文件通过编译器能够生产相应的.class文件（字节码文件�
 
 <div class="post-preview">
 
-    <a href="/2017/03/05/Android自定义View-8/">
-        <h2 class="post-title">
-            Android自定义View——Path操作学习笔记
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Path简介
-Path封装了直线曲线构成的几何路径；
-可以利用Canvas的drawPath绘制；也可以用于剪裁画布，根据路径绘制文字；也可以用于描述一个图像的轮廓；
-有开放和封闭路径的区别；
-Paht常用方法
-
-**移动起点moveTo:**移动下一次操作的起点位置
-**设置终点setLastPoint:**重置当前path中最后一个点位置，如果在绘制之前调用，效果和moveTo相同
-**......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Csming on
-            2017-03-05
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
     <a href="/2017/03/05/Android自定义View-7/">
         <h2 class="post-title">
             Android自定义View——Canvas操作学习笔记
@@ -563,31 +568,33 @@ translate是坐标系的移动，可以为图形绘制选择一个合适的坐�
 
 <div class="post-preview">
 
-    <a href="/2017/02/28/ClassLoader学习记录/">
+    <a href="/2017/03/05/Android自定义View-8/">
         <h2 class="post-title">
-            ClassLoader深入学习记录
+            Android自定义View——Path操作学习笔记
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            
-最近为了学习Java底层，因而学习了ClassLoader；准备下一阶段学习JVM原理
+            Path简介
+Path封装了直线曲线构成的几何路径；
+可以利用Canvas的drawPath绘制；也可以用于剪裁画布，根据路径绘制文字；也可以用于描述一个图像的轮廓；
+有开放和封闭路径的区别；
+Paht常用方法
 
-ClassLoader是什么
-
-ClassLoader是Java的类加载机制
-ClassLoader用于动态加载class文件到内存中
-
-Java程序写好后，是由若干个class文件组织而成的一个完整的Java应用程序；程序运行时，会调用改程序的一个入口函数来调用系统的相关功能；这些功能被封装在不同的......
+**移动起点moveTo:**移动下一次操作的起点位置
+**设置终点setLastPoint:**重置当前path中最后一个点位置，如果在绘制之前调用，效果和moveTo相同
+**......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Csming on
-            2017-02-28
+            2017-03-05
         </p>
         <div class="tags">
+            
+              <a href="/tags/#android" title="android">android</a>
             
               <a href="/tags/#java" title="java">java</a>
             
@@ -679,7 +686,7 @@ Java程序写好后，是由若干个class文件组织而成的一个完整的Ja
             
         
             
-            <a href="/tags/#JavaScript" title="JavaScript" rel="11">JavaScript</a>
+            <a href="/tags/#JavaScript" title="JavaScript" rel="12">JavaScript</a>
             
         
             
@@ -760,6 +767,10 @@ Java程序写好后，是由若干个class文件组织而成的一个完整的Ja
         </li>
       
         <li>
+          <a href="/2019/04/28/JS_prototype/">JavaScript的原型</a>
+        </li>
+      
+        <li>
           <a href="/2019/03/16/ColorfulNavigationBar/">ColorfulNavigationBar</a>
         </li>
       
@@ -769,10 +780,6 @@ Java程序写好后，是由若干个class文件组织而成的一个完整的Ja
       
         <li>
           <a href="/2018/09/16/Gradle/">关于Gradle</a>
-        </li>
-      
-        <li>
-          <a href="/2018/09/16/JS_7/">ECMAScript学习笔记（八）——函数表达式</a>
         </li>
       
     </ul>
@@ -825,7 +832,7 @@ Java程序写好后，是由若干个class文件组织而成的一个完整的Ja
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
