@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>https://csming1995.github.io/2018/09/24/JS_DOM_1/</loc>
+        <lastmod>2019-04-28T15:50:21.468Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://csming1995.github.io/2019/04/28/JS_prototype/</loc>
         <lastmod>2019-04-28T15:49:17.887Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -17,14 +25,6 @@
     <url>
         <loc>https://csming1995.github.io/2019/03/16/ColorfulNavigationBar/</loc>
         <lastmod>2019-03-16T08:50:58.328Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://csming1995.github.io/2019/09/24/JS_DOM_1/</loc>
-        <lastmod>2018-09-24T14:25:37.263Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
