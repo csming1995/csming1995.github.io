@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          ColorfulNavigationBar - 十一月 | 深入迷雾寻找火光
+          JavaScript的闭包与函数重载 - 十一月 | 深入迷雾寻找火光
         
     </title>
 
-    <link rel="canonical" href="https://csming1995.github.io/2019/03/16/ColorfulNavigationBar/">
+    <link rel="canonical" href="https://csming1995.github.io/2019/04/28/JS_ Closure/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -86,14 +86,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#android" title="android">android</a>
+                              <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
                             
                         </div>
-                        <h1>ColorfulNavigationBar</h1>
+                        <h1>JavaScript的闭包与函数重载</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Csming on
-                            2019-03-16
+                            2019-04-28
                         </span>
                     </div>
                 
@@ -217,28 +217,53 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="colorfulnavigationbar">ColorfulNavigationBar</span></h1>
-<p>首先附上github项目地址；<a href="https://github.com/csming1995/ColorNavigationBar" target="_blank" rel="noopener">https://github.com/csming1995/ColorNavigationBar</a></p>
-<p>之前在github上看到了一个iOS版本的彩色的菜单栏觉得很有趣，于是模仿了一套Android版本的，并且加上了回弹的效果，让动画看起来更流畅。</p>
+                <h1><span id="javascript的闭包与函数重载">JavaScript的闭包与函数重载</span></h1>
+<h2><span id="闭包的概念">闭包的概念</span></h2>
+<h3><span id="什么是闭包">什么是闭包</span></h3>
+<p>说到JavaScript的闭包，需要先说一说JavaScript的作用域。</p>
+<p><strong>JavaScript在ECMA6之前，作用域是只有全局作用域跟函数作用域的。（这里先不涉及let和const）</strong></p>
+<p>函数内部可以读取器外部作用域定义的变量，而外部作用域不能直接读取到函数中定义的变量。</p>
+<p>eg:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> n = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(n); <span class="comment">// 0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f1();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.lot(a); <span class="comment">// throw error .... undefind</span></span><br></pre></td></tr></table></figure>
+<p>上述例子中，函数f1在运行时可以访问到全局作用域定义的变量n。而全局作用域中无法访问到函数f2中定义的变量a。</p>
+<p>那么还有一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> n = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(n); <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(n); <span class="comment">// 0</span></span><br><span class="line">		<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	f2();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f1();</span><br></pre></td></tr></table></figure>
+<p>上述例子中的，函数f1中定义了函数f2，f2能够访问到f1中定义的变量a以及全局作用域中定义的变量n。那么，这可以说明，更里层的函数能够访问到更外层的作用域中定义的变量。而更外层的代码，无法访问到更里层的函数作用域定义的变量。这是JavaScript链式作用域的作用。</p>
+<p>那么，如果我们有需要在全局作用域中访问到函数作用域中定义的变量，那应该怎么做呢？</p>
+<p>我们发现函数f2是能够访问到f1中定义的变量的。那么将他返回到全局作用域：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(a);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> function2 = f1();</span><br><span class="line">function2(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p>那么，上述的函数f2，就是一个闭包。</p>
+<blockquote>
+<p>闭包是用于读取其他函数内部变量的函数（取自@阮一峰老师的博客）</p>
+</blockquote>
+<h3><span id="闭包的特性">闭包的特性</span></h3>
+<p><strong>1.闭包可以读取其他函数内部变量。</strong></p>
+<p>这个特性这里不再赘述</p>
+<p><strong>2.闭包会将函数内部的局部变量存储在内存中</strong></p>
+<p>如上一节最后一个例子，函数f2将变量a保存在内存中，然后在被调用时，就能够访问到了。</p>
+<p>那么，利用这个特性，我们可以做一个类似于计数器的东西：</p>
+<p>eg:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">counter</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> a++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> counter1 = f1();</span><br><span class="line">counter1(); <span class="comment">// 1</span></span><br><span class="line">counter1(); <span class="comment">// 2</span></span><br><span class="line">counter1(); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<p>这个特性也会导致一个问题，就是如果滥用闭包的话，内存消耗会比较多。</p>
+<h2><span id="利用闭包来定义私有变量">利用闭包来定义私有变量</span></h2>
+<p>利用闭包的特性，我们可以利用闭包做私有变量：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> ClassA = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">this</span>.getA = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> a;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">this</span>.setA = <span class="function"><span class="keyword">function</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">		a = val;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> objectA = <span class="keyword">new</span> ClassA();</span><br><span class="line"><span class="built_in">console</span>.log(objectA.getA()); <span class="comment">// 0</span></span><br><span class="line">objectA.setA(<span class="number">111</span>);</span><br><span class="line"><span class="built_in">console</span>.log(objectA.getA()); <span class="comment">// 111</span></span><br><span class="line">objectA.a; <span class="comment">// error</span></span><br></pre></td></tr></table></figure>
+<p>这里的a变量只能被ClassA以及getA和setA访问到。</p>
+<h2><span id="利用闭包做函数重载">利用闭包做函数重载</span></h2>
+<p>最近学习到了一个在JavaScript中实现函数重载的方法，感觉比较有趣。</p>
+<p>众所周知JavaScript的函数的参数是不固定的，所以没办法做函数重载。如果要实现类似于函数重载的方法，比较平常的做法是使用<code>if-else</code>或<code>switch</code>来判断参数，然后根据传入的参数不同，输出不同的结果。</p>
+<p>而最近学习了一个，利用闭包处理的比较干净一些的做法。</p>
+<p>1.准备阶段先撸一下需要存放重载函数的类/对象</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> object = &#123;&#125;;</span><br></pre></td></tr></table></figure>
+<p>2.定义需要重载的函数。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum0</span>(<span class="params">val0</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> val0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum1</span>(<span class="params">val0, val1</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> val0 + val1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum2</span>(<span class="params">val0, val1, val2</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> val0 + val1 + val2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.然后定义装载重载函数的函数（核心）:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addMethod</span>(<span class="params">object, name, f</span>) </span>&#123;</span><br><span class="line">	<span class="comment">// 1. 从object中获取名字为name的函数作为old备用</span></span><br><span class="line">	<span class="keyword">var</span> old = object[name];</span><br><span class="line">    <span class="comment">// 2. 将object[name]定义为一个新的函数</span></span><br><span class="line">    object[name] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 3. f.length为函数定义时的参数个数</span></span><br><span class="line">        <span class="comment">// arguments.length为函数调用时的参数个数</span></span><br><span class="line">        <span class="comment">// 如果调用的函数的形参和实参一致，则直接调用。否则，调用old函数</span></span><br><span class="line">        <span class="keyword">if</span> (f.length === <span class="built_in">arguments</span>.length) &#123;　　</span><br><span class="line">            <span class="keyword">return</span> f.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);　　　　</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> old === <span class="string">"function"</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> old.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);　　　　</span><br><span class="line">        &#125;　　</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4.装载函数:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">addMethod(people, <span class="string">"add"</span>, add0);</span><br><span class="line">addMethod(people, <span class="string">"add"</span>, add1);</span><br><span class="line">addMethod(people, <span class="string">"add"</span>, add2);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(people.add(<span class="number">1</span>)); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(people.add(<span class="number">1</span>, <span class="number">2</span>)); <span class="comment">// 3</span></span><br><span class="line"><span class="built_in">console</span>.log(people.add(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+<p>上述代码使用old存储上一次调用addMethod方法加入的函数。然后通过闭包存储在内存中。使得每次调用add函数时，出现参数不等的情况时能够调用到old，以查找到上一个add进来的函数。最终达到函数重载的目的。</p>
 <hr>
-<p>这个开源库主要是出于兴趣写的，花了差不多一个下午写了一下。应该还有很多漏洞。</p>
-<p>效果如下：</p>
-<p><img src="/attach/ColorfulNavigationBar/example.gif" alt=""></p>
-<p>先看一下调用者所需要编写的源码；</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ColorfulNavigation mColorfulNavigation;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ID_1 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ID_2 = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ID_3 = <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ID_4 = <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ID_5 = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        mColorfulNavigation = findViewById(R.id.colorful_navigation);</span><br><span class="line">        mColorfulNavigation.add(<span class="keyword">new</span> ColorfulNavigation.Item(ID_1, R.drawable.ic_home_black_24dp, R.color.test1, <span class="string">"Item 1"</span>));</span><br><span class="line">        mColorfulNavigation.add(<span class="keyword">new</span> ColorfulNavigation.Item(ID_2, R.drawable.ic_home_black_24dp, R.color.test2, <span class="string">"Item 2"</span>));</span><br><span class="line">        mColorfulNavigation.add(<span class="keyword">new</span> ColorfulNavigation.Item(ID_3, R.drawable.ic_home_black_24dp, R.color.test3, <span class="string">"Item 3"</span>));</span><br><span class="line">        mColorfulNavigation.add(<span class="keyword">new</span> ColorfulNavigation.Item(ID_4, R.drawable.ic_home_black_24dp, R.color.test4, <span class="string">"Item 4"</span>));</span><br><span class="line">        mColorfulNavigation.add(<span class="keyword">new</span> ColorfulNavigation.Item(ID_5, R.drawable.ic_home_black_24dp, R.color.test5, <span class="string">"Item 5"</span>));</span><br><span class="line"></span><br><span class="line">        mColorfulNavigation.setOnItemSelectedListener(<span class="keyword">new</span> ColorfulNavigation.OnItemSelectedListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemSelected</span><span class="params">(ColorfulNavigation.Item item)</span> </span>&#123;</span><br><span class="line"><span class="comment">//                Toast.makeText(MainActivity.this, "" + item.getId(), Toast.LENGTH_SHORT).show();</span></span><br><span class="line">                <span class="keyword">switch</span>(item.getId()) &#123;</span><br><span class="line">                    <span class="keyword">case</span> ID_1 :&#123;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">case</span> ID_2: &#123;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">case</span> ID_3 :&#123;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">case</span> ID_4: &#123;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">case</span> ID_5: &#123;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">default</span>:&#123;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这边使用的时候，在获取到ColorfulNavigation实例后，依次将菜单item的信息new出来后add到ColorfulNavigation中。这边的add方法，内部实现如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(@NonNull Item item)</span> </span>&#123;</span><br><span class="line">    ColorfulNavigationItem colorfulNavigationItem = <span class="keyword">new</span> ColorfulNavigationItem(getContext());</span><br><span class="line">    colorfulNavigationItem.setItem(item);</span><br><span class="line"></span><br><span class="line">    LayoutParams layoutParams = <span class="keyword">new</span> LinearLayout.LayoutParams(<span class="number">0</span>, LayoutParams.MATCH_PARENT, <span class="number">1f</span>);</span><br><span class="line">    colorfulNavigationItem.setLayoutParams(layoutParams);</span><br><span class="line">    addView(colorfulNavigationItem);</span><br><span class="line"></span><br><span class="line">    mIndex = mItems.size();</span><br><span class="line">    item.index = mIndex;</span><br><span class="line">    mItems.add(item);</span><br><span class="line">    mColorfulNavigationItems.add(colorfulNavigationItem);</span><br><span class="line"></span><br><span class="line">    mPaint.setColor(getResources().getColor(item.color));</span><br><span class="line">    mRightPaint.setColor(getResources().getColor(item.color));</span><br><span class="line">    requestLayout();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>先说明一下，ColorfulNavigation的是一个继承于LinearLayout的控件，并且Orientation设置为HORIZONTAL,此处创建一个ColorfulNavigationItem的实例，将其LayoutParams设置为：width=0, weight=1;于是加入到ColorfulNavigation之后会将所有的ColorfulNavigationItem作平铺处理。</p>
-<h1><span id="动画处理">动画处理</span></h1>
-<p>在用户点击到ColorfulNavigationItem的时候会触发动画效果，以及回调事件。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">private void startAnimator(int targetIndex) &#123;</span><br><span class="line">    boolean isRight = mIndex &lt; targetIndex;</span><br><span class="line">    mIndex = targetIndex;</span><br><span class="line">    int targetLeft = mItemWidth * mIndex;</span><br><span class="line">    if (targetLeft != mRectF.left) &#123;</span><br><span class="line">        if (mValueAnimator == null) &#123;</span><br><span class="line">            mValueAnimator = new ValueAnimator();</span><br><span class="line">            mValueAnimatorListener = new ValueAnimatorListener();</span><br><span class="line">            mValueAnimator.addUpdateListener(mValueAnimatorListener);</span><br><span class="line">        &#125;</span><br><span class="line">        mValueAnimator.setFloatValues(mRectF.left, targetLeft, targetLeft + (isRight? 20: - 20), targetLeft);</span><br><span class="line">        mValueAnimator.setDuration(380);</span><br><span class="line">        mValueAnimator.cancel();</span><br><span class="line">        mValueAnimator.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private class ValueAnimatorListener implements ValueAnimator.AnimatorUpdateListener &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onAnimationUpdate(ValueAnimator valueAnimator) &#123;</span><br><span class="line">        mRectF.left = (float) valueAnimator.getAnimatedValue();</span><br><span class="line">        mRectF.right = mRectF.left + mItemWidth;</span><br><span class="line">        mDrawIndex =  (int) mRectF.left / mItemWidth;</span><br><span class="line">        mRightRectF.left = (mDrawIndex + 1) * mItemWidth;</span><br><span class="line">        mRightRectF.right = mRectF.right;</span><br><span class="line">        mPaint.setColor(getResources().getColor(mItems.get(mDrawIndex).getColor()));</span><br><span class="line">        if (mDrawIndex + 1 &lt; mItems.size())&#123;</span><br><span class="line">            mRightPaint.setColor(getResources().getColor(mItems.get(mDrawIndex + 1).getColor()));</span><br><span class="line">        &#125;</span><br><span class="line">        invalidate();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这边为了维护一个item在navigation中滑动的效果，在ColorfulNavigation，维护了一个RectF用来绘制滑动中的item。RectF的right-left的值永远的等于该item的宽度，而left的值在起点处的item的left与目标item的left值的渐进移动中获得。item的宽度为ColorfulNavigation的总宽度除以item个数。</p>
-<p>ok，接着为了维护在item交界处的两种颜色，这边通过下方的计算得到当前矩阵的左边界所在的位置，然后计算出当前矩阵所处在的边界位置，该边界的右边由于矩阵：mRightRectF绘制。：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">mDrawIndex =  (<span class="keyword">int</span>) mRectF.left / mItemWidth;</span><br></pre></td></tr></table></figure>
-<p>如果要优化的话，应该将mRectF的右边界设置为矩阵所处在的边界，以减少绘制压力。</p>
-<p>该开源库已经上传到github上了；</p>
-<p><a href="https://github.com/csming1995/ColorNavigationBar" target="_blank" rel="noopener">https://github.com/csming1995/ColorNavigationBar</a></p>
-<p>各种求star~~~</p>
+<p>参考：<a href="https://wangdoc.com/javascript/oop/prototype.html" target="_blank" rel="noopener">阮一峰老师的JavaScript教程</a></p>
 
                 
 
@@ -246,13 +271,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2019/04/28/JS_prototype/" data-toggle="tooltip" data-placement="top" title="JavaScript的原型链">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/09/24/JS_DOM_1/" data-toggle="tooltip" data-placement="top" title="JavaScript——DOM扩展">Next Post &rarr;</a>
+                            <a href="/2019/04/28/JS_prototype/" data-toggle="tooltip" data-placement="top" title="JavaScript的原型链">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -291,7 +312,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#android" title="android">android</a>
+                          <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
                         
                     </div>
                 </section>
@@ -350,8 +371,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "csming1995";
-    var disqus_identifier = "https://csming1995.github.io/2019/03/16/ColorfulNavigationBar/";
-    var disqus_url = "https://csming1995.github.io/2019/03/16/ColorfulNavigationBar/";
+    var disqus_identifier = "https://csming1995.github.io/2019/04/28/JS_ Closure/";
+    var disqus_url = "https://csming1995.github.io/2019/04/28/JS_ Closure/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
